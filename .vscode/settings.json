@@ -10,5 +10,11 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "json.validate.enable": false
+  "json.validate.enable": false,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml",
+    "vite.config.ts": "tsconfig.json, tailwind.config.ts, .postcssrc.json",
+    "biome.json": ".editorconfig"
+  }
 }
