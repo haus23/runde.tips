@@ -1,5 +1,11 @@
 # @tipprunde/manager
 
+## 0.0.3
+
+### Patch Changes
+
+- chore: Rename config file.
+
 ## 0.0.2
 
 ### Patch Changes

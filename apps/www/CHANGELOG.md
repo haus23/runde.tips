@@ -1,5 +1,13 @@
 # @tipprunde/www
 
+## 0.0.5
+
+### Patch Changes
+
+- chore: Depend on ui package. More a proof of concept by now.
+
+- chore: Rename config file.
+
 ## 0.0.4
 
 ### Patch Changes
