@@ -19,10 +19,6 @@
 		color-scheme: dark;
 	}
 
-  body {
-    @apply bg-app text-app;
-  }
-
   @media (min-resolution: 200dpi) {
     html {
       font-size: 18px;

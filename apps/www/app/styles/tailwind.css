@@ -1,0 +1,7 @@
+@import '@tipprunde/tailwind-config/styles.css';
+
+@layer base {
+  body {
+    @apply bg-app text-app;
+  }
+}

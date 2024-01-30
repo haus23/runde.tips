@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 
-import '@tipprunde/tailwind-config/styles.css';
+import './styles/tailwind.css';
 
 export default function App() {
   return (
