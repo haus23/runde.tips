@@ -1,5 +1,11 @@
 # @tipprunde/manager
 
+## 0.0.2
+
+### Patch Changes
+
+- chore: Depend on @tipprunde/typescript-config.
+
 ## 0.0.1
 
 ### Patch Changes
