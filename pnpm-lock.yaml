@@ -109,6 +109,9 @@ importers:
 
   packages/config-tailwind:
     devDependencies:
+      '@radix-ui/colors':
+        specifier: ^3.0.0
+        version: 3.0.0
       '@tipprunde/typescript-config':
         specifier: workspace:*
         version: link:../config-typescript
@@ -1409,6 +1412,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@radix-ui/colors@3.0.0:
+    resolution: {integrity: sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg==}
+    dev: true
 
   /@remix-run/dev@2.5.1(@remix-run/serve@2.5.1)(typescript@5.3.3)(vite@5.0.12):
     resolution: {integrity: sha512-IrYhWANubH+WM62Wz55n8NWT5kBqfbyytXDFlP0VoZLrr1IpJf2GtaT4IA+CODMaNoeXeMACOD5Tw5/Y2bO5lA==}
