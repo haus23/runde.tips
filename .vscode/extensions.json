@@ -2,6 +2,8 @@
   "recommendations": [
     "biomejs.biome",
     "editorconfig.editorconfig",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "pflannery.vscode-versionlens",
+    "johnsoncodehk.vscode-tsconfig-helper"
   ]
 }
