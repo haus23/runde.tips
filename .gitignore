@@ -3,6 +3,7 @@ node_modules/
 
 # Builds
 build/
+dist/
 
 # Sensible data
 .env
