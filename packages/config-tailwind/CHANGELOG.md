@@ -1,5 +1,11 @@
 # @tipprunde/tailwind-config
 
+## 0.0.3
+
+### Patch Changes
+
+- chore: Move app styling to the app ;-)
+
 ## 0.0.2
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @tipprunde/www
 
+## 0.0.6
+
+### Patch Changes
+
+- chore: Move app styling to the app ;-)
+
+- chore: Update due to now transpiled ui package.
+
 ## 0.0.5
 
 ### Patch Changes
