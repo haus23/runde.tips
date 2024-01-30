@@ -1,5 +1,11 @@
 # @tipprunde/www
 
+## 0.0.3
+
+### Patch Changes
+
+- chore: Depend on @tipprunde/tailwind-config. Add tailwind support.
+
 ## 0.0.2
 
 ### Patch Changes
