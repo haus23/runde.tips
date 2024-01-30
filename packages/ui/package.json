@@ -9,7 +9,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsup src/index.ts --watch",
-    "build": "tsup src/index.ts"
+    "build": "tsup src/index.ts",
+    "typecheck": "tsc"
   },
   "peerDependencies": {
     "react": "^18.2.0"
