@@ -1,3 +1,9 @@
 {
-  "name": "@haus23/runde.tips"
+  "name": "@haus23/runde.tips",
+  "scripts": {
+    "check": "biome check --apply ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.5.3"
+  }
 }
