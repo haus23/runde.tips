@@ -1,5 +1,11 @@
 # @tipprunde/www
 
+## 0.0.4
+
+### Patch Changes
+
+- feat: Import tailwind-config package styles.
+
 ## 0.0.3
 
 ### Patch Changes
