@@ -1,5 +1,5 @@
 {
-  "extends": "@tipprunde/typescript-config/remix.json",
+  "extends": "@tipprunde/typescript-config/react.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     // DX
