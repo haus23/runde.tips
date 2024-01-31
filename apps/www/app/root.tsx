@@ -8,11 +8,15 @@ import {
 } from '@remix-run/react';
 
 import type { LinksFunction } from '@remix-run/node';
-import { iconsHref } from '@tipprunde/ui';
 import './styles/tailwind.css';
 
+import { iconsHref, logoHref } from '@tipprunde/ui';
+
 export const links: LinksFunction = () => {
-  return [{ rel: 'preload', href: iconsHref, as: 'image' }];
+  return [
+    { rel: 'preload', href: iconsHref, as: 'image' },
+    { rel: 'preload', href: logoHref, as: 'image' },
+  ];
 };
 
 export default function App() {
