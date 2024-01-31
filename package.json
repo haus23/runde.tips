@@ -1,6 +1,7 @@
 {
   "name": "@haus23/runde.tips",
   "scripts": {
+    "www:dev": "pnpm run --filter www dev",
     "check": "biome check --apply ."
   },
   "devDependencies": {
