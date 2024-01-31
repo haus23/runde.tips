@@ -16,5 +16,8 @@
     "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml",
     "vite.config.ts": "tsconfig.json, tailwind.config.ts, .postcssrc.json",
     "biome.json": ".editorconfig"
-  }
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ]
 }
