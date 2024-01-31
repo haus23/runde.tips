@@ -6,7 +6,6 @@
     ".": "./dist/index.js",
     "./styles.css": "./dist/index.css"
   },
-  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsup src/index.ts --watch",
     "build": "tsup src/index.ts",
