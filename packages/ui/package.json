@@ -5,19 +5,25 @@
     ".": "./src/index.ts"
   },
   "scripts": {
+    "icons:add": "sly add",
+    "icons:build": "icons build -i ./icons -o ./src/components/icon/icons --optimize 0",
     "typecheck": "tsc"
   },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^18.2.0"
   },
   "devDependencies": {
+    "@sly-cli/sly": "^1.8.0",
     "@tipprunde/tailwind-config": "workspace:*",
     "@tipprunde/typescript-config": "workspace:*",
     "@types/react": "^18.2.48",
     "react": "^18.2.0",
     "react-aria-components": "^1.0.1",
+    "svg-icons-cli": "^0.0.6",
     "tailwind-variants": "^0.1.20",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
   }
 }
