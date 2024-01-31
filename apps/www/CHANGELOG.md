@@ -1,5 +1,11 @@
 # @tipprunde/www
 
+## 0.0.7
+
+### Patch Changes
+
+- refactor: Adapt to the now internal ui package.
+
 ## 0.0.6
 
 ### Patch Changes
