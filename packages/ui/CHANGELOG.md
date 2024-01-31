@@ -1,5 +1,19 @@
 # @tipprunde/ui
 
+## 0.1.0
+
+### Minor Changes
+
+- feat: Add icon handling support and an icon component.
+
+### Patch Changes
+
+- chore: Add first react aria component.
+
+- feat: Add complete logo implementation.
+
+- chore: Add react aria components and tailwind helpers.
+
 ## 0.0.3
 
 ### Patch Changes

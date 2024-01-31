@@ -1,6 +1,6 @@
 {
   "name": "@tipprunde/www",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "imports": {
     "#*": "./app/*"
@@ -21,8 +21,8 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^2.5.1",
-    "@tipprunde/typescript-config": "workspace:*",
     "@tipprunde/tailwind-config": "workspace:*",
+    "@tipprunde/typescript-config": "workspace:*",
     "@tipprunde/ui": "workspace:*",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",

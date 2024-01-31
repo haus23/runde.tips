@@ -1,5 +1,13 @@
 # @tipprunde/www
 
+## 0.0.8
+
+### Patch Changes
+
+- fix: Preload logo image.
+
+- feat: Add support for svg icons and files.
+
 ## 0.0.7
 
 ### Patch Changes
