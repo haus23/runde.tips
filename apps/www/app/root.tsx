@@ -7,7 +7,13 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 
+import type { LinksFunction } from '@remix-run/node';
+import { iconsHref } from '@tipprunde/ui';
 import './styles/tailwind.css';
+
+export const links: LinksFunction = () => {
+  return [{ rel: 'preload', href: iconsHref, as: 'image' }];
+};
 
 export default function App() {
   return (
