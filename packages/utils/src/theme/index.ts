@@ -12,7 +12,7 @@ export function useTheme() {
   return {
     mode: 'client',
     colorScheme: context.clientHint,
-  } satisfies { colorScheme: ColorScheme; mode: ColorSchemeMode };
+  } satisfies { colorScheme?: ColorScheme; mode: ColorSchemeMode };
 }
 
 export { ThemeProvider };

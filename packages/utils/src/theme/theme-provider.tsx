@@ -4,7 +4,7 @@ import { createContext } from 'react';
 import type { ColorScheme } from './types';
 
 type ThemeContextType = {
-  clientHint: ColorScheme;
+  clientHint: ColorScheme | undefined;
 };
 
 type ThemeProviderProps = ThemeContextType & {

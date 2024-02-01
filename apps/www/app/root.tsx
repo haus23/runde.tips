@@ -25,7 +25,7 @@ export const links: LinksFunction = () => {
 export const loader = ({ request }: LoaderFunctionArgs) => {
   return json({
     requestInfo: {
-      hints: getHints(request, { colorScheme: 'light' }),
+      hints: getHints(request),
     },
   });
 };
