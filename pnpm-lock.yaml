@@ -94,6 +94,9 @@ importers:
       '@tipprunde/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@tipprunde/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@types/react':
         specifier: ^18.2.48
         version: 18.2.48
@@ -162,6 +165,21 @@ importers:
       vite:
         specifier: ^5.0.12
         version: 5.0.12
+
+  packages/utils:
+    devDependencies:
+      '@tipprunde/typescript-config':
+        specifier: workspace:*
+        version: link:../config-typescript
+      '@types/react':
+        specifier: ^18.2.48
+        version: 18.2.48
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
 
 packages:
 

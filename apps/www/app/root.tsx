@@ -11,6 +11,7 @@ import type { LinksFunction } from '@remix-run/node';
 import './styles/tailwind.css';
 
 import { iconsHref, logoHref } from '@tipprunde/ui';
+import { useTheme } from '@tipprunde/utils/theme';
 
 export const links: LinksFunction = () => {
   return [
@@ -20,8 +21,9 @@ export const links: LinksFunction = () => {
 };
 
 export default function App() {
+  const { colorScheme } = useTheme();
   return (
-    <html lang="de">
+    <html lang="de" className={colorScheme}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
