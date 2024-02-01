@@ -10,9 +10,13 @@ import {
 } from '@remix-run/react';
 
 import type { LoaderFunctionArgs } from '@remix-run/node';
+import { themeSession } from '#utils/sessions.server';
+
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
+  const session = await themeSession.getSession(request.headers.get('Cookie'));
+
   return json({
     requestInfo: {},
   });
