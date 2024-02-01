@@ -11,21 +11,4 @@
     --app-bg: var(--sand-2);
     --app-fg: var(--sand-12);
   }
-
-  html {
-		color-scheme: light;
-	}
-	html.dark {
-		color-scheme: dark;
-	}
-
-  @media (min-resolution: 200dpi) {
-    html {
-      font-size: 18px;
-    }
-
-    .text-sm {
-      font-size: 0.9rem;
-    }
-  }
 }

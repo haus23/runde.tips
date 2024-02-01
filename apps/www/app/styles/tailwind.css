@@ -1,6 +1,17 @@
 @import '@tipprunde/tailwind-config/styles.css';
 
 @layer base {
+
+  @media (min-resolution: 200dpi) {
+    html {
+      font-size: 18px;
+    }
+
+    .text-sm {
+      font-size: 0.9rem;
+    }
+  }
+
   body {
     @apply bg-app text-app;
   }

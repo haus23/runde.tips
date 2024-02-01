@@ -12,6 +12,7 @@ export default function HomeRoute() {
   return (
     <div>
       <h2 className="text-3xl font-medium">Home</h2>
+      <input placeholder="Ein kleiner Test" />
     </div>
   );
 }
