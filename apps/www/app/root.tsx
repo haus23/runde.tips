@@ -13,7 +13,12 @@ import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import './styles/tailwind.css';
 
 import { iconsHref, logoHref } from '@tipprunde/ui';
-import { ThemeProvider, getHints, useTheme } from '@tipprunde/utils/theme';
+import {
+  MediaQueryFallback,
+  ThemeProvider,
+  getHints,
+  useTheme,
+} from '@tipprunde/utils/theme';
 
 export const links: LinksFunction = () => {
   return [
@@ -31,12 +36,14 @@ export const loader = ({ request }: LoaderFunctionArgs) => {
 };
 
 function App() {
-  const { colorScheme } = useTheme();
+  const { colorScheme, isSSR } = useTheme();
+
   return (
     <html lang="de" className={colorScheme}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <MediaQueryFallback ssrTheme={isSSR} />
         <Meta />
         <Links />
       </head>

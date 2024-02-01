@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 
-import { ThemeContext, ThemeProvider } from './theme-provider';
+import { ThemeContext } from './theme-context';
+import { ThemeProvider } from './theme-provider';
 import type { ColorScheme, ColorSchemeMode } from './types';
 
 export function useTheme() {
@@ -11,9 +12,15 @@ export function useTheme() {
 
   return {
     mode: 'client',
-    colorScheme: context.clientHint,
-  } satisfies { colorScheme?: ColorScheme; mode: ColorSchemeMode };
+    isSSR: !!context.clientHint,
+    colorScheme: context.colorScheme,
+  } satisfies {
+    colorScheme?: ColorScheme;
+    mode: ColorSchemeMode;
+    isSSR: boolean;
+  };
 }
 
 export { ThemeProvider };
 export { getHints } from './client-hints';
+export { MediaQueryFallback } from './media-query-fallback';
