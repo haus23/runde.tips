@@ -1,0 +1,16 @@
+{
+  "name": "@tipprunde/utils",
+  "version": "0.0.0",
+  "exports": {
+    "./theme": "./src/theme/index.ts"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tipprunde/typescript-config": "workspace:*",
+    "@types/react": "^18.2.48",
+    "react": "^18.2.0",
+    "typescript": "^5.3.3"
+  }
+}
