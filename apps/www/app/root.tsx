@@ -11,7 +11,7 @@ import type { LinksFunction } from '@remix-run/node';
 import './styles/tailwind.css';
 
 import { iconsHref, logoHref } from '@tipprunde/ui';
-import { useTheme } from '@tipprunde/utils/theme';
+import { ThemeProvider, useTheme } from '@tipprunde/utils/theme';
 
 export const links: LinksFunction = () => {
   return [
@@ -20,7 +20,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export default function App() {
+function App() {
   const { colorScheme } = useTheme();
   return (
     <html lang="de" className={colorScheme}>
@@ -37,5 +37,13 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
+  );
+}
+
+export default function AppRoot() {
+  return (
+    <ThemeProvider clientHint="dark">
+      <App />
+    </ThemeProvider>
   );
 }
