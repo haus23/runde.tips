@@ -1,5 +1,11 @@
 # @tipprunde/tailwind-config
 
+## 0.0.4
+
+### Patch Changes
+
+- refactor: Move app styles to the app. And use meta for color-scheme setting.
+
 ## 0.0.3
 
 ### Patch Changes

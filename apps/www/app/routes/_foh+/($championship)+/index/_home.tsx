@@ -1,12 +1,11 @@
 import type { MetaFunction } from '@remix-run/node';
-import { Logo } from '@tipprunde/ui';
 
-export const meta: MetaFunction = () => {
+export function meta() {
   return [
     { title: 'runde.tips' },
     { name: 'description', content: 'Haus23 Tipprunde' },
   ];
-};
+}
 
 export default function HomeRoute() {
   return (
