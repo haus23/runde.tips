@@ -16,3 +16,4 @@ export function useTheme() {
 }
 
 export { ThemeProvider };
+export { getHints } from './client-hints';
