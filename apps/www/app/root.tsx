@@ -9,23 +9,14 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 
-import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import './styles/tailwind.css';
 
-import { iconsHref, logoHref } from '@tipprunde/ui';
-
-export const links: LinksFunction = () => {
-  return [
-    { rel: 'preload', href: iconsHref, as: 'image' },
-    { rel: 'preload', href: logoHref, as: 'image' },
-  ];
-};
-
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export async function loader({ request }: LoaderFunctionArgs) {
   return json({
     requestInfo: {},
   });
-};
+}
 
 function App() {
   const colorScheme = 'dark';
