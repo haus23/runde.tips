@@ -5,19 +5,29 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  json,
+  useLoaderData,
 } from '@remix-run/react';
 
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import './styles/tailwind.css';
 
 import { iconsHref, logoHref } from '@tipprunde/ui';
-import { ThemeProvider, useTheme } from '@tipprunde/utils/theme';
+import { ThemeProvider, getHints, useTheme } from '@tipprunde/utils/theme';
 
 export const links: LinksFunction = () => {
   return [
     { rel: 'preload', href: iconsHref, as: 'image' },
     { rel: 'preload', href: logoHref, as: 'image' },
   ];
+};
+
+export const loader = ({ request }: LoaderFunctionArgs) => {
+  return json({
+    requestInfo: {
+      hints: getHints(request, { colorScheme: 'light' }),
+    },
+  });
 };
 
 function App() {
@@ -41,8 +51,10 @@ function App() {
 }
 
 export default function AppRoot() {
+  const { requestInfo } = useLoaderData<typeof loader>();
+
   return (
-    <ThemeProvider clientHint="dark">
+    <ThemeProvider clientHint={requestInfo.hints.colorScheme}>
       <App />
     </ThemeProvider>
   );
