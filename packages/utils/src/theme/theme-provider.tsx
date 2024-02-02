@@ -1,8 +1,14 @@
 import { type ReactNode, createContext, useContext } from 'react';
-import type { Theme } from './types';
+import type {
+  ClientHints,
+  ColorScheme,
+  ColorSchemeSource,
+  Theme,
+} from './types';
 
 type ThemeContextType = {
   theme: Theme | undefined;
+  hints: ClientHints;
 };
 
 const ThemeContext = createContext<ThemeContextType>(undefined as never);
@@ -22,7 +28,14 @@ export function ThemeProvider({
   );
 }
 
-export function useTheme() {
+export function useTheme(): {
+  colorScheme: ColorScheme | null;
+  mode: ColorSchemeSource;
+} {
   const ctx = useContext(ThemeContext);
-  return ctx;
+
+  return {
+    colorScheme: ctx.theme?.colorScheme || ctx.hints.colorScheme,
+    mode: ctx.theme ? 'session' : 'client',
+  };
 }

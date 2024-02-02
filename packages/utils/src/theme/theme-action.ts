@@ -13,21 +13,22 @@ export const createThemeAction = serverOnly$(
   (resolver: ThemeSessionResolver) =>
     async ({ request }: ActionFunctionArgs) => {
       const formData = await request.formData();
-      const theme = v.parse(
+
+      const themeResult = v.safeParse(
         ThemeSchema,
         Object.fromEntries(formData.entries()),
       );
 
       const [session, { commit, destroy }] = await resolver(request);
 
-      session.set('theme', theme);
+      let cookieString: string;
+      if (themeResult.success) {
+        session.set('theme', themeResult.output);
+        cookieString = await commit();
+      } else {
+        cookieString = await destroy();
+      }
 
-      const cookieString =
-        theme.colorScheme === 'system' ? await destroy() : await commit();
-
-      return json(
-        { success: true },
-        { headers: { 'Set-Cookie': cookieString } },
-      );
+      return json(null, { headers: { 'Set-Cookie': cookieString } });
     },
 );

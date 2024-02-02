@@ -1,16 +1,17 @@
-import type { ColorScheme } from './types';
+import * as v from 'valibot';
+import { ColorSchemeSchema } from './types';
 
-export function getHints(request: Request): {
-  colorScheme: ColorScheme | undefined;
-} {
+export function getHints(request: Request) {
   const colorSchemeHeaderValue = request.headers.get(
     'Sec-CH-Prefers-Color-Scheme',
   );
 
+  const colorSchemeResult = v.safeParse(
+    ColorSchemeSchema,
+    colorSchemeHeaderValue,
+  );
+
   return {
-    colorScheme:
-      colorSchemeHeaderValue === 'dark' || colorSchemeHeaderValue === 'light'
-        ? colorSchemeHeaderValue
-        : undefined,
+    colorScheme: colorSchemeResult.success ? colorSchemeResult.output : null,
   };
 }
