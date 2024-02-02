@@ -17,6 +17,8 @@ import type {
 type ThemeContextType = {
   theme: Theme;
   mode: ColorSchemeSource;
+  mediaQueryFallback: boolean;
+  isSSR: boolean;
   setColorScheme: (scheme: ColorScheme | 'system') => void;
   // setThemeColor: ...
 };
@@ -33,7 +35,7 @@ type ThemeProviderProps = {
   theme?: Theme;
   hints?: ClientHints;
   themeAction?: string;
-  mediaQueryFallback: boolean;
+  mediaQueryFallback?: boolean;
   children: ReactNode;
 };
 
@@ -47,9 +49,22 @@ export function ThemeProvider({
   const fetcher = useFetcher();
 
   const mode = theme?.colorScheme ? 'session' : 'client';
+  const isSSR = !!(theme?.colorScheme || hints?.colorScheme);
+
   const [colorScheme, setColorSchemeState] = useState<ColorScheme | null>(
-    detectSSRColorScheme({ theme, hints }),
+    () => {
+      let scheme = detectSSRColorScheme({ theme, hints });
+
+      if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
+        scheme = window.matchMedia(prefersLightQuery).matches
+          ? 'light'
+          : 'dark';
+      }
+
+      return scheme;
+    },
   );
+
   const setColorScheme = (scheme: ColorScheme | 'system') => {
     if (!themeAction) {
       throw new Error(
@@ -63,8 +78,13 @@ export function ThemeProvider({
   };
 
   useEffect(() => {
-    setColorSchemeState(detectSSRColorScheme({ theme, hints }));
-  }, [theme, hints]);
+    let scheme = detectSSRColorScheme({ theme, hints });
+
+    if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
+      scheme = window.matchMedia(prefersLightQuery).matches ? 'light' : 'dark';
+    }
+    setColorSchemeState(scheme);
+  }, [theme, hints, mediaQueryFallback]);
 
   useEffect(() => {
     // Listen only with mediaQueryFallback or Client-Hints Support
@@ -84,7 +104,13 @@ export function ThemeProvider({
 
   return (
     <ThemeContext.Provider
-      value={{ theme: { colorScheme }, mode, setColorScheme }}
+      value={{
+        theme: { colorScheme },
+        mode,
+        setColorScheme,
+        mediaQueryFallback,
+        isSSR,
+      }}
     >
       {children}
     </ThemeContext.Provider>

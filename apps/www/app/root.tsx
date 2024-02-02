@@ -12,7 +12,12 @@ import {
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { themeSessionResolver } from '#utils/sessions.server';
 
-import { ThemeProvider, getHints, useTheme } from '@tipprunde/utils/theme';
+import {
+  MediaQueryFallback,
+  ThemeProvider,
+  getHints,
+  useTheme,
+} from '@tipprunde/utils/theme';
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -30,11 +35,12 @@ function App() {
   const { theme } = useTheme();
 
   return (
-    <html lang="de" className={theme.colorScheme ?? 'light'}>
+    <html lang="de" className={theme.colorScheme || undefined}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="dark light" />
+        <MediaQueryFallback />
         <Meta />
         <Links />
       </head>
@@ -56,6 +62,7 @@ export default function AppRoot() {
       hints={requestInfo.hints}
       theme={requestInfo.theme}
       themeAction="/action/set-theme"
+      mediaQueryFallback={true}
     >
       <App />
     </ThemeProvider>
