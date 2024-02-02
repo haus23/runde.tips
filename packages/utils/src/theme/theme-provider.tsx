@@ -2,6 +2,7 @@ import { useFetcher } from '@remix-run/react';
 import {
   type ReactNode,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -14,54 +15,42 @@ import type {
 } from './types';
 
 type ThemeContextType = {
-  theme?: Theme;
-  hints?: ClientHints;
-  themeAction?: string;
+  theme: Theme;
+  mode: ColorSchemeSource;
+  setColorScheme: (scheme: ColorScheme | 'system') => void;
+  // setThemeColor: ...
 };
 
 const ThemeContext = createContext<ThemeContextType>(undefined as never);
 
-type ThemeProviderProps = ThemeContextType & {
+const prefersLightQuery = '(prefers-color-scheme: light)';
+
+function detectSSRColorScheme(sources: { theme?: Theme; hints?: ClientHints }) {
+  return sources.theme?.colorScheme || sources.hints?.colorScheme || null;
+}
+
+type ThemeProviderProps = {
+  theme?: Theme;
+  hints?: ClientHints;
+  themeAction?: string;
+  mediaQueryFallback: boolean;
   children: ReactNode;
 };
 
 export function ThemeProvider({
   children,
-  ...contextProps
+  theme,
+  hints,
+  themeAction,
+  mediaQueryFallback = false,
 }: ThemeProviderProps) {
-  return (
-    <ThemeContext.Provider value={contextProps}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-function detectSSRTheme(ctx: ThemeContextType) {
-  return ctx.theme?.colorScheme || ctx.hints?.colorScheme || null;
-}
-
-export function useTheme(): {
-  colorScheme: ColorScheme | null;
-  setColorScheme: (scheme: ColorScheme | 'system') => void;
-  mode: ColorSchemeSource;
-} {
   const fetcher = useFetcher();
-  const ctx = useContext(ThemeContext);
-  if (!ctx) {
-    throw new Error('You must use useTheme within a ThemeProvider.');
-  }
 
-  const { theme, hints, themeAction } = ctx;
-
-  const [colorScheme, setColorSchemeState] = useState<ColorScheme | null>(() =>
-    detectSSRTheme({ theme, hints }),
+  const mode = theme?.colorScheme ? 'session' : 'client';
+  const [colorScheme, setColorSchemeState] = useState<ColorScheme | null>(
+    detectSSRColorScheme({ theme, hints }),
   );
-
-  useEffect(() => {
-    setColorSchemeState(detectSSRTheme({ theme, hints }));
-  }, [theme, hints]);
-
-  function setColorScheme(scheme: ColorScheme | 'system') {
+  const setColorScheme = (scheme: ColorScheme | 'system') => {
     if (!themeAction) {
       throw new Error(
         'You must specify themeAction in ThemeProvider to switch themes.',
@@ -71,11 +60,41 @@ export function useTheme(): {
       { colorScheme: scheme },
       { method: 'POST', action: themeAction },
     );
-  }
-
-  return {
-    colorScheme,
-    setColorScheme,
-    mode: theme ? 'session' : 'client',
   };
+
+  useEffect(() => {
+    setColorSchemeState(detectSSRColorScheme({ theme, hints }));
+  }, [theme, hints]);
+
+  useEffect(() => {
+    // Listen only with mediaQueryFallback or Client-Hints Support
+    if (mediaQueryFallback || !!hints?.colorScheme) {
+      // Switch only on system theme
+      const handleChange = (ev: MediaQueryListEvent) => {
+        if (!theme?.colorScheme) {
+          setColorSchemeState(ev.matches ? 'light' : 'dark');
+        }
+      };
+
+      const mediaQuery = window.matchMedia(prefersLightQuery);
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery?.removeEventListener('change', handleChange);
+    }
+  }, [theme, hints, mediaQueryFallback]);
+
+  return (
+    <ThemeContext.Provider
+      value={{ theme: { colorScheme }, mode, setColorScheme }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) {
+    throw new Error('You must use useTheme within a ThemeProvider.');
+  }
+  return ctx;
 }

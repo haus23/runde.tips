@@ -27,10 +27,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 function App() {
-  const { colorScheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
-    <html lang="de" className={colorScheme ?? 'light'}>
+    <html lang="de" className={theme.colorScheme ?? 'light'}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
