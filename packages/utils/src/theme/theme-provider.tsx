@@ -1,41 +1,28 @@
-import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { type ReactNode, createContext, useContext } from 'react';
+import type { Theme } from './types';
 
-import { ThemeContext } from './theme-context';
-import type { ColorScheme } from './types';
-
-type ThemeProviderProps = {
-  children: ReactNode;
-  clientHint: ColorScheme | undefined;
+type ThemeContextType = {
+  theme: Theme | undefined;
 };
 
-const prefersLightQuery = '(prefers-color-scheme: light)';
+const ThemeContext = createContext<ThemeContextType>(undefined as never);
 
-export function ThemeProvider({ children, clientHint }: ThemeProviderProps) {
-  const [colorScheme, setTheme] = useState<ColorScheme | undefined>(() => {
-    if (clientHint) {
-      return clientHint;
-    }
+type ThemeProviderProps = ThemeContextType & {
+  children: ReactNode;
+};
 
-    if (typeof window !== 'object') {
-      return undefined;
-    }
-
-    return window.matchMedia(prefersLightQuery).matches ? 'light' : 'dark';
-  });
-
-  useEffect(() => {
-    const handleChange = (ev: MediaQueryListEvent) => {
-      setTheme(ev.matches ? 'light' : 'dark');
-    };
-    const mediaQuery = window.matchMedia(prefersLightQuery);
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery?.removeEventListener('change', handleChange);
-  }, []);
-
+export function ThemeProvider({
+  children,
+  ...contextProps
+}: ThemeProviderProps) {
   return (
-    <ThemeContext.Provider value={{ clientHint, colorScheme }}>
+    <ThemeContext.Provider value={contextProps}>
       {children}
     </ThemeContext.Provider>
   );
+}
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext);
+  return ctx;
 }

@@ -12,6 +12,7 @@ import {
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { themeSessionResolver } from '#utils/sessions.server';
 
+import { ThemeProvider, useTheme } from '@tipprunde/utils/theme';
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -25,7 +26,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 function App() {
-  const colorScheme = 'dark';
+  const { theme } = useTheme();
+
+  const colorScheme = theme?.colorScheme ?? 'dark';
 
   return (
     <html lang="de" className={colorScheme}>
@@ -49,5 +52,9 @@ function App() {
 export default function AppRoot() {
   const { requestInfo } = useLoaderData<typeof loader>();
 
-  return <App />;
+  return (
+    <ThemeProvider theme={requestInfo.theme}>
+      <App />
+    </ThemeProvider>
+  );
 }
