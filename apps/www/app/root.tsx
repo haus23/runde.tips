@@ -28,7 +28,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 function App() {
   const { theme } = useTheme();
 
-  const colorScheme = theme?.colorScheme ?? 'dark';
+  const colorScheme = theme?.colorScheme ?? 'light';
 
   return (
     <html lang="de" className={colorScheme}>
