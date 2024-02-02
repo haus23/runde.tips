@@ -1,5 +1,21 @@
 # @tipprunde/utils
 
+## 0.0.2
+
+### Patch Changes
+
+- refactor: Provide a session helper to create ts typed sessions.
+
+- refactor: Set theme via setter. Use state for color scheme.
+
+- fix: Spotted the server-only code. And switch to formData.
+
+- refactor: Redesigned the types. Readded client hints.
+
+- feat: Handle setting and destroying theme session
+
+- feat: Add provider and hook with the session data. And add a POC in home route.
+
 ## 0.0.1
 
 ### Patch Changes

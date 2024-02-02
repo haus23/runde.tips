@@ -1,5 +1,29 @@
 # @tipprunde/www
 
+## 0.0.10
+
+### Patch Changes
+
+- refactor: Provide a session helper to create ts typed sessions.
+
+- refactor: Switch to default color scheme light.
+
+- refactor: Set theme via setter. Use state for color scheme.
+
+- fix: Spotted the server-only code. And switch to formData.
+
+- feat: Create theme session.
+
+- refactor: Remove all theme related code. Due to problems with code splitting.
+
+- refactor: Redesigned the types. Readded client hints.
+
+- feat: Handle setting and destroying theme session
+
+- fix: Get rid of preloading the svg-files. Annoying console warnings.
+
+- feat: Add provider and hook with the session data. And add a POC in home route.
+
 ## 0.0.9
 
 ### Patch Changes
