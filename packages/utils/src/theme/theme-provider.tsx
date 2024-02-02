@@ -1,4 +1,11 @@
-import { type ReactNode, createContext, useContext } from 'react';
+import { useFetcher } from '@remix-run/react';
+import {
+  type ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import type {
   ClientHints,
   ColorScheme,
@@ -28,14 +35,36 @@ export function ThemeProvider({
   );
 }
 
+function detectSSRTheme(ctx: ThemeContextType) {
+  return ctx.theme?.colorScheme || ctx.hints.colorScheme;
+}
+
 export function useTheme(): {
   colorScheme: ColorScheme | null;
+  setColorScheme: (scheme: ColorScheme | 'system') => void;
   mode: ColorSchemeSource;
 } {
-  const ctx = useContext(ThemeContext);
+  const { theme, hints } = useContext(ThemeContext);
+  const fetcher = useFetcher();
+
+  const [colorScheme, setColorSchemeState] = useState<ColorScheme | null>(() =>
+    detectSSRTheme({ theme, hints }),
+  );
+
+  useEffect(() => {
+    setColorSchemeState(detectSSRTheme({ theme, hints }));
+  }, [theme, hints]);
+
+  function setColorScheme(scheme: ColorScheme | 'system') {
+    fetcher.submit(
+      { colorScheme: scheme },
+      { method: 'POST', action: '/action/set-theme' },
+    );
+  }
 
   return {
-    colorScheme: ctx.theme?.colorScheme || ctx.hints.colorScheme,
-    mode: ctx.theme ? 'session' : 'client',
+    colorScheme,
+    setColorScheme,
+    mode: theme ? 'session' : 'client',
   };
 }

@@ -1,5 +1,5 @@
-import { useFetcher } from '@remix-run/react';
 import { Button } from '@tipprunde/ui';
+import { useTheme } from '@tipprunde/utils/theme';
 
 export function meta() {
   return [
@@ -9,21 +9,15 @@ export function meta() {
 }
 
 export default function HomeRoute() {
-  const fetcher = useFetcher();
+  const { setColorScheme } = useTheme();
 
-  function setTheme(colorScheme: string) {
-    fetcher.submit(
-      { colorScheme },
-      { method: 'POST', action: '/action/set-theme' },
-    );
-  }
   return (
     <div>
       <h2 className="text-3xl font-medium">Home</h2>
       <div className="flex justify-between">
-        <Button onPress={() => setTheme('light')}>Light</Button>
-        <Button onPress={() => setTheme('dark')}>Dark</Button>
-        <Button onPress={() => setTheme('system')}>System</Button>
+        <Button onPress={() => setColorScheme('light')}>Light</Button>
+        <Button onPress={() => setColorScheme('dark')}>Dark</Button>
+        <Button onPress={() => setColorScheme('system')}>System</Button>
       </div>
     </div>
   );
