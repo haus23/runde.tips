@@ -14,8 +14,9 @@ import type {
 } from './types';
 
 type ThemeContextType = {
-  theme: Theme | undefined;
-  hints: ClientHints;
+  theme?: Theme;
+  hints?: ClientHints;
+  themeAction?: string;
 };
 
 const ThemeContext = createContext<ThemeContextType>(undefined as never);
@@ -36,7 +37,7 @@ export function ThemeProvider({
 }
 
 function detectSSRTheme(ctx: ThemeContextType) {
-  return ctx.theme?.colorScheme || ctx.hints.colorScheme;
+  return ctx.theme?.colorScheme || ctx.hints?.colorScheme || null;
 }
 
 export function useTheme(): {
@@ -44,8 +45,13 @@ export function useTheme(): {
   setColorScheme: (scheme: ColorScheme | 'system') => void;
   mode: ColorSchemeSource;
 } {
-  const { theme, hints } = useContext(ThemeContext);
   const fetcher = useFetcher();
+  const ctx = useContext(ThemeContext);
+  if (!ctx) {
+    throw new Error('You must use useTheme within a ThemeProvider.');
+  }
+
+  const { theme, hints, themeAction } = ctx;
 
   const [colorScheme, setColorSchemeState] = useState<ColorScheme | null>(() =>
     detectSSRTheme({ theme, hints }),
@@ -56,9 +62,14 @@ export function useTheme(): {
   }, [theme, hints]);
 
   function setColorScheme(scheme: ColorScheme | 'system') {
+    if (!themeAction) {
+      throw new Error(
+        'You must specify themeAction in ThemeProvider to switch themes.',
+      );
+    }
     fetcher.submit(
       { colorScheme: scheme },
-      { method: 'POST', action: '/action/set-theme' },
+      { method: 'POST', action: themeAction },
     );
   }
 

@@ -52,7 +52,11 @@ export default function AppRoot() {
   const { requestInfo } = useLoaderData<typeof loader>();
 
   return (
-    <ThemeProvider theme={requestInfo.theme} hints={requestInfo.hints}>
+    <ThemeProvider
+      hints={requestInfo.hints}
+      theme={requestInfo.theme}
+      themeAction="/action/set-theme"
+    >
       <App />
     </ThemeProvider>
   );
