@@ -1,5 +1,15 @@
 # @tipprunde/utils
 
+## 0.0.3
+
+### Patch Changes
+
+- refactor: State belong in context. And listen for media query changes.
+
+- refactor: Cleanup and make everything optional.
+
+- feat: Implement support for mediaQuery based colorScheme setting.
+
 ## 0.0.2
 
 ### Patch Changes

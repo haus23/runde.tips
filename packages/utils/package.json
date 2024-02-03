@@ -1,6 +1,6 @@
 {
   "name": "@tipprunde/utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "exports": {
     "./session": "./src/session/index.ts",
     "./theme": "./src/theme/index.ts"
