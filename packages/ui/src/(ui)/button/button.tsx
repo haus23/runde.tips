@@ -8,7 +8,7 @@ import { focusRing } from '../base-styles';
 
 const button = tv({
   extend: focusRing,
-  base: 'flex px-4 py-2 rounded-md text-center',
+  base: 'flex px-4 py-2 rounded-md text-center cursor-default',
   variants: {
     variant: {
       neutral: 'bg-cn hover:bg-cn-hover pressed:bg-cn-active',
