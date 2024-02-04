@@ -15,11 +15,10 @@ import type {
 
 type ThemeContextType = {
   theme: Theme;
+  setTheme: (theme: { colorScheme: ColorScheme | 'system' }) => void;
   mode: ColorSchemeSource;
   mediaQueryFallback: boolean;
   isSSR: boolean;
-  setColorScheme: (scheme: ColorScheme | 'system') => void;
-  // setThemeColor: ...
 };
 
 const ThemeContext = createContext<ThemeContextType>(undefined as never);
@@ -52,7 +51,7 @@ export function ThemeProvider({
   const mode = sessionTheme?.colorScheme ? 'session' : 'client';
   const isSSR = !!(sessionTheme?.colorScheme || hints?.colorScheme);
 
-  const [theme, setTheme] = useState<Theme>(() => {
+  const [theme, setThemeState] = useState<Theme>(() => {
     let scheme = detectSSRColorScheme({ theme: sessionTheme, hints });
 
     if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
@@ -62,16 +61,13 @@ export function ThemeProvider({
     return { colorScheme: scheme || defaultColorScheme };
   });
 
-  const setColorScheme = (scheme: ColorScheme | 'system') => {
+  const setTheme = (theme: { colorScheme: ColorScheme | 'system' }) => {
     if (!themeAction) {
       throw new Error(
         'You must specify themeAction in ThemeProvider to switch themes.',
       );
     }
-    fetcher.submit(
-      { colorScheme: scheme },
-      { method: 'POST', action: themeAction },
-    );
+    fetcher.submit(theme, { method: 'POST', action: themeAction });
   };
 
   useEffect(() => {
@@ -80,7 +76,7 @@ export function ThemeProvider({
     if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
       scheme = window.matchMedia(prefersLightQuery).matches ? 'light' : 'dark';
     }
-    setTheme((t) => ({ ...t, colorScheme: scheme || defaultColorScheme }));
+    setThemeState((t) => ({ ...t, colorScheme: scheme || defaultColorScheme }));
   }, [sessionTheme, hints, mediaQueryFallback, defaultColorScheme]);
 
   useEffect(() => {
@@ -89,7 +85,7 @@ export function ThemeProvider({
       // Switch only on system theme
       const handleChange = (ev: MediaQueryListEvent) => {
         if (!sessionTheme?.colorScheme) {
-          setTheme((t) => ({
+          setThemeState((t) => ({
             ...t,
             colorScheme: ev.matches ? 'light' : 'dark',
           }));
@@ -107,7 +103,7 @@ export function ThemeProvider({
       value={{
         theme,
         mode,
-        setColorScheme,
+        setTheme,
         mediaQueryFallback,
         isSSR,
       }}
