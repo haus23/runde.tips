@@ -133,6 +133,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.1
+      tailwindcss-react-aria-components:
+        specifier: ^1.0.0
+        version: 1.0.0(tailwindcss@3.4.1)
 
   packages/config-typescript: {}
 
@@ -7645,6 +7648,14 @@ packages:
       tailwindcss: '*'
     dependencies:
       tailwind-merge: 1.14.0
+      tailwindcss: 3.4.1
+    dev: true
+
+  /tailwindcss-react-aria-components@1.0.0(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-iQNS6/037UPYTxj4G4IMFL7R3FT5I583/c/nQFdvYwU0gpuTZXCSeaWjCp9q0V9DqZypdo+j8KLRVaxD5z7psA==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
       tailwindcss: 3.4.1
     dev: true
 

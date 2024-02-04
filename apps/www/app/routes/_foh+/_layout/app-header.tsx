@@ -1,4 +1,4 @@
-import { Logo } from '@tipprunde/ui';
+import { Button, Icon, Logo } from '@tipprunde/ui';
 
 export function AppHeader() {
   return (
@@ -6,6 +6,11 @@ export function AppHeader() {
       <div className="max-w-7xl mx-auto flex justify-between">
         <div className="h-14 flex items-center">
           <Logo />
+        </div>
+        <div className="flex items-center">
+          <Button variant="toolbar">
+            <Icon name="moon" />
+          </Button>
         </div>
       </div>
     </header>

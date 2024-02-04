@@ -1,5 +1,11 @@
 @import '@radix-ui/colors/sand.css';
 @import '@radix-ui/colors/sand-dark.css';
+@import '@radix-ui/colors/orange.css';
+@import '@radix-ui/colors/orange-dark.css';
+@import '@radix-ui/colors/sage.css';
+@import '@radix-ui/colors/sage-dark.css';
+@import '@radix-ui/colors/jade.css';
+@import '@radix-ui/colors/jade-dark.css';
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +14,16 @@
 @layer base {
 
   :root {
-    --app-bg: var(--sand-2);
-    --app-fg: var(--sand-12);
+    --app-bg: var(--sage-2);
+    --app-fg: var(--sage-12);
+
+    --cn-bg: var(--sage-3);
+    --cn-bg-hover: var(--sage-4);
+    --cn-bg-active: var(--sage-5);
+    --cn-ring: var(--sage-7);
+
+    --ca-bg: var(--jade-3);
+    --ca-bg-hover: var(--jade-4);
+    --ca-bg-active: var(--jade-5);
   }
 }
