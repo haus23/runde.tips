@@ -8,3 +8,5 @@ export const focusRing = tv({
     },
   },
 });
+
+export const dropdownItem = tv({});
