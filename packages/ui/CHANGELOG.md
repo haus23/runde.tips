@@ -1,5 +1,13 @@
 # @tipprunde/ui
 
+## 0.1.1
+
+### Patch Changes
+
+- chore: Update deps. Update Remix to v2.6
+
+- feat: Add minimal styled button with variants.
+
 ## 0.1.0
 
 ### Minor Changes

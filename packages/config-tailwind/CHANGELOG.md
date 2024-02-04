@@ -1,5 +1,11 @@
 # @tipprunde/tailwind-config
 
+## 0.0.5
+
+### Patch Changes
+
+- feat: Add minimal styled button with variants.
+
 ## 0.0.4
 
 ### Patch Changes

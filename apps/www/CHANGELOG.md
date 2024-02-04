@@ -1,5 +1,17 @@
 # @tipprunde/www
 
+## 0.0.12
+
+### Patch Changes
+
+- chore: Update deps. Update Remix to v2.6
+
+- feat: Add minimal styled button with variants.
+
+- refactor: Remove now obsolete live-reload component.
+
+- fix: Typo.
+
 ## 0.0.11
 
 ### Patch Changes

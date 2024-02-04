@@ -1,5 +1,13 @@
 # @tipprunde/manager
 
+## 0.0.4
+
+### Patch Changes
+
+- chore: Update deps. Update Remix to v2.6
+
+- refactor: Remove now obsolete live-reload component.
+
 ## 0.0.3
 
 ### Patch Changes

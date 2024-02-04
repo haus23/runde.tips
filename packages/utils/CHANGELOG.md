@@ -1,5 +1,11 @@
 # @tipprunde/utils
 
+## 0.0.4
+
+### Patch Changes
+
+- chore: Update deps. Update Remix to v2.6
+
 ## 0.0.3
 
 ### Patch Changes
