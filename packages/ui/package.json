@@ -9,6 +9,7 @@
     "icons:build": "icons build -i ./icons -o ./src/components/icon/icons --optimize 0",
     "typecheck": "tsc"
   },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^18.2.0"
   },
