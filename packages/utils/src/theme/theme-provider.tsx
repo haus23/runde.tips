@@ -41,7 +41,7 @@ type ThemeProviderProps = {
 
 export function ThemeProvider({
   children,
-  theme,
+  theme: sessionTheme,
   hints,
   themeAction,
   mediaQueryFallback = false,
@@ -49,17 +49,17 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const fetcher = useFetcher();
 
-  const mode = theme?.colorScheme ? 'session' : 'client';
-  const isSSR = !!(theme?.colorScheme || hints?.colorScheme);
+  const mode = sessionTheme?.colorScheme ? 'session' : 'client';
+  const isSSR = !!(sessionTheme?.colorScheme || hints?.colorScheme);
 
-  const [colorScheme, setColorSchemeState] = useState<ColorScheme>(() => {
-    let scheme = detectSSRColorScheme({ theme, hints });
+  const [theme, setTheme] = useState<Theme>(() => {
+    let scheme = detectSSRColorScheme({ theme: sessionTheme, hints });
 
     if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
       scheme = window.matchMedia(prefersLightQuery).matches ? 'light' : 'dark';
     }
 
-    return scheme || defaultColorScheme;
+    return { colorScheme: scheme || defaultColorScheme };
   });
 
   const setColorScheme = (scheme: ColorScheme | 'system') => {
@@ -75,21 +75,24 @@ export function ThemeProvider({
   };
 
   useEffect(() => {
-    let scheme = detectSSRColorScheme({ theme, hints });
+    let scheme = detectSSRColorScheme({ theme: sessionTheme, hints });
 
     if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
       scheme = window.matchMedia(prefersLightQuery).matches ? 'light' : 'dark';
     }
-    setColorSchemeState(scheme || defaultColorScheme);
-  }, [theme, hints, mediaQueryFallback, defaultColorScheme]);
+    setTheme((t) => ({ ...t, colorScheme: scheme || defaultColorScheme }));
+  }, [sessionTheme, hints, mediaQueryFallback, defaultColorScheme]);
 
   useEffect(() => {
     // Listen only with mediaQueryFallback or Client-Hints Support
     if (mediaQueryFallback || !!hints?.colorScheme) {
       // Switch only on system theme
       const handleChange = (ev: MediaQueryListEvent) => {
-        if (!theme?.colorScheme) {
-          setColorSchemeState(ev.matches ? 'light' : 'dark');
+        if (!sessionTheme?.colorScheme) {
+          setTheme((t) => ({
+            ...t,
+            colorScheme: ev.matches ? 'light' : 'dark',
+          }));
         }
       };
 
@@ -97,12 +100,12 @@ export function ThemeProvider({
       mediaQuery.addEventListener('change', handleChange);
       return () => mediaQuery?.removeEventListener('change', handleChange);
     }
-  }, [theme, hints, mediaQueryFallback]);
+  }, [sessionTheme, hints, mediaQueryFallback]);
 
   return (
     <ThemeContext.Provider
       value={{
-        theme: { colorScheme },
+        theme,
         mode,
         setColorScheme,
         mediaQueryFallback,
