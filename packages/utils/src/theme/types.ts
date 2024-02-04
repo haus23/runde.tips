@@ -4,7 +4,7 @@ const colorSchemeNames = ['light', 'dark'] as const;
 export const ColorSchemeSchema = v.picklist(colorSchemeNames);
 
 export const ThemeSchema = v.object({
-  colorScheme: v.nullable(ColorSchemeSchema),
+  colorScheme: ColorSchemeSchema,
   // themeColor: ...
 });
 export const ClientHintsSchema = v.object({

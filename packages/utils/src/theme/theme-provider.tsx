@@ -2,7 +2,6 @@ import { useFetcher } from '@remix-run/react';
 import {
   type ReactNode,
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -36,6 +35,7 @@ type ThemeProviderProps = {
   hints?: ClientHints;
   themeAction?: string;
   mediaQueryFallback?: boolean;
+  defaultColorScheme: ColorScheme;
   children: ReactNode;
 };
 
@@ -45,25 +45,22 @@ export function ThemeProvider({
   hints,
   themeAction,
   mediaQueryFallback = false,
+  defaultColorScheme,
 }: ThemeProviderProps) {
   const fetcher = useFetcher();
 
   const mode = theme?.colorScheme ? 'session' : 'client';
   const isSSR = !!(theme?.colorScheme || hints?.colorScheme);
 
-  const [colorScheme, setColorSchemeState] = useState<ColorScheme | null>(
-    () => {
-      let scheme = detectSSRColorScheme({ theme, hints });
+  const [colorScheme, setColorSchemeState] = useState<ColorScheme>(() => {
+    let scheme = detectSSRColorScheme({ theme, hints });
 
-      if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
-        scheme = window.matchMedia(prefersLightQuery).matches
-          ? 'light'
-          : 'dark';
-      }
+    if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
+      scheme = window.matchMedia(prefersLightQuery).matches ? 'light' : 'dark';
+    }
 
-      return scheme;
-    },
-  );
+    return scheme || defaultColorScheme;
+  });
 
   const setColorScheme = (scheme: ColorScheme | 'system') => {
     if (!themeAction) {
@@ -83,8 +80,8 @@ export function ThemeProvider({
     if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
       scheme = window.matchMedia(prefersLightQuery).matches ? 'light' : 'dark';
     }
-    setColorSchemeState(scheme);
-  }, [theme, hints, mediaQueryFallback]);
+    setColorSchemeState(scheme || defaultColorScheme);
+  }, [theme, hints, mediaQueryFallback, defaultColorScheme]);
 
   useEffect(() => {
     // Listen only with mediaQueryFallback or Client-Hints Support
