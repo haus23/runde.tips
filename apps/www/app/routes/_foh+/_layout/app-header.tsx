@@ -9,7 +9,7 @@ export function AppHeader() {
         </div>
         <div className="flex items-center">
           <Button variant="toolbar">
-            <Icon name="moon" />
+            <Icon name="lucide/moon" />
           </Button>
         </div>
       </div>
