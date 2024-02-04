@@ -1,5 +1,15 @@
 # @tipprunde/ui
 
+## 0.1.2
+
+### Patch Changes
+
+- feat: Add unstyled but working menu component.
+
+- fix: Use default cursor on buttons.
+
+- feat: Add check icon.
+
 ## 0.1.1
 
 ### Patch Changes

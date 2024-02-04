@@ -1,5 +1,15 @@
 # @tipprunde/www
 
+## 0.0.13
+
+### Patch Changes
+
+- feat: Add unstyled but working menu component.
+
+- fix: Icons were renamed. Use library prefix now.
+
+- refactor: Add default colorScheme prop.
+
 ## 0.0.12
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @tipprunde/utils
 
+## 0.0.5
+
+### Patch Changes
+
+- refactor: Provide a future-proof complete setTheme method.
+
+- refactor: Use completed theme as state.
+
+- refactor: Add default colorScheme prop.
+
 ## 0.0.4
 
 ### Patch Changes
