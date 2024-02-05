@@ -1,5 +1,13 @@
 # @tipprunde/utils
 
+## 0.2.0
+
+### Minor Changes
+
+- feat: Add misc utilities: singleton and invariant.
+
+- feat: Add helper to handle readonly arrays.
+
 ## 0.1.0
 
 ### Minor Changes

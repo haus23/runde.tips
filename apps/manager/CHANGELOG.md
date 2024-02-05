@@ -1,5 +1,11 @@
 # @tipprunde/manager
 
+## 0.0.5
+
+### Patch Changes
+
+- fix: Prepare removal of manager app.
+
 ## 0.0.4
 
 ### Patch Changes
