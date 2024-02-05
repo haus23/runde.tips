@@ -58,10 +58,9 @@ export default function AppRoot() {
   return (
     <ThemeProvider
       hints={requestInfo.hints}
-      theme={requestInfo.theme}
+      sessionTheme={requestInfo.theme}
       themeAction="/action/set-theme"
-      mediaQueryFallback={true}
-      defaultColorScheme="dark"
+      mediaQueryFallback
     >
       <App />
     </ThemeProvider>

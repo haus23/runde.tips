@@ -30,20 +30,27 @@ function detectSSRColorScheme(sources: { theme?: Theme; hints?: ClientHints }) {
 }
 
 type ThemeProviderProps = {
-  theme?: Theme;
+  sessionTheme?: Theme;
   hints?: ClientHints;
   themeAction?: string;
-  mediaQueryFallback?: boolean;
-  defaultColorScheme: ColorScheme;
   children: ReactNode;
-};
+} & (
+  | {
+      mediaQueryFallback: true;
+      defaultColorScheme?: never;
+    }
+  | {
+      mediaQueryFallback?: never;
+      defaultColorScheme: ColorScheme;
+    }
+);
 
 export function ThemeProvider({
   children,
-  theme: sessionTheme,
+  sessionTheme,
   hints,
   themeAction,
-  mediaQueryFallback = false,
+  mediaQueryFallback,
   defaultColorScheme,
 }: ThemeProviderProps) {
   const fetcher = useFetcher();
@@ -58,7 +65,7 @@ export function ThemeProvider({
       scheme = window.matchMedia(prefersLightQuery).matches ? 'light' : 'dark';
     }
 
-    return { colorScheme: scheme || defaultColorScheme };
+    return { colorScheme: scheme || defaultColorScheme || 'light' };
   });
 
   const setTheme = (theme: { colorScheme: ColorScheme | 'system' }) => {
@@ -76,7 +83,10 @@ export function ThemeProvider({
     if (!scheme && mediaQueryFallback && typeof window !== 'undefined') {
       scheme = window.matchMedia(prefersLightQuery).matches ? 'light' : 'dark';
     }
-    setThemeState((t) => ({ ...t, colorScheme: scheme || defaultColorScheme }));
+    setThemeState((t) => ({
+      ...t,
+      colorScheme: scheme || defaultColorScheme || 'light',
+    }));
   }, [sessionTheme, hints, mediaQueryFallback, defaultColorScheme]);
 
   useEffect(() => {
@@ -104,7 +114,7 @@ export function ThemeProvider({
         theme,
         mode,
         setTheme,
-        mediaQueryFallback,
+        mediaQueryFallback: !!mediaQueryFallback,
         isSSR,
       }}
     >
