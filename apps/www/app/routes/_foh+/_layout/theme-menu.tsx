@@ -16,8 +16,8 @@ const colorSchemes: {
   label: string;
   icon: IconName;
 }[] = [
-  { name: 'light', label: 'Light', icon: 'lucide/sun' },
-  { name: 'dark', label: 'Dark', icon: 'lucide/moon' },
+  { name: 'light', label: 'Hell', icon: 'lucide/sun' },
+  { name: 'dark', label: 'Dunkel', icon: 'lucide/moon' },
   { name: 'system', label: 'System', icon: 'lucide/laptop' },
 ];
 
