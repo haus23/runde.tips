@@ -24,6 +24,15 @@ importers:
         specifier: ^1.12.2
         version: 1.12.2
 
+  apps/console:
+    dependencies:
+      '@tipprunde/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      prisma:
+        specifier: ^5.9.1
+        version: 5.9.1
+
   apps/manager:
     dependencies:
       '@remix-run/node':
@@ -75,6 +84,15 @@ importers:
       '@remix-run/serve':
         specifier: ^2.6.0
         version: 2.6.0(typescript@5.3.3)
+      '@tipprunde/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@tipprunde/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@tipprunde/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       isbot:
         specifier: ^4.4.0
         version: 4.4.0
@@ -94,12 +112,6 @@ importers:
       '@tipprunde/typescript-config':
         specifier: workspace:*
         version: link:../../packages/config-typescript
-      '@tipprunde/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@tipprunde/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       '@types/node':
         specifier: ^20.11.16
         version: 20.11.16
@@ -150,10 +162,19 @@ importers:
       '@prisma/client':
         specifier: ^5.9.1
         version: 5.9.1(prisma@5.9.1)
+      '@tipprunde/utils':
+        specifier: workspace:*
+        version: link:../utils
     devDependencies:
+      '@tipprunde/typescript-config':
+        specifier: workspace:*
+        version: link:../config-typescript
       prisma:
         specifier: ^5.9.1
         version: 5.9.1
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
 
   packages/ui:
     devDependencies:
