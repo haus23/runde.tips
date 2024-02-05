@@ -9,10 +9,8 @@
     "icons:build": "icons build -i ./icons -o ./src/components/icon/icons --optimize 0",
     "typecheck": "tsc"
   },
-  "peerDependencies": {
-    "react": "^18.2.0"
-  },
   "devDependencies": {
+    "@remix-run/react": "^2.6.0",
     "@sly-cli/sly": "^1.8.0",
     "@tipprunde/tailwind-config": "workspace:*",
     "@tipprunde/typescript-config": "workspace:*",

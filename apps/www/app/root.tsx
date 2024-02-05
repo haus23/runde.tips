@@ -6,11 +6,13 @@ import {
   ScrollRestoration,
   json,
   useLoaderData,
+  useNavigate,
 } from '@remix-run/react';
 
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { themeSessionResolver } from '#utils/sessions.server';
 
+import { RouterProvider } from '@tipprunde/ui';
 import {
   MediaQueryFallback,
   ThemeProvider,
@@ -54,15 +56,18 @@ function App() {
 
 export default function AppRoot() {
   const { requestInfo } = useLoaderData<typeof loader>();
+  const navigate = useNavigate();
 
   return (
-    <ThemeProvider
-      hints={requestInfo.hints}
-      sessionTheme={requestInfo.theme}
-      themeAction="/action/set-theme"
-      mediaQueryFallback
-    >
-      <App />
-    </ThemeProvider>
+    <RouterProvider navigate={navigate}>
+      <ThemeProvider
+        hints={requestInfo.hints}
+        sessionTheme={requestInfo.theme}
+        themeAction="/action/set-theme"
+        mediaQueryFallback
+      >
+        <App />
+      </ThemeProvider>
+    </RouterProvider>
   );
 }
