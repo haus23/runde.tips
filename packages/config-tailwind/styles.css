@@ -20,8 +20,6 @@
     --app-fg: var(--sage-12);
     --app-fg-subtle: var(--sage-11);
 
-    --border-neutral: var(--sage-6);
-
     --cn-bg: var(--sage-3);
     --cn-bg-hover: var(--sage-4);
     --cn-bg-active: var(--sage-5);
@@ -33,5 +31,8 @@
     --ca-bg: var(--jade-3);
     --ca-bg-hover: var(--jade-4);
     --ca-bg-active: var(--jade-5);
+
+    --border-neutral: var(--sage-6);
+    --border-accent: var(--jade-6);
   }
 }

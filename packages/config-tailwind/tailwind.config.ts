@@ -27,6 +27,7 @@ export default {
     borderColor: ({ theme }) => ({
       ...theme('colors'),
       neutral: 'var(--border-neutral)',
+      accent: 'var(--border-accent)',
     }),
     fill: ({ theme }) => ({
       ...theme('colors'),

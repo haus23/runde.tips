@@ -22,7 +22,7 @@ interface _PopoverProps extends PopoverProps {
 function _Popover({ children, className, showArrow, ...props }: _PopoverProps) {
   return (
     <Popover
-      offset={12}
+      offset={16}
       {...props}
       className={composeRenderProps(className, (className, renderProps) =>
         popover({ ...renderProps, className }),
