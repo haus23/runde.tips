@@ -1,5 +1,13 @@
 # @tipprunde/www
 
+## 0.0.14
+
+### Patch Changes
+
+- feat: Finally styled the theme menu.
+
+- feat: Final utils/theme. Resolves #1 und resolves #2
+
 ## 0.0.13
 
 ### Patch Changes

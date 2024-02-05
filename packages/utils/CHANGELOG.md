@@ -1,5 +1,11 @@
 # @tipprunde/utils
 
+## 0.1.0
+
+### Minor Changes
+
+- feat: Final utils/theme. Resolves #1 und resolves #2
+
 ## 0.0.5
 
 ### Patch Changes

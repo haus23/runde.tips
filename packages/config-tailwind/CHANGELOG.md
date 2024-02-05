@@ -1,5 +1,11 @@
 # @tipprunde/tailwind-config
 
+## 0.0.6
+
+### Patch Changes
+
+- feat: Finally styled the theme menu.
+
 ## 0.0.5
 
 ### Patch Changes

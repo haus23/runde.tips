@@ -1,5 +1,11 @@
 # @tipprunde/ui
 
+## 0.1.3
+
+### Patch Changes
+
+- feat: Finally styled the theme menu.
+
 ## 0.1.2
 
 ### Patch Changes
