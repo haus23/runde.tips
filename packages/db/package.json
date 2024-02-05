@@ -1,10 +1,20 @@
 {
   "name": "@tipprunde/db",
   "version": "0.0.0",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push --skip-generate"
+  },
   "dependencies": {
-    "@prisma/client": "^5.9.1"
+    "@prisma/client": "^5.9.1",
+    "@tipprunde/utils": "workspace:*"
   },
   "devDependencies": {
-    "prisma": "^5.9.1"
+    "@tipprunde/typescript-config": "workspace:*",
+    "prisma": "^5.9.1",
+    "typescript": "^5.3.3"
   }
 }
