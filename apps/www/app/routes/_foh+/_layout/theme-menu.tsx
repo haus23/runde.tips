@@ -58,6 +58,7 @@ export function ThemeMenu() {
       </Button>
       <MenuItems
         placement="bottom"
+        showArrow
         selectionMode="single"
         selectedKeys={selectedColorScheme}
         onAction={handleAction}

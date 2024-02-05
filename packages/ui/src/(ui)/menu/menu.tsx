@@ -15,11 +15,20 @@ import { Popover, type PopoverProps } from '../popover/popover';
 
 interface _MenuProps<T> extends MenuProps<T> {
   placement?: PopoverProps['placement'];
+  showArrow?: PopoverProps['showArrow'];
 }
 
-function _MenuItems<T extends object>(props: _MenuProps<T>) {
+function _MenuItems<T extends object>({
+  placement,
+  showArrow,
+  ...props
+}: _MenuProps<T>) {
   return (
-    <Popover placement={props.placement} className="min-w-[150px]">
+    <Popover
+      placement={placement}
+      showArrow={showArrow}
+      className="min-w-[150px]"
+    >
       <Menu
         {...props}
         className="p-1 outline-0 max-h-[inherit] overflow-auto [clip-path:inset(0_0_0_0_round_.75rem)]"

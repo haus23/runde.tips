@@ -28,6 +28,10 @@ export default {
       ...theme('colors'),
       neutral: 'var(--border-neutral)',
     }),
+    fill: ({ theme }) => ({
+      ...theme('colors'),
+      cn: 'var(--cn-bg)',
+    }),
     ringColor: ({ theme }) => ({
       ...theme('colors'),
       cn: 'var(--cn-ring)',
@@ -35,6 +39,10 @@ export default {
     ringOffsetColor: ({ theme }) => ({
       ...theme('colors'),
       app: 'var(--app-bg)',
+    }),
+    stroke: ({ theme }) => ({
+      ...theme('colors'),
+      'border-neutral': 'var(--border-neutral)',
     }),
     textColor: ({ theme }) => ({
       ...theme('colors'),
