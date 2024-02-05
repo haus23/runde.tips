@@ -1,7 +1,9 @@
 {
   "name": "@haus23/runde.tips",
   "scripts": {
-    "www:dev": "pnpm run --filter www dev",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "pnpm run --filter www start",
     "icons:add": "pnpm run --filter ui icons:add",
     "icons:build": "pnpm run --filter ui icons:build",
     "check": "biome check --apply ."
@@ -10,6 +12,7 @@
     "@biomejs/biome": "1.5.3",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
-    "changeset-conventional-commits": "^0.2.4"
+    "changeset-conventional-commits": "^0.2.4",
+    "turbo": "^1.12.2"
   }
 }
