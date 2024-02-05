@@ -13,7 +13,7 @@
   "json.validate.enable": false,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml",
+    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml, .npmrc",
     "vite.config.ts": "tsconfig.json, tailwind.config.ts, .postcssrc.json",
     "biome.json": ".editorconfig"
   },

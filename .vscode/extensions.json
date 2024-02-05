@@ -4,6 +4,7 @@
     "editorconfig.editorconfig",
     "bradlc.vscode-tailwindcss",
     "pflannery.vscode-versionlens",
-    "johnsoncodehk.vscode-tsconfig-helper"
+    "johnsoncodehk.vscode-tsconfig-helper",
+    "prisma.prisma"
   ]
 }
