@@ -1,5 +1,5 @@
-import { Button, Icon, Logo } from '@tipprunde/ui';
-import { ThemeSelect } from './theme-select';
+import { Logo } from '@tipprunde/ui';
+import { ThemeMenu } from './theme-menu';
 
 export function AppHeader() {
   return (
@@ -9,7 +9,7 @@ export function AppHeader() {
           <Logo />
         </div>
         <div className="flex items-center">
-          <ThemeSelect />
+          <ThemeMenu />
         </div>
       </div>
     </header>

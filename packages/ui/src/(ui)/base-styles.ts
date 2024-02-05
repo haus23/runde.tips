@@ -9,4 +9,18 @@ export const focusRing = tv({
   },
 });
 
-export const dropdownItem = tv({});
+export const dropdownItem = tv({
+  base: [
+    'group flex items-center gap-4 cursor-default select-none text-sm',
+    'py-2 pl-3 pr-1 rounded-lg outline-none',
+    'pressed:bg-cn-active',
+  ],
+  variants: {
+    isFocused: {
+      true: 'bg-cn-hover',
+    },
+    isSelected: {
+      true: 'text-accent',
+    },
+  },
+});

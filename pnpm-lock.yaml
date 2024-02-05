@@ -106,6 +106,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.18
         version: 18.2.18
+      clsx:
+        specifier: ^2.1.0
+        version: 2.1.0
       remix-flat-routes:
         specifier: ^0.6.4
         version: 0.6.4(@remix-run/dev@2.6.0)
@@ -153,6 +156,9 @@ importers:
       '@types/react':
         specifier: ^18.2.52
         version: 18.2.52
+      clsx:
+        specifier: ^2.1.0
+        version: 2.1.0
       react:
         specifier: ^18.2.0
         version: 18.2.0

@@ -7,7 +7,10 @@ export default {
   theme: {
     backgroundColor: ({ theme }) => ({
       ...theme('colors'),
-      app: 'var(--app-bg)',
+      app: {
+        DEFAULT: 'var(--app-bg)',
+        stressed: 'var(--app-bg-stressed)',
+      },
       // Component Neutral
       cn: {
         DEFAULT: 'var(--cn-bg)',
@@ -21,6 +24,10 @@ export default {
         active: 'var(--ca-bg-active)',
       },
     }),
+    borderColor: ({ theme }) => ({
+      ...theme('colors'),
+      neutral: 'var(--border-neutral)',
+    }),
     ringColor: ({ theme }) => ({
       ...theme('colors'),
       cn: 'var(--cn-ring)',
@@ -31,7 +38,14 @@ export default {
     }),
     textColor: ({ theme }) => ({
       ...theme('colors'),
-      app: 'var(--app-fg)',
+      app: {
+        DEFAULT: 'var(--app-fg)',
+        subtle: 'var(--app-fg-subtle)',
+      },
+      accent: {
+        DEFAULT: 'var(--accent-fg)',
+        subtle: 'var(--accent-fg-subtle)',
+      },
     }),
     extend: {},
   },

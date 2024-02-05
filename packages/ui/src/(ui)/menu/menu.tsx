@@ -1,3 +1,4 @@
+import cx from 'clsx';
 import {
   Menu,
   MenuItem,
@@ -19,12 +20,19 @@ interface _MenuProps<T> extends MenuProps<T> {
 function _MenuItems<T extends object>(props: _MenuProps<T>) {
   return (
     <Popover placement={props.placement} className="min-w-[150px]">
-      <Menu {...props} className="" />
+      <Menu
+        {...props}
+        className="p-1 outline-0 max-h-[inherit] overflow-auto [clip-path:inset(0_0_0_0_round_.75rem)]"
+      />
     </Popover>
   );
 }
 
-function _MenuItem(props: MenuItemProps) {
+interface _MenuItemProps extends MenuItemProps {
+  check?: 'left' | 'right';
+}
+
+function _MenuItem({ check = 'left', ...props }: _MenuItemProps) {
   return (
     <MenuItem {...props} className={dropdownItem}>
       {composeRenderProps(
@@ -32,11 +40,18 @@ function _MenuItem(props: MenuItemProps) {
         (children, { selectionMode, isSelected }) => (
           <>
             {selectionMode !== 'none' && (
-              <span>
+              <span
+                className={cx(
+                  'flex items-center w-4',
+                  check === 'left' ? 'order-0' : 'order-1',
+                )}
+              >
                 {isSelected && <Icon name="lucide/check" aria-hidden />}
               </span>
             )}
-            <span>{children}</span>
+            <span className="flex-1 flex items-center gap-2 truncate font-normal group-selected:font-semibold">
+              {children}
+            </span>
           </>
         ),
       )}
