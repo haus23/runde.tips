@@ -6,10 +6,10 @@ import {
   composeRenderProps,
 } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
-import { focusRing } from '../base-styles';
+import { focusRingStyles } from '../base-styles';
 
 const linkStyles = tv({
-  extend: focusRing,
+  extend: focusRingStyles,
   base: ['p-1.5'],
 });
 

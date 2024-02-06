@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants';
 
-export const focusRing = tv({
+export const focusRingStyles = tv({
   base: 'focus:outline-none',
   variants: {
     isFocusVisible: {
@@ -9,7 +9,7 @@ export const focusRing = tv({
   },
 });
 
-export const dropdownItem = tv({
+export const itemStyles = tv({
   base: [
     'group flex items-center gap-4 cursor-default select-none text-sm',
     'py-2 pl-3 pr-1 rounded-lg outline-none',

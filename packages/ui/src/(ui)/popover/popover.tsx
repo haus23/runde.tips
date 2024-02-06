@@ -7,7 +7,7 @@ import {
 } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
 
-const popover = tv({
+const styles = tv({
   base: [
     'bg-cn dark:backdrop-blur-2xl dark:backdrop-saturate-200',
     'shadow-2xl rounded-xl bg-clip-padding border border-neutral text-app-subtle',
@@ -25,7 +25,7 @@ function _Popover({ children, className, showArrow, ...props }: _PopoverProps) {
       offset={16}
       {...props}
       className={composeRenderProps(className, (className, renderProps) =>
-        popover({ ...renderProps, className }),
+        styles({ ...renderProps, className }),
       )}
     >
       <OverlayArrow className="group">

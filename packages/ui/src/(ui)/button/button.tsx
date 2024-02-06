@@ -4,10 +4,10 @@ import {
   composeRenderProps,
 } from 'react-aria-components';
 import { type VariantProps, tv } from 'tailwind-variants';
-import { focusRing } from '../base-styles';
+import { focusRingStyles } from '../base-styles';
 
-const button = tv({
-  extend: focusRing,
+const styles = tv({
+  extend: focusRingStyles,
   base: 'flex px-4 py-2 rounded-md text-center cursor-default',
   variants: {
     variant: {
@@ -23,14 +23,14 @@ const button = tv({
 
 interface _ButtonProps
   extends ButtonProps,
-    Pick<VariantProps<typeof button>, 'variant'> {}
+    Pick<VariantProps<typeof styles>, 'variant'> {}
 
 function _Button({ className, variant, ...props }: _ButtonProps) {
   return (
     <Button
       {...props}
       className={composeRenderProps(className, (className, renderProps) =>
-        button({ ...renderProps, variant, className }),
+        styles({ ...renderProps, variant, className }),
       )}
     />
   );

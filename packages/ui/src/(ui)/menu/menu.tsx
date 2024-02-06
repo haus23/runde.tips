@@ -8,7 +8,7 @@ import {
   composeRenderProps,
 } from 'react-aria-components';
 
-import { dropdownItem } from '../base-styles';
+import { itemStyles } from '../base-styles';
 
 import { Icon } from '../../components/icon/icon';
 import { Popover, type PopoverProps } from '../popover/popover';
@@ -43,7 +43,7 @@ interface _MenuItemProps extends MenuItemProps {
 
 function _MenuItem({ check = 'left', ...props }: _MenuItemProps) {
   return (
-    <MenuItem {...props} className={dropdownItem}>
+    <MenuItem {...props} className={itemStyles}>
       {composeRenderProps(
         props.children,
         (children, { selectionMode, isSelected }) => (
