@@ -9,7 +9,7 @@ import { tv } from 'tailwind-variants';
 
 const styles = tv({
   base: [
-    'bg-cn dark:backdrop-blur-2xl dark:backdrop-saturate-200',
+    'bg-app-subtle dark:backdrop-blur-2xl dark:backdrop-saturate-200',
     'shadow-2xl rounded-xl bg-clip-padding border border-neutral text-app-subtle',
   ],
 });
@@ -36,7 +36,7 @@ function _Popover({ children, className, showArrow, ...props }: _PopoverProps) {
             width={12}
             height={12}
             viewBox="0 0 12 12"
-            className="block fill-cn stroke-1 stroke-border-neutral group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90"
+            className="block fill-app-subtle stroke-1 stroke-border-neutral group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90"
           >
             <path d="M0 0 L6 6 L12 0" />
           </svg>

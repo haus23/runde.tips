@@ -11,11 +11,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Custom colors calculated via
+  https://developer.chrome.com/docs/css-ui/css-color-mix
+*/
+
 @layer base {
 
   :root {
     --app-bg: var(--sage-2);
     --app-bg-stressed: var(--sage-1);
+    --app-bg-subtle: #f2f5f4;
 
     --app-fg: var(--sage-12);
     --app-fg-subtle: var(--sage-11);
@@ -34,5 +40,9 @@
 
     --border-neutral: var(--sage-6);
     --border-accent: var(--jade-6);
+  }
+
+  .dark {
+    --app-bg-subtle: #1b1d1c;
   }
 }

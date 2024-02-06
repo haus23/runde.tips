@@ -10,6 +10,7 @@ export default {
       app: {
         DEFAULT: 'var(--app-bg)',
         stressed: 'var(--app-bg-stressed)',
+        subtle: 'var(--app-bg-subtle)',
       },
       // Component Neutral
       cn: {
@@ -31,7 +32,7 @@ export default {
     }),
     fill: ({ theme }) => ({
       ...theme('colors'),
-      cn: 'var(--cn-bg)',
+      'app-subtle': 'var(--app-bg-subtle)',
     }),
     ringColor: ({ theme }) => ({
       ...theme('colors'),
