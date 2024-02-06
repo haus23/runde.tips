@@ -10,6 +10,7 @@ export { RouterProvider } from 'react-aria-components';
 export * from './(ui)/button/button';
 export * from './(ui)/menu/menu';
 export * from './(ui)/link/link';
+export * from './(ui)/textfield/textfield';
 
 export * from './components/logo/logo';
 export * from './components/icon/icon';
