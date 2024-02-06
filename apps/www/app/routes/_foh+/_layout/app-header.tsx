@@ -5,8 +5,11 @@ export function AppHeader() {
   return (
     <header className="bg-app fixed inset-x-0 top-0 px-2 sm:px-4">
       <div className="max-w-7xl mx-auto flex justify-between">
-        <div className="h-16 flex items-center gap-x-4">
-          <Link href="/" className="py-0 pl-1">
+        <div className="h-14 flex items-center gap-x-4">
+          <Link
+            href="/"
+            className="py-0 pl-1 rounded-lg hover:bg-cn-hover pressed:bg-cn-active"
+          >
             <Logo />
           </Link>
           <nav className="flex">
@@ -18,7 +21,7 @@ export function AppHeader() {
         <div className="flex items-center gap-2">
           <ThemeMenu />
           <div className="flex items-center">
-            <span className="border border-neutral h-12 ml-2 mr-2" />
+            <span className="border border-neutral h-10 ml-2 mr-2" />
             <NavLink href="/login">Log In</NavLink>
           </div>
         </div>

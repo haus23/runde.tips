@@ -10,12 +10,17 @@ import { focusRing } from '../base-styles';
 
 const linkStyles = tv({
   extend: focusRing,
-  base: ['p-1.5 rounded-lg'],
+  base: ['p-1.5'],
 });
 
 const navLinkStyles = tv({
-  extend: focusRing,
-  base: ['px-3 py-1.5 rounded-lg hover:bg-cn-hover pressed:bg-cn-active'],
+  extend: linkStyles,
+  base: ['px-3 rounded-lg hover:bg-cn-hover pressed:bg-cn-active'],
+  variants: {
+    isCurrent: {
+      true: 'text-accent-subtle dark:text-accent',
+    },
+  },
 });
 
 interface _LinkProps extends LinkProps {}
@@ -46,16 +51,14 @@ function _NavLink({ className, href, ...props }: _NavLinkProps) {
   const isActive = path.pathname === location.pathname;
 
   return (
-    <div className="flex translate-y-1.5 pb-2 px-2 border-b-2 border-transparent has-[[aria-current]]:border-accent">
-      <Link
-        {...(isActive && { 'aria-current': 'page' })}
-        {...props}
-        href={href}
-        className={composeRenderProps(className, (className, renderProps) =>
-          navLinkStyles({ ...renderProps, className }),
-        )}
-      />
-    </div>
+    <Link
+      {...(isActive && { 'aria-current': 'page' })}
+      {...props}
+      href={href}
+      className={composeRenderProps(className, (className, renderProps) =>
+        navLinkStyles({ ...renderProps, className }),
+      )}
+    />
   );
 }
 
