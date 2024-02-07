@@ -1,5 +1,11 @@
 # @tipprunde/utils
 
+## 0.2.1
+
+### Patch Changes
+
+- fix: Hydration error since we have a default scheme. And better dark/light mode switching via color-scheme.
+
 ## 0.2.0
 
 ### Minor Changes

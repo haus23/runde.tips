@@ -1,5 +1,17 @@
 # @tipprunde/tailwind-config
 
+## 0.0.7
+
+### Patch Changes
+
+- refactor: Add overlay-arrow.
+
+- feat: First try on the link components and the app header.
+
+- refactor: Create a new neutral bg color. First usage in popover bg.
+
+- feat: Styled text field.
+
 ## 0.0.6
 
 ### Patch Changes

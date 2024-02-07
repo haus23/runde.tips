@@ -1,5 +1,29 @@
 # @tipprunde/ui
 
+## 0.2.0
+
+### Minor Changes
+
+- feat: Add unstyled textfield component.
+
+- feat: Styled text field.
+
+### Patch Changes
+
+- refactor: Add overlay-arrow.
+
+- feat: Add simple link components.
+
+- refactor: Change focus ring color to accent color.
+
+- fix: Remove border styling for current links. Resolves #4
+
+- feat: First try on the link components and the app header.
+
+- refactor: Align variant naming.
+
+- refactor: Create a new neutral bg color. First usage in popover bg.
+
 ## 0.1.3
 
 ### Patch Changes
