@@ -9,13 +9,7 @@ export async function getUserById(db: PrismaClient, id: number) {
   return user;
 }
 
-export async function getUserByEmail(db: PrismaClient, email: string) {
+export async function findUserByEmail(db: PrismaClient, email: string) {
   const user = await db.user.findUnique({ where: { email } });
-  invariant(user !== null, `Unknown email: ${email}`);
   return user;
-}
-
-export async function isKnownEmail(db: PrismaClient, email: string) {
-  const user = await db.user.findUnique({ where: { email } });
-  return user !== null;
 }
