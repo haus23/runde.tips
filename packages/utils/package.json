@@ -5,7 +5,7 @@
     ".": "./src/index.ts",
     "./session": "./src/session/index.ts",
     "./theme": "./src/theme/index.ts",
-    "./auth": "./src/theme/auth.ts"
+    "./auth": "./src/auth/index.ts"
   },
   "devDependencies": {
     "@remix-run/node": "^2.6.0",

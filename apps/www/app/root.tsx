@@ -19,12 +19,15 @@ import {
   getHints,
   useTheme,
 } from '@tipprunde/utils/theme';
+import { getUser } from '#utils/auth.server';
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await themeSession.getSession(request);
+  const user = await getUser(request);
 
   return json({
+    user,
     requestInfo: {
       hints: getHints(request),
       theme: session.get('theme'),
