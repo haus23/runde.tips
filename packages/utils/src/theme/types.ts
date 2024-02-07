@@ -13,5 +13,10 @@ export const ClientHintsSchema = v.object({
 
 export type ColorSchemeSource = 'client' | 'session';
 export type ColorScheme = v.Input<typeof ColorSchemeSchema>;
+
 export type Theme = v.Input<typeof ThemeSchema>;
+export type ThemeSessionData = {
+  theme: Theme;
+};
+
 export type ClientHints = v.Input<typeof ClientHintsSchema>;

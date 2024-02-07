@@ -222,14 +222,13 @@ importers:
         version: 5.0.12(@types/node@20.11.16)
 
   packages/utils:
-    dependencies:
-      '@remix-run/react':
-        specifier: ^2.5.1
-        version: 2.6.0(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
     devDependencies:
       '@remix-run/node':
         specifier: ^2.6.0
         version: 2.6.0(typescript@5.3.3)
+      '@remix-run/react':
+        specifier: ^2.6.0
+        version: 2.6.0(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       '@tipprunde/typescript-config':
         specifier: workspace:*
         version: link:../config-typescript

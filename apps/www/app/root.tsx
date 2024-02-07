@@ -10,7 +10,7 @@ import {
 } from '@remix-run/react';
 
 import type { LoaderFunctionArgs } from '@remix-run/node';
-import { themeSessionResolver } from '#utils/sessions.server';
+import { themeSession } from '#utils/sessions.server';
 
 import { RouterProvider } from '@tipprunde/ui';
 import {
@@ -22,7 +22,7 @@ import {
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const [session] = await themeSessionResolver(request);
+  const session = await themeSession.getSession(request);
 
   return json({
     requestInfo: {

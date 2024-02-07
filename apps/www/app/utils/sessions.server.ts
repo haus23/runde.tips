@@ -1,9 +1,9 @@
 import { createCookieSessionStorage } from '@remix-run/node';
-import { createSessionResolver } from '@tipprunde/utils/session';
-import type { Theme } from '@tipprunde/utils/theme';
+import { cookieSession } from '@tipprunde/utils/session';
+import type { ThemeSessionData } from '@tipprunde/utils/theme';
 
-export const themeSessionResolver = createSessionResolver<{ theme: Theme }>(
-  createCookieSessionStorage({
+export const themeSession = cookieSession(
+  createCookieSessionStorage<ThemeSessionData>({
     cookie: {
       name: '__theme',
       sameSite: 'lax',
