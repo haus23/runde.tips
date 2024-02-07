@@ -21,5 +21,10 @@ export function createAuthModule(sessionStorage: AuthSession) {
     }
   }
 
-  return { getUserId, requireAnonymous };
+  async function prepareOnboarding(
+    request: Request,
+    user: { name: string; email: string },
+  ) {}
+
+  return { getUserId, requireAnonymous, prepareOnboarding };
 }
