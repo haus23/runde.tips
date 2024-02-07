@@ -24,3 +24,18 @@ export const itemStyles = tv({
     },
   },
 });
+
+export const fieldBorderStyles = tv({
+  variants: {
+    isFocusWithin: {
+      false: 'border-neutral',
+      true: 'border-focus',
+    },
+    isInvalid: {
+      true: 'border-error',
+    },
+    isDisabled: {
+      true: 'border-disabled',
+    },
+  },
+});

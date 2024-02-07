@@ -28,7 +28,10 @@ export default {
     borderColor: ({ theme }) => ({
       ...theme('colors'),
       neutral: 'var(--border-neutral)',
+      disabled: 'var(--border-disabled)',
+      focus: 'var(--border-focus)',
       accent: 'var(--border-accent)',
+      error: 'var(--border-error)',
     }),
     fill: ({ theme }) => ({
       ...theme('colors'),
@@ -37,6 +40,7 @@ export default {
     ringColor: ({ theme }) => ({
       ...theme('colors'),
       cn: 'var(--cn-ring)',
+      ca: 'var(--ca-ring)',
     }),
     ringOffsetColor: ({ theme }) => ({
       ...theme('colors'),
@@ -51,6 +55,8 @@ export default {
       app: {
         DEFAULT: 'var(--app-fg)',
         subtle: 'var(--app-fg-subtle)',
+        notice: 'var(--app-fg-notice)',
+        error: 'var(--app-fg-error)',
       },
       accent: {
         DEFAULT: 'var(--accent-fg)',
