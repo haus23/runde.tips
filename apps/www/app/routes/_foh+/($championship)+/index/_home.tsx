@@ -1,4 +1,4 @@
-import { useIsAuthenticated } from '#utils/user';
+import { useIsAuthenticated } from '#app/utils/user';
 
 export function meta() {
   return [

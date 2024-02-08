@@ -20,12 +20,12 @@ import {
 } from '@tipprunde/utils/theme';
 
 import { getUser } from '#app/utils/.server/auth';
-import { themeSession } from '#app/utils/.server/sessions';
+import { getSession } from '#app/utils/.server/theme';
 
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await themeSession.getSession(request);
+  const session = await getSession(request);
   const user = await getUser(request);
 
   return json({

@@ -1,20 +1,25 @@
 import { getUserByEmail, getUserById, isKnownEmail } from '@tipprunde/db';
 import { db } from './db';
 
+import { createCookieSessionStorage } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
 import { TOTPStrategy } from 'remix-auth-totp-dev';
 
-import { authSessionStorage } from './sessions';
+export const authSessionStorage = createCookieSessionStorage({
+  cookie: {
+    name: '__auth',
+    sameSite: 'lax',
+    path: '/',
+    httpOnly: true,
+    secrets: [process.env.AUTH_SESSION_SECRET],
+    secure: process.env.NODE_ENV === 'production',
+  },
+});
 
-const {
-  getSession: getRawSession,
-  commitSession,
-  destroySession,
-} = authSessionStorage;
-function getSession(request: Request) {
-  return authSessionStorage.getSession(request.headers.get('Cookie'));
-}
-export { getSession, commitSession, destroySession };
+const { commitSession } = authSessionStorage;
+const getSession = (request: Request) =>
+  authSessionStorage.getSession(request.headers.get('Cookie'));
+export { getSession, commitSession };
 
 type AuthSessionData = {
   userId: number;
