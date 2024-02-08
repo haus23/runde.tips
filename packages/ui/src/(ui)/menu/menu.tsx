@@ -41,9 +41,14 @@ interface _MenuItemProps extends MenuItemProps {
   check?: 'left' | 'right';
 }
 
-function _MenuItem({ check = 'left', ...props }: _MenuItemProps) {
+function _MenuItem({ check = 'left', className, ...props }: _MenuItemProps) {
   return (
-    <MenuItem {...props} className={itemStyles}>
+    <MenuItem
+      {...props}
+      className={composeRenderProps(className, (className, renderProps) =>
+        itemStyles({ ...renderProps, className }),
+      )}
+    >
       {composeRenderProps(
         props.children,
         (children, { selectionMode, isSelected }) => (
