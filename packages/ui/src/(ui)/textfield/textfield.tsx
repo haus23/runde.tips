@@ -24,7 +24,7 @@ function _Label({ className, ...props }: LabelProps) {
     <Label
       {...props}
       className={twMerge(
-        'font-medium cursor-default w-fit text-app-subtle',
+        'font-semibold cursor-default w-fit text-app-subtle',
         className,
       )}
     />
