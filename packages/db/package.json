@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.9.1",
-    "@tipprunde/utils": "workspace:*"
+    "@epic-web/invariant": "^1.0.0"
   },
   "devDependencies": {
     "@tipprunde/typescript-config": "workspace:*",

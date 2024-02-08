@@ -165,12 +165,12 @@ importers:
 
   packages/db:
     dependencies:
+      '@epic-web/invariant':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@prisma/client':
         specifier: ^5.9.1
         version: 5.9.1(prisma@5.9.1)
-      '@tipprunde/utils':
-        specifier: workspace:*
-        version: link:../utils
     devDependencies:
       '@tipprunde/typescript-config':
         specifier: workspace:*
@@ -226,33 +226,6 @@ importers:
       vite:
         specifier: ^5.0.12
         version: 5.0.12(@types/node@20.11.16)
-
-  packages/utils:
-    devDependencies:
-      '@remix-run/node':
-        specifier: ^2.6.0
-        version: 2.6.0(typescript@5.3.3)
-      '@remix-run/react':
-        specifier: ^2.6.0
-        version: 2.6.0(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
-      '@tipprunde/typescript-config':
-        specifier: workspace:*
-        version: link:../config-typescript
-      '@types/react':
-        specifier: ^18.2.52
-        version: 18.2.52
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      typescript:
-        specifier: ^5.3.3
-        version: 5.3.3
-      valibot:
-        specifier: ^0.27.1
-        version: 0.27.1
-      vite-env-only:
-        specifier: ^2.2.0
-        version: 2.2.0
 
 packages:
 
@@ -967,6 +940,10 @@ packages:
   /@emotion/hash@0.9.1:
     resolution: {integrity: sha512-gJB6HLm5rYwSLI6PQa+X1t5CFGrv1J1TWG+sOyMCeKz2ojaj6Fnl/rZEspogG+cvqbt4AE/2eIyD2QfLKTBNlQ==}
     dev: true
+
+  /@epic-web/invariant@1.0.0:
+    resolution: {integrity: sha512-lrTPqgvfFQtR/eY/qkIzp98OGdNJu0m5ji3q/nJI8v3SXkRKEnWiOxMmbvcSoAIzv/cGiuvRy57k4suKQSAdwA==}
+    dev: false
 
   /@epic-web/totp@1.1.2:
     resolution: {integrity: sha512-ngw0+NjNgZ1ikmascnQWfut7dj0cuWqKwDM7m2w7JoOXHZCR0C5cx2aUPIl8oHOO2DQzkI6yaJLoc1bMDOn/oQ==}
@@ -8251,10 +8228,6 @@ packages:
       diff: 5.1.0
       kleur: 4.1.5
       sade: 1.8.1
-    dev: true
-
-  /valibot@0.27.1:
-    resolution: {integrity: sha512-k57/5/kMwMjiVP0LUMpa+n4ihSemuXshz1ND4fftKw1bkHZYN/TnHcbjaEie3K7FwAceiOgugLZPjSaNxdygeg==}
     dev: true
 
   /validate-npm-package-license@3.0.4:

@@ -1,5 +1,5 @@
+import { invariant } from '@epic-web/invariant';
 import { PrismaClient } from '@prisma/client';
-import { invariant } from '@tipprunde/utils';
 
 export type { User } from '@prisma/client';
 
