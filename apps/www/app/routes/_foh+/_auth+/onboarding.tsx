@@ -1,17 +1,19 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json, redirect, useLoaderData, useSubmit } from '@remix-run/react';
 import { Button, Form, TextField } from '@tipprunde/ui';
-import { authenticator } from '#utils/auth.server';
-import { authSessionStorage } from '#utils/sessions.server';
+
+import {
+  authenticator,
+  commitSession,
+  getSession,
+} from '#app/utils/.server/auth';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await authenticator.isAuthenticated(request, {
     successRedirect: '/',
   });
 
-  const session = await authSessionStorage.getSession(
-    request.headers.get('cookie'),
-  );
+  const session = await getSession(request);
   const authEmail = session.get('auth:email');
   const authError = session.get(authenticator.sessionErrorKey);
 
@@ -22,7 +24,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     { errors },
     {
       headers: {
-        'set-cookie': await authSessionStorage.commitSession(session),
+        'set-cookie': await commitSession(session),
       },
     },
   );

@@ -10,7 +10,6 @@ import {
 } from '@remix-run/react';
 
 import type { LoaderFunctionArgs } from '@remix-run/node';
-import { themeSession } from '#utils/sessions.server';
 
 import { RouterProvider } from '@tipprunde/ui';
 import {
@@ -19,7 +18,10 @@ import {
   getHints,
   useTheme,
 } from '@tipprunde/utils/theme';
-import { getUser } from '#utils/auth.server';
+
+import { getUser } from '#app/utils/.server/auth';
+import { themeSession } from '#app/utils/.server/sessions';
+
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {

@@ -1,10 +1,20 @@
 import { getUserByEmail, getUserById, isKnownEmail } from '@tipprunde/db';
-import { db } from './db.server';
+import { db } from './db';
 
 import { Authenticator } from 'remix-auth';
 import { TOTPStrategy } from 'remix-auth-totp-dev';
 
-import { authSessionStorage } from './sessions.server';
+import { authSessionStorage } from './sessions';
+
+const {
+  getSession: getRawSession,
+  commitSession,
+  destroySession,
+} = authSessionStorage;
+function getSession(request: Request) {
+  return authSessionStorage.getSession(request.headers.get('Cookie'));
+}
+export { getSession, commitSession, destroySession };
 
 type AuthSessionData = {
   userId: number;
