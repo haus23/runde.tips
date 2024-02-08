@@ -4,11 +4,9 @@
   "exports": {
     ".": "./src/index.ts",
     "./session": "./src/session/index.ts",
-    "./theme": "./src/theme/index.ts",
-    "./auth": "./src/auth/index.ts"
+    "./theme": "./src/theme/index.ts"
   },
   "devDependencies": {
-    "@epic-web/totp": "^1.1.2",
     "@remix-run/node": "^2.6.0",
     "@remix-run/react": "^2.6.0",
     "@tipprunde/typescript-config": "workspace:*",

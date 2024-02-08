@@ -1,6 +1,3 @@
-import { json, useLoaderData } from '@remix-run/react';
-import { findUserByEmail } from '@tipprunde/db';
-import { db } from '#utils/db.server';
 import { useIsAuthenticated } from '#utils/user';
 
 export function meta() {

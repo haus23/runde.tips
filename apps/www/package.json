@@ -20,7 +20,9 @@
     "@tipprunde/utils": "workspace:*",
     "isbot": "^4.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "remix-auth": "^3.6.0",
+    "remix-auth-totp-dev": "^3.0.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.6.0",

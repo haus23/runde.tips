@@ -1,28 +1,35 @@
-import type { ActionFunctionArgs } from '@remix-run/node';
-import { json, useActionData, useSubmit } from '@remix-run/react';
-import { findUserByEmail } from '@tipprunde/db';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import { json, useLoaderData, useSubmit } from '@remix-run/react';
 import { Button, Form, TextField } from '@tipprunde/ui';
-import { invariant } from '@tipprunde/utils';
-import { auth } from '#utils/auth.server';
-import { db } from '#utils/db.server';
+import { authenticator } from '#utils/auth.server';
+import { authSessionStorage } from '#utils/sessions.server';
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  await authenticator.isAuthenticated(request, {
+    successRedirect: '/',
+  });
+
+  const session = await authSessionStorage.getSession(
+    request.headers.get('Cookie'),
+  );
+  const authError = session.get(authenticator.sessionErrorKey);
+  const errors = authError ? { email: authError?.message } : undefined;
+
+  return json(
+    { errors },
+    {
+      headers: {
+        'set-cookie': await authSessionStorage.commitSession(session),
+      },
+    },
+  );
+}
 
 export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
-
-  const email = formData.get('email');
-  invariant(typeof email === 'string');
-
-  const user = await findUserByEmail(db, email);
-
-  if (user === null) {
-    return json({
-      errors: {
-        email: 'Unbekannte Email-Adresse.',
-      },
-    });
-  }
-
-  return await auth.onboarding(request, { name: user.name, email });
+  await authenticator.authenticate('TOTP', request, {
+    successRedirect: '/onboarding',
+    failureRedirect: '/login',
+  });
 }
 
 export default function LoginRoute() {
@@ -33,7 +40,7 @@ export default function LoginRoute() {
     submit(e.currentTarget);
   }
 
-  const actionData = useActionData<typeof action>();
+  const loaderData = useLoaderData<typeof loader>();
 
   return (
     <div className="mt-8 p-4 sm:px-8 flex flex-col gap-y-8 max-w-xl mx-4 rounded-md sm:mx-auto bg-app-stressed sm:rounded-xl">
@@ -42,7 +49,7 @@ export default function LoginRoute() {
         className="flex flex-col gap-4"
         method="post"
         onSubmit={onSubmit}
-        validationErrors={actionData?.errors}
+        validationErrors={loaderData?.errors}
       >
         <TextField
           isRequired
