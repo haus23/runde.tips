@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs } from '@remix-run/node';
-import { json, redirect, useActionData, useSubmit } from '@remix-run/react';
+import { json, useActionData, useSubmit } from '@remix-run/react';
 import { findUserByEmail } from '@tipprunde/db';
 import { Button, Form, TextField } from '@tipprunde/ui';
 import { invariant } from '@tipprunde/utils';
@@ -22,8 +22,7 @@ export async function action({ request }: ActionFunctionArgs) {
     });
   }
 
-  await auth.prepareOnboarding(request, { name: user.name, email });
-  return redirect('/onboarding');
+  return await auth.onboarding(request, { name: user.name, email });
 }
 
 export default function LoginRoute() {
@@ -38,7 +37,7 @@ export default function LoginRoute() {
 
   return (
     <div className="mt-8 p-4 sm:px-8 flex flex-col gap-y-8 max-w-xl mx-4 rounded-md sm:mx-auto bg-app-stressed sm:rounded-xl">
-      <h2 className="text-center text-3xl font-medium">Anmeldung</h2>
+      <h2 className="text-center text-2xl font-medium">Anmeldung</h2>
       <Form
         className="flex flex-col gap-4"
         method="post"
