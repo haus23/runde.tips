@@ -1,31 +1,19 @@
 import type { ActionFunctionArgs } from '@remix-run/node';
-import { json, useActionData, useSubmit } from '@remix-run/react';
-import { findUserByEmail } from '@tipprunde/db';
+import { useActionData, useSubmit } from '@remix-run/react';
 import { Button, Form, TextField } from '@tipprunde/ui';
 import { invariant } from '@tipprunde/utils';
 import { auth } from '#utils/auth.server';
-import { db } from '#utils/db.server';
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
 
-  const email = formData.get('email');
-  invariant(typeof email === 'string');
+  const code = formData.get('code');
+  invariant(typeof code === 'string');
 
-  const user = await findUserByEmail(db, email);
-
-  if (user === null) {
-    return json({
-      errors: {
-        email: 'Unbekannte Email-Adresse.',
-      },
-    });
-  }
-
-  return await auth.onboarding(request, { name: user.name, email });
+  return auth.login(request, code);
 }
 
-export default function LoginRoute() {
+export default function OnboardingRoute() {
   const submit = useSubmit();
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -34,10 +22,10 @@ export default function LoginRoute() {
   }
 
   const actionData = useActionData<typeof action>();
-
+  console.log(actionData);
   return (
-    <div className="mt-8 p-4 sm:px-8 flex flex-col gap-y-8 max-w-xl mx-4 rounded-md sm:mx-auto bg-app-stressed sm:rounded-xl">
-      <h2 className="text-center text-2xl font-medium">Anmeldung</h2>
+    <div className="mt-8 p-4 sm:px-8 flex flex-col gap-y-4 max-w-xl mx-4 rounded-md sm:mx-auto bg-app-stressed sm:rounded-xl">
+      <h2 className="text-center text-2xl font-medium">Code Eingabe</h2>
       <Form
         className="flex flex-col gap-4"
         method="post"
@@ -45,16 +33,21 @@ export default function LoginRoute() {
         validationErrors={actionData?.errors}
       >
         <TextField
+          type="text"
+          name="code"
+          inputMode="numeric"
+          autoComplete="one-time-code"
+          aria-label="Code"
           isRequired
-          type="email"
-          name="email"
-          label="Email"
-          placeholder="Die in der Tipprunde benutzte Adresse."
+          pattern="\d{6}"
+          maxLength={6}
+          className="text-center"
+          inputClassName="w-40 self-center text-4xl text-center"
           errorMessage={({ validationErrors, validationDetails }) =>
             validationDetails.valueMissing
-              ? 'Ohne Email-Adresse geht es nicht.'
-              : validationDetails.typeMismatch
-                ? 'Ungültige Email-Adresse.'
+              ? 'Ohne Code geht es nicht weiter.'
+              : validationDetails.patternMismatch
+                ? 'Kein Code. Ein Code hat genau sechs Ziffern.'
                 : validationDetails.customError
                   ? validationErrors.join()
                   : ''
@@ -62,7 +55,7 @@ export default function LoginRoute() {
         />
         <div className="flex justify-center">
           <Button variant="accent" type="submit">
-            Code anfordern
+            Anmelden
           </Button>
         </div>
       </Form>

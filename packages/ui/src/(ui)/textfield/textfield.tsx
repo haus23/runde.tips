@@ -12,6 +12,7 @@ import {
   Label,
   Text,
   TextField,
+  composeRenderProps,
 } from 'react-aria-components';
 import { twMerge } from 'tailwind-merge';
 import { tv } from 'tailwind-variants';
@@ -76,6 +77,7 @@ interface _TextFieldProps extends TextFieldProps {
   label?: string;
   description?: string;
   placeholder?: string;
+  inputClassName?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
@@ -85,6 +87,7 @@ function _TextField({
   placeholder,
   errorMessage,
   className,
+  inputClassName,
   ...props
 }: _TextFieldProps) {
   return (
@@ -93,7 +96,14 @@ function _TextField({
       className={composeTailwindRenderProps(className, 'flex flex-col gap-1')}
     >
       {label && <_Label>{label}</_Label>}
-      <_Input className={inputStyles} placeholder={placeholder} />
+      <_Input
+        className={composeRenderProps(
+          inputClassName,
+          (className, renderProps) =>
+            inputStyles({ ...renderProps, className }),
+        )}
+        placeholder={placeholder}
+      />
       {description && <_Description>{description}</_Description>}
       <_FieldError>{errorMessage}</_FieldError>
     </TextField>
