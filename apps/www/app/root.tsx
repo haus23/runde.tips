@@ -19,8 +19,8 @@ import {
   useTheme,
 } from '@tipprunde/utils/theme';
 
-import { getUser } from '#app/utils/.server/auth';
-import { getSession } from '#app/utils/.server/theme';
+import { getUser } from '#app/.server/auth';
+import { getSession } from '#app/.server/theme';
 
 import './styles/tailwind.css';
 

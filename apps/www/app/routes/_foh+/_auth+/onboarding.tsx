@@ -2,11 +2,7 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json, redirect, useLoaderData, useSubmit } from '@remix-run/react';
 import { Button, Form, TextField } from '@tipprunde/ui';
 
-import {
-  authenticator,
-  commitSession,
-  getSession,
-} from '#app/utils/.server/auth';
+import { authenticator, commitSession, getSession } from '#app/.server/auth';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await authenticator.isAuthenticated(request, {

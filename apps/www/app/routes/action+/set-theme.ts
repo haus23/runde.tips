@@ -1,3 +1,3 @@
-import { createThemeAction } from '#app/utils/.server/theme';
+import { createThemeAction } from '#app/.server/theme';
 
 export const action = createThemeAction();
