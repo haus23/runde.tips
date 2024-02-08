@@ -90,9 +90,6 @@ importers:
       '@tipprunde/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@tipprunde/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       isbot:
         specifier: ^4.4.0
         version: 4.4.0
