@@ -1,10 +1,9 @@
 import { useRouteLoaderData } from '@remix-run/react';
-import { invariant } from '@tipprunde/utils';
-import type { loader } from '#root';
+import type { loader } from '#app/root';
+import { invariant } from './misc';
 
 export function useIsAuthenticated() {
   const data = useRouteLoaderData<typeof loader>('root');
-
   return !!data && !!data.user;
 }
 

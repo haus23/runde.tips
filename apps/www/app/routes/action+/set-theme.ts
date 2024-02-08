@@ -1,4 +1,3 @@
-import { createThemeAction } from '@tipprunde/utils/theme';
-import { themeSession } from '#utils/sessions.server';
+import { createThemeAction } from '#app/.server/theme';
 
-export const action = createThemeAction?.(themeSession);
+export const action = createThemeAction();

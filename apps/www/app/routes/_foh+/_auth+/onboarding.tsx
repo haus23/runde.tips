@@ -1,16 +1,39 @@
-import type { ActionFunctionArgs } from '@remix-run/node';
-import { useActionData, useSubmit } from '@remix-run/react';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import { json, redirect, useLoaderData, useSubmit } from '@remix-run/react';
 import { Button, Form, TextField } from '@tipprunde/ui';
-import { invariant } from '@tipprunde/utils';
-import { auth } from '#utils/auth.server';
+
+import { authenticator, commitSession, getSession } from '#app/.server/auth';
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  await authenticator.isAuthenticated(request, {
+    successRedirect: '/',
+  });
+
+  const session = await getSession(request);
+  const authEmail = session.get('auth:email');
+  const authError = session.get(authenticator.sessionErrorKey);
+
+  if (!authEmail) return redirect('/login');
+
+  const errors = authError ? { code: authError?.message } : undefined;
+  return json(
+    { errors },
+    {
+      headers: {
+        'set-cookie': await commitSession(session),
+      },
+    },
+  );
+}
 
 export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
+  const url = new URL(request.url);
+  const currentPath = url.pathname;
 
-  const code = formData.get('code');
-  invariant(typeof code === 'string');
-
-  return auth.login(request, code);
+  await authenticator.authenticate('TOTP', request, {
+    successRedirect: currentPath,
+    failureRedirect: currentPath,
+  });
 }
 
 export default function OnboardingRoute() {
@@ -21,8 +44,8 @@ export default function OnboardingRoute() {
     submit(e.currentTarget);
   }
 
-  const actionData = useActionData<typeof action>();
-  console.log(actionData);
+  const loaderData = useLoaderData<typeof loader>();
+
   return (
     <div className="mt-8 p-4 sm:px-8 flex flex-col gap-y-4 max-w-xl mx-4 rounded-md sm:mx-auto bg-app-stressed sm:rounded-xl">
       <h2 className="text-center text-2xl font-medium">Code Eingabe</h2>
@@ -30,7 +53,7 @@ export default function OnboardingRoute() {
         className="flex flex-col gap-4"
         method="post"
         onSubmit={onSubmit}
-        validationErrors={actionData?.errors}
+        validationErrors={loaderData?.errors}
       >
         <TextField
           type="text"

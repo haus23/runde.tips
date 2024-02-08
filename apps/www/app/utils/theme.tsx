@@ -11,13 +11,13 @@ import type {
   ColorScheme,
   ColorSchemeSource,
   Theme,
-} from './types';
+} from '#app/types';
 
 type ThemeContextType = {
   theme: Theme;
   setTheme: (theme: { colorScheme: ColorScheme | 'system' }) => void;
   mode: ColorSchemeSource;
-  mediaQueryFallback: boolean;
+  mediaQueryFallback?: boolean;
   isSSR: boolean;
 };
 
@@ -114,7 +114,7 @@ export function ThemeProvider({
         theme,
         mode,
         setTheme,
-        mediaQueryFallback: !!mediaQueryFallback,
+        mediaQueryFallback,
         isSSR,
       }}
     >

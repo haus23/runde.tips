@@ -10,20 +10,20 @@ import {
 } from '@remix-run/react';
 
 import type { LoaderFunctionArgs } from '@remix-run/node';
-import { themeSession } from '#utils/sessions.server';
 
 import { RouterProvider } from '@tipprunde/ui';
-import {
-  MediaQueryFallback,
-  ThemeProvider,
-  getHints,
-  useTheme,
-} from '@tipprunde/utils/theme';
-import { getUser } from '#utils/auth.server';
+
+import { getUser } from '#app/.server/auth';
+import { getHints } from '#app/.server/client-hints';
+import { getSession } from '#app/.server/theme';
+
+import { MediaQueryFallback } from '#app/utils/media-query-fallback';
+import { ThemeProvider, useTheme } from '#app/utils/theme';
+
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await themeSession.getSession(request);
+  const session = await getSession(request);
   const user = await getUser(request);
 
   return json({

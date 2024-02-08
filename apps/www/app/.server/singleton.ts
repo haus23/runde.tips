@@ -1,7 +1,4 @@
-export const singleton = <Value>(
-  name: string,
-  valueFactory: () => Value,
-): Value => {
+export function singleton<Value>(name: string, factory: () => Value) {
   const g = (global as typeof globalThis) && {
     __singletons: {} as Record<typeof name, Value>,
   };
@@ -9,7 +6,7 @@ export const singleton = <Value>(
 
   let instance = g.__singletons[name];
   if (!instance) {
-    instance = g.__singletons[name] = valueFactory();
+    instance = g.__singletons[name] = factory();
   }
   return instance;
-};
+}
