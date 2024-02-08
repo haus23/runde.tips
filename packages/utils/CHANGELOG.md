@@ -1,5 +1,19 @@
 # @tipprunde/utils
 
+## 0.3.0
+
+### Minor Changes
+
+- [#8](https://github.com/haus23/runde.tips/pull/8) [`2900977`](https://github.com/haus23/runde.tips/commit/29009774b23f55ddce4acbf2f084ad25b2ee7968) Thanks [@haus23](https://github.com/haus23)! - feat: Implement login workflow. Buggy. Time to work at issue #3
+
+- [#8](https://github.com/haus23/runde.tips/pull/8) [`2900977`](https://github.com/haus23/runde.tips/commit/29009774b23f55ddce4acbf2f084ad25b2ee7968) Thanks [@haus23](https://github.com/haus23)! - feat: Implement login form logic
+
+### Patch Changes
+
+- [#8](https://github.com/haus23/runde.tips/pull/8) [`2900977`](https://github.com/haus23/runde.tips/commit/29009774b23f55ddce4acbf2f084ad25b2ee7968) Thanks [@haus23](https://github.com/haus23)! - refactor: Simple wrap the session getter.
+
+- [#8](https://github.com/haus23/runde.tips/pull/8) [`2900977`](https://github.com/haus23/runde.tips/commit/29009774b23f55ddce4acbf2f084ad25b2ee7968) Thanks [@haus23](https://github.com/haus23)! - feat: Implement first auth ideas.
+
 ## 0.2.1
 
 ### Patch Changes
