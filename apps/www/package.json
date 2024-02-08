@@ -1,6 +1,6 @@
 {
   "name": "@tipprunde/www",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "type": "module",
   "imports": {
     "#*": "./*"

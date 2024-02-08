@@ -1,5 +1,24 @@
 # @tipprunde/www
 
+## 0.0.18
+
+### Patch Changes
+
+- [#9](https://github.com/haus23/runde.tips/pull/9) [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3) Thanks [@haus23](https://github.com/haus23)! - refactor: Move theme code from utils package into app.
+
+- [#9](https://github.com/haus23/runde.tips/pull/9) [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3) Thanks [@haus23](https://github.com/haus23)! - refactor: Move server code directory.
+
+- [#9](https://github.com/haus23/runde.tips/pull/9) [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3) Thanks [@haus23](https://github.com/haus23)! - refactor: Reorganize server code. Change path alias.
+
+- [#9](https://github.com/haus23/runde.tips/pull/9) [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3) Thanks [@haus23](https://github.com/haus23)! - refactor: Drop auth from utils. Use remix-auth-totp instead.
+
+- [#9](https://github.com/haus23/runde.tips/pull/9) [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3) Thanks [@haus23](https://github.com/haus23)! - refactor: Remove remaining helpers to app.
+
+- [#9](https://github.com/haus23/runde.tips/pull/9) [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3) Thanks [@haus23](https://github.com/haus23)! - refactor: Reorganize sessions and theme related server code.
+
+- Updated dependencies [[`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3), [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3)]:
+  - @tipprunde/db@0.1.3
+
 ## 0.0.17
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @tipprunde/db
 
+## 0.1.3
+
+### Patch Changes
+
+- [#9](https://github.com/haus23/runde.tips/pull/9) [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3) Thanks [@haus23](https://github.com/haus23)! - refactor: Drop auth from utils. Use remix-auth-totp instead.
+
+- [#9](https://github.com/haus23/runde.tips/pull/9) [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3) Thanks [@haus23](https://github.com/haus23)! - refactor: Replace invarinat helper with epic web package (for now).
+
 ## 0.1.2
 
 ### Patch Changes

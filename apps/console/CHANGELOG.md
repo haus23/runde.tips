@@ -1,5 +1,12 @@
 # @tipprunde/console
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3), [`38c2cec`](https://github.com/haus23/runde.tips/commit/38c2cec7e94e6887fe5a81fb7bb4e9312a3212d3)]:
+  - @tipprunde/db@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes
