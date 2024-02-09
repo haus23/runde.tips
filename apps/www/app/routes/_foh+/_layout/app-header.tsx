@@ -16,9 +16,15 @@ export function AppHeader() {
             <Logo />
           </Link>
           <nav className="flex gap-x-2">
-            <NavLink href="/">Tabelle</NavLink>
-            <NavLink href="/spieler">Spieler</NavLink>
-            <NavLink href="/spiel">Spiele</NavLink>
+            <NavLink variant="topnav" href="/">
+              Tabelle
+            </NavLink>
+            <NavLink variant="topnav" href="/spieler">
+              Spieler
+            </NavLink>
+            <NavLink variant="topnav" href="/spiel">
+              Spiele
+            </NavLink>
           </nav>
         </div>
         <div className="flex items-center gap-2">
@@ -28,7 +34,9 @@ export function AppHeader() {
           ) : (
             <div className="flex items-center">
               <span className="border border-neutral h-10 ml-2 mr-2" />
-              <NavLink href="/login">Log In</NavLink>
+              <NavLink variant="topnav" href="/login">
+                Log In
+              </NavLink>
             </div>
           )}
         </div>
