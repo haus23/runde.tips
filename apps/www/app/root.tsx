@@ -11,6 +11,8 @@ import {
 
 import type { LoaderFunctionArgs } from '@remix-run/node';
 
+import { Toaster } from 'sonner';
+
 import { RouterProvider } from '@tipprunde/ui';
 
 import { getUser } from '#app/.server/auth';
@@ -52,6 +54,7 @@ function App() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
+        <Toaster />
       </body>
     </html>
   );
