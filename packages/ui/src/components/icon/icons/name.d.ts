@@ -3,8 +3,10 @@
   export type IconName =
   	| "lucide/check"
 	| "lucide/laptop"
+	| "lucide/log-out"
 	| "lucide/moon"
 	| "lucide/search"
+	| "lucide/settings"
 	| "lucide/sun"
 	| "lucide/user";
   
