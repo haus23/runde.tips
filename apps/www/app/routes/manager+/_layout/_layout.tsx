@@ -1,6 +1,7 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
 import { requireAdmin } from '#app/.server/auth';
+import { Sidebar } from './sidebar';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await requireAdmin(request);
@@ -11,8 +12,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function ManagerLayout() {
   return (
     <div>
-      <h1>Manager</h1>
-      <main>
+      <Sidebar />
+      <main className="md:pl-64">
         <Outlet />
       </main>
     </div>
