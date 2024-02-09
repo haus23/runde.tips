@@ -1,7 +1,7 @@
 import { getUserByEmail, getUserById, isKnownEmail } from '@tipprunde/db';
 import { db } from './db';
 
-import { createCookieSessionStorage } from '@remix-run/node';
+import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
 import { TOTPStrategy } from 'remix-auth-totp-dev';
 
@@ -55,4 +55,11 @@ authenticator.use(
 export async function getUser(request: Request) {
   const sessionData = await authenticator.isAuthenticated(request);
   return sessionData ? getUserById(db, sessionData.userId) : null;
+}
+
+export async function requireAdmin(request: Request) {
+  const user = await getUser(request);
+  if (!user?.role.includes('ADMIN')) {
+    throw redirect('/login');
+  }
 }
