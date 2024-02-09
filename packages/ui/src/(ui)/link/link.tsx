@@ -5,7 +5,7 @@ import {
   type LinkRenderProps,
   composeRenderProps,
 } from 'react-aria-components';
-import { tv } from 'tailwind-variants';
+import { type VariantProps, tv } from 'tailwind-variants';
 import { focusRingStyles } from '../base-styles';
 
 const linkStyles = tv({
@@ -15,10 +15,15 @@ const linkStyles = tv({
 
 const navLinkStyles = tv({
   extend: linkStyles,
-  base: ['px-3 rounded-lg hover:bg-cn-hover pressed:bg-cn-active'],
+  base: ['px-3 rounded-lg'],
   variants: {
+    variant: {
+      topnav: 'hover:bg-cn-hover pressed:bg-cn-active',
+      sidenav: 'text-app-subtle hover:text-app',
+    },
     isCurrent: {
-      true: 'text-accent-subtle dark:text-accent',
+      true: 'text-accent-subtle hover:text-accent-subtle dark:text-accent hover:dark:text-accent',
+      false: '',
     },
   },
 });
@@ -36,14 +41,13 @@ function _Link({ className, ...props }: _LinkProps) {
   );
 }
 
-interface _NavLinkProps extends LinkProps {
+interface _NavLinkProps
+  extends LinkProps,
+    Pick<VariantProps<typeof navLinkStyles>, 'variant'> {
   href: string;
 }
-interface _NavLinkRenderProps extends LinkRenderProps {
-  isActive: boolean;
-}
 
-function _NavLink({ className, href, ...props }: _NavLinkProps) {
+function _NavLink({ className, variant, href, ...props }: _NavLinkProps) {
   // See: https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L1030
   const path = useResolvedPath(href);
   const location = useLocation();
@@ -56,7 +60,7 @@ function _NavLink({ className, href, ...props }: _NavLinkProps) {
       {...props}
       href={href}
       className={composeRenderProps(className, (className, renderProps) =>
-        navLinkStyles({ ...renderProps, className }),
+        navLinkStyles({ ...renderProps, variant, className }),
       )}
     />
   );
