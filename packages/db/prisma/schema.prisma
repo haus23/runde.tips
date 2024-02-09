@@ -15,3 +15,31 @@ model User {
   role  String
   email String? @unique
 }
+
+model Ruleset {
+  id   Int    @id @default(autoincrement())
+  slug String @unique
+
+  name                String
+  description         String
+  extraQuestionRuleId String
+  matchRuleId         String
+  roundRuleId         String
+  tipRuleId           String
+
+  championships Championship[]
+}
+
+model Championship {
+  id   Int    @id @default(autoincrement())
+  slug String @unique
+
+  nr                   Int
+  name                 String
+  published            Boolean @default(false)
+  completed            Boolean @default(false)
+  extraPointsPublished Boolean @default(false)
+
+  rulesetId Int
+  ruleset   Ruleset @relation(fields: [rulesetId], references: [id])
+}
