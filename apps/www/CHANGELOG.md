@@ -1,5 +1,35 @@
 # @tipprunde/www
 
+## 0.0.19
+
+### Patch Changes
+
+- refactor: Initial take on nav styling.
+
+- feat: Integrate sonner toast library.
+
+- feat: Secure the manager routes.
+
+- refactor: Simplify icon usage.
+
+- refactor: Clean up and add manager link.
+
+- feat: Minimal implementation for cache invalidation on backend.
+
+- feat: Add simple user menu.
+
+- refactor: Use topnav variant for navlinks
+
+- feat: Add initial manager routes and layout.
+
+- feat: Add logout route.
+
+- fix: Small layout change. Left padding mismatch.
+
+- Updated dependencies []:
+  - @tipprunde/ui@0.2.2
+  - @tipprunde/db@0.2.0
+
 ## 0.0.18
 
 ### Patch Changes

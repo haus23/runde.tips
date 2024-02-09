@@ -1,5 +1,23 @@
 # @tipprunde/ui
 
+## 0.2.2
+
+### Patch Changes
+
+- refactor: Simplify icon usage.
+
+- refactor: Add navlink variants for top- and sidenav
+
+- feat: Add more icons. And ignore source icons now.
+
+- feat: Add icons logout and settings.
+
+- refactor: Use semibold font.
+
+- feat: Add usage of classname prop
+
+- fix: Move something to deps. Icons build script crashes else.
+
 ## 0.2.1
 
 ### Patch Changes

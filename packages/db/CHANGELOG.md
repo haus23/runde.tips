@@ -1,5 +1,11 @@
 # @tipprunde/db
 
+## 0.2.0
+
+### Minor Changes
+
+- feat: Add the two most basic models. Rulesets and championships.
+
 ## 0.1.3
 
 ### Patch Changes
