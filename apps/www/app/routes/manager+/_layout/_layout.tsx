@@ -13,7 +13,7 @@ export default function ManagerLayout() {
   return (
     <div>
       <Sidebar />
-      <main className="md:pl-64">
+      <main className="md:pl-60">
         <Outlet />
       </main>
     </div>
