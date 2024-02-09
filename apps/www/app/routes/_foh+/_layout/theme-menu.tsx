@@ -66,8 +66,7 @@ export function ThemeMenu() {
       >
         {colorSchemes.map((cs) => (
           <MenuItem key={cs.name} id={cs.name} check="right">
-            <Icon name={cs.icon} />
-            <span>{cs.label}</span>
+            <Icon name={cs.icon}>{cs.label}</Icon>
           </MenuItem>
         ))}
       </MenuItems>
