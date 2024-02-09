@@ -41,7 +41,7 @@ export default function LoginRoute() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <div className="mt-8 p-4 sm:px-8 flex flex-col gap-y-8 max-w-xl mx-4 rounded-md sm:mx-auto bg-app-stressed sm:rounded-xl">
+    <div className="mt-8 p-4 sm:px-8 flex flex-col gap-y-8 max-w-xl mx-4 rounded-md sm:mx-auto bg-app-stressed border border-neutral sm:rounded-xl">
       <h2 className="text-center text-2xl font-medium">Anmeldung</h2>
       <Form
         className="flex flex-col gap-4"
