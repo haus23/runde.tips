@@ -9,15 +9,17 @@
     "icons:build": "icons build -i ./icons -o ./src/components/icon/icons --optimize 0",
     "typecheck": "tsc"
   },
-  "devDependencies": {
+  "dependencies": {
     "@remix-run/react": "^2.6.0",
+    "react-aria-components": "^1.0.1"
+  },
+  "devDependencies": {
     "@sly-cli/sly": "^1.8.0",
     "@tipprunde/tailwind-config": "workspace:*",
     "@tipprunde/typescript-config": "workspace:*",
     "@types/react": "^18.2.52",
     "clsx": "^2.1.0",
     "react": "^18.2.0",
-    "react-aria-components": "^1.0.1",
     "svg-icons-cli": "^0.0.6",
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.1.20",
