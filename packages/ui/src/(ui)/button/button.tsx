@@ -8,7 +8,7 @@ import { focusRingStyles } from '../base-styles';
 
 const styles = tv({
   extend: focusRingStyles,
-  base: 'flex px-4 py-2 rounded-md text-center cursor-default',
+  base: 'flex items-center px-4 py-2 rounded-md text-center cursor-default',
   variants: {
     variant: {
       neutral: 'bg-cn hover:bg-cn-hover pressed:bg-cn-active',
