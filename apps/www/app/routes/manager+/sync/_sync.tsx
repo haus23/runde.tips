@@ -1,21 +1,12 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
-import {
-  Await,
-  type ClientActionFunctionArgs,
-  Form,
-  defer,
-  json,
-  useActionData,
-} from '@remix-run/react';
+import { json, useFetcher, useLoaderData } from '@remix-run/react';
 import { Button } from '@tipprunde/ui';
-import { toast } from 'sonner';
+import type { Key } from 'react';
 import { db } from '#app/.server/db';
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const championships = await db.championship.findMany({
-    orderBy: { nr: 'asc' },
-  });
-
+  const championships = await db.championship.findMany();
+  console.log('Loader');
   const legacyChampionships = await fetch(
     'https://backend.runde.tips/api/v1/championships',
   ).then((response) => response.json());
@@ -23,36 +14,16 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return json({ championships, legacyChampionships });
 }
 
-export async function action() {
-  const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: '{"routes":true,"resources":[],"standings":"rr2324"}',
-  };
-
-  const invalidateResult = await fetch(
-    'https://backend.runde.tips/api/invalidate-cache',
-    options,
-  ).then((response) => response.json());
-  return json({ invalidateResult });
-}
-
-export async function clientAction({
-  request,
-  serverAction,
-}: ClientActionFunctionArgs) {
-  const result = serverAction<typeof action>();
-
-  toast.promise(result, {
-    loading: 'Cache Daten werden gelöscht...',
-    success: (data) =>
-      `Daten von ${data.invalidateResult.cleared.length} Route(n) gelöscht.`,
-  });
-
-  return result;
-}
-
 export default function SyncRoute() {
+  const fetcher = useFetcher();
+
+  const { championships, legacyChampionships } = useLoaderData<typeof loader>();
+
+  for (const legacyChampionship of legacyChampionships) {
+    const current = championships.find((c) => c.slug === legacyChampionship.id);
+    legacyChampionship.synced = !!current;
+  }
+
   return (
     <div className="p-4 flex flex-col gap-y-8">
       <h2 className="text-2xl font-medium">Datenabgleich</h2>
@@ -71,11 +42,54 @@ export default function SyncRoute() {
           entweder alles obsolet sein oder hier eine Auswahlmöglichkeit
           realisert sein.
         </p>
-        <Form method="post">
-          <Button variant="accent" type="submit">
+        <fetcher.Form action="/action/sync/clear-cache" method="post">
+          <Button
+            variant="accent"
+            type="submit"
+            isDisabled={fetcher.state === 'submitting'}
+          >
             Cache löschen
           </Button>
-        </Form>
+        </fetcher.Form>
+      </div>
+      <div className="bg-app-subtle rounded-md border border-neutral p-4 flex flex-col gap-y-4">
+        <h3 className="text-xl font-medium">Lokale Daten</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Nr</th>
+              <th>Titel</th>
+              <th>Status</th>
+              <th>Aktion</th>
+            </tr>
+          </thead>
+          <tbody>
+            {legacyChampionships.map(
+              (lc: {
+                id: Key;
+                nr: number;
+                name: string;
+                synced: boolean;
+                completed: boolean;
+              }) => (
+                <tr key={lc.id}>
+                  <td>{lc.nr}</td>
+                  <td>{lc.name}</td>
+                  <td>
+                    {lc.synced
+                      ? lc.completed
+                        ? 'Abgeschlossen'
+                        : 'Laufend'
+                      : 'Nicht geladen'}
+                  </td>
+                  <td>
+                    <Button>Abgleich</Button>
+                  </td>
+                </tr>
+              ),
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

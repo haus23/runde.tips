@@ -14,7 +14,8 @@ export default defineConfig({
     envOnly(),
     remix({
       ignoredRouteFiles: ['**/*'],
-      routes: async (defineRoutes) => flatRoutes('routes', defineRoutes),
+      routes: async (defineRoutes) =>
+        flatRoutes('routes', defineRoutes, { ignoredRouteFiles: ['**/*.md'] }),
     }),
   ],
 });
