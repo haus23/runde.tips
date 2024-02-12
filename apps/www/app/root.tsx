@@ -18,6 +18,7 @@ import { RouterProvider } from '@tipprunde/ui';
 import { getUser } from '#app/.server/auth';
 import { getHints } from '#app/.server/client-hints';
 import { getSession } from '#app/.server/theme';
+import { getToast } from '#app/.server/toast';
 
 import { MediaQueryFallback } from '#app/utils/media-query-fallback';
 import { ThemeProvider, useTheme } from '#app/utils/theme';
@@ -27,14 +28,19 @@ import './styles/tailwind.css';
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request);
   const user = await getUser(request);
+  const { toast, headers } = await getToast(request);
 
-  return json({
-    user,
-    requestInfo: {
-      hints: getHints(request),
-      theme: session.get('theme'),
+  return json(
+    {
+      user,
+      requestInfo: {
+        hints: getHints(request),
+        theme: session.get('theme'),
+        toast,
+      },
     },
-  });
+    { headers },
+  );
 }
 
 function App() {
