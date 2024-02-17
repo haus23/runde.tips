@@ -6,7 +6,7 @@ import { db } from '#app/.server/db';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const championships = await db.championship.findMany();
-  console.log('Loader');
+
   const legacyChampionships = await fetch(
     'https://backend.runde.tips/api/v1/championships',
   ).then((response) => response.json());

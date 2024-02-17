@@ -1,4 +1,4 @@
-import { json } from '@remix-run/node';
+import { jsonWithToast } from '#app/.server/toast';
 
 export async function action() {
   // TODO: Get options from request
@@ -12,5 +12,9 @@ export async function action() {
     'https://backend.runde.tips/api/invalidate-cache',
     options,
   ).then((response) => response.json());
-  return json({ invalidationResults });
+
+  return jsonWithToast(
+    { invalidationResults },
+    { type: 'success', msg: 'Cache-Daten erfolgreich gelöscht.' },
+  );
 }

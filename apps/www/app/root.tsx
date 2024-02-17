@@ -11,7 +11,7 @@ import {
 
 import type { LoaderFunctionArgs } from '@remix-run/node';
 
-import { Toaster } from 'sonner';
+import { Toaster, toast as showToast } from 'sonner';
 
 import { RouterProvider } from '@tipprunde/ui';
 
@@ -23,12 +23,15 @@ import { getToast } from '#app/.server/toast';
 import { MediaQueryFallback } from '#app/utils/media-query-fallback';
 import { ThemeProvider, useTheme } from '#app/utils/theme';
 
+import { useEffect } from 'react';
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request);
   const user = await getUser(request);
   const { toast, headers } = await getToast(request);
+
+  console.log(toast);
 
   return json(
     {
@@ -45,6 +48,18 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 function App() {
   const { theme } = useTheme();
+  const {
+    requestInfo: { toast },
+  } = useLoaderData<typeof loader>();
+
+  useEffect(() => {
+    if (toast) {
+      const { type, msg } = toast;
+      setTimeout(() => {
+        showToast[type](msg);
+      }, 0);
+    }
+  }, [toast]);
 
   return (
     <html lang="de" className={theme.colorScheme}>
@@ -60,7 +75,7 @@ function App() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <Toaster />
+        <Toaster position="top-right" />
       </body>
     </html>
   );
