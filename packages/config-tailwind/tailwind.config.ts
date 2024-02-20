@@ -70,6 +70,10 @@ export default {
       accent: {
         DEFAULT: 'var(--accent-fg)',
         subtle: 'var(--accent-fg-subtle)',
+        stressed: {
+          DEFAULT: 'var(--accent-fg-stressed)',
+          hover: 'var(--accent-fg-stressed-hover)',
+        },
       },
     }),
     extend: {},

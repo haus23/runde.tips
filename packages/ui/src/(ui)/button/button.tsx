@@ -36,8 +36,7 @@ const styles = tv({
     {
       variant: 'toolbar',
       color: 'neutral',
-      className:
-        'hover:bg-cn-hover pressed:bg-cn-hover pressed:component-pressed',
+      className: 'hover:bg-cn-hover pressed:bg-cn-active',
     },
   ],
   defaultVariants: {

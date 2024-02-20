@@ -11,7 +11,7 @@ const icon = tv({
   base: 'size-5 inline self-center',
 });
 
-const wrapper = tv({ base: 'inline-flex items-center gap-2' });
+const wrapper = tv({ base: 'flex items-center gap-2' });
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;

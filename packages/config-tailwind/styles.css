@@ -37,6 +37,8 @@
 
     --accent-fg: var(--jade-12);
     --accent-fg-subtle: var(--jade-11);
+    --accent-fg-stressed: var(--jade-9);
+    --accent-fg-stressed-hover: var(--jade-10);
 
     --ca-bg: var(--jade-3);
     --ca-bg-hover: var(--jade-4);

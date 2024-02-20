@@ -15,14 +15,12 @@ const linkStyles = tv({
 
 const navLinkStyles = tv({
   extend: linkStyles,
-  base: ['px-3 rounded-lg'],
+  base: [
+    'px-3 rounded-lg font-medium text-app-subtle hover:text-accent-stressed-hover',
+  ],
   variants: {
-    variant: {
-      topnav: 'hover:bg-cn-hover pressed:bg-cn-active',
-      sidenav: 'text-app-subtle hover:text-app',
-    },
     isCurrent: {
-      true: 'text-accent-subtle hover:text-accent-subtle dark:text-accent hover:dark:text-accent',
+      true: 'text-accent-stressed',
       false: '',
     },
   },
@@ -41,13 +39,11 @@ function _Link({ className, ...props }: _LinkProps) {
   );
 }
 
-interface _NavLinkProps
-  extends LinkProps,
-    Pick<VariantProps<typeof navLinkStyles>, 'variant'> {
+interface _NavLinkProps extends LinkProps {
   href: string;
 }
 
-function _NavLink({ className, variant, href, ...props }: _NavLinkProps) {
+function _NavLink({ className, href, ...props }: _NavLinkProps) {
   // See: https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L1030
   const path = useResolvedPath(href);
   const location = useLocation();
@@ -60,7 +56,7 @@ function _NavLink({ className, variant, href, ...props }: _NavLinkProps) {
       {...props}
       href={href}
       className={composeRenderProps(className, (className, renderProps) =>
-        navLinkStyles({ ...renderProps, variant, className }),
+        navLinkStyles({ ...renderProps, className }),
       )}
     />
   );
