@@ -66,7 +66,7 @@ export default function LoginRoute() {
           }
         />
         <div className="flex justify-center">
-          <Button variant="accent" type="submit">
+          <Button color="accent" type="submit">
             Code anfordern
           </Button>
         </div>

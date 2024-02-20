@@ -77,7 +77,7 @@ export default function OnboardingRoute() {
           }
         />
         <div className="flex justify-center">
-          <Button variant="accent" type="submit">
+          <Button color="accent" type="submit">
             Anmelden
           </Button>
         </div>

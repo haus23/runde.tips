@@ -33,7 +33,7 @@ export function AppHeader() {
             <UserMenu />
           ) : (
             <div className="flex items-center">
-              <span className="border border-neutral h-10 ml-2 mr-2" />
+              <span className="border border-neutral h-10 mx-2" />
               <NavLink variant="topnav" href="/login">
                 Log In
               </NavLink>

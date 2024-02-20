@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import ariaComponents from 'tailwindcss-react-aria-components';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   content: [],
@@ -17,12 +18,20 @@ export default {
         DEFAULT: 'var(--cn-bg)',
         hover: 'var(--cn-bg-hover)',
         active: 'var(--cn-bg-active)',
+        solid: {
+          DEFAULT: 'var(--cn-solid-bg)',
+          hover: 'var(--cn-solid-bg-hover)',
+        },
       },
-      // Component Neutral
+      // Component Accent
       ca: {
         DEFAULT: 'var(--ca-bg)',
         hover: 'var(--ca-bg-hover)',
         active: 'var(--ca-bg-active)',
+        solid: {
+          DEFAULT: 'var(--ca-solid-bg)',
+          hover: 'var(--ca-solid-bg-hover)',
+        },
       },
     }),
     borderColor: ({ theme }) => ({
@@ -65,5 +74,14 @@ export default {
     }),
     extend: {},
   },
-  plugins: [ariaComponents()],
+  plugins: [
+    ariaComponents(),
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        '.component-pressed': {
+          filter: 'var(--app-component-solid-pressed)',
+        },
+      });
+    }),
+  ],
 } satisfies Config;

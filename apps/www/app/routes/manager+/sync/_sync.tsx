@@ -44,7 +44,7 @@ export default function SyncRoute() {
         </p>
         <fetcher.Form action="/action/sync/clear-cache" method="post">
           <Button
-            variant="accent"
+            color="accent"
             type="submit"
             isDisabled={fetcher.state === 'submitting'}
           >

@@ -32,6 +32,9 @@
     --cn-bg-active: var(--sage-5);
     --cn-ring: var(--sage-7);
 
+    --cn-solid-bg: var(--sage-9);
+    --cn-solid-bg-hover: var(--sage-10);
+
     --accent-fg: var(--jade-12);
     --accent-fg-subtle: var(--jade-11);
 
@@ -40,14 +43,24 @@
     --ca-bg-active: var(--jade-5);
     --ca-ring: var(--jade-7);
 
+    --ca-solid-bg: var(--jade-9);
+    --ca-solid-bg-hover: var(--jade-10);
+
     --border-neutral: var(--sage-6);
     --border-disabled: var(--sage-4);
     --border-focus: var(--sage-10);
     --border-accent: var(--jade-6);
     --border-error: var(--tomato-6);
+
+    /* Utilities */
+    --app-component-solid-pressed: brightness(0.92) saturate(1.1);
   }
+
 
   .dark {
     --app-bg-subtle: #1b1d1c;
+
+     /* Utilities */
+     --app-component-solid-pressed: brightness(1.08);
   }
 }
