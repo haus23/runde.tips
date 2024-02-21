@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "@tipprunde/db": "workspace:*",
-    "prisma": "^5.9.1"
+    "prisma": "^5.10.1"
   }
 }
