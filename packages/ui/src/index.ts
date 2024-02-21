@@ -12,5 +12,3 @@ export * from './(ui)/button/button';
 export * from './(ui)/menu/menu';
 export * from './(ui)/link/link';
 export * from './(ui)/textfield/textfield';
-
-export * from './components/icon/icon';

@@ -1,13 +1,6 @@
-import {
-  Button,
-  Icon,
-  type IconName,
-  type Key,
-  Menu,
-  MenuItem,
-  MenuItems,
-} from '@tipprunde/ui';
+import { Button, type Key, Menu, MenuItem, MenuItems } from '@tipprunde/ui';
 import cx from 'clsx';
+import { Icon, type IconName } from '#components';
 import type { ColorScheme } from '#types';
 import { includes } from '#utils/misc';
 import { useTheme } from '#utils/theme';
