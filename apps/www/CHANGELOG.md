@@ -1,5 +1,25 @@
 # @tipprunde/www
 
+## 0.0.22
+
+### Patch Changes
+
+- refactor: Move logo component to www app
+
+- refactor: Move simplified icon component to www app.
+
+- refactor: Move handling for adding icons to www app.
+
+- refactor: prepare moving ui package components to www app.
+
+- refactor: Move tsconfig to www app. Removed last package.
+
+- refactor: Move tailwind config to www app. Finally delete tw config package.
+
+- refactor: Move icons build script to www app.
+
+- refactor: Finally remove all rac code to www app and delete ui package.
+
 ## 0.0.21
 
 ### Patch Changes
