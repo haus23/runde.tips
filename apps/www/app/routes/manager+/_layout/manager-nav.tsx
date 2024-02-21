@@ -5,7 +5,7 @@ export function ManagerNav() {
   const user = useUser();
 
   return (
-    <div className="flex flex-col w-full pl-2">
+    <div className="flex flex-col w-full">
       <Link href="/" className="ml-1.5 py-2">
         <Logo />
       </Link>
