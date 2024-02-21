@@ -1,5 +1,12 @@
 # @tipprunde/www
 
+
+## 0.0.23
+
+### Patch Changes
+
+- refactor: Refactor monorepo into single project.
+
 ## 0.0.22
 
 ### Patch Changes
