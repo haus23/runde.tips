@@ -5,7 +5,6 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "icons:add": "sly add",
     "icons:build": "icons build -i ./icons -o ./src/components/icon/icons --optimize 0",
     "typecheck": "tsc"
   },
@@ -14,7 +13,6 @@
     "react-aria-components": "^1.1.1"
   },
   "devDependencies": {
-    "@sly-cli/sly": "^1.8.0",
     "@tipprunde/tailwind-config": "workspace:*",
     "@tipprunde/typescript-config": "workspace:*",
     "@types/react": "^18.2.57",
