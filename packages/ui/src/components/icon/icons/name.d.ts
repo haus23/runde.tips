@@ -6,14 +6,19 @@
 	| "lucide/dices"
 	| "lucide/folder-sync"
 	| "lucide/folder"
+	| "lucide/folders"
 	| "lucide/home"
 	| "lucide/laptop"
 	| "lucide/log-out"
 	| "lucide/moon"
+	| "lucide/pilcrow"
 	| "lucide/scale"
 	| "lucide/search"
 	| "lucide/settings"
+	| "lucide/shield-half"
 	| "lucide/smile-plus"
 	| "lucide/sun"
-	| "lucide/user";
+	| "lucide/trophy"
+	| "lucide/user"
+	| "lucide/users";
   

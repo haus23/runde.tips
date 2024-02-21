@@ -56,31 +56,31 @@ export function ManagerNav() {
             href="/manager/turniere"
             className="data-[current]:bg-app-subtle"
           >
-            Turniere
+            <Icon name="lucide/folders">Turniere</Icon>
           </NavLink>
           <NavLink
             href="/manager/spieler"
             className="data-[current]:bg-app-subtle"
           >
-            Spieler
+            <Icon name="lucide/users">Spieler</Icon>
           </NavLink>
           <NavLink
             href="/manager/teams"
             className="data-[current]:bg-app-subtle"
           >
-            Teams
+            <Icon name="lucide/shield-half">Teams</Icon>
           </NavLink>
           <NavLink
             href="/manager/ligen"
             className="data-[current]:bg-app-subtle"
           >
-            Ligen
+            <Icon name="lucide/trophy">Ligen</Icon>
           </NavLink>
           <NavLink
             href="/manager/regelwerke"
             className="data-[current]:bg-app-subtle"
           >
-            Regelwerke
+            <Icon name="lucide/pilcrow">Regelwerke</Icon>
           </NavLink>
         </div>
         <div className="border-t border-neutral flex flex-col py-2">
