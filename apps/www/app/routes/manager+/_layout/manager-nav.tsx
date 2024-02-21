@@ -6,7 +6,7 @@ export function ManagerNav() {
 
   return (
     <div className="flex flex-col w-full">
-      <Link href="/" className="ml-1.5 py-2">
+      <Link href="/" className="ml-1.5 py-2 block">
         <Logo />
       </Link>
       <div className="grow flex flex-col p-2 gap-y-2">
