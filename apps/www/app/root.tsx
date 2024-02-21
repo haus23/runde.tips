@@ -31,8 +31,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const user = await getUser(request);
   const { toast, headers } = await getToast(request);
 
-  console.log(toast);
-
   return json(
     {
       user,
