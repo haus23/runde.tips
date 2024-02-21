@@ -1,5 +1,4 @@
-import { Link, NavLink } from '@tipprunde/ui';
-import { Icon, Logo } from '#components';
+import { Icon, Link, Logo, NavLink } from '#components';
 import { useUser } from '#utils/user';
 
 export function ManagerNav() {

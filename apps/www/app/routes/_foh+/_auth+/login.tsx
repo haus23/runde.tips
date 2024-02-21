@@ -1,8 +1,8 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json, useLoaderData, useSubmit } from '@remix-run/react';
-import { Button, Form, TextField } from '@tipprunde/ui';
 
 import { authenticator, commitSession, getSession } from '#.server/auth';
+import { Button, Form, TextField } from '#components/(ui)';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await authenticator.isAuthenticated(request, {

@@ -1,8 +1,8 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json, useFetcher, useLoaderData } from '@remix-run/react';
-import { Button } from '@tipprunde/ui';
 import type { Key } from 'react';
 import { db } from '#.server/db';
+import { Button } from '#components/(ui)';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const championships = await db.championship.findMany();

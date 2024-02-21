@@ -1,9 +1,9 @@
-import { Button, type Key, Menu, MenuItem, MenuItems } from '@tipprunde/ui';
 import cx from 'clsx';
-import { Icon, type IconName } from '#components';
 import type { ColorScheme } from '#types';
 import { includes } from '#utils/misc';
 import { useTheme } from '#utils/theme';
+import { Button, type Key, Menu, MenuItem, MenuItems } from '../(ui)';
+import { Icon, type IconName } from '../icon/icon';
 
 const colorSchemes: {
   name: ColorScheme | 'system';

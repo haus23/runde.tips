@@ -13,7 +13,7 @@ import type { LoaderFunctionArgs } from '@remix-run/node';
 
 import { Toaster, toast as showToast } from 'sonner';
 
-import { RouterProvider } from '@tipprunde/ui';
+import { RouterProvider } from 'react-aria-components';
 
 import { getUser } from '#.server/auth';
 import { getHints } from '#.server/client-hints';

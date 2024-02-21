@@ -1,5 +1,4 @@
-import { Link, NavLink } from '@tipprunde/ui';
-import { Logo, ThemeMenu } from '#components';
+import { Link, Logo, NavLink, ThemeMenu } from '#components';
 import { useIsAuthenticated } from '#utils/user';
 import { UserMenu } from './user-menu';
 

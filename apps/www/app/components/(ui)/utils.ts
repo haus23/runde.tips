@@ -2,7 +2,7 @@ import { composeRenderProps } from 'react-aria-components';
 import { twMerge } from 'tailwind-merge';
 
 /**
- * Helper to merge tailwind classed with renderProps support w/o variants
+ * Helper to merge tailwind classes with renderProps support w/o variants
  *
  * @param className
  * @param tw

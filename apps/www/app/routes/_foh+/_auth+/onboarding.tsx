@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json, redirect, useLoaderData, useSubmit } from '@remix-run/react';
-import { Button, Form, TextField } from '@tipprunde/ui';
+import { Button, Form, TextField } from '#components/(ui)';
 
 import { authenticator, commitSession, getSession } from '#.server/auth';
 

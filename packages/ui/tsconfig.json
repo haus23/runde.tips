@@ -1,7 +1,0 @@
-{
-  "extends": "@tipprunde/typescript-config/react.json",
-  "include": ["**/*.ts", "**/*.tsx"],
-  "compilerOptions": {
-    "types": ["vite/client"]
-  }
-}

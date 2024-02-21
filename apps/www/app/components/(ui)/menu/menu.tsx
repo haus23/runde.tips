@@ -10,7 +10,7 @@ import {
 
 import { itemStyles } from '../base-styles';
 
-import { Icon } from '../../components/icon/icon';
+import { Icon } from '../../icon/icon';
 import { Popover, type PopoverProps } from '../popover/popover';
 
 interface _MenuProps<T> extends MenuProps<T> {

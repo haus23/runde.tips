@@ -16,8 +16,8 @@ import {
 } from 'react-aria-components';
 import { twMerge } from 'tailwind-merge';
 import { tv } from 'tailwind-variants';
-import { composeTailwindRenderProps } from '../../utils';
-import { fieldBorderStyles, focusRingStyles } from '../base-styles';
+import { fieldBorderStyles } from '../base-styles';
+import { composeTailwindRenderProps } from '../utils';
 
 function _Label({ className, ...props }: LabelProps) {
   return (

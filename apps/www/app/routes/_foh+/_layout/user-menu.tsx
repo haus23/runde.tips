@@ -1,5 +1,4 @@
-import { Button, Menu, MenuItem, MenuItems } from '@tipprunde/ui';
-import { Icon } from '#components';
+import { Button, Icon, Menu, MenuItem, MenuItems } from '#components';
 import { useUser } from '#utils/user';
 
 export function UserMenu() {
