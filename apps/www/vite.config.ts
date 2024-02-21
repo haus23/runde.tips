@@ -1,7 +1,6 @@
 import { vitePlugin as remix } from '@remix-run/dev';
 import { flatRoutes } from 'remix-flat-routes';
 import { defineConfig } from 'vite';
-import envOnly from 'vite-env-only';
 
 export default defineConfig({
   build: {
@@ -11,7 +10,6 @@ export default defineConfig({
     port: 5001,
   },
   plugins: [
-    envOnly(),
     remix({
       ignoredRouteFiles: ['**/*'],
       routes: async (defineRoutes) =>
