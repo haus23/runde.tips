@@ -15,13 +15,13 @@ import { Toaster, toast as showToast } from 'sonner';
 
 import { RouterProvider } from '@tipprunde/ui';
 
-import { getUser } from '#app/.server/auth';
-import { getHints } from '#app/.server/client-hints';
-import { getSession } from '#app/.server/theme';
-import { getToast } from '#app/.server/toast';
+import { getUser } from '#.server/auth';
+import { getHints } from '#.server/client-hints';
+import { getSession } from '#.server/theme';
+import { getToast } from '#.server/toast';
 
-import { MediaQueryFallback } from '#app/utils/media-query-fallback';
-import { ThemeProvider, useTheme } from '#app/utils/theme';
+import { MediaQueryFallback } from '#utils/media-query-fallback';
+import { ThemeProvider, useTheme } from '#utils/theme';
 
 import { useEffect } from 'react';
 import './styles/tailwind.css';

@@ -11,7 +11,7 @@ import type {
   ColorScheme,
   ColorSchemeSource,
   Theme,
-} from '#app/types';
+} from '#types';
 
 type ThemeContextType = {
   theme: Theme;

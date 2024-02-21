@@ -1,4 +1,4 @@
-import { colorSchemeSchema } from '#app/types';
+import { colorSchemeSchema } from '#types';
 
 export function getHints(request: Request) {
   const colorSchemeHeaderValue = request.headers.get(

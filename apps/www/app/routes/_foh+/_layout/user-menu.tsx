@@ -1,5 +1,5 @@
 import { Button, Icon, Menu, MenuItem, MenuItems } from '@tipprunde/ui';
-import { useUser } from '#app/utils/user';
+import { useUser } from '#utils/user';
 
 export function UserMenu() {
   const user = useUser();

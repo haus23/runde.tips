@@ -1,5 +1,5 @@
 import { Icon, Link, Logo, NavLink } from '@tipprunde/ui';
-import { useUser } from '#app/utils/user';
+import { useUser } from '#utils/user';
 
 export function ManagerNav() {
   const user = useUser();

@@ -8,9 +8,9 @@ import {
   MenuItems,
 } from '@tipprunde/ui';
 import cx from 'clsx';
-import type { ColorScheme } from '#app/types';
-import { includes } from '#app/utils/misc';
-import { useTheme } from '#app/utils/theme';
+import type { ColorScheme } from '#types';
+import { includes } from '#utils/misc';
+import { useTheme } from '#utils/theme';
 
 const colorSchemes: {
   name: ColorScheme | 'system';

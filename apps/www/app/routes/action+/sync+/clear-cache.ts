@@ -1,4 +1,4 @@
-import { jsonWithToast } from '#app/.server/toast';
+import { jsonWithToast } from '#.server/toast';
 
 export async function action() {
   // TODO: Get options from request

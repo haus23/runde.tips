@@ -1,5 +1,5 @@
 import { createCookieSessionStorage, json } from '@remix-run/node';
-import type { ToastMessage } from '#app/types';
+import type { ToastMessage } from '#types';
 
 type SessionData = unknown;
 type SessionFlashData = {

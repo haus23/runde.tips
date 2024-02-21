@@ -4,7 +4,7 @@ import {
   json,
 } from '@remix-run/node';
 
-import { type ThemeSessionData, themeSchema } from '#app/types';
+import { type ThemeSessionData, themeSchema } from '#types';
 
 const themeSessionStorage = createCookieSessionStorage<ThemeSessionData>({
   cookie: {

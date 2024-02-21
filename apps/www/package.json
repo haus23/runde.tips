@@ -3,7 +3,7 @@
   "version": "0.0.19",
   "type": "module",
   "imports": {
-    "#*": "./*"
+    "#*": "./app/*"
   },
   "scripts": {
     "build": "remix vite:build",
