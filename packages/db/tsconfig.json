@@ -1,4 +1,0 @@
-{
-  "extends": "@tipprunde/typescript-config/base.json",
-  "include": ["src/**/*.ts"],
-}
