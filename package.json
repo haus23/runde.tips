@@ -7,7 +7,7 @@
     "db:push": "turbo db:push db:generate",
     "db:studio": "pnpm run --filter www db:studio",
     "icons:add": "pnpm run --filter www icons:add",
-    "icons:build": "pnpm run --filter ui icons:build",
+    "icons:build": "pnpm run --filter www icons:build",
     "check": "biome check --apply ."
   },
   "devDependencies": {
