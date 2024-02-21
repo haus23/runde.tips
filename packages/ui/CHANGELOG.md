@@ -1,5 +1,19 @@
 # @tipprunde/ui
 
+## 0.2.4
+
+### Patch Changes
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - chore: Update tailwind-variants
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - chore: Update svg icons cli
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - chore: Upgrade remix. Vite plugin now stable.
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - chore: Update typings.
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - chore: Update react-aria-components.
+
 ## 0.2.3
 
 ### Patch Changes

@@ -1,5 +1,23 @@
 # @tipprunde/www
 
+## 0.0.21
+
+### Patch Changes
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - fix: Remove currently unused vite-env-only plugin.
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - refactor: Upgrade isbot and simplify usage.
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - chore: Upgrade remix. Vite plugin now stable.
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - fix: Remove debug info.
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - chore: Update typings.
+
+- Updated dependencies [[`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706), [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706), [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706), [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706), [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706), [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706)]:
+  - @tipprunde/ui@0.2.4
+  - @tipprunde/db@0.2.1
+
 ## 0.0.20
 
 ### Patch Changes

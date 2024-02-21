@@ -1,6 +1,6 @@
 {
   "name": "@tipprunde/console",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "type": "module",
   "scripts": {
     "db:deploy": "prisma migrate deploy --schema ../../packages/db/prisma/schema.prisma",

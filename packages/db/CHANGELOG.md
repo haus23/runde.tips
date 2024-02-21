@@ -1,5 +1,11 @@
 # @tipprunde/db
 
+## 0.2.1
+
+### Patch Changes
+
+- [`2636326`](https://github.com/haus23/runde.tips/commit/2636326e8e72d5dc3c7d3aaf64ddbd81abaea706) Thanks [@haus23](https://github.com/haus23)! - chore: Update prisma orm.
+
 ## 0.2.0
 
 ### Minor Changes
