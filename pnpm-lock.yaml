@@ -173,8 +173,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
       svg-icons-cli:
-        specifier: ^0.0.6
-        version: 0.0.6
+        specifier: ^0.0.7
+        version: 0.0.7
       tailwind-merge:
         specifier: ^2.2.1
         version: 2.2.1
@@ -7697,8 +7697,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svg-icons-cli@0.0.6:
-    resolution: {integrity: sha512-RCRUSPhqK7ENY7Xs8Uk1BFD4T18YvJGqkzViIP2Q8KdTW5zeNQcCZEhXVsP6BlCJowa4rCcvvT4K/R31M76YxQ==}
+  /svg-icons-cli@0.0.7:
+    resolution: {integrity: sha512-P2rFrajWaDYMvQr9gId0jpO7aCuHc7jlhIaZvVZvyUDUEBYOU4pYccsJ1zmYj01juAtxjQnR2a2FctyFBgTTAQ==}
     hasBin: true
     dependencies:
       '@clack/prompts': 0.7.0
