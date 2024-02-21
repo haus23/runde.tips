@@ -10,3 +10,7 @@ dist/
 
 # Sensible data
 .env
+
+# Dev DB
+db/dev.db
+db/dev.db-journal
