@@ -12,9 +12,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function ManagerLayout() {
   return (
-    <div>
+    <div className="md:ml-60">
       <Sidebar />
-      <main className="md:pl-60 relative">
+      <main className="relative">
         <div className="absolute top-2 right-4">
           <ThemeMenu />
         </div>
