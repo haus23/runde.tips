@@ -47,7 +47,7 @@ export function ManagerNav() {
           <Icon name="lucide/folder-sync">Synchronisierung</Icon>
         </NavLink>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-4">
         <h3 className="pb-2 pl-5 text-app-notice border-b border-b-neutral">
           Stammdaten
         </h3>
