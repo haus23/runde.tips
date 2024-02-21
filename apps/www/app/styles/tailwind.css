@@ -1,6 +1,70 @@
-@import '@tipprunde/tailwind-config/styles.css';
+@import '@radix-ui/colors/sage.css';
+@import '@radix-ui/colors/sage-dark.css';
+@import '@radix-ui/colors/jade.css';
+@import '@radix-ui/colors/jade-dark.css';
+
+@import '@radix-ui/colors/tomato.css';
+@import '@radix-ui/colors/tomato-dark.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Custom colors calculated via
+  https://developer.chrome.com/docs/css-ui/css-color-mix
+*/
 
 @layer base {
+
+  :root {
+    --app-bg: var(--sage-2);
+    --app-bg-stressed: var(--sage-1);
+    --app-bg-subtle: #f2f5f4;
+
+    --app-fg: var(--sage-12);
+    --app-fg-subtle: var(--sage-11);
+    --app-fg-notice: var(--sage-9);
+    --app-fg-error: var(--tomato-11);
+
+    --cn-bg: var(--sage-3);
+    --cn-bg-hover: var(--sage-4);
+    --cn-bg-active: var(--sage-5);
+    --cn-ring: var(--sage-7);
+
+    --cn-solid-bg: var(--sage-9);
+    --cn-solid-bg-hover: var(--sage-10);
+
+    --accent-fg: var(--jade-12);
+    --accent-fg-subtle: var(--jade-11);
+    --accent-fg-stressed: var(--jade-9);
+    --accent-fg-stressed-hover: var(--jade-10);
+
+    --ca-bg: var(--jade-3);
+    --ca-bg-hover: var(--jade-4);
+    --ca-bg-active: var(--jade-5);
+    --ca-ring: var(--jade-7);
+
+    --ca-solid-bg: var(--jade-9);
+    --ca-solid-bg-hover: var(--jade-10);
+
+    --border-neutral: var(--sage-6);
+    --border-disabled: var(--sage-4);
+    --border-focus: var(--sage-10);
+    --border-accent: var(--jade-6);
+    --border-error: var(--tomato-6);
+
+    /* Utilities */
+    --app-component-solid-pressed: brightness(0.92) saturate(1.1);
+  }
+
+
+  .dark {
+    --app-bg-subtle: #1b1d1c;
+
+     /* Utilities */
+     --app-component-solid-pressed: brightness(1.08);
+  }
 
   html {
     color-scheme: light;
