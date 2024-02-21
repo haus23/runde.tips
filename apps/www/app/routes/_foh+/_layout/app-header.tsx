@@ -1,6 +1,6 @@
 import { Link, Logo, NavLink } from '@tipprunde/ui';
+import { ThemeMenu } from '#app/components/theme-menu';
 import { useIsAuthenticated } from '#app/utils/user';
-import { ThemeMenu } from './theme-menu';
 import { UserMenu } from './user-menu';
 
 export function AppHeader() {

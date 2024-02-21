@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { Outlet } from '@remix-run/react';
 import { requireAdmin } from '#app/.server/auth';
-import { ThemeMenu } from '#app/routes/_foh+/_layout/theme-menu';
+import { ThemeMenu } from '#app/components/theme-menu';
 import { Sidebar } from './sidebar';
 
 export async function loader({ request }: LoaderFunctionArgs) {
