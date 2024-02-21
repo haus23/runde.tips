@@ -1,6 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+// MIGRATION:
+// Während der Migrationsphase können mit diesem Script
+// alle bestehenden Accounts in die neue Datenbank übernommen werden.
 
-const legacyBaseUrl = 'https://backend.runde.tips/api/v1';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -14,10 +16,11 @@ async function main() {
     return;
   }
 
-  const resourceUrl = `${legacyBaseUrl}/accounts`;
+  const data = [];
 
-  const response = await fetch(resourceUrl);
-  const data = await response.json();
+  if (data.length === 0) {
+    throw new Error('Unimplemented!');
+  }
 
   let count = 0;
 

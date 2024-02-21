@@ -5,7 +5,7 @@
     "build": "turbo run build",
     "start": "pnpm run --filter www start",
     "db:push": "turbo db:push db:generate",
-    "db:studio": "pnpm run --filter console db:studio",
+    "db:studio": "pnpm run --filter www db:studio",
     "icons:add": "pnpm run --filter ui icons:add",
     "icons:build": "pnpm run --filter ui icons:build",
     "check": "biome check --apply ."
