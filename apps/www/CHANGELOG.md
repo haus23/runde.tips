@@ -1,5 +1,38 @@
 # @tipprunde/www
 
+## 0.0.20
+
+### Patch Changes
+
+- refactor: Align session secret. No need to use more than one.
+
+- refactor: Move action into resource route.
+
+- refactor: Move theme menu to common components folder.
+
+- fix: Make logo link a block. Simplifies clicking.
+
+- fix: Add borders
+
+- refactor: Move path alias again to the app folder.
+
+- refactor: Rethink button colors.
+
+- feat: Add icons for master data nav items.
+
+- fix: remove padding from content. Instead set margin in layout. Items are clickable again.
+
+- feat: Handling toasts on server side (WIP).
+
+- fix: Cleaner header and nav styling. Resolves #10
+
+- feat: Implement raw toast handling (via server).
+
+- feat: Add theme menu to manager layout.
+
+- Updated dependencies []:
+  - @tipprunde/ui@0.2.3
+
 ## 0.0.19
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # @tipprunde/ui
 
+## 0.2.3
+
+### Patch Changes
+
+- fix: Add center class.
+
+- refactor: Rethink button colors.
+
+- feat: Add icons for master data nav items.
+
+- fix: Cleaner header and nav styling. Resolves #10
+
+- fix: Hoppla, must keep the icon sources.
+
 ## 0.2.2
 
 ### Patch Changes

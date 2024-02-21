@@ -1,5 +1,13 @@
 # @tipprunde/tailwind-config
 
+## 0.0.8
+
+### Patch Changes
+
+- refactor: Rethink button colors.
+
+- fix: Cleaner header and nav styling. Resolves #10
+
 ## 0.0.7
 
 ### Patch Changes
