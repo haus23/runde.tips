@@ -2,7 +2,9 @@ import type { ActionFunctionArgs } from '@remix-run/node';
 import { Form, json, useFetcher, useLoaderData } from '@remix-run/react';
 import { namedAction } from 'remix-utils/named-action';
 import { getFirestoreChampionships } from '#.server/api/firestore/championship';
+import { syncPlayers } from '#.server/api/sync/players';
 import { db } from '#.server/db';
+import { jsonWithToast } from '#.server/toast';
 import { Button, Disclosure } from '#components';
 
 export async function loader() {
@@ -18,9 +20,15 @@ export async function action({ request }: ActionFunctionArgs) {
 
   return namedAction(formData, {
     async players() {
-      return json(null);
+      console.log('Syncing Players');
+      await syncPlayers();
+      return jsonWithToast(null, {
+        type: 'success',
+        msg: 'Spielerdaten synchronisiert.',
+      });
     },
     async teams() {
+      console.log('Syncing Teams');
       return json(null);
     },
     async leagues() {
