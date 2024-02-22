@@ -1,15 +1,12 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json, useFetcher, useLoaderData } from '@remix-run/react';
-import type { Key } from 'react';
 import { db } from '#.server/db';
+import { getFirestoreChampionships } from '#api/firestore/championships';
 import { Button } from '#components/(ui)';
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader() {
   const championships = await db.championship.findMany();
 
-  const legacyChampionships = await fetch(
-    'https://backend.runde.tips/api/v1/championships',
-  ).then((response) => response.json());
+  const legacyChampionships = await getFirestoreChampionships();
 
   return json({ championships, legacyChampionships });
 }
@@ -63,30 +60,22 @@ export default function SyncRoute() {
             </tr>
           </thead>
           <tbody>
-            {legacyChampionships.map(
-              (lc: {
-                id: Key;
-                nr: number;
-                name: string;
-                synced: boolean;
-                completed: boolean;
-              }) => (
-                <tr key={lc.id}>
-                  <td>{lc.nr}</td>
-                  <td>{lc.name}</td>
-                  <td>
-                    {lc.synced
-                      ? lc.completed
-                        ? 'Abgeschlossen'
-                        : 'Laufend'
-                      : 'Nicht geladen'}
-                  </td>
-                  <td>
-                    <Button>Abgleich</Button>
-                  </td>
-                </tr>
-              ),
-            )}
+            {legacyChampionships.map((lc) => (
+              <tr key={lc.id}>
+                <td>{lc.nr}</td>
+                <td>{lc.name}</td>
+                <td>
+                  {lc.synced
+                    ? lc.completed
+                      ? 'Abgeschlossen'
+                      : 'Laufend'
+                    : 'Nicht geladen'}
+                </td>
+                <td>
+                  <Button>Abgleich</Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
