@@ -1,6 +1,6 @@
 import { json, useFetcher, useLoaderData } from '@remix-run/react';
+import { getFirestoreChampionships } from '#.server/api/firestore/championships';
 import { db } from '#.server/db';
-import { getFirestoreChampionships } from '#api/firestore/championships';
 import { Button } from '#components/(ui)';
 
 export async function loader() {
