@@ -1,11 +1,12 @@
 import type { ActionFunctionArgs } from '@remix-run/node';
 import { Form, json, useFetcher, useLoaderData } from '@remix-run/react';
 import { namedAction } from 'remix-utils/named-action';
+import { twMerge } from 'tailwind-merge';
 import { getFirestoreChampionships } from '#.server/api/firestore/championship';
 import { syncPlayers } from '#.server/api/sync/players';
 import { db } from '#.server/db';
 import { jsonWithToast } from '#.server/toast';
-import { Button, Disclosure } from '#components';
+import { Button, Disclosure, Icon } from '#components';
 
 export async function loader() {
   const championships = await db.championship.findMany();
@@ -41,7 +42,8 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function SyncRoute() {
-  const fetcher = useFetcher();
+  const cacheFetcher = useFetcher();
+  const syncFetcher = useFetcher();
 
   const { championships, legacyChampionships } = useLoaderData<typeof loader>();
 
@@ -68,95 +70,143 @@ export default function SyncRoute() {
               sollte das entweder alles obsolet sein oder hier eine
               Auswahlmöglichkeit realisert sein.
             </p>
-            <fetcher.Form action="/action/sync/clear-cache" method="post">
+            <cacheFetcher.Form action="/action/sync/clear-cache" method="post">
               <Button
                 color="accent"
                 type="submit"
-                isDisabled={fetcher.state === 'submitting'}
+                isDisabled={cacheFetcher.state === 'submitting'}
               >
                 Cache löschen
               </Button>
-            </fetcher.Form>
+            </cacheFetcher.Form>
           </div>
         </Disclosure>
       </div>
-      <div className="bg-app-subtle rounded-md border border-neutral p-4">
-        <Disclosure label="Stammdaten">
-          <div className="py-4 px-2 flex flex-col gap-y-4">
-            <p className="text-app-subtle">
-              Stammdaten sind die unveränderlichen Daten, die in den jeweiligen
-              Turnieren benutzt werden: Spieler, Mannschaften/Teams, Ligen und
-              Regelwerke. Diese Daten sind relativ stabil und ändern sich
-              maximal bei neuen Runden oder neuen Turnieren.
-            </p>
-            <p className="text-app-subtle">
-              Solange die Firestore-Datenbank maßgeblich die Daten besitzt,
-              müssen - nach Änderungen dieser - die lokalen Daten der Anwendung
-              synchronisiert werden.
-            </p>
-            <Form className="flex flex-wrap justify-around" method="post">
-              <Button
-                color="accent"
-                type="submit"
-                name="action"
-                value="players"
-              >
-                Spieler
-              </Button>
-              <Button color="accent" type="submit" name="action" value="teams">
-                Teams
-              </Button>
-              <Button
-                color="accent"
-                type="submit"
-                name="action"
-                value="leagues"
-              >
-                Ligen
-              </Button>
-              <Button
-                color="accent"
-                type="submit"
-                name="action"
-                value="rulesets"
-              >
-                Regelwerke
-              </Button>
-            </Form>
-          </div>
-        </Disclosure>
-      </div>
-      <div className="bg-app-subtle rounded-md border border-neutral p-4 flex flex-col gap-y-4">
-        <h3 className="text-xl font-medium">Lokale Daten</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Nr</th>
-              <th>Titel</th>
-              <th>Status</th>
-              <th>Aktion</th>
-            </tr>
-          </thead>
-          <tbody>
-            {legacyChampionships.map((lc) => (
-              <tr key={lc.id}>
-                <td>{lc.nr}</td>
-                <td>{lc.name}</td>
-                <td>
-                  {lc.synced
-                    ? lc.completed
-                      ? 'Abgeschlossen'
-                      : 'Laufend'
-                    : 'Nicht geladen'}
-                </td>
-                <td>
-                  <Button>Abgleich</Button>
-                </td>
+      <syncFetcher.Form method="post" className="flex flex-col gap-y-8">
+        <div className="bg-app-subtle rounded-md border border-neutral p-4">
+          <Disclosure label="Stammdaten">
+            <div className="py-4 px-2 flex flex-col gap-y-4">
+              <p className="text-app-subtle">
+                Stammdaten sind die unveränderlichen Daten, die in den
+                jeweiligen Turnieren benutzt werden: Spieler,
+                Mannschaften/Teams, Ligen und Regelwerke. Diese Daten sind
+                relativ stabil und ändern sich maximal bei neuen Runden oder
+                neuen Turnieren.
+              </p>
+              <p className="text-app-subtle">
+                Solange die Firestore-Datenbank maßgeblich die Daten besitzt,
+                müssen - nach Änderungen dieser - die lokalen Daten der
+                Anwendung synchronisiert werden.
+              </p>
+              <div className="flex flex-wrap justify-around">
+                <Button
+                  isDisabled={syncFetcher.state === 'submitting'}
+                  color="accent"
+                  type="submit"
+                  name="action"
+                  value="players"
+                  className="flex gap-x-1 pl-2"
+                >
+                  <Icon
+                    name="lucide/loader"
+                    className={twMerge(
+                      syncFetcher.state === 'submitting' &&
+                        syncFetcher.formData?.get('action') === 'players' &&
+                        'animate-spin',
+                    )}
+                  />
+                  Spieler
+                </Button>
+                <Button
+                  isDisabled={syncFetcher.state === 'submitting'}
+                  color="accent"
+                  type="submit"
+                  name="action"
+                  value="teams"
+                  className="flex gap-x-1 pl-2"
+                >
+                  <Icon
+                    name="lucide/loader"
+                    className={twMerge(
+                      syncFetcher.state === 'submitting' &&
+                        syncFetcher.formData?.get('action') === 'teams' &&
+                        'animate-spin',
+                    )}
+                  />
+                  Teams
+                </Button>
+                <Button
+                  isDisabled={syncFetcher.state === 'submitting'}
+                  color="accent"
+                  type="submit"
+                  name="action"
+                  value="leagues"
+                  className="flex gap-x-1 pl-2"
+                >
+                  <Icon
+                    name="lucide/loader"
+                    className={twMerge(
+                      syncFetcher.state === 'submitting' &&
+                        syncFetcher.formData?.get('action') === 'leagues' &&
+                        'animate-spin',
+                    )}
+                  />
+                  Ligen
+                </Button>
+                <Button
+                  isDisabled={syncFetcher.state === 'submitting'}
+                  color="accent"
+                  type="submit"
+                  name="action"
+                  value="rulesets"
+                  className="flex gap-x-1 pl-2"
+                >
+                  <Icon
+                    name="lucide/loader"
+                    className={twMerge(
+                      syncFetcher.state === 'submitting' &&
+                        syncFetcher.formData?.get('action') === 'rulesets' &&
+                        'animate-spin',
+                    )}
+                  />
+                  Regelwerke
+                </Button>
+              </div>
+            </div>
+          </Disclosure>
+        </div>
+        <div className="bg-app-subtle rounded-md border border-neutral p-4 flex flex-col gap-y-4">
+          <h3 className="text-xl font-medium">Lokale Daten</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Nr</th>
+                <th>Titel</th>
+                <th>Status</th>
+                <th>Aktion</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {legacyChampionships.map((lc) => (
+                <tr key={lc.id}>
+                  <td>{lc.nr}</td>
+                  <td>{lc.name}</td>
+                  <td>
+                    {lc.synced
+                      ? lc.completed
+                        ? 'Abgeschlossen'
+                        : 'Laufend'
+                      : 'Nicht geladen'}
+                  </td>
+                  <td>
+                    <Button>Abgleich</Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </syncFetcher.Form>
     </div>
   );
 }

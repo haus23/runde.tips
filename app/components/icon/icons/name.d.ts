@@ -10,6 +10,7 @@
 	| "lucide/folders"
 	| "lucide/home"
 	| "lucide/laptop"
+	| "lucide/loader"
 	| "lucide/log-out"
 	| "lucide/moon"
 	| "lucide/pilcrow"

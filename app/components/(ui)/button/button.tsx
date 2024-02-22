@@ -19,6 +19,9 @@ const styles = tv({
       outline: '',
       toolbar: 'p-2 rounded-lg border-neutral border',
     },
+    isDisabled: {
+      true: 'grayscale-[70%] cursor-not-allowed',
+    },
   },
   compoundVariants: [
     {
