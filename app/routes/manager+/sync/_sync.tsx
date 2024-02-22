@@ -1,7 +1,7 @@
 import type { ActionFunctionArgs } from '@remix-run/node';
-import { json, useFetcher, useLoaderData } from '@remix-run/react';
+import { json, useFetcher, useFetchers, useLoaderData } from '@remix-run/react';
+import { clsx } from 'clsx';
 import { namedAction } from 'remix-utils/named-action';
-import { twMerge } from 'tailwind-merge';
 import { getFirestoreChampionships } from '#.server/api/firestore/championship';
 import { syncLeagues } from '#.server/api/sync/leagues';
 import { syncPlayers } from '#.server/api/sync/players';
@@ -23,6 +23,14 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
 
   return namedAction(formData, {
+    async championship() {
+      const championshipSlug = formData.get('championshipSlug');
+      await syncPlayers();
+      return jsonWithToast(null, {
+        type: 'success',
+        msg: `${championshipSlug} synchronisiert`,
+      });
+    },
     async players() {
       await syncPlayers();
       return jsonWithToast(null, {
@@ -55,8 +63,14 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function SyncRoute() {
-  const cacheFetcher = useFetcher();
-  const syncFetcher = useFetcher();
+  const legacyCache = useFetcher();
+  const masterData = useFetcher();
+  const championshipData = useFetcher();
+
+  const fetchers = useFetchers();
+  const isSubmmitting = fetchers.some(
+    (fetcher) => fetcher.state === 'submitting',
+  );
 
   const { championships, legacyChampionships } = useLoaderData<typeof loader>();
 
@@ -83,19 +97,19 @@ export default function SyncRoute() {
               sollte das entweder alles obsolet sein oder hier eine
               Auswahlmöglichkeit realisert sein.
             </p>
-            <cacheFetcher.Form action="/action/sync/clear-cache" method="post">
+            <legacyCache.Form action="/action/sync/clear-cache" method="post">
               <Button
                 color="accent"
                 type="submit"
-                isDisabled={cacheFetcher.state === 'submitting'}
+                isDisabled={legacyCache.state === 'submitting'}
               >
                 Cache löschen
               </Button>
-            </cacheFetcher.Form>
+            </legacyCache.Form>
           </div>
         </Disclosure>
       </div>
-      <syncFetcher.Form method="post" className="flex flex-col gap-y-8">
+      <masterData.Form method="post" className="flex flex-col gap-y-8">
         <div className="bg-app-subtle rounded-md border border-neutral p-4">
           <Disclosure label="Stammdaten">
             <div className="py-4 px-2 flex flex-col gap-y-4">
@@ -113,7 +127,7 @@ export default function SyncRoute() {
               </p>
               <div className="flex flex-wrap justify-around">
                 <Button
-                  isDisabled={syncFetcher.state === 'submitting'}
+                  isDisabled={isSubmmitting}
                   color="accent"
                   type="submit"
                   name="action"
@@ -122,16 +136,15 @@ export default function SyncRoute() {
                 >
                   <Icon
                     name="lucide/loader"
-                    className={twMerge(
-                      syncFetcher.state === 'submitting' &&
-                        syncFetcher.formData?.get('action') === 'players' &&
+                    className={clsx(
+                      masterData.formData?.get('action') === 'players' &&
                         'animate-spin',
                     )}
                   />
                   Spieler
                 </Button>
                 <Button
-                  isDisabled={syncFetcher.state === 'submitting'}
+                  isDisabled={isSubmmitting}
                   color="accent"
                   type="submit"
                   name="action"
@@ -140,16 +153,15 @@ export default function SyncRoute() {
                 >
                   <Icon
                     name="lucide/loader"
-                    className={twMerge(
-                      syncFetcher.state === 'submitting' &&
-                        syncFetcher.formData?.get('action') === 'teams' &&
+                    className={clsx(
+                      masterData.formData?.get('action') === 'teams' &&
                         'animate-spin',
                     )}
                   />
                   Teams
                 </Button>
                 <Button
-                  isDisabled={syncFetcher.state === 'submitting'}
+                  isDisabled={isSubmmitting}
                   color="accent"
                   type="submit"
                   name="action"
@@ -158,16 +170,15 @@ export default function SyncRoute() {
                 >
                   <Icon
                     name="lucide/loader"
-                    className={twMerge(
-                      syncFetcher.state === 'submitting' &&
-                        syncFetcher.formData?.get('action') === 'leagues' &&
+                    className={clsx(
+                      masterData.formData?.get('action') === 'leagues' &&
                         'animate-spin',
                     )}
                   />
                   Ligen
                 </Button>
                 <Button
-                  isDisabled={syncFetcher.state === 'submitting'}
+                  isDisabled={isSubmmitting}
                   color="accent"
                   type="submit"
                   name="action"
@@ -176,9 +187,8 @@ export default function SyncRoute() {
                 >
                   <Icon
                     name="lucide/loader"
-                    className={twMerge(
-                      syncFetcher.state === 'submitting' &&
-                        syncFetcher.formData?.get('action') === 'rulesets' &&
+                    className={clsx(
+                      masterData.formData?.get('action') === 'rulesets' &&
                         'animate-spin',
                     )}
                   />
@@ -188,38 +198,62 @@ export default function SyncRoute() {
             </div>
           </Disclosure>
         </div>
-        <div className="bg-app-subtle rounded-md border border-neutral p-4 flex flex-col gap-y-4">
-          <h3 className="text-xl font-medium">Lokale Daten</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Nr</th>
-                <th>Titel</th>
-                <th>Status</th>
-                <th>Aktion</th>
+      </masterData.Form>
+
+      <div className="bg-app-subtle rounded-md border border-neutral p-4 flex flex-col gap-y-4">
+        <h3 className="text-xl font-medium">Lokale Daten</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Nr</th>
+              <th>Titel</th>
+              <th>Status</th>
+              <th>Aktion</th>
+            </tr>
+          </thead>
+          <tbody>
+            {legacyChampionships.map((lc) => (
+              <tr key={lc.id}>
+                <td>{lc.nr}</td>
+                <td>{lc.name}</td>
+                <td>
+                  {lc.synced
+                    ? lc.completed
+                      ? 'Abgeschlossen'
+                      : 'Laufend'
+                    : 'Nicht geladen'}
+                </td>
+                <td>
+                  <championshipData.Form method="post">
+                    <input
+                      type="hidden"
+                      name="championshipSlug"
+                      value={lc.id}
+                    />
+                    <Button
+                      isDisabled={isSubmmitting}
+                      color="accent"
+                      type="submit"
+                      name="action"
+                      value="championship"
+                      className="flex gap-x-1 pl-2"
+                    >
+                      <Icon
+                        name="lucide/loader"
+                        className={clsx(
+                          championshipData.formData?.get('championshipSlug') ===
+                            lc.id && 'animate-spin',
+                        )}
+                      />
+                      Abgleich
+                    </Button>
+                  </championshipData.Form>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {legacyChampionships.map((lc) => (
-                <tr key={lc.id}>
-                  <td>{lc.nr}</td>
-                  <td>{lc.name}</td>
-                  <td>
-                    {lc.synced
-                      ? lc.completed
-                        ? 'Abgeschlossen'
-                        : 'Laufend'
-                      : 'Nicht geladen'}
-                  </td>
-                  <td>
-                    <Button>Abgleich</Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </syncFetcher.Form>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
