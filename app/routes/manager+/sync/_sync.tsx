@@ -3,6 +3,7 @@ import { json, useFetcher, useLoaderData } from '@remix-run/react';
 import { namedAction } from 'remix-utils/named-action';
 import { twMerge } from 'tailwind-merge';
 import { getFirestoreChampionships } from '#.server/api/firestore/championship';
+import { syncLeagues } from '#.server/api/sync/leagues';
 import { syncPlayers } from '#.server/api/sync/players';
 import { syncTeams } from '#.server/api/sync/teams';
 import { db } from '#.server/db';
@@ -36,7 +37,11 @@ export async function action({ request }: ActionFunctionArgs) {
       });
     },
     async leagues() {
-      return json(null);
+      await syncLeagues();
+      return jsonWithToast(null, {
+        type: 'success',
+        msg: 'Ligen synchronisiert.',
+      });
     },
     async rulesets() {
       return json(null);
