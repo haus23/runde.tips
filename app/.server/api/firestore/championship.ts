@@ -14,7 +14,6 @@ type Championship = {
 export async function getFirestoreChampionships() {
   const snapshot = await firestore
     .collection('championships')
-    .where('published', '==', true)
     .orderBy('nr', 'desc')
     .withConverter(modelConverter<Championship>())
     .get();

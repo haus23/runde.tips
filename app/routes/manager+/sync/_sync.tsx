@@ -1,5 +1,7 @@
-import { json, useFetcher, useLoaderData } from '@remix-run/react';
-import { getFirestoreChampionships } from '#.server/api/firestore/championships';
+import type { ActionFunctionArgs } from '@remix-run/node';
+import { Form, json, useFetcher, useLoaderData } from '@remix-run/react';
+import { namedAction } from 'remix-utils/named-action';
+import { getFirestoreChampionships } from '#.server/api/firestore/championship';
 import { db } from '#.server/db';
 import { Button, Disclosure } from '#components';
 
@@ -9,6 +11,25 @@ export async function loader() {
   const legacyChampionships = await getFirestoreChampionships();
 
   return json({ championships, legacyChampionships });
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+
+  return namedAction(formData, {
+    async players() {
+      return json(null);
+    },
+    async teams() {
+      return json(null);
+    },
+    async leagues() {
+      return json(null);
+    },
+    async rulesets() {
+      return json(null);
+    },
+  });
 }
 
 export default function SyncRoute() {
@@ -48,6 +69,52 @@ export default function SyncRoute() {
                 Cache löschen
               </Button>
             </fetcher.Form>
+          </div>
+        </Disclosure>
+      </div>
+      <div className="bg-app-subtle rounded-md border border-neutral p-4">
+        <Disclosure label="Stammdaten">
+          <div className="py-4 px-2 flex flex-col gap-y-4">
+            <p className="text-app-subtle">
+              Stammdaten sind die unveränderlichen Daten, die in den jeweiligen
+              Turnieren benutzt werden: Spieler, Mannschaften/Teams, Ligen und
+              Regelwerke. Diese Daten sind relativ stabil und ändern sich
+              maximal bei neuen Runden oder neuen Turnieren.
+            </p>
+            <p className="text-app-subtle">
+              Solange die Firestore-Datenbank maßgeblich die Daten besitzt,
+              müssen - nach Änderungen dieser - die lokalen Daten der Anwendung
+              synchronisiert werden.
+            </p>
+            <Form className="flex flex-wrap justify-around" method="post">
+              <Button
+                color="accent"
+                type="submit"
+                name="action"
+                value="players"
+              >
+                Spieler
+              </Button>
+              <Button color="accent" type="submit" name="action" value="teams">
+                Teams
+              </Button>
+              <Button
+                color="accent"
+                type="submit"
+                name="action"
+                value="leagues"
+              >
+                Ligen
+              </Button>
+              <Button
+                color="accent"
+                type="submit"
+                name="action"
+                value="rulesets"
+              >
+                Regelwerke
+              </Button>
+            </Form>
           </div>
         </Disclosure>
       </div>
