@@ -5,6 +5,7 @@ import { twMerge } from 'tailwind-merge';
 import { getFirestoreChampionships } from '#.server/api/firestore/championship';
 import { syncLeagues } from '#.server/api/sync/leagues';
 import { syncPlayers } from '#.server/api/sync/players';
+import { syncRulesets } from '#.server/api/sync/rulesets';
 import { syncTeams } from '#.server/api/sync/teams';
 import { db } from '#.server/db';
 import { jsonWithToast } from '#.server/toast';
@@ -44,7 +45,11 @@ export async function action({ request }: ActionFunctionArgs) {
       });
     },
     async rulesets() {
-      return json(null);
+      await syncRulesets();
+      return jsonWithToast(null, {
+        type: 'success',
+        msg: 'Regelwerke synchronisiert.',
+      });
     },
   });
 }
