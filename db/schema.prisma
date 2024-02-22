@@ -16,6 +16,23 @@ model User {
   email String? @unique
 }
 
+model Team {
+  id   Int    @id @default(autoincrement())
+  slug String @unique
+
+  name      String
+  shortname String
+}
+
+model League {
+  id   Int    @id @default(autoincrement())
+  slug String @unique
+
+  name      String
+  shortname String
+}
+
+
 model Ruleset {
   id   Int    @id @default(autoincrement())
   slug String @unique
