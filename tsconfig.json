@@ -1,5 +1,5 @@
 {
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "**/.server/**/*.ts"],
   "compilerOptions": {
     // Base
     "target": "ES2022",
