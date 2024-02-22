@@ -11,6 +11,9 @@
 <symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="lucide/check">
   <path d="M20 6 9 17l-5-5" ></path>
 </symbol>
+<symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="lucide/chevron-left">
+  <path d="m15 18-6-6 6-6" ></path>
+</symbol>
 <symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="lucide/dices">
   <rect width="12" height="12" x="2" y="10" rx="2" ry="2" ></rect>
   <path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6" ></path>

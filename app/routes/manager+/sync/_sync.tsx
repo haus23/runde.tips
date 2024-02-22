@@ -1,7 +1,7 @@
 import { json, useFetcher, useLoaderData } from '@remix-run/react';
 import { getFirestoreChampionships } from '#.server/api/firestore/championships';
 import { db } from '#.server/db';
-import { Button } from '#components/(ui)';
+import { Button, Disclosure } from '#components';
 
 export async function loader() {
   const championships = await db.championship.findMany();
@@ -24,29 +24,32 @@ export default function SyncRoute() {
   return (
     <div className="p-4 flex flex-col gap-y-8">
       <h2 className="text-2xl font-medium">Datenabgleich</h2>
-      <div className="bg-app-subtle rounded-md border border-neutral p-4 flex flex-col gap-y-4">
-        <h3 className="text-xl font-medium">Backend-Daten</h3>
-        <p className="text-app-notice">
-          Hiermit werden die Cache-Daten des Backends gelöscht. Damit kann die
-          zur Zeit noch laufende Tipprunden-Anwendung wieder aktuelle Daten
-          anzeigen.
-        </p>
-        <p className="text-app-notice">
-          Zur Zeit sind die zu löschenden Routen noch hart codiert. Während
-          eines laufenden Turniers ändert sich da auch nicht viel. Es könnten
-          neue Teams oder neue Mannschaften dazukommen. Bis Sommer sollte das
-          entweder alles obsolet sein oder hier eine Auswahlmöglichkeit
-          realisert sein.
-        </p>
-        <fetcher.Form action="/action/sync/clear-cache" method="post">
-          <Button
-            color="accent"
-            type="submit"
-            isDisabled={fetcher.state === 'submitting'}
-          >
-            Cache löschen
-          </Button>
-        </fetcher.Form>
+      <div className="bg-app-subtle rounded-md border border-neutral p-4">
+        <Disclosure label="Backend-Daten">
+          <div className="py-4 px-2 flex flex-col gap-y-4">
+            <p className="text-app-subtle">
+              Hiermit werden die Cache-Daten des Backends gelöscht. Damit kann
+              die zur Zeit noch laufende Tipprunden-Anwendung wieder aktuelle
+              Daten anzeigen.
+            </p>
+            <p className="text-app-subtle">
+              Zur Zeit sind die zu löschenden Routen noch hart codiert. Während
+              eines laufenden Turniers ändert sich da auch nicht viel. Es
+              könnten neue Teams oder neue Mannschaften dazukommen. Bis Sommer
+              sollte das entweder alles obsolet sein oder hier eine
+              Auswahlmöglichkeit realisert sein.
+            </p>
+            <fetcher.Form action="/action/sync/clear-cache" method="post">
+              <Button
+                color="accent"
+                type="submit"
+                isDisabled={fetcher.state === 'submitting'}
+              >
+                Cache löschen
+              </Button>
+            </fetcher.Form>
+          </div>
+        </Disclosure>
       </div>
       <div className="bg-app-subtle rounded-md border border-neutral p-4 flex flex-col gap-y-4">
         <h3 className="text-xl font-medium">Lokale Daten</h3>
