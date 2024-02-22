@@ -1,6 +1,37 @@
 # @tipprunde/www
 
 
+## v0.0.25
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.24...v0.0.25)
+
+### 🚀 Enhancements
+
+- Add simple disclosure component. ([f80b25c](https://github.com/haus23/runde.tips/commit/f80b25c))
+- Add master data models for teams and leagues. ([6f7e266](https://github.com/haus23/runde.tips/commit/6f7e266))
+- Implement syncing players. ([e8cce61](https://github.com/haus23/runde.tips/commit/e8cce61))
+- Start handling the master data syncings. ([290b9ad](https://github.com/haus23/runde.tips/commit/290b9ad))
+- Add feedback while syncing. ([3f52b62](https://github.com/haus23/runde.tips/commit/3f52b62))
+- Syncing teams ([89d96d2](https://github.com/haus23/runde.tips/commit/89d96d2))
+- Syncing leagues ([8879055](https://github.com/haus23/runde.tips/commit/8879055))
+- Syncing rulesets. ([f5c3214](https://github.com/haus23/runde.tips/commit/f5c3214))
+
+### 🩹 Fixes
+
+- Include server folder. Seems to be ignored otherwise. ([70a4751](https://github.com/haus23/runde.tips/commit/70a4751))
+
+### 💅 Refactors
+
+- Load all championships from firestore - not just published. ([9557535](https://github.com/haus23/runde.tips/commit/9557535))
+
+### 🏡 Chore
+
+- **release:** V0.0.24 ([6062f46](https://github.com/haus23/runde.tips/commit/6062f46))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.24
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.23...v0.0.24)
