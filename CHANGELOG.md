@@ -1,6 +1,31 @@
 # @tipprunde/www
 
 
+## v0.0.24
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.23...v0.0.24)
+
+### 🚀 Enhancements
+
+- Load data from firestore. Proof-of-concept works. ([5ab7a2a](https://github.com/haus23/runde.tips/commit/5ab7a2a))
+
+### 🩹 Fixes
+
+- Update notice about the sync backend reasons. ([a82fdf7](https://github.com/haus23/runde.tips/commit/a82fdf7))
+- Provide sample .env file ([73c9d5e](https://github.com/haus23/runde.tips/commit/73c9d5e))
+
+### 💅 Refactors
+
+- Move api code to server folder. ([35f2b17](https://github.com/haus23/runde.tips/commit/35f2b17))
+
+### 🏡 Chore
+
+- Initialize and configure firestore. ([f816bfb](https://github.com/haus23/runde.tips/commit/f816bfb))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## 0.0.23
 
 ### Patch Changes
