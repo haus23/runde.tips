@@ -14,6 +14,8 @@ model User {
   name  String
   role  String
   email String? @unique
+
+  appearances Player[]
 }
 
 model Team {
@@ -22,6 +24,9 @@ model Team {
 
   name      String
   shortname String
+
+  homematches Match[] @relation("hometeam")
+  awaymatches Match[] @relation("awayteam")
 }
 
 model League {
@@ -30,8 +35,9 @@ model League {
 
   name      String
   shortname String
-}
 
+  matches Match[]
+}
 
 model Ruleset {
   id   Int    @id @default(autoincrement())
@@ -59,4 +65,82 @@ model Championship {
 
   rulesetId Int
   ruleset   Ruleset @relation(fields: [rulesetId], references: [id])
+
+  rounds  Round[]
+  matches Match[]
+  players Player[]
+  tips    Tip[]
+}
+
+model Round {
+  id Int @id @default(autoincrement())
+
+  nr            Int
+  isDoubleRound Boolean @default(false)
+  published     Boolean @default(false)
+  tipsPublished Boolean @default(false)
+  completed     Boolean @default(false)
+
+  championshipId Int
+  championship   Championship @relation(fields: [championshipId], references: [id])
+
+  matches Match[]
+}
+
+model Match {
+  id Int @id @default(autoincrement())
+
+  nr     Int
+  date   String?
+  result String  @default("")
+  points Int     @default(0)
+
+  championshipId Int
+  championship   Championship @relation(fields: [championshipId], references: [id])
+  roundId        Int
+  round          Round        @relation(fields: [roundId], references: [id])
+  leagueId       Int?
+  league         League?      @relation(fields: [leagueId], references: [id])
+  hometeamId     Int?
+  hometeam       Team?        @relation("hometeam", fields: [hometeamId], references: [id])
+  awayteamId     Int?
+  awayteam       Team?        @relation("awayteam", fields: [awayteamId], references: [id])
+
+  tips Tip[]
+}
+
+model Player {
+  id Int @id @default(autoincrement())
+
+  points      Int     @default(0)
+  extraPoints Decimal @default(0)
+  totalPoints Decimal @default(0)
+  rank        Int     @default(0)
+
+  championshipId Int
+  championship   Championship @relation(fields: [championshipId], references: [id])
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  tips Tip[]
+}
+
+model Tip {
+  id Int @id @default(autoincrement())
+
+  tip        String
+  joker      Boolean?
+  extraJoker Boolean?
+  lonelyHit  Boolean?
+  points     Int      @default(0)
+
+  championshipId Int
+  championship   Championship @relation(fields: [championshipId], references: [id])
+  playerId       Int
+  player         Player       @relation(fields: [playerId], references: [id])
+  matchId        Int
+  match          Match        @relation(fields: [matchId], references: [id])
+
+  @@unique([playerId, matchId])
 }
