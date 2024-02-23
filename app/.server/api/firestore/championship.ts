@@ -19,3 +19,16 @@ export async function getFirestoreChampionships() {
     .get();
   return snapshot.docs.map((doc) => doc.data());
 }
+
+export async function getFirestoreChampionshipById(id: string) {
+  const docRef = firestore
+    .collection('championships')
+    .doc(id)
+    .withConverter(modelConverter<Championship>());
+  const doc = await docRef.get();
+  const championship = doc.data();
+  if (!championship) {
+    throw new Error(`Unknown championship ${id}`);
+  }
+  return championship;
+}

@@ -3,6 +3,7 @@ import { json, useFetcher, useFetchers, useLoaderData } from '@remix-run/react';
 import { clsx } from 'clsx';
 import { namedAction } from 'remix-utils/named-action';
 import { getFirestoreChampionships } from '#.server/api/firestore/championship';
+import { syncChampionship } from '#.server/api/sync/championship';
 import { syncLeagues } from '#.server/api/sync/leagues';
 import { syncPlayers } from '#.server/api/sync/players';
 import { syncRulesets } from '#.server/api/sync/rulesets';
@@ -10,6 +11,7 @@ import { syncTeams } from '#.server/api/sync/teams';
 import { db } from '#.server/db';
 import { jsonWithToast } from '#.server/toast';
 import { Button, Disclosure, Icon } from '#components';
+import { invariant } from '#utils/misc';
 
 export async function loader() {
   const championships = await db.championship.findMany();
@@ -25,11 +27,10 @@ export async function action({ request }: ActionFunctionArgs) {
   return namedAction(formData, {
     async championship() {
       const championshipSlug = formData.get('championshipSlug');
-      await syncPlayers();
-      return jsonWithToast(null, {
-        type: 'success',
-        msg: `${championshipSlug} synchronisiert`,
-      });
+      invariant(typeof championshipSlug === 'string');
+
+      const result = await syncChampionship(championshipSlug);
+      return jsonWithToast(null, result);
     },
     async players() {
       await syncPlayers();

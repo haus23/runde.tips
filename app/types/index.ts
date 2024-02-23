@@ -13,7 +13,7 @@ export type ThemeSessionData = { theme: Theme };
 
 // Toast
 export type ToastMessage = {
-  type: 'success' | 'info';
+  type: 'success' | 'info' | 'error';
   msg: string;
 };
 
