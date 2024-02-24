@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
 import { invariant } from '#utils/misc';
 
 export type { User } from '@prisma/client';

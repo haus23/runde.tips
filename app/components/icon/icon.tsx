@@ -1,11 +1,11 @@
-import { type SVGProps } from 'react';
+import type { SVGProps } from 'react';
 
 import { twMerge } from 'tailwind-merge';
 import type { IconName } from './icons/name.d.ts';
 import iconsHref from './icons/sprite.svg';
 
 export { iconsHref };
-export { type IconName };
+export type { IconName };
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;

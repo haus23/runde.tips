@@ -18,7 +18,7 @@ const themeSessionStorage = createCookieSessionStorage<ThemeSessionData>({
 });
 
 export async function getSession(request: Request) {
-  return themeSessionStorage.getSession(request.headers.get('Cookie'));
+  return await themeSessionStorage.getSession(request.headers.get('Cookie'));
 }
 
 export function createThemeAction() {
