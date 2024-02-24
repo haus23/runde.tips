@@ -12,9 +12,9 @@ export function AppHeader() {
             <Logo />
           </Link>
           <nav className="flex gap-x-2">
-            <NavLink href="/">Tabelle</NavLink>
+            <NavLink href="/tabelle">Tabelle</NavLink>
             <NavLink href="/spieler">Spieler</NavLink>
-            <NavLink href="/spiel">Spiele</NavLink>
+            <NavLink href="/spiele">Spiele</NavLink>
           </nav>
         </div>
         <div className="flex items-center gap-2">
