@@ -1,14 +1,11 @@
-import { useRouteLoaderData } from '@remix-run/react';
 import { Link, Logo, NavLink, ThemeMenu } from '#components';
+import { useChampionships } from '#utils/foh/use-championships';
 import { useIsAuthenticated } from '#utils/user';
-import type { loader } from './_layout';
 import { UserMenu } from './user-menu';
 
 export function AppHeader() {
   const isAuthenticated = useIsAuthenticated();
-  const championships = useRouteLoaderData<typeof loader>(
-    'routes/_foh+/_layout/_layout',
-  );
+  const championships = useChampionships();
 
   return (
     <header className="bg-app fixed inset-x-0 top-0 px-2 sm:px-4">
