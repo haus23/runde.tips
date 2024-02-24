@@ -10,7 +10,13 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "nursery": {
+        "useAwait": "error",
+        "useExportType": "error",
+        "useGroupedTypeImport": "error",
+        "useImportType": "error"
+      }
     }
   },
   "javascript": {
