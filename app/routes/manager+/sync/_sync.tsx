@@ -225,30 +225,35 @@ export default function SyncRoute() {
                     : 'Nicht geladen'}
                 </td>
                 <td>
-                  <championshipData.Form method="post">
-                    <input
-                      type="hidden"
-                      name="championshipSlug"
-                      value={lc.id}
-                    />
-                    <Button
-                      isDisabled={isSubmmitting}
-                      color="accent"
-                      type="submit"
-                      name="action"
-                      value="championship"
-                      className="flex gap-x-1 pl-2"
-                    >
-                      <Icon
-                        name="lucide/loader"
-                        className={clsx(
-                          championshipData.formData?.get('championshipSlug') ===
-                            lc.id && 'animate-spin',
-                        )}
+                  {lc.synced && lc.completed ? (
+                    <span>Keine</span>
+                  ) : (
+                    <championshipData.Form method="post">
+                      <input
+                        type="hidden"
+                        name="championshipSlug"
+                        value={lc.id}
                       />
-                      Abgleich
-                    </Button>
-                  </championshipData.Form>
+                      <Button
+                        isDisabled={isSubmmitting}
+                        color="accent"
+                        type="submit"
+                        name="action"
+                        value="championship"
+                        className="flex gap-x-1 pl-2"
+                      >
+                        <Icon
+                          name="lucide/loader"
+                          className={clsx(
+                            championshipData.formData?.get(
+                              'championshipSlug',
+                            ) === lc.id && 'animate-spin',
+                          )}
+                        />
+                        Abgleich
+                      </Button>
+                    </championshipData.Form>
+                  )}
                 </td>
               </tr>
             ))}
