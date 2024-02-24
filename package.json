@@ -1,6 +1,6 @@
 {
   "name": "@haus23/runde.tips",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "type": "module",
   "imports": {
     "#*": "./app/*"

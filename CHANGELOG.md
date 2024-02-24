@@ -1,6 +1,26 @@
 # @tipprunde/www
 
 
+## v0.0.26
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.25...v0.0.26)
+
+### 🚀 Enhancements
+
+- Prepare syncing of championships. ([df1a3c1](https://github.com/haus23/runde.tips/commit/df1a3c1))
+- Add missing championship data models. ([dd6e280](https://github.com/haus23/runde.tips/commit/dd6e280))
+- Use cases for championship syncs. ([008083d](https://github.com/haus23/runde.tips/commit/008083d))
+- Implement simple insert sync method. ([e202d8a](https://github.com/haus23/runde.tips/commit/e202d8a))
+
+### 🏡 Chore
+
+- Patch update deps. ([7d1c795](https://github.com/haus23/runde.tips/commit/7d1c795))
+- **dx:** Set formatter for prisma files. ([ace7956](https://github.com/haus23/runde.tips/commit/ace7956))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.25
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.24...v0.0.25)
