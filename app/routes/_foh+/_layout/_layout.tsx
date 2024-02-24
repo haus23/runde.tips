@@ -1,5 +1,11 @@
-import { Outlet } from '@remix-run/react';
+import { Outlet, json } from '@remix-run/react';
+import { getPublishedChampionships } from '#.server/api/championship';
 import { AppHeader } from './app-header';
+
+export async function loader() {
+  const championships = await getPublishedChampionships();
+  return json(championships);
+}
 
 export default function FohLayout() {
   return (
