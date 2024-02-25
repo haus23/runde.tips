@@ -1,6 +1,34 @@
 # @tipprunde/www
 
 
+## v0.0.27
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.26...v0.0.27)
+
+### 🩹 Fixes
+
+- Hide nav with no championships. ([f533e5e](https://github.com/haus23/runde.tips/commit/f533e5e))
+
+### 💅 Refactors
+
+- Restructure foh routes. ([cd38a61](https://github.com/haus23/runde.tips/commit/cd38a61))
+- Enforce better code style. ([e8cceba](https://github.com/haus23/runde.tips/commit/e8cceba))
+- Move loader data loading into hook. ([010aeb9](https://github.com/haus23/runde.tips/commit/010aeb9))
+- Move db (and singleton) utilities to utils folder. ([f5f7ac3](https://github.com/haus23/runde.tips/commit/f5f7ac3))
+- Move theme related code to utils subfolder. ([27dc08f](https://github.com/haus23/runde.tips/commit/27dc08f))
+- Move auth related code to utils subfolder. ([4a594d5](https://github.com/haus23/runde.tips/commit/4a594d5))
+- Move firestore and sync code to utils sub folders ([0f771e1](https://github.com/haus23/runde.tips/commit/0f771e1))
+- Moved types and schematas to appropriate files. ([ef10d37](https://github.com/haus23/runde.tips/commit/ef10d37))
+- Move single use db access functions to file with only usage. ([7b41c56](https://github.com/haus23/runde.tips/commit/7b41c56))
+
+### 🏡 Chore
+
+- **dx:** Enforce more linter rules to track errors. ([f2c0f93](https://github.com/haus23/runde.tips/commit/f2c0f93))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.26
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.25...v0.0.26)
