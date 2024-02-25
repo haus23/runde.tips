@@ -15,7 +15,7 @@ const toastSessionStorage = createCookieSessionStorage<
   SessionFlashData
 >({
   cookie: {
-    name: '__toast',
+    name: '__app',
     sameSite: 'lax',
     path: '/',
     httpOnly: true,
