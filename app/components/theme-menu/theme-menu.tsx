@@ -1,7 +1,7 @@
 import cx from 'clsx';
 import type { ColorScheme } from '#types';
 import { includes } from '#utils/misc';
-import { useTheme } from '#utils/theme';
+import { useTheme } from '#utils/theme/theme.provider';
 import { Button, type Key, Menu, MenuItem, MenuItems } from '../(ui)';
 import { Icon, type IconName } from '../icon/icon';
 

@@ -1,3 +1,4 @@
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import {
   Links,
   Meta,
@@ -9,21 +10,18 @@ import {
   useNavigate,
 } from '@remix-run/react';
 
-import type { LoaderFunctionArgs } from '@remix-run/node';
-
+import { useEffect } from 'react';
+import { RouterProvider } from 'react-aria-components';
 import { Toaster, toast as showToast } from 'sonner';
 
-import { RouterProvider } from 'react-aria-components';
-
 import { getUser } from '#.server/auth';
-import { getHints } from '#.server/client-hints';
-import { getSession } from '#.server/theme';
 import { getToast } from '#.server/toast';
 
-import { MediaQueryFallback } from '#utils/media-query-fallback';
-import { ThemeProvider, useTheme } from '#utils/theme';
+import { getHints } from '#utils/theme/client-hints.server';
+import { MediaQueryFallback } from '#utils/theme/media-query-fallback';
+import { ThemeProvider, useTheme } from '#utils/theme/theme.provider';
+import { getSession } from '#utils/theme/theme.server';
 
-import { useEffect } from 'react';
 import './styles/tailwind.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
