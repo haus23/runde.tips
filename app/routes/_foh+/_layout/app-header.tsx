@@ -1,6 +1,6 @@
 import { Link, Logo, NavLink, ThemeMenu } from '#components';
+import { useIsAuthenticated } from '#utils/auth/user';
 import { useChampionships } from '#utils/foh/use-championships';
-import { useIsAuthenticated } from '#utils/user';
 import { UserMenu } from './user-menu';
 
 export function AppHeader() {

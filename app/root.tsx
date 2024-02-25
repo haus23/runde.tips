@@ -14,8 +14,8 @@ import { useEffect } from 'react';
 import { RouterProvider } from 'react-aria-components';
 import { Toaster, toast as showToast } from 'sonner';
 
-import { getUser } from '#.server/auth';
 import { getToast } from '#.server/toast';
+import { getUser } from '#utils/auth/auth.server';
 
 import { getHints } from '#utils/theme/client-hints.server';
 import { MediaQueryFallback } from '#utils/theme/media-query-fallback';

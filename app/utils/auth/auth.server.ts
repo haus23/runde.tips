@@ -1,9 +1,9 @@
-import { db } from '#utils/db.server';
-import { getUserByEmail, getUserById, isKnownEmail } from './api/user';
-
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
 import { TOTPStrategy } from 'remix-auth-totp-dev';
+
+import { getUserByEmail, getUserById, isKnownEmail } from '#.server/api/user';
+import { db } from '#utils/db.server';
 
 export const authSessionStorage = createCookieSessionStorage({
   cookie: {

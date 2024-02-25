@@ -1,5 +1,5 @@
 import { Button, Icon, Menu, MenuItem, MenuItems } from '#components';
-import { useUser } from '#utils/user';
+import { useUser } from '#utils/auth/user';
 
 export function UserMenu() {
   const user = useUser();
