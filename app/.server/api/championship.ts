@@ -1,4 +1,4 @@
-import { db } from '#.server/db';
+import { db } from '#utils/db.server';
 
 export type { Championship } from '@prisma/client';
 

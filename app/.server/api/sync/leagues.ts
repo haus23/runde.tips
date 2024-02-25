@@ -1,4 +1,4 @@
-import { db } from '#.server/db';
+import { db } from '#utils/db.server';
 import { getFirestoreLeagues } from '../firestore/league';
 
 export async function syncLeagues() {

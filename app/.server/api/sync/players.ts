@@ -1,4 +1,4 @@
-import { db } from '#.server/db';
+import { db } from '#utils/db.server';
 import { getFirestorePlayers } from '../firestore/player';
 
 export async function syncPlayers() {

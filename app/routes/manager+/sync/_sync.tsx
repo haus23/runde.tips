@@ -8,9 +8,9 @@ import { syncLeagues } from '#.server/api/sync/leagues';
 import { syncPlayers } from '#.server/api/sync/players';
 import { syncRulesets } from '#.server/api/sync/rulesets';
 import { syncTeams } from '#.server/api/sync/teams';
-import { db } from '#.server/db';
 import { jsonWithToast } from '#.server/toast';
 import { Button, Disclosure, Icon } from '#components';
+import { db } from '#utils/db.server';
 import { invariant } from '#utils/misc';
 
 export async function loader() {
