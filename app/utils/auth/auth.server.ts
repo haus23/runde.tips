@@ -1,9 +1,9 @@
-import { getUserByEmail, getUserById, isKnownEmail } from './api/user';
-import { db } from './db';
-
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
 import { TOTPStrategy } from 'remix-auth-totp-dev';
+
+import { db } from '#utils/db.server';
+import { invariant } from '#utils/misc';
 
 export const authSessionStorage = createCookieSessionStorage({
   cookie: {
@@ -29,15 +29,27 @@ export const authenticator = new Authenticator<AuthSessionData>(
   authSessionStorage,
 );
 
+async function isKnownEmail(email: string) {
+  const user = await db.user.findUnique({ where: { email } });
+  return user !== null;
+}
+
+export async function getUserByEmail(email: string) {
+  invariant(email.length, 'Empty email argument');
+  const user = await db.user.findUnique({ where: { email } });
+  invariant(user !== null, `Unknown user email: ${email}`);
+  return { ...user, email };
+}
+
 authenticator.use(
   new TOTPStrategy(
     {
       secret: process.env.AUTH_ENCRYPTION_SECRET,
       sendTOTP: async ({ email, code, magicLink }) => {
-        const user = await getUserByEmail(db, email);
+        const user = await getUserByEmail(email);
         console.log(`Code für ${user.name}: ${code}, Link: ${magicLink}`);
       },
-      validateEmail: (email) => isKnownEmail(db, email),
+      validateEmail: (email) => isKnownEmail(email),
       totpGeneration: { period: 360, charSet: '0123456789' },
       customErrors: {
         invalidEmail: 'Unbekannte Email-Adresse. Wende dich an Micha.',
@@ -46,15 +58,21 @@ authenticator.use(
       },
     },
     async ({ email }) => {
-      const user = await getUserByEmail(db, email);
+      const user = await getUserByEmail(email);
       return { userId: user.id };
     },
   ),
 );
 
+async function getUserById(id: number) {
+  const user = await db.user.findUnique({ where: { id } });
+  invariant(user !== null, `Unknown user id: ${id}`);
+  return user;
+}
+
 export async function getUser(request: Request) {
   const sessionData = await authenticator.isAuthenticated(request);
-  return sessionData ? getUserById(db, sessionData.userId) : null;
+  return sessionData ? getUserById(sessionData.userId) : null;
 }
 
 export async function requireAdmin(request: Request) {

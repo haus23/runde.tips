@@ -1,9 +1,12 @@
 import { Outlet, json } from '@remix-run/react';
-import { getPublishedChampionships } from '#.server/api/championship';
+import { db } from '#utils/db.server';
 import { AppHeader } from './app-header';
 
 export async function loader() {
-  const championships = await getPublishedChampionships();
+  const championships = await db.championship.findMany({
+    where: { published: true },
+    orderBy: { nr: 'desc' },
+  });
   return json({ championships });
 }
 

@@ -1,5 +1,5 @@
 import { Icon, Link, Logo, NavLink } from '#components';
-import { useUser } from '#utils/user';
+import { useUser } from '#utils/auth/user';
 
 export function ManagerNav() {
   const user = useUser();

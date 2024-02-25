@@ -1,4 +1,4 @@
-import { db } from '#.server/db';
+import { db } from '#utils/db.server';
 import { getFirestoreRulesets } from '../firestore/ruleset';
 
 export async function syncRulesets() {
