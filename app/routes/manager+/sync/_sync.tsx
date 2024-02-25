@@ -2,16 +2,16 @@ import type { ActionFunctionArgs } from '@remix-run/node';
 import { json, useFetcher, useFetchers, useLoaderData } from '@remix-run/react';
 import { clsx } from 'clsx';
 import { namedAction } from 'remix-utils/named-action';
-import { getFirestoreChampionships } from '#.server/api/firestore/championship';
-import { syncChampionship } from '#.server/api/sync/championship';
-import { syncLeagues } from '#.server/api/sync/leagues';
-import { syncPlayers } from '#.server/api/sync/players';
-import { syncRulesets } from '#.server/api/sync/rulesets';
-import { syncTeams } from '#.server/api/sync/teams';
-import { jsonWithToast } from '#.server/toast';
 import { Button, Disclosure, Icon } from '#components';
 import { db } from '#utils/db.server';
+import { getFirestoreChampionships } from '#utils/firestore/championship';
 import { invariant } from '#utils/misc';
+import { syncChampionship } from '#utils/sync/championship';
+import { syncLeagues } from '#utils/sync/leagues';
+import { syncPlayers } from '#utils/sync/players';
+import { syncRulesets } from '#utils/sync/rulesets';
+import { syncTeams } from '#utils/sync/teams';
+import { jsonWithToast } from '#utils/toast.server';
 
 export async function loader() {
   const championships = await db.championship.findMany();
