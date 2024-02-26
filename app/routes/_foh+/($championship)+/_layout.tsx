@@ -1,5 +1,33 @@
-import { Outlet } from '@remix-run/react';
+import type { LoaderFunctionArgs } from '@remix-run/node';
+import { Outlet, isRouteErrorResponse, useRouteError } from '@remix-run/react';
+import { db } from '#utils/db.server';
 import { useChampionships } from '#utils/foh/use-championships';
+
+export async function loader({ params }: LoaderFunctionArgs) {
+  const { championship: slug } = params;
+
+  // Route requirement: route param championship is a correct championship slug
+  if (slug) {
+    const championship = await db.championship.findUnique({ where: { slug } });
+    if (!championship) {
+      throw new Response(null, {
+        status: 404,
+        statusText: 'Not found',
+      });
+    }
+  }
+
+  return null;
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    console.log(error);
+  }
+  return <div>{JSON.stringify(error)}</div>;
+}
 
 export default function ChampionshipLayout() {
   const championships = useChampionships();
