@@ -25,6 +25,7 @@ function _MenuItems<T extends object>({
 }: _MenuProps<T>) {
   return (
     <Popover
+      offset={10}
       placement={placement}
       showArrow={showArrow}
       className="min-w-[150px]"

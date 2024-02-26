@@ -16,7 +16,7 @@ export function AppHeader() {
           </Link>
           {championships && championships.length > 0 && (
             <nav className="flex gap-x-2">
-              <NavLink href="/tabelle">Tabelle</NavLink>
+              <NavLink href="/">Tabelle</NavLink>
               <NavLink href="/spieler">Spieler</NavLink>
               <NavLink href="/spiele">Spiele</NavLink>
             </nav>
