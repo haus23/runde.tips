@@ -1,13 +1,10 @@
 import { Outlet, json } from '@remix-run/react';
-import { db } from '#utils/db.server';
+import { getPublishedChampionships } from '#utils/cache.server';
 import { FohProvider } from '#utils/foh/foh-context';
 import { AppHeader } from './app-header';
 
 export async function loader() {
-  const championships = await db.championship.findMany({
-    where: { published: true },
-    orderBy: { nr: 'desc' },
-  });
+  const championships = await getPublishedChampionships();
   return json({ championships });
 }
 

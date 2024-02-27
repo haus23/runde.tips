@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@epic-web/cachified':
+        specifier: ^5.1.2
+        version: 5.1.2
       '@prisma/client':
         specifier: ^5.10.2
         version: 5.10.2(prisma@5.10.2)
@@ -644,6 +647,10 @@ packages:
   /@emotion/hash@0.9.1:
     resolution: {integrity: sha512-gJB6HLm5rYwSLI6PQa+X1t5CFGrv1J1TWG+sOyMCeKz2ojaj6Fnl/rZEspogG+cvqbt4AE/2eIyD2QfLKTBNlQ==}
     dev: true
+
+  /@epic-web/cachified@5.1.2:
+    resolution: {integrity: sha512-8Q1J/jF0bOKUN+XPTSUo+z34WJHMBLkuDv+HkPPS9ufs+cHvInWrLOLi3qIljhe03Xq777pwEDBKnMafetnPhA==}
+    dev: false
 
   /@epic-web/totp@1.1.2:
     resolution: {integrity: sha512-ngw0+NjNgZ1ikmascnQWfut7dj0cuWqKwDM7m2w7JoOXHZCR0C5cx2aUPIl8oHOO2DQzkI6yaJLoc1bMDOn/oQ==}
@@ -3624,7 +3631,7 @@ packages:
       '@babel/plugin-syntax-typescript': 7.23.3(@babel/core@7.23.9)
       '@vanilla-extract/babel-plugin-debug-ids': 1.0.5
       '@vanilla-extract/css': 1.14.1
-      esbuild: 0.17.6
+      esbuild: 0.19.12
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
