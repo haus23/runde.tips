@@ -121,6 +121,8 @@ function ErrorDocument() {
   return (
     <html lang="de" className={theme.colorScheme}>
       <head>
+        <meta charSet="utf-8" />
+        <title>Hoppla! - runde.tips</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content={theme.colorScheme} />
         <Meta />
