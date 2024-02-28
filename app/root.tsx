@@ -1,14 +1,19 @@
 import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  isRouteErrorResponse,
   json,
   useLoaderData,
+  useLocation,
   useNavigate,
+  useRouteError,
+  useRouteLoaderData,
 } from '@remix-run/react';
 
 import { useEffect } from 'react';
@@ -23,6 +28,7 @@ import { MediaQueryFallback } from '#utils/theme/media-query-fallback';
 import { ThemeProvider, useTheme } from '#utils/theme/theme.provider';
 import { getSession } from '#utils/theme/theme.server';
 
+import { Icon, type IconName } from '#components';
 import styles from './styles/tailwind.css';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
@@ -98,40 +104,56 @@ export default function AppRoot() {
   );
 }
 
-/*
-export function ErrorBoundary() {
-  //const { theme } = useTheme();
-  const theme = { colorScheme: 'dark' };
+function ErrorDocument() {
+  const { pathname } = useLocation();
+  const error = useRouteError();
+  const { theme } = useTheme();
+
+  let iconName: IconName = 'lucide/angry';
+
+  let errorMsg = 'Hier läuft etwas schief!';
+  if (isRouteErrorResponse(error)) {
+    if (error.status === 404) {
+      iconName = 'lucide/frown';
+      errorMsg = 'Da hast du dich aber vertippt ...';
+    }
+  }
   return (
     <html lang="de" className={theme.colorScheme}>
       <head>
-        <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content={theme.colorScheme} />
         <Meta />
         <Links />
       </head>
       <body>
-        <p className="mx-4 text-center text-3xl leading-snug [text-wrap:balance]">
-          Hoppla, hier stimmt was nicht!
-        </p>
-        <ScrollRestoration />
-        <Scripts />
+        <div className="h-dvh flex flex-col gap-y-8 items-center justify-center">
+          <Icon name={iconName} className="size-40 text-error" />
+          <p className="inline-flex text-2xl text-center mx-4 leading-snug">
+            {errorMsg}
+          </p>
+          {pathname === '/' ? (
+            <p className="block text-2xl">Bitte Micha informieren!</p>
+          ) : (
+            <Link
+              to="/"
+              className="block text-2xl underline underline-offset-4"
+            >
+              Zur Startseite
+            </Link>
+          )}
+        </div>
+        <LiveReload />
       </body>
     </html>
   );
 }
 
-export function ErrorBoundaryBackup() {
+export function ErrorBoundary() {
   const data = useRouteLoaderData<typeof loader>('root');
   return (
-    <ThemeProvider
-      hints={data?.requestInfo.hints}
-      sessionTheme={data?.requestInfo.theme}
-      defaultColorScheme="dark"
-    >
+    <ThemeProvider defaultColorScheme="dark">
       <ErrorDocument />
     </ThemeProvider>
   );
 }
-*/

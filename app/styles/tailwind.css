@@ -25,7 +25,6 @@
     --app-fg: var(--sage-12);
     --app-fg-subtle: var(--sage-11);
     --app-fg-notice: var(--sage-9);
-    --app-fg-error: var(--tomato-11);
 
     --cn-bg: var(--sage-3);
     --cn-bg-hover: var(--sage-4);
@@ -52,7 +51,9 @@
     --border-disabled: var(--sage-4);
     --border-focus: var(--sage-10);
     --border-accent: var(--jade-6);
-    --border-error: var(--tomato-6);
+
+    --error-fg: var(--tomato-9);
+    --error-border: var(--tomato-6);
 
     /* Utilities */
     --app-component-solid-pressed: brightness(0.92) saturate(1.1);

@@ -40,7 +40,7 @@ export default {
       disabled: 'var(--border-disabled)',
       focus: 'var(--border-focus)',
       accent: 'var(--border-accent)',
-      error: 'var(--border-error)',
+      error: 'var(--error-border)',
     }),
     fill: ({ theme }) => ({
       ...theme('colors'),
@@ -65,7 +65,6 @@ export default {
         DEFAULT: 'var(--app-fg)',
         subtle: 'var(--app-fg-subtle)',
         notice: 'var(--app-fg-notice)',
-        error: 'var(--app-fg-error)',
       },
       accent: {
         DEFAULT: 'var(--accent-fg)',
@@ -75,6 +74,7 @@ export default {
           hover: 'var(--accent-fg-stressed-hover)',
         },
       },
+      error: 'var(--error-fg)',
     }),
     extend: {},
   },
