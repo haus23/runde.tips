@@ -1,6 +1,38 @@
 # @tipprunde/www
 
 
+## v0.0.28
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.27...v0.0.28)
+
+### 🚀 Enhancements
+
+- Add provider and hooks to track the current championship. ([42b71ff](https://github.com/haus23/runde.tips/commit/42b71ff))
+- Add cache capability for often loaded data. ([9ae7c80](https://github.com/haus23/runde.tips/commit/9ae7c80))
+- Start providing error boundaries. See #19 ([#19](https://github.com/haus23/runde.tips/issues/19))
+
+### 🩹 Fixes
+
+- Revert foh routing. And provide fallback with no championships. Resolves #24 ([#24](https://github.com/haus23/runde.tips/issues/24))
+- Committed wrong where clause. ([ca49730](https://github.com/haus23/runde.tips/commit/ca49730))
+- Bring back rendering of championship name. ([eff7c0f](https://github.com/haus23/runde.tips/commit/eff7c0f))
+
+### 💅 Refactors
+
+- Rename session cookie ([b53d8f9](https://github.com/haus23/runde.tips/commit/b53d8f9))
+- Now effectively redirect any championship route to a welcome route w/o championships. See #24 ([#24](https://github.com/haus23/runde.tips/issues/24))
+- Move slug checking into hook. ([ecc2736](https://github.com/haus23/runde.tips/commit/ecc2736))
+- Decouple cache server code from usage. ([6a3bf77](https://github.com/haus23/runde.tips/commit/6a3bf77))
+- Simplify guarding the standings routes. ([74475c1](https://github.com/haus23/runde.tips/commit/74475c1))
+- Simplify app state. No need for a context. Basta. ([d7e3f57](https://github.com/haus23/runde.tips/commit/d7e3f57))
+- Mark code server only. ([05da7f7](https://github.com/haus23/runde.tips/commit/05da7f7))
+- Dropped vite plugin. And temporaryly the error boundary as well. ([68eff50](https://github.com/haus23/runde.tips/commit/68eff50))
+- Align build path with vite. Looks better even w/o vite. ([7dea67e](https://github.com/haus23/runde.tips/commit/7dea67e))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.27
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.26...v0.0.27)
