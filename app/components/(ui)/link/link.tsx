@@ -2,7 +2,6 @@ import { useLocation, useResolvedPath } from '@remix-run/react';
 import {
   Link,
   type LinkProps,
-  type LinkRenderProps,
   composeRenderProps,
 } from 'react-aria-components';
 import { type VariantProps, tv } from 'tailwind-variants';
