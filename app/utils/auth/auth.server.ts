@@ -1,8 +1,9 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
-import { TOTPStrategy } from 'remix-auth-totp-dev';
+import { type SendTOTPOptions, TOTPStrategy } from 'remix-auth-totp-dev';
 
 import { db } from '#utils/db.server';
+import { sendTemplateEmail } from '#utils/email.server';
 import { invariant } from '#utils/misc';
 
 export const authSessionStorage = createCookieSessionStorage({
@@ -34,21 +35,34 @@ async function isKnownEmail(email: string) {
   return user !== null;
 }
 
-export async function getUserByEmail(email: string) {
+async function getUserByEmail(email: string) {
   invariant(email.length, 'Empty email argument');
   const user = await db.user.findUnique({ where: { email } });
   invariant(user !== null, `Unknown user email: ${email}`);
   return { ...user, email };
 }
 
+async function sendTOTP({ email, code, magicLink }: SendTOTPOptions) {
+  const user = await getUserByEmail(email);
+
+  await sendTemplateEmail({
+    to: `${user.name} <${email}>`,
+    templateAlias: 'send-totp',
+    templateModel: {
+      product_url: 'https://runde.tips',
+      product_name: 'Haus23 Tipprunde',
+      name: user.name,
+      code: code,
+      magic_link: magicLink,
+    },
+  });
+}
+
 authenticator.use(
   new TOTPStrategy(
     {
       secret: process.env.AUTH_ENCRYPTION_SECRET,
-      sendTOTP: async ({ email, code, magicLink }) => {
-        const user = await getUserByEmail(email);
-        console.log(`Code für ${user.name}: ${code}, Link: ${magicLink}`);
-      },
+      sendTOTP,
       validateEmail: (email) => isKnownEmail(email),
       totpGeneration: { period: 360, charSet: '0123456789' },
       customErrors: {
