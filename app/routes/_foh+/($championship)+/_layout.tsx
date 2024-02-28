@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { Outlet, redirect } from '@remix-run/react';
-import { getPublishedChampionships } from '#utils/cache.server';
+import { getPublishedChampionships } from '#utils/foh/championships';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const championships = await getPublishedChampionships();

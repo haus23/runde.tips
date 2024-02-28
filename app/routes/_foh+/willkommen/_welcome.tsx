@@ -1,5 +1,5 @@
 import { redirect } from '@remix-run/react';
-import { getPublishedChampionships } from '#utils/cache.server';
+import { getPublishedChampionships } from '#utils/foh/championships';
 
 export async function loader() {
   const championships = await getPublishedChampionships();
