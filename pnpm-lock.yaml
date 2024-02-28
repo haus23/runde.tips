@@ -65,7 +65,7 @@ importers:
         version: 3.0.0
       '@remix-run/dev':
         specifier: ^2.7.2
-        version: 2.7.2(@remix-run/serve@2.7.2)(@types/node@20.11.20)(typescript@5.3.3)(vite@5.1.4)
+        version: 2.7.2(@remix-run/serve@2.7.2)(@types/node@20.11.20)(typescript@5.3.3)
       '@sly-cli/sly':
         specifier: ^1.8.0
         version: 1.8.0(typescript@5.3.3)
@@ -102,9 +102,6 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
-      vite:
-        specifier: ^5.1.4
-        version: 5.1.4(@types/node@20.11.20)
 
   apps/www:
     dependencies:
@@ -2908,7 +2905,7 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@remix-run/dev@2.7.2(@remix-run/serve@2.7.2)(@types/node@20.11.20)(typescript@5.3.3)(vite@5.1.4):
+  /@remix-run/dev@2.7.2(@remix-run/serve@2.7.2)(@types/node@20.11.20)(typescript@5.3.3):
     resolution: {integrity: sha512-ejxzcQY5DFl1CNG5+5+y0UeklOqkRBO43lAPnSC8ITLigjZY6UZsBENlex/Y+xJzjIUtaRBxc7mVaWa62FDQOg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -2981,7 +2978,6 @@ packages:
       tar-fs: 2.1.1
       tsconfig-paths: 4.2.0
       typescript: 5.3.3
-      vite: 5.1.4(@types/node@20.11.20)
       ws: 7.5.9
     transitivePeerDependencies:
       - '@types/node'
@@ -3190,7 +3186,7 @@ packages:
     peerDependencies:
       '@remix-run/dev': ^1.15.0 || ^2.0.0
     dependencies:
-      '@remix-run/dev': 2.7.2(@remix-run/serve@2.7.2)(@types/node@20.11.20)(typescript@5.3.3)(vite@5.1.4)
+      '@remix-run/dev': 2.7.2(@remix-run/serve@2.7.2)(@types/node@20.11.20)(typescript@5.3.3)
       minimatch: 7.4.6
     dev: true
 
@@ -7241,7 +7237,7 @@ packages:
     peerDependencies:
       '@remix-run/dev': ^1.15.0 || ^2
     dependencies:
-      '@remix-run/dev': 2.7.2(@remix-run/serve@2.7.2)(@types/node@20.11.20)(typescript@5.3.3)(vite@5.1.4)
+      '@remix-run/dev': 2.7.2(@remix-run/serve@2.7.2)(@types/node@20.11.20)(typescript@5.3.3)
       '@remix-run/v1-route-convention': 0.1.4(@remix-run/dev@2.7.2)
       fs-extra: 11.2.0
       minimatch: 5.1.6

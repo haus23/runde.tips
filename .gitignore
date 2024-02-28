@@ -1,12 +1,12 @@
 # NPM deps
 node_modules/
 
-# Turborepo
-.turbo/
+# Remix Dev
+.cache/
 
-# Builds
+# Remix Build
 build/
-dist/
+public/build/
 
 # Sensible data
 .env

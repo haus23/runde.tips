@@ -1,6 +1,7 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import {
   Links,
+  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -8,7 +9,6 @@ import {
   json,
   useLoaderData,
   useNavigate,
-  useRouteLoaderData,
 } from '@remix-run/react';
 
 import { useEffect } from 'react';
@@ -23,7 +23,8 @@ import { MediaQueryFallback } from '#utils/theme/media-query-fallback';
 import { ThemeProvider, useTheme } from '#utils/theme/theme.provider';
 import { getSession } from '#utils/theme/theme.server';
 
-import './styles/tailwind.css';
+import styles from './styles/tailwind.css';
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request);
@@ -72,6 +73,7 @@ function AppDocument() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
+        <LiveReload />
         <Toaster position="top-right" />
       </body>
     </html>
@@ -96,8 +98,10 @@ export default function AppRoot() {
   );
 }
 
-function ErrorDocument() {
-  const { theme } = useTheme();
+/*
+export function ErrorBoundary() {
+  //const { theme } = useTheme();
+  const theme = { colorScheme: 'dark' };
   return (
     <html lang="de" className={theme.colorScheme}>
       <head>
@@ -118,7 +122,7 @@ function ErrorDocument() {
   );
 }
 
-export function ErrorBoundary() {
+export function ErrorBoundaryBackup() {
   const data = useRouteLoaderData<typeof loader>('root');
   return (
     <ThemeProvider
@@ -130,3 +134,4 @@ export function ErrorBoundary() {
     </ThemeProvider>
   );
 }
+*/
