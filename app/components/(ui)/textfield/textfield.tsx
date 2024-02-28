@@ -59,7 +59,7 @@ function _FieldError({ className, ...props }: FieldErrorProps) {
       {...props}
       className={composeTailwindRenderProps(
         className,
-        'mt-1 text-sm text-app-error',
+        'mt-1 text-sm text-error',
       )}
     />
   );
