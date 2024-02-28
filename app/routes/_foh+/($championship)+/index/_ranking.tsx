@@ -1,6 +1,6 @@
 import { type LoaderFunctionArgs, json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { requireChampionship } from '#utils/foh/championships';
+import { requireChampionship } from '#utils/foh/championships.server';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const championship = await requireChampionship(params);
@@ -12,7 +12,7 @@ export default function RankingRoute() {
 
   return (
     <div>
-      <h2 className="text-3xl font-medium">{championship.name}</h2>
+      <h2 className="text-3xl font-medium">{'championship.name'}</h2>
     </div>
   );
 }

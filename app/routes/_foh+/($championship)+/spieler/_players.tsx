@@ -1,5 +1,5 @@
 import { type LoaderFunctionArgs, json } from '@remix-run/node';
-import { requireChampionship } from '#utils/foh/championships';
+import { requireChampionship } from '#utils/foh/championships.server';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const championship = await requireChampionship(params);

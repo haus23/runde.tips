@@ -1,5 +1,5 @@
 import { Outlet, json } from '@remix-run/react';
-import { getPublishedChampionships } from '#utils/foh/championships';
+import { getPublishedChampionships } from '#utils/foh/championships.server';
 import { AppHeader } from './app-header';
 
 export async function loader() {
