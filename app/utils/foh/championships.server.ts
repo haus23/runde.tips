@@ -25,7 +25,10 @@ export async function requireChampionship(params: Params<string>) {
     : championships.at(0);
 
   if (!championship) {
-    throw new Response('Not Found', { status: 404 });
+    throw new Response(null, {
+      status: 404,
+      statusText: 'Not Found',
+    });
   }
 
   return championship;
