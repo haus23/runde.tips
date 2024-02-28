@@ -8,7 +8,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev --manual",
-    "start": "remix-serve ./build/index.js",
+    "start": "remix-serve ./build/server/index.js",
     "db:generate": "prisma generate --schema ./db/schema.prisma",
     "db:push": "prisma db push --schema ./db/schema.prisma",
     "db:deploy": "prisma migrate deploy --schema ./db/schema.prisma",

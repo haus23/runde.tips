@@ -6,7 +6,6 @@ node_modules/
 
 # Remix Build
 build/
-public/build/
 
 # Sensible data
 .env
