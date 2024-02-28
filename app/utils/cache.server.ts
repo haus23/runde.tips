@@ -4,19 +4,17 @@ import { singleton } from './singleton.server';
 
 const cache = singleton('cache', () => new Map());
 
-export function getChampionships() {
+export function getPublishedChampionships() {
   return cachified({
     ttl: 2 * 60 * 1000, // 2 minutes
     staleWhileRevalidate: 5 * 60 * 1000, // 5 minutes
     cache,
     key: 'championships',
     async getFreshValue() {
-      return await db.championship.findMany({ orderBy: { nr: 'desc' } });
+      return await db.championship.findMany({
+        where: { published: true },
+        orderBy: { nr: 'desc' },
+      });
     },
   });
-}
-
-export async function getPublishedChampionships() {
-  const championships = await getChampionships();
-  return championships.filter((c) => c.published);
 }

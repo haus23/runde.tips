@@ -1,12 +1,12 @@
 import { Link, Logo, NavLink, ThemeMenu } from '#components';
 import { useIsAuthenticated } from '#utils/auth/user';
 import { useOptionalChampionship } from '#utils/foh/use-championship';
-import { useChampionships } from '#utils/foh/use-championships';
+import { usePublishedChampionships } from '#utils/foh/use-championships';
 import { UserMenu } from './user-menu';
 
 export function AppHeader() {
   const isAuthenticated = useIsAuthenticated();
-  const championships = useChampionships();
+  const championships = usePublishedChampionships();
   const { championshipSegment, setChampionship } = useOptionalChampionship();
 
   const segmentRoute = championshipSegment ? `/${championshipSegment}` : '';

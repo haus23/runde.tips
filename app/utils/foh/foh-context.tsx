@@ -1,7 +1,7 @@
 import type { Championship } from '@prisma/client';
 import { useParams } from '@remix-run/react';
 import { type ReactNode, createContext, useCallback, useState } from 'react';
-import { useChampionships } from './use-championships';
+import { usePublishedChampionships } from './use-championships';
 
 type FohContextProps = {
   championship?: Championship;
@@ -12,15 +12,16 @@ type FohContextProps = {
 export const FohContext = createContext<FohContextProps>(undefined as never);
 
 export function FohProvider({ children }: { children: ReactNode }) {
-  const championships = useChampionships();
+  const championships = usePublishedChampionships();
   const latestChampionship = championships[0];
 
   const { championship: slug } = useParams();
 
   const [currentChampionshipState, setCurrentChampionshipState] = useState(
     () => {
-      const championship =
-        championships.find((c) => c.slug === slug) || latestChampionship;
+      const championship = slug
+        ? championships.find((c) => c.slug === slug)
+        : latestChampionship;
       return {
         championship,
         championshipSegment:

@@ -1,12 +1,13 @@
 import { useContext } from 'react';
-import { invariant } from '#utils/misc';
 import { FohContext } from './foh-context';
 
 export function useChampionship() {
   const { championship, championshipSegment, setChampionship } =
     useContext(FohContext);
 
-  invariant(typeof championship !== 'undefined');
+  if (!championship) {
+    throw new Response('Not Found', { status: 404 });
+  }
 
   return {
     championship,
