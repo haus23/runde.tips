@@ -8,6 +8,7 @@ import {
   json,
   useLoaderData,
   useNavigate,
+  useRouteLoaderData,
 } from '@remix-run/react';
 
 import { useEffect } from 'react';
@@ -42,7 +43,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   );
 }
 
-function App() {
+function AppDocument() {
   const { theme } = useTheme();
   const {
     requestInfo: { toast },
@@ -89,8 +90,43 @@ export default function AppRoot() {
         themeAction="/action/set-theme"
         mediaQueryFallback
       >
-        <App />
+        <AppDocument />
       </ThemeProvider>
     </RouterProvider>
+  );
+}
+
+function ErrorDocument() {
+  const { theme } = useTheme();
+  return (
+    <html lang="de" className={theme.colorScheme}>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content={theme.colorScheme} />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <p className="mx-4 text-center text-3xl leading-snug [text-wrap:balance]">
+          Hoppla, hier stimmt was nicht!
+        </p>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+export function ErrorBoundary() {
+  const data = useRouteLoaderData<typeof loader>('root');
+  return (
+    <ThemeProvider
+      hints={data?.requestInfo.hints}
+      sessionTheme={data?.requestInfo.theme}
+      defaultColorScheme="dark"
+    >
+      <ErrorDocument />
+    </ThemeProvider>
   );
 }
