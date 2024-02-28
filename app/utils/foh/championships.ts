@@ -6,7 +6,7 @@ export function getPublishedChampionships() {
   return cached('publishedChampionships', () => {
     console.log('Fetching published championships');
     return db.championship.findMany({
-      where: { published: false },
+      where: { published: true },
       orderBy: { nr: 'desc' },
     });
   });
