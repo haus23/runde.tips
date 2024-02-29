@@ -1,6 +1,33 @@
 # @tipprunde/www
 
 
+## v0.0.29
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.28...v0.0.29)
+
+### 🚀 Enhancements
+
+- Add global error boundary w/o theme support. Resolves #19 ([#19](https://github.com/haus23/runde.tips/issues/19))
+- Add real world email sending back. ([57f963a](https://github.com/haus23/runde.tips/commit/57f963a))
+- Add an email template for the send-totp-mail ([2dd2c85](https://github.com/haus23/runde.tips/commit/2dd2c85))
+- Implement and send totp mail with resend. ([99141ab](https://github.com/haus23/runde.tips/commit/99141ab))
+- (Re-) Implement sending TOTP with postmark. ([25f7a29](https://github.com/haus23/runde.tips/commit/25f7a29))
+
+### 🩹 Fixes
+
+- Fixed refactored class name. ([ac9aa4c](https://github.com/haus23/runde.tips/commit/ac9aa4c))
+- Add missing title and charset. Resolves #29 ([#29](https://github.com/haus23/runde.tips/issues/29))
+
+### 💅 Refactors
+
+- Align error with docs. ([0362bb5](https://github.com/haus23/runde.tips/commit/0362bb5))
+- Parse env with zod ([1b246e5](https://github.com/haus23/runde.tips/commit/1b246e5))
+- Simplify folder structure again. ([12941b0](https://github.com/haus23/runde.tips/commit/12941b0))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.28
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.27...v0.0.28)
