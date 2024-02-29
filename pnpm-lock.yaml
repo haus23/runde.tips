@@ -47,7 +47,7 @@ importers:
       remix-auth:
         specifier: ^3.6.0
         version: 3.6.0(@remix-run/react@2.7.2)(@remix-run/server-runtime@2.7.2)
-      remix-auth-totp-dev:
+      remix-auth-totp:
         specifier: ^3.0.0
         version: 3.0.0(remix-auth@3.6.0)
       remix-utils:
@@ -9600,6 +9600,17 @@ packages:
 
   /remix-auth-totp-dev@3.0.0(remix-auth@3.6.0):
     resolution: {integrity: sha512-sxYUcUidEPlRxFv9yZm96gfsKNmxY9eDp3/h1gzHpl4WyBiDEztU+VwGCn34+bBiZpXNrPgXkjLaVsm9Y7uXkg==}
+    peerDependencies:
+      remix-auth: ^3.6.0
+    dependencies:
+      '@epic-web/totp': 1.1.2
+      jose: 5.2.2
+      remix-auth: 3.6.0(@remix-run/react@2.7.2)(@remix-run/server-runtime@2.7.2)
+      thirty-two: 1.0.2
+    dev: false
+
+  /remix-auth-totp@3.0.0(remix-auth@3.6.0):
+    resolution: {integrity: sha512-U9MtfOCM0RU9/nIyLFcUlXpvHhXLKDHoc/Utu+L6foBLQ0f/WUO4HEmlLYZY9ZdTN4R+Cneh94zas9etaXc2zg==}
     peerDependencies:
       remix-auth: ^3.6.0
     dependencies:
