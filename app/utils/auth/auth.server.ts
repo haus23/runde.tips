@@ -1,6 +1,6 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
-import { type SendTOTPOptions, TOTPStrategy } from 'remix-auth-totp-dev';
+import { type SendTOTPOptions, TOTPStrategy } from 'remix-auth-totp';
 
 import { db } from '#utils/db.server';
 import { sendTotpWithPostmark, sendTotpWithResend } from '#utils/email.server';
