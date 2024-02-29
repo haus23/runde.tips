@@ -14,7 +14,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml, .npmrc",
-    "vite.config.ts": "tsconfig.json, tailwind.config.ts, .postcssrc.json",
+    "remix.config.js": "remix.env.d.ts, tsconfig.json, tailwind.config.ts, sly.json",
     "biome.json": ".editorconfig"
   },
   "tailwindCSS.experimental.classRegex": [
