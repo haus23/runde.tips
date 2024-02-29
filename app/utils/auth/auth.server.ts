@@ -3,7 +3,7 @@ import { Authenticator } from 'remix-auth';
 import { type SendTOTPOptions, TOTPStrategy } from 'remix-auth-totp-dev';
 
 import { db } from '#utils/db.server';
-import { sendTemplateEmail } from '#utils/email.server';
+import { sendTOTPWithResend, sendTemplateEmail } from '#utils/email.server';
 import { invariant } from '#utils/misc';
 
 export const authSessionStorage = createCookieSessionStorage({
@@ -45,17 +45,19 @@ async function getUserByEmail(email: string) {
 async function sendTOTP({ email, code, magicLink }: SendTOTPOptions) {
   const user = await getUserByEmail(email);
 
-  await sendTemplateEmail({
-    to: `${user.name} <${email}>`,
-    templateAlias: 'send-totp',
-    templateModel: {
-      product_url: 'https://runde.tips',
-      product_name: 'Haus23 Tipprunde',
-      name: user.name,
-      code: code,
-      magic_link: magicLink,
-    },
-  });
+  await sendTOTPWithResend({ name: user.name, email, code, magicLink });
+
+  // await sendTemplateEmail({
+  //   to: `${user.name} <${email}>`,
+  //   templateAlias: 'send-totp',
+  //   templateModel: {
+  //     product_url: 'https://runde.tips',
+  //     product_name: 'Haus23 Tipprunde',
+  //     name: user.name,
+  //     code: code,
+  //     magic_link: magicLink,
+  //   },
+  // });
 }
 
 authenticator.use(

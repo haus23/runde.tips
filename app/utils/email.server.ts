@@ -1,3 +1,5 @@
+import { renderSendTotpEmail } from './auth/send-totp.email';
+
 export async function sendTemplateEmail({
   to,
   templateAlias,
@@ -35,4 +37,58 @@ export async function sendTemplateEmail({
   }
 
   throw new Error('Probleme beim Email-Versand');
+}
+
+export async function sendMailWithResend(props: {
+  from: string;
+  to: string;
+  subject: string;
+  html: string;
+  text: string;
+  category: string;
+}) {
+  const { from, to, subject, html, text } = props;
+  const httpBody = {
+    from,
+    to,
+    subject,
+    html,
+    text,
+    tags: [{ name: 'category', value: props.category }],
+  };
+
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    body: JSON.stringify(httpBody),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.RESEND_TOKEN}`,
+    },
+  });
+
+  if (!response.ok) {
+    console.log(response);
+    throw new Error('Probleme beim Email-Versand');
+  }
+}
+
+export async function sendTOTPWithResend({
+  name,
+  email,
+  code,
+  magicLink,
+}: {
+  name: string;
+  email: string;
+  code: string;
+  magicLink: string;
+}) {
+  const mailProps = {
+    from: 'Tipprunde <hallo@runde.tips>',
+    to: `${name} <${email}>`,
+    subject: 'Tipprunde Login Code',
+    category: 'totp',
+    ...(await renderSendTotpEmail({ name, code, magicLink })),
+  };
+  await sendMailWithResend(mailProps);
 }
