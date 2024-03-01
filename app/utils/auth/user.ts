@@ -1,4 +1,5 @@
-import { useRouteLoaderData } from '@remix-run/react';
+import { useRevalidator, useRouteLoaderData } from '@remix-run/react';
+import { useEffect, useRef } from 'react';
 import type { loader } from '#root';
 import { invariant } from '../misc';
 
@@ -11,4 +12,31 @@ export function useUser() {
   const data = useRouteLoaderData<typeof loader>('root');
   invariant(data?.user, 'User is not logged in');
   return data.user;
+}
+
+// TODO: Watch out for other BroadcastChannel usages in Remix
+// - remix-themes
+export function useAuthBroadcast() {
+  const channelRef = useRef<BroadcastChannel>();
+  const authenticated = useIsAuthenticated();
+  const revalidator = useRevalidator();
+
+  useEffect(() => {
+    channelRef.current = new BroadcastChannel('auth');
+
+    function revalidate() {
+      if (revalidator.state === 'idle') {
+        revalidator.revalidate();
+      }
+    }
+    channelRef.current.addEventListener('message', revalidate);
+    return () => {
+      channelRef.current?.removeEventListener('message', revalidate);
+      channelRef.current?.close();
+    };
+  }, [revalidator]);
+
+  useEffect(() => {
+    channelRef.current?.postMessage(authenticated);
+  }, [authenticated]);
 }

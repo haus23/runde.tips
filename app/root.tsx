@@ -23,12 +23,13 @@ import { Toaster, toast as showToast } from 'sonner';
 import { getUser } from '#utils/auth/auth.server';
 import { getToast } from '#utils/toast.server';
 
+import { Icon, type IconName } from '#components';
+import { useAuthBroadcast } from '#utils/auth/user';
 import { getHints } from '#utils/theme/client-hints.server';
 import { MediaQueryFallback } from '#utils/theme/media-query-fallback';
 import { ThemeProvider, useTheme } from '#utils/theme/theme.provider';
 import { getSession } from '#utils/theme/theme.server';
 
-import { Icon, type IconName } from '#components';
 import styles from './styles/tailwind.css';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
@@ -51,6 +52,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 function AppDocument() {
+  useAuthBroadcast();
+
   const { theme } = useTheme();
   const {
     requestInfo: { toast },
