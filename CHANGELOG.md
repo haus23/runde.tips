@@ -1,6 +1,34 @@
 # @tipprunde/www
 
 
+## v0.0.30
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.29...v0.0.30)
+
+### 🚀 Enhancements
+
+- Implement missing magic link login. Resolves #33 ([#33](https://github.com/haus23/runde.tips/issues/33))
+- Sync auth state over browser tabs. ([3515e4a](https://github.com/haus23/runde.tips/commit/3515e4a))
+
+### 🩹 Fixes
+
+- That was easy. Resolves #22 ([#22](https://github.com/haus23/runde.tips/issues/22))
+- Remove strict mode. Resolves #43 ([#43](https://github.com/haus23/runde.tips/issues/43))
+- Refactor logout to an action. Resolves #12 ([#12](https://github.com/haus23/runde.tips/issues/12))
+- Logging out manually. So precise control over the redirect path. Resolves #44 ([#44](https://github.com/haus23/runde.tips/issues/44))
+
+### 💅 Refactors
+
+- Reveal client entry file. ([2e30b7d](https://github.com/haus23/runde.tips/commit/2e30b7d))
+
+### 🏡 Chore
+
+- Upgrade remix. Nothing special in this release. ([40a31ac](https://github.com/haus23/runde.tips/commit/40a31ac))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.29
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.28...v0.0.29)
