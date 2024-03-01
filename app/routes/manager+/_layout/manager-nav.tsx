@@ -1,3 +1,4 @@
+import { Form } from '@remix-run/react';
 import { Icon, Link, Logo, NavLink } from '#components';
 import { useUser } from '#utils/auth/user';
 
@@ -84,9 +85,17 @@ export function ManagerNav() {
           </NavLink>
         </div>
         <div className="border-t border-neutral flex flex-col py-2">
-          <NavLink href="/logout">
-            <Icon name="lucide/user">Log Out</Icon>
-          </NavLink>
+          <Form action="/logout" method="post" className="px-2 flex">
+            <button
+              type="submit"
+              className="grow
+                focus:outline-none focus-visible:ring-2 ring-offset-2 ring-ca ring-offset-app
+                py-1.5 px-3 rounded-lg font-medium text-app-subtle hover:text-accent-stressed-hover
+              "
+            >
+              <Icon name="lucide/user">Log Out</Icon>
+            </button>
+          </Form>
         </div>
       </div>
     </div>
