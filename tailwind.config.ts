@@ -42,6 +42,10 @@ export default {
       accent: 'var(--border-accent)',
       error: 'var(--error-border)',
     }),
+    divideColor: ({ theme }) => ({
+      ...theme('colors'),
+      neutral: 'var(--border-neutral)',
+    }),
     fill: ({ theme }) => ({
       ...theme('colors'),
       'app-subtle': 'var(--app-bg-subtle)',
