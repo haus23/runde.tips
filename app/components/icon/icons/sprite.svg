@@ -72,6 +72,11 @@
   <polyline points="16 17 21 12 16 7" ></polyline>
   <line x1="21" x2="9" y1="12" y2="12" ></line>
 </symbol>
+<symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="lucide/menu">
+  <line x1="4" x2="20" y1="12" y2="12" ></line>
+  <line x1="4" x2="20" y1="6" y2="6" ></line>
+  <line x1="4" x2="20" y1="18" y2="18" ></line>
+</symbol>
 <symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="lucide/moon">
   <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" ></path>
 </symbol>
@@ -135,6 +140,10 @@
   <circle cx="9" cy="7" r="4" ></circle>
   <path d="M22 21v-2a4 4 0 0 0-3-3.87" ></path>
   <path d="M16 3.13a4 4 0 0 1 0 7.75" ></path>
+</symbol>
+<symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="lucide/x">
+  <path d="M18 6 6 18" ></path>
+  <path d="m6 6 12 12" ></path>
 </symbol>
 </defs>
 </svg>

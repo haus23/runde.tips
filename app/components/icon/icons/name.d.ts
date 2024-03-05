@@ -14,6 +14,7 @@
 	| "lucide/laptop"
 	| "lucide/loader"
 	| "lucide/log-out"
+	| "lucide/menu"
 	| "lucide/moon"
 	| "lucide/pilcrow"
 	| "lucide/scale"
@@ -24,5 +25,6 @@
 	| "lucide/sun"
 	| "lucide/trophy"
 	| "lucide/user"
-	| "lucide/users";
+	| "lucide/users"
+	| "lucide/x";
   
