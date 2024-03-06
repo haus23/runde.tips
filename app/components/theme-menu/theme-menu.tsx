@@ -1,8 +1,15 @@
-import cx from 'clsx';
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@nextui-org/react';
+
+import type { Key } from 'react';
+import { Icon, type IconName } from '#components';
 import { includes } from '#utils/misc';
 import { type ColorScheme, useTheme } from '#utils/theme/theme.provider';
-import { Button, type Key, Menu, MenuItem, MenuItems } from '../(ui)';
-import { Icon, type IconName } from '../icon/icon';
 
 const colorSchemes: {
   name: ColorScheme | 'system';
@@ -33,35 +40,37 @@ export function ThemeMenu() {
   }
 
   return (
-    <Menu>
-      <Button
-        variant="toolbar"
-        className={cx('overflow-clip', mode === 'client' && 'text-app-subtle')}
-      >
-        <div className="relative size-5">
-          <Icon
-            name="lucide/moon"
-            className="absolute inset-0 origin-[50%_100px] rotate-90 transform transition-transform duration-300 dark:rotate-0"
-          />
-          <Icon
-            name="lucide/sun"
-            className="absolute inset-0 origin-[50%_100px] rotate-0 transform transition-transform duration-300 dark:-rotate-90"
-          />
-        </div>
-      </Button>
-      <MenuItems
-        placement="bottom"
-        showArrow
+    <Dropdown>
+      <DropdownTrigger>
+        <Button isIconOnly variant="ghost">
+          <div className="relative size-5">
+            <Icon
+              name="lucide/moon"
+              className="absolute inset-0 origin-[50%_100px] rotate-90 transform transition-transform duration-300 dark:rotate-0"
+            />
+            <Icon
+              name="lucide/sun"
+              className="absolute inset-0 origin-[50%_100px] rotate-0 transform transition-transform duration-300 dark:-rotate-90"
+            />
+          </div>
+        </Button>
+      </DropdownTrigger>
+      <DropdownMenu
+        aria-label="Dynamic Actions"
+        items={colorSchemes}
+        onAction={handleAction}
         selectionMode="single"
         selectedKeys={selectedColorScheme}
-        onAction={handleAction}
       >
-        {colorSchemes.map((cs) => (
-          <MenuItem key={cs.name} id={cs.name} check="right">
-            <Icon name={cs.icon}>{cs.label}</Icon>
-          </MenuItem>
-        ))}
-      </MenuItems>
-    </Menu>
+        {(item) => (
+          <DropdownItem
+            key={item.name}
+            startContent={<Icon name={item.icon} />}
+          >
+            {item.label}
+          </DropdownItem>
+        )}
+      </DropdownMenu>
+    </Dropdown>
   );
 }

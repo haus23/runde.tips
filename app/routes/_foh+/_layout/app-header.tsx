@@ -1,5 +1,10 @@
-import { Navbar, NavbarBrand } from '@nextui-org/react';
-import { Logo } from '#components';
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+} from '@nextui-org/react';
+import { Logo, ThemeMenu } from '#components';
 
 export function AppHeader() {
   return (
@@ -7,6 +12,11 @@ export function AppHeader() {
       <NavbarBrand>
         <Logo />
       </NavbarBrand>
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <ThemeMenu />
+        </NavbarItem>
+      </NavbarContent>
     </Navbar>
   );
 }
