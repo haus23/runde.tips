@@ -16,8 +16,9 @@ import {
   useRouteLoaderData,
 } from '@remix-run/react';
 
+import { NextUIProvider as UIProvider } from '@nextui-org/react';
+
 import { useEffect } from 'react';
-import { RouterProvider } from 'react-aria-components';
 import { Toaster, toast as showToast } from 'sonner';
 
 import { getUser } from '#utils/auth/auth.server';
@@ -52,6 +53,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 function AppDocument() {
+  const navigate = useNavigate();
   useAuthBroadcast();
 
   const { theme } = useTheme();
@@ -79,11 +81,13 @@ function AppDocument() {
         <Links />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-        <Toaster position="top-right" />
+        <UIProvider navigate={navigate}>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+          <Toaster position="top-right" />
+        </UIProvider>
       </body>
     </html>
   );
@@ -91,19 +95,16 @@ function AppDocument() {
 
 export default function AppRoot() {
   const { requestInfo } = useLoaderData<typeof loader>();
-  const navigate = useNavigate();
 
   return (
-    <RouterProvider navigate={navigate}>
-      <ThemeProvider
-        hints={requestInfo.hints}
-        sessionTheme={requestInfo.theme}
-        themeAction="/action/set-theme"
-        mediaQueryFallback
-      >
-        <AppDocument />
-      </ThemeProvider>
-    </RouterProvider>
+    <ThemeProvider
+      hints={requestInfo.hints}
+      sessionTheme={requestInfo.theme}
+      themeAction="/action/set-theme"
+      mediaQueryFallback
+    >
+      <AppDocument />
+    </ThemeProvider>
   );
 }
 
