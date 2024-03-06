@@ -12,7 +12,7 @@ export function Logo() {
       >
         <use href={`${logoHref}#logo`} />
       </svg>
-      <span className="text-xl font-medium">runde.tips</span>
+      <span className="text-xl font-medium -translate-y-0.5">runde.tips</span>
     </div>
   );
 }

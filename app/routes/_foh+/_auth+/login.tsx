@@ -8,6 +8,10 @@ import {
   getSession,
 } from '#utils/auth/auth.server';
 
+export const handle = {
+  pageTitle: 'Log In',
+};
+
 export async function loader({ request }: LoaderFunctionArgs) {
   await authenticator.isAuthenticated(request, {
     successRedirect: '/',

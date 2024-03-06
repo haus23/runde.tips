@@ -21,7 +21,7 @@ const colorSchemes: {
   { name: 'system', label: 'System', icon: 'lucide/laptop' },
 ];
 
-export function ThemeMenu() {
+export function ThemeMenu({ onSelection }: { onSelection?: () => void }) {
   const { theme, mode, setTheme } = useTheme();
 
   const selectedColorScheme = new Set([
@@ -36,6 +36,7 @@ export function ThemeMenu() {
       )
     ) {
       !selectedColorScheme.has(key) && setTheme({ ...theme, colorScheme: key });
+      onSelection?.();
     }
   }
 
@@ -56,7 +57,7 @@ export function ThemeMenu() {
         </Button>
       </DropdownTrigger>
       <DropdownMenu
-        aria-label="Dynamic Actions"
+        aria-label="Hell-/Dunkelmodus Auswahl"
         items={colorSchemes}
         onAction={handleAction}
         selectionMode="single"
