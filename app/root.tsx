@@ -80,7 +80,7 @@ function AppDocument() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="text-foreground bg-background">
         <UIProvider navigate={navigate}>
           <Outlet />
           <ScrollRestoration />
