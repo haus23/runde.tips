@@ -1,8 +1,9 @@
+import { Button } from '@nextui-org/react';
 import type { ActionFunctionArgs } from '@remix-run/node';
 import { json, useFetcher, useFetchers, useLoaderData } from '@remix-run/react';
 import { clsx } from 'clsx';
 import { namedAction } from 'remix-utils/named-action';
-import { Button, Disclosure, Icon } from '#components';
+import { Disclosure, Icon } from '#components';
 import { db } from '#utils/db.server';
 import { getFirestoreChampionships } from '#utils/firestore/championship';
 import { invariant } from '#utils/misc';
@@ -100,7 +101,7 @@ export default function SyncRoute() {
             </p>
             <legacyCache.Form action="/action/sync/clear-cache" method="post">
               <Button
-                color="accent"
+                color="primary"
                 type="submit"
                 isDisabled={legacyCache.state === 'submitting'}
               >
@@ -129,7 +130,7 @@ export default function SyncRoute() {
               <div className="flex flex-wrap justify-around">
                 <Button
                   isDisabled={isSubmmitting}
-                  color="accent"
+                  color="primary"
                   type="submit"
                   name="action"
                   value="players"
@@ -146,7 +147,7 @@ export default function SyncRoute() {
                 </Button>
                 <Button
                   isDisabled={isSubmmitting}
-                  color="accent"
+                  color="primary"
                   type="submit"
                   name="action"
                   value="teams"
@@ -163,7 +164,7 @@ export default function SyncRoute() {
                 </Button>
                 <Button
                   isDisabled={isSubmmitting}
-                  color="accent"
+                  color="primary"
                   type="submit"
                   name="action"
                   value="leagues"
@@ -180,7 +181,7 @@ export default function SyncRoute() {
                 </Button>
                 <Button
                   isDisabled={isSubmmitting}
-                  color="accent"
+                  color="primary"
                   type="submit"
                   name="action"
                   value="rulesets"
@@ -236,7 +237,7 @@ export default function SyncRoute() {
                       />
                       <Button
                         isDisabled={isSubmmitting}
-                        color="accent"
+                        color="primary"
                         type="submit"
                         name="action"
                         value="championship"
