@@ -1,12 +1,25 @@
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Divider,
+  Input,
+} from '@nextui-org/react';
+
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json, redirect, useLoaderData, useSubmit } from '@remix-run/react';
-import { Button, Form, TextField } from '#components/(ui)';
 
+import { Form } from 'react-aria-components';
 import {
   authenticator,
   commitSession,
   getSession,
 } from '#utils/auth/auth.server';
+
+export const handle = {
+  pageTitle: 'Log In',
+};
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await authenticator.isAuthenticated(request, {
@@ -51,41 +64,34 @@ export default function OnboardingRoute() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <div className="mt-8 p-4 sm:px-8 flex flex-col gap-y-4 max-w-xl mx-4 border border-neutral rounded-md sm:mx-auto bg-app-stressed sm:rounded-xl">
-      <h2 className="text-center text-2xl font-medium">Code Eingabe</h2>
-      <Form
-        className="flex flex-col gap-4"
-        method="post"
-        onSubmit={onSubmit}
-        validationErrors={loaderData?.errors}
-      >
-        <TextField
-          type="text"
-          name="code"
-          inputMode="numeric"
-          autoComplete="one-time-code"
-          aria-label="Code"
-          isRequired
-          pattern="\d{6}"
-          maxLength={6}
-          className="text-center"
-          inputClassName="w-40 self-center text-4xl text-center"
-          errorMessage={({ validationErrors, validationDetails }) =>
-            validationDetails.valueMissing
-              ? 'Ohne Code geht es nicht weiter.'
-              : validationDetails.patternMismatch
-                ? 'Kein Code. Ein Code hat genau sechs Ziffern.'
-                : validationDetails.customError
-                  ? validationErrors.join()
-                  : ''
-          }
-        />
-        <div className="flex justify-center">
-          <Button color="accent" type="submit">
-            Anmelden
-          </Button>
-        </div>
-      </Form>
-    </div>
+    <Card className="max-w-xl mx-auto mt-8">
+      <CardHeader className="flex flex-col">
+        <h2 className="text-center text-2xl font-medium">Code Eingabe</h2>
+      </CardHeader>
+      <Divider />
+      <CardBody className="p-4">
+        <Form className="flex flex-col gap-4" method="post" onSubmit={onSubmit}>
+          <Input
+            className="w-40 self-center"
+            classNames={{
+              inputWrapper: 'h-unit-14',
+              input: 'text-4xl text-center',
+            }}
+            type="text"
+            name="code"
+            aria-label="Code"
+            inputMode="numeric"
+            autoComplete="one-time-code"
+            isRequired
+            pattern="\d{6}"
+            maxLength={6}
+            errorMessage={loaderData.errors?.code}
+          />
+          <div className="flex justify-center">
+            <Button type="submit">Anmelden</Button>
+          </div>
+        </Form>
+      </CardBody>
+    </Card>
   );
 }
