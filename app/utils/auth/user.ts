@@ -8,6 +8,11 @@ export function useIsAuthenticated() {
   return !!data && !!data.user;
 }
 
+export function useIsManager() {
+  const data = useRouteLoaderData<typeof loader>('root');
+  return !!data && !!data.user && data.user.role.includes('ADMIN');
+}
+
 export function useUser() {
   const data = useRouteLoaderData<typeof loader>('root');
   invariant(data?.user, 'User is not logged in');
