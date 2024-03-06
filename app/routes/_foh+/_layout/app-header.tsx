@@ -1,5 +1,12 @@
+import { Navbar, NavbarBrand } from '@nextui-org/react';
+import { Logo } from '#components';
+
 export function AppHeader() {
   return (
-    <header className="bg-app sticky top-0 inset-x-0 h-14">runde.tips</header>
+    <Navbar>
+      <NavbarBrand>
+        <Logo />
+      </NavbarBrand>
+    </Navbar>
   );
 }
