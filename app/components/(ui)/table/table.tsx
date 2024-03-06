@@ -5,14 +5,15 @@ import {
 } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
 
-const tableStyles = tv({ base: 'mt-4 w-full text-sm' });
+const tableStyles = tv({ base: '' });
 
-function _Table({ children, className }: TableProps) {
+function _Table({ children, className, ...props }: TableProps) {
   return (
     <Table
       className={composeRenderProps(className, (className, renderProps) =>
         tableStyles({ ...renderProps, className }),
       )}
+      {...props}
     >
       {children}
     </Table>

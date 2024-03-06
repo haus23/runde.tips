@@ -26,12 +26,8 @@ export default function RankingRoute() {
   const { championship, ranks } = useLoaderData<typeof loader>();
 
   return (
-    <div className="mt-2">
-      <h2 className="text-xl font-medium flex gap-1 mx-2 sm:mx-0">
-        <span className="hidden sm:block">{championship.name} -</span>
-        Abschlusstabelle
-      </h2>
-      <Table aria-label={`${championship.name} - Abschlusstabelle`}>
+    <div>
+      <Table aria-label="Abschlusstabelle">
         <TableHeader className="uppercase text-xs font-medium bg-ca text-white">
           <Column className="py-2 pl-4 pr-2 text-right font-medium md:px-6">
             Platz

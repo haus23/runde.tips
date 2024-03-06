@@ -11,9 +11,7 @@ export default function FohLayout() {
   return (
     <>
       <AppHeader />
-      <main className="mx-auto max-w-4xl pt-14 pb-10 sm:px-6 lg:px-8">
-        <Outlet />
-      </main>
+      <Outlet />
     </>
   );
 }

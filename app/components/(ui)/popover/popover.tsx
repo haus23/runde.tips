@@ -28,8 +28,8 @@ function _Popover({ children, className, showArrow, ...props }: _PopoverProps) {
         styles({ ...renderProps, className }),
       )}
     >
-      <OverlayArrow className="group">
-        {showArrow && (
+      {showArrow && (
+        <OverlayArrow className="group">
           <svg
             role="img"
             aria-label="Kleiner Pfeil"
@@ -40,8 +40,8 @@ function _Popover({ children, className, showArrow, ...props }: _PopoverProps) {
           >
             <path d="M0 0 L6 6 L12 0" />
           </svg>
-        )}
-      </OverlayArrow>
+        </OverlayArrow>
+      )}
       {children}
     </Popover>
   );
