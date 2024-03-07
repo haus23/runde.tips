@@ -1,8 +1,9 @@
+import { Button, Card, CardBody, CardHeader } from '@nextui-org/react';
 import type { ActionFunctionArgs } from '@remix-run/node';
 import { json, useFetcher, useFetchers, useLoaderData } from '@remix-run/react';
 import { clsx } from 'clsx';
 import { namedAction } from 'remix-utils/named-action';
-import { Button, Disclosure, Icon } from '#components';
+import { Disclosure, Icon } from '#components';
 import { db } from '#utils/db.server';
 import { getFirestoreChampionships } from '#utils/firestore/championship';
 import { invariant } from '#utils/misc';
@@ -83,183 +84,189 @@ export default function SyncRoute() {
   return (
     <div className="p-4 flex flex-col gap-y-8">
       <h2 className="text-2xl font-medium">Datenabgleich</h2>
-      <div className="bg-app-subtle rounded-md border border-neutral p-4">
-        <Disclosure label="Backend-Daten">
-          <div className="py-4 px-2 flex flex-col gap-y-4">
-            <p className="text-app-subtle">
-              Hiermit werden die Cache-Daten des Backends gelöscht. Damit kann
-              die zur Zeit noch laufende Tipprunden-Anwendung wieder aktuelle
-              Daten anzeigen.
-            </p>
-            <p className="text-app-subtle">
-              Zur Zeit sind die zu löschenden Routen noch hart codiert. Während
-              eines laufenden Turniers ändert sich da auch nicht viel. Es
-              könnten neue Teams oder neue Mannschaften dazukommen. Bis Sommer
-              sollte das entweder alles obsolet sein oder hier eine
-              Auswahlmöglichkeit realisert sein.
-            </p>
-            <legacyCache.Form action="/action/sync/clear-cache" method="post">
-              <Button
-                color="accent"
-                type="submit"
-                isDisabled={legacyCache.state === 'submitting'}
-              >
-                Cache löschen
-              </Button>
-            </legacyCache.Form>
-          </div>
-        </Disclosure>
-      </div>
-      <masterData.Form method="post" className="flex flex-col gap-y-8">
-        <div className="bg-app-subtle rounded-md border border-neutral p-4">
-          <Disclosure label="Stammdaten">
+      <Card>
+        <CardBody>
+          <Disclosure label="Backend-Daten">
             <div className="py-4 px-2 flex flex-col gap-y-4">
               <p className="text-app-subtle">
-                Stammdaten sind die unveränderlichen Daten, die in den
-                jeweiligen Turnieren benutzt werden: Spieler,
-                Mannschaften/Teams, Ligen und Regelwerke. Diese Daten sind
-                relativ stabil und ändern sich maximal bei neuen Runden oder
-                neuen Turnieren.
+                Hiermit werden die Cache-Daten des Backends gelöscht. Damit kann
+                die zur Zeit noch laufende Tipprunden-Anwendung wieder aktuelle
+                Daten anzeigen.
               </p>
               <p className="text-app-subtle">
-                Solange die Firestore-Datenbank maßgeblich die Daten besitzt,
-                müssen - nach Änderungen dieser - die lokalen Daten der
-                Anwendung synchronisiert werden.
+                Zur Zeit sind die zu löschenden Routen noch hart codiert.
+                Während eines laufenden Turniers ändert sich da auch nicht viel.
+                Es könnten neue Teams oder neue Mannschaften dazukommen. Bis
+                Sommer sollte das entweder alles obsolet sein oder hier eine
+                Auswahlmöglichkeit realisert sein.
               </p>
-              <div className="flex flex-wrap justify-around">
+              <legacyCache.Form action="/action/sync/clear-cache" method="post">
                 <Button
-                  isDisabled={isSubmmitting}
-                  color="accent"
+                  color="primary"
                   type="submit"
-                  name="action"
-                  value="players"
-                  className="flex gap-x-1 pl-2"
+                  isDisabled={legacyCache.state === 'submitting'}
                 >
-                  <Icon
-                    name="lucide/loader"
-                    className={clsx(
-                      masterData.formData?.get('action') === 'players' &&
-                        'animate-spin',
-                    )}
-                  />
-                  Spieler
+                  Cache löschen
                 </Button>
-                <Button
-                  isDisabled={isSubmmitting}
-                  color="accent"
-                  type="submit"
-                  name="action"
-                  value="teams"
-                  className="flex gap-x-1 pl-2"
-                >
-                  <Icon
-                    name="lucide/loader"
-                    className={clsx(
-                      masterData.formData?.get('action') === 'teams' &&
-                        'animate-spin',
-                    )}
-                  />
-                  Teams
-                </Button>
-                <Button
-                  isDisabled={isSubmmitting}
-                  color="accent"
-                  type="submit"
-                  name="action"
-                  value="leagues"
-                  className="flex gap-x-1 pl-2"
-                >
-                  <Icon
-                    name="lucide/loader"
-                    className={clsx(
-                      masterData.formData?.get('action') === 'leagues' &&
-                        'animate-spin',
-                    )}
-                  />
-                  Ligen
-                </Button>
-                <Button
-                  isDisabled={isSubmmitting}
-                  color="accent"
-                  type="submit"
-                  name="action"
-                  value="rulesets"
-                  className="flex gap-x-1 pl-2"
-                >
-                  <Icon
-                    name="lucide/loader"
-                    className={clsx(
-                      masterData.formData?.get('action') === 'rulesets' &&
-                        'animate-spin',
-                    )}
-                  />
-                  Regelwerke
-                </Button>
-              </div>
+              </legacyCache.Form>
             </div>
           </Disclosure>
-        </div>
-      </masterData.Form>
+        </CardBody>
+      </Card>
+      <Card>
+        <CardBody>
+          <masterData.Form method="post" className="flex flex-col gap-y-8">
+            <Disclosure label="Stammdaten">
+              <div className="py-4 px-2 flex flex-col gap-y-4">
+                <p className="text-app-subtle">
+                  Stammdaten sind die unveränderlichen Daten, die in den
+                  jeweiligen Turnieren benutzt werden: Spieler,
+                  Mannschaften/Teams, Ligen und Regelwerke. Diese Daten sind
+                  relativ stabil und ändern sich maximal bei neuen Runden oder
+                  neuen Turnieren.
+                </p>
+                <p className="text-app-subtle">
+                  Solange die Firestore-Datenbank maßgeblich die Daten besitzt,
+                  müssen - nach Änderungen dieser - die lokalen Daten der
+                  Anwendung synchronisiert werden.
+                </p>
+                <div className="flex flex-wrap justify-around">
+                  <Button
+                    isDisabled={isSubmmitting}
+                    color="primary"
+                    type="submit"
+                    name="action"
+                    value="players"
+                    className="flex gap-x-1 pl-2"
+                  >
+                    <Icon
+                      name="lucide/loader"
+                      className={clsx(
+                        masterData.formData?.get('action') === 'players' &&
+                          'animate-spin',
+                      )}
+                    />
+                    Spieler
+                  </Button>
+                  <Button
+                    isDisabled={isSubmmitting}
+                    color="primary"
+                    type="submit"
+                    name="action"
+                    value="teams"
+                    className="flex gap-x-1 pl-2"
+                  >
+                    <Icon
+                      name="lucide/loader"
+                      className={clsx(
+                        masterData.formData?.get('action') === 'teams' &&
+                          'animate-spin',
+                      )}
+                    />
+                    Teams
+                  </Button>
+                  <Button
+                    isDisabled={isSubmmitting}
+                    color="primary"
+                    type="submit"
+                    name="action"
+                    value="leagues"
+                    className="flex gap-x-1 pl-2"
+                  >
+                    <Icon
+                      name="lucide/loader"
+                      className={clsx(
+                        masterData.formData?.get('action') === 'leagues' &&
+                          'animate-spin',
+                      )}
+                    />
+                    Ligen
+                  </Button>
+                  <Button
+                    isDisabled={isSubmmitting}
+                    color="primary"
+                    type="submit"
+                    name="action"
+                    value="rulesets"
+                    className="flex gap-x-1 pl-2"
+                  >
+                    <Icon
+                      name="lucide/loader"
+                      className={clsx(
+                        masterData.formData?.get('action') === 'rulesets' &&
+                          'animate-spin',
+                      )}
+                    />
+                    Regelwerke
+                  </Button>
+                </div>
+              </div>
+            </Disclosure>
+          </masterData.Form>
+        </CardBody>
+      </Card>
 
-      <div className="bg-app-subtle rounded-md border border-neutral p-4 flex flex-col gap-y-4">
-        <h3 className="text-xl font-medium">Lokale Daten</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Nr</th>
-              <th>Titel</th>
-              <th>Status</th>
-              <th>Aktion</th>
-            </tr>
-          </thead>
-          <tbody>
-            {legacyChampionships.map((lc) => (
-              <tr key={lc.id}>
-                <td>{lc.nr}</td>
-                <td>{lc.name}</td>
-                <td>
-                  {lc.synced
-                    ? lc.completed
-                      ? 'Abgeschlossen'
-                      : 'Laufend'
-                    : 'Nicht geladen'}
-                </td>
-                <td>
-                  {lc.synced && lc.completed ? (
-                    <span>Keine</span>
-                  ) : (
-                    <championshipData.Form method="post">
-                      <input
-                        type="hidden"
-                        name="championshipSlug"
-                        value={lc.id}
-                      />
-                      <Button
-                        isDisabled={isSubmmitting}
-                        color="accent"
-                        type="submit"
-                        name="action"
-                        value="championship"
-                        className="flex gap-x-1 pl-2"
-                      >
-                        <Icon
-                          name="lucide/loader"
-                          className={clsx(
-                            championshipData.formData?.get(
-                              'championshipSlug',
-                            ) === lc.id && 'animate-spin',
-                          )}
-                        />
-                        Abgleich
-                      </Button>
-                    </championshipData.Form>
-                  )}
-                </td>
+      <Card>
+        <CardBody>
+          <h3 className="text-xl font-medium">Lokale Daten</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Nr</th>
+                <th>Titel</th>
+                <th>Status</th>
+                <th>Aktion</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {legacyChampionships.map((lc) => (
+                <tr key={lc.id}>
+                  <td>{lc.nr}</td>
+                  <td>{lc.name}</td>
+                  <td>
+                    {lc.synced
+                      ? lc.completed
+                        ? 'Abgeschlossen'
+                        : 'Laufend'
+                      : 'Nicht geladen'}
+                  </td>
+                  <td>
+                    {lc.synced && lc.completed ? (
+                      <span>Keine</span>
+                    ) : (
+                      <championshipData.Form method="post">
+                        <input
+                          type="hidden"
+                          name="championshipSlug"
+                          value={lc.id}
+                        />
+                        <Button
+                          isDisabled={isSubmmitting}
+                          color="primary"
+                          type="submit"
+                          name="action"
+                          value="championship"
+                          className="flex gap-x-1 pl-2"
+                        >
+                          <Icon
+                            name="lucide/loader"
+                            className={clsx(
+                              championshipData.formData?.get(
+                                'championshipSlug',
+                              ) === lc.id && 'animate-spin',
+                            )}
+                          />
+                          Abgleich
+                        </Button>
+                      </championshipData.Form>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </CardBody>
+      </Card>
     </div>
   );
 }

@@ -80,7 +80,7 @@ function AppDocument() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="text-foreground bg-background">
         <UIProvider navigate={navigate}>
           <Outlet />
           <ScrollRestoration />
@@ -134,7 +134,7 @@ function ErrorDocument() {
       </head>
       <body>
         <div className="h-dvh flex flex-col gap-y-8 items-center justify-center">
-          <Icon name={iconName} className="size-40 text-error" />
+          <Icon name={iconName} className="size-40 text-danger-200" />
           <p className="inline-flex text-2xl text-center mx-4 leading-snug">
             {errorMsg}
           </p>
