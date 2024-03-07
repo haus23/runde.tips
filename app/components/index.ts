@@ -1,6 +1,3 @@
-// React Aria Components
-export * from './(ui)';
-
 // App Components
 export * from './disclosure/disclosure';
 export * from './icon/icon';
