@@ -1,5 +1,6 @@
+import { Link, Link as NavLink } from '@nextui-org/react';
 import { Form } from '@remix-run/react';
-import { Icon, Link, Logo, NavLink } from '#components';
+import { Icon, Logo } from '#components';
 import { useUser } from '#utils/auth/user';
 
 export function ManagerNav() {
