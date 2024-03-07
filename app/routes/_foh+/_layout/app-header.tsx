@@ -12,6 +12,7 @@ import {
 import { useState } from 'react';
 import { Logo, ThemeMenu } from '#components';
 import { useIsAuthenticated, useIsManager } from '#utils/auth/user';
+import { usePublishedChampionships } from '#utils/foh/use-championships';
 import { usePageTitle } from '#utils/foh/use-page-title';
 import { UserMenu } from './user-menu';
 
@@ -20,6 +21,7 @@ export function AppHeader() {
   const pageTitle = usePageTitle();
   const isAuthenticated = useIsAuthenticated();
   const isManager = useIsManager();
+  const championships = usePublishedChampionships();
 
   return (
     <Navbar
@@ -36,13 +38,15 @@ export function AppHeader() {
           </Link>
         </NavbarBrand>
       </NavbarContent>
-      <NavbarContent className="hidden sm:flex" justify="start">
-        <NavbarItem>
-          <Link color="foreground" href="/">
-            Tabelle
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
+      {championships.length > 0 && (
+        <NavbarContent className="hidden sm:flex" justify="start">
+          <NavbarItem>
+            <Link color="foreground" href="/">
+              Tabelle
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+      )}
       <NavbarContent justify="end" className="hidden sm:flex">
         <NavbarItem>
           <ThemeMenu />
@@ -63,17 +67,21 @@ export function AppHeader() {
         )}
       </NavbarContent>
       <NavbarMenu>
-        <NavbarMenuItem>
-          <Link
-            color="foreground"
-            size="lg"
-            href="/"
-            onPress={() => setIsMenuOpen(false)}
-          >
-            Tabelle
-          </Link>
-        </NavbarMenuItem>
-        <Divider orientation="horizontal" />
+        {championships.length > 0 && (
+          <>
+            <NavbarMenuItem>
+              <Link
+                color="foreground"
+                size="lg"
+                href="/"
+                onPress={() => setIsMenuOpen(false)}
+              >
+                Tabelle
+              </Link>
+            </NavbarMenuItem>
+            <Divider orientation="horizontal" />
+          </>
+        )}
         {isAuthenticated ? (
           <>
             {isManager && (
