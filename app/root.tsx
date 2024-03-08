@@ -12,6 +12,7 @@ import {
   useLoaderData,
   useLocation,
   useNavigate,
+  useRevalidator,
   useRouteError,
 } from '@remix-run/react';
 
@@ -54,12 +55,26 @@ export async function loader({ request }: LoaderFunctionArgs) {
 function AppDocument() {
   const { requestInfo } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
+  const { revalidate } = useRevalidator();
+
   useAuthBroadcast();
 
-  const { theme } = useTheme();
+  const { theme, mode } = useTheme();
   const {
     requestInfo: { toast },
   } = useLoaderData<typeof loader>();
+
+  useEffect(() => {
+    if (mode === 'client') {
+      const handleChange = (ev: MediaQueryListEvent) => {
+        revalidate();
+      };
+
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery?.removeEventListener('change', handleChange);
+    }
+  }, [revalidate, mode]);
 
   useEffect(() => {
     if (toast) {

@@ -7,13 +7,16 @@ import { z } from 'zod';
 const colorSchemeSchema = z.enum(['light', 'dark']);
 export type ColorScheme = z.infer<typeof colorSchemeSchema>;
 
+type ThemeMode = 'session' | 'client';
+
 const themeAction = '/action/set-theme';
 
 export function useTheme() {
   const fetcher = useFetcher();
   const data = useRouteLoaderData<typeof loader>('root');
 
-  const mode = data?.requestInfo.theme ? 'session' : 'client';
+  const mode: ThemeMode = data?.requestInfo.theme ? 'session' : 'client';
+
   const theme = {
     colorScheme:
       data?.requestInfo.theme?.colorScheme ??

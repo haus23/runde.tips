@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useTheme } from '.';
+
 const cookieName = 'CH-prefers-color-scheme';
 
 const clientHintsCode = `
@@ -21,6 +24,24 @@ const clientHintsCode = `
 `;
 
 export function ClientHintsFallback() {
+  const { theme, mode } = useTheme();
+
+  useEffect(() => {
+    if (mode === 'client') {
+      const handleChange = (ev: MediaQueryListEvent) => {
+        const colorScheme = ev.matches ? 'light' : 'dark';
+        if (theme.colorScheme !== colorScheme && navigator.cookieEnabled) {
+          document.cookie = `${cookieName}=${colorScheme}; Max-Age=31536000; path=/`;
+          window.location.reload();
+        }
+      };
+
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery?.removeEventListener('change', handleChange);
+    }
+  }, [theme, mode]);
+
   return (
     <script
       // biome-ignore lint/security/noDangerouslySetInnerHtml: Allowed here only for this script
