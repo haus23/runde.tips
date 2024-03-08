@@ -9,7 +9,7 @@ import {
 import type { Key } from 'react';
 import { Icon, type IconName } from '#components';
 import { includes } from '#utils/misc';
-import { type ColorScheme, useThemeLegacy } from '#utils/theme/theme.provider';
+import { type ColorScheme, useTheme } from '#utils/theme';
 
 const colorSchemes: {
   name: ColorScheme | 'system';
@@ -22,7 +22,7 @@ const colorSchemes: {
 ];
 
 export function ThemeMenu({ onSelection }: { onSelection?: () => void }) {
-  const { theme, mode, setTheme } = useThemeLegacy();
+  const { theme, mode, setTheme } = useTheme();
 
   const selectedColorScheme = new Set([
     mode === 'session' ? theme.colorScheme : 'system',
