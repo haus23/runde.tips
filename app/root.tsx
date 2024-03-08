@@ -12,13 +12,13 @@ import {
   useLoaderData,
   useLocation,
   useNavigate,
+  useRevalidator,
   useRouteError,
-  useRouteLoaderData,
 } from '@remix-run/react';
 
 import { NextUIProvider as UIProvider } from '@nextui-org/react';
 
-import { useEffect } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { Toaster, toast as showToast } from 'sonner';
 
 import { getUser } from '#utils/auth/auth.server';
@@ -27,10 +27,10 @@ import { getToast } from '#utils/toast.server';
 import { Icon, type IconName } from '#components';
 import { useAuthBroadcast } from '#utils/auth/user';
 import { getHints } from '#utils/theme/client-hints.server';
-import { MediaQueryFallback } from '#utils/theme/media-query-fallback';
-import { ThemeProvider, useTheme } from '#utils/theme/theme.provider';
 import { getSession } from '#utils/theme/theme.server';
 
+import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
+import { useTheme } from '#utils/theme/theme';
 import styles from './styles/tailwind.css';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
@@ -52,11 +52,47 @@ export async function loader({ request }: LoaderFunctionArgs) {
   );
 }
 
-function AppDocument() {
+export function Layout({ children }: { children: ReactNode }) {
+  const { revalidate } = useRevalidator();
+  const { theme, mode, needsFallback } = useTheme();
+
+  useEffect(() => {
+    if (mode === 'client') {
+      const handleChange = (ev: MediaQueryListEvent) => {
+        revalidate();
+      };
+
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery?.removeEventListener('change', handleChange);
+    }
+  }, [revalidate, mode]);
+
+  return (
+    <html lang="de" className={theme.colorScheme}>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content={theme.colorScheme} />
+        {needsFallback && <ClientHintsFallback />}
+        <Meta />
+        <Links />
+      </head>
+      <body className="text-foreground bg-background">
+        {children}
+        <Scripts />
+        <ScrollRestoration />
+        <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+export default function AppRoot() {
   const navigate = useNavigate();
+
   useAuthBroadcast();
 
-  const { theme } = useTheme();
   const {
     requestInfo: { toast },
   } = useLoaderData<typeof loader>();
@@ -71,47 +107,16 @@ function AppDocument() {
   }, [toast]);
 
   return (
-    <html lang="de" className={theme.colorScheme}>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="color-scheme" content={theme.colorScheme} />
-        <MediaQueryFallback />
-        <Meta />
-        <Links />
-      </head>
-      <body className="text-foreground bg-background">
-        <UIProvider navigate={navigate}>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-          <Toaster position="top-right" />
-        </UIProvider>
-      </body>
-    </html>
+    <UIProvider navigate={navigate}>
+      <Outlet />
+      <Toaster position="top-right" />
+    </UIProvider>
   );
 }
 
-export default function AppRoot() {
-  const { requestInfo } = useLoaderData<typeof loader>();
-
-  return (
-    <ThemeProvider
-      hints={requestInfo.hints}
-      sessionTheme={requestInfo.theme}
-      themeAction="/action/set-theme"
-      mediaQueryFallback
-    >
-      <AppDocument />
-    </ThemeProvider>
-  );
-}
-
-function ErrorDocument() {
+export function ErrorBoundary() {
   const { pathname } = useLocation();
   const error = useRouteError();
-  const { theme } = useTheme();
 
   let iconName: IconName = 'lucide/angry';
 
@@ -123,43 +128,18 @@ function ErrorDocument() {
     }
   }
   return (
-    <html lang="de" className={theme.colorScheme}>
-      <head>
-        <meta charSet="utf-8" />
-        <title>Hoppla! - runde.tips</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="color-scheme" content={theme.colorScheme} />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <div className="h-dvh flex flex-col gap-y-8 items-center justify-center">
-          <Icon name={iconName} className="size-40 text-danger-200" />
-          <p className="inline-flex text-2xl text-center mx-4 leading-snug">
-            {errorMsg}
-          </p>
-          {pathname === '/' ? (
-            <p className="block text-2xl">Bitte Micha informieren!</p>
-          ) : (
-            <Link
-              to="/"
-              className="block text-2xl underline underline-offset-4"
-            >
-              Zur Startseite
-            </Link>
-          )}
-        </div>
-        <LiveReload />
-      </body>
-    </html>
-  );
-}
-
-export function ErrorBoundary() {
-  const data = useRouteLoaderData<typeof loader>('root');
-  return (
-    <ThemeProvider defaultColorScheme="dark">
-      <ErrorDocument />
-    </ThemeProvider>
+    <div className="h-dvh flex flex-col gap-y-8 items-center justify-center">
+      <Icon name={iconName} className="size-40 text-danger-200" />
+      <p className="inline-flex text-2xl text-center mx-4 leading-snug">
+        {errorMsg}
+      </p>
+      {pathname === '/' ? (
+        <p className="block text-2xl">Bitte Micha informieren!</p>
+      ) : (
+        <Link to="/" className="block text-2xl underline underline-offset-4">
+          Zur Startseite
+        </Link>
+      )}
+    </div>
   );
 }

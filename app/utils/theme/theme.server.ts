@@ -3,9 +3,15 @@ import {
   createCookieSessionStorage,
   json,
 } from '@remix-run/node';
-import { type ThemeSessionData, themeSchema } from './theme.provider';
+import { z } from 'zod';
+import { colorSchemeSchema } from './types';
 
-const themeSessionStorage = createCookieSessionStorage<ThemeSessionData>({
+export const themeSchema = z.object({
+  colorScheme: colorSchemeSchema,
+});
+type Theme = z.infer<typeof themeSchema>;
+
+const themeSessionStorage = createCookieSessionStorage<{ theme: Theme }>({
   cookie: {
     name: '__theme',
     sameSite: 'lax',
