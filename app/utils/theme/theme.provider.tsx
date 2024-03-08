@@ -137,7 +137,7 @@ export function ThemeProvider({
   );
 }
 
-export function useTheme() {
+export function useThemeLegacy() {
   const ctx = useContext(ThemeContext);
   if (!ctx) {
     throw new Error('You must use useTheme within a ThemeProvider.');

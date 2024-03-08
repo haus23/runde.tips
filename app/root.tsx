@@ -28,7 +28,7 @@ import { Icon, type IconName } from '#components';
 import { useAuthBroadcast } from '#utils/auth/user';
 import { getHints } from '#utils/theme/client-hints.server';
 import { MediaQueryFallback } from '#utils/theme/media-query-fallback';
-import { ThemeProvider, useTheme } from '#utils/theme/theme.provider';
+import { ThemeProvider, useThemeLegacy } from '#utils/theme/theme.provider';
 import { getSession } from '#utils/theme/theme.server';
 
 import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
@@ -58,7 +58,7 @@ function AppDocument() {
   const navigate = useNavigate();
   useAuthBroadcast();
 
-  const { theme } = useTheme();
+  const { theme } = useThemeLegacy();
   const {
     requestInfo: { toast },
   } = useLoaderData<typeof loader>();
@@ -114,7 +114,7 @@ export default function AppRoot() {
 function ErrorDocument() {
   const { pathname } = useLocation();
   const error = useRouteError();
-  const { theme } = useTheme();
+  const { theme } = useThemeLegacy();
 
   let iconName: IconName = 'lucide/angry';
 

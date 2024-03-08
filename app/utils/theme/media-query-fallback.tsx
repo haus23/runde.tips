@@ -1,4 +1,4 @@
-import { useTheme } from './theme.provider';
+import { useThemeLegacy } from './theme.provider';
 
 const clientThemeCode = `
 (() => {
@@ -23,7 +23,7 @@ const clientThemeCode = `
 `;
 
 export function MediaQueryFallback() {
-  const { mediaQueryFallback, isSSR } = useTheme();
+  const { mediaQueryFallback, isSSR } = useThemeLegacy();
   return mediaQueryFallback && !isSSR ? (
     <script
       // biome-ignore lint/security/noDangerouslySetInnerHtml: Allowed here only for this script
