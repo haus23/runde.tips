@@ -53,13 +53,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 function AppDocument() {
-  const { requestInfo } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
   const { revalidate } = useRevalidator();
 
   useAuthBroadcast();
 
-  const { theme, mode } = useTheme();
+  const { theme, mode, needsFallback } = useTheme();
   const {
     requestInfo: { toast },
   } = useLoaderData<typeof loader>();
@@ -91,7 +90,7 @@ function AppDocument() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content={theme.colorScheme} />
-        {!!requestInfo.hints.fallback && <ClientHintsFallback />}
+        {needsFallback && <ClientHintsFallback />}
         <Meta />
         <Links />
       </head>

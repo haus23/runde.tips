@@ -13,6 +13,7 @@ export function useTheme() {
   const data = useRouteLoaderData<typeof loader>('root');
 
   const mode: ThemeMode = data?.requestInfo.theme ? 'session' : 'client';
+  const needsFallback = !!data?.requestInfo.hints.fallback;
 
   const theme = {
     colorScheme:
@@ -28,5 +29,5 @@ export function useTheme() {
     [fetcher],
   );
 
-  return { theme, mode, setTheme };
+  return { theme, mode, needsFallback, setTheme };
 }
