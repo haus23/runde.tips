@@ -62,7 +62,7 @@ export function AppHeader() {
               <Link color="foreground" href="/login">
                 Log In
               </Link>
-            </NavbarItem>{' '}
+            </NavbarItem>
           </>
         )}
       </NavbarContent>
