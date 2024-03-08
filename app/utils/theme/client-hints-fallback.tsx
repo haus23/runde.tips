@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useTheme } from '.';
+import { useTheme } from './theme';
 
 const cookieName = 'CH-prefers-color-scheme';
 

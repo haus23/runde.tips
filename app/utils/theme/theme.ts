@@ -2,13 +2,10 @@ import { useFetcher, useRouteLoaderData } from '@remix-run/react';
 import { useCallback } from 'react';
 import type { loader } from '#root';
 
-import { z } from 'zod';
-
-export const colorSchemeSchema = z.enum(['light', 'dark']);
-export type ColorScheme = z.infer<typeof colorSchemeSchema>;
+import type { ColorScheme } from './types';
+export type { ColorScheme } from './types';
 
 type ThemeMode = 'session' | 'client';
-
 const themeAction = '/action/set-theme';
 
 export function useTheme() {

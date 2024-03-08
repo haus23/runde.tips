@@ -9,7 +9,7 @@ import {
 import type { Key } from 'react';
 import { Icon, type IconName } from '#components';
 import { includes } from '#utils/misc';
-import { type ColorScheme, useTheme } from '#utils/theme';
+import { type ColorScheme, useTheme } from '#utils/theme/theme';
 
 const colorSchemes: {
   name: ColorScheme | 'system';

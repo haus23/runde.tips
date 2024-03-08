@@ -1,4 +1,4 @@
-import { colorSchemeSchema } from '.';
+import { colorSchemeSchema } from './types';
 
 // TODO: Remove fallback to cookie value after decent browser support for client hint headers
 

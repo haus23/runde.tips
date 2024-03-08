@@ -4,7 +4,7 @@ import {
   json,
 } from '@remix-run/node';
 import { z } from 'zod';
-import { colorSchemeSchema } from '.';
+import { colorSchemeSchema } from './types';
 
 export const themeSchema = z.object({
   colorScheme: colorSchemeSchema,

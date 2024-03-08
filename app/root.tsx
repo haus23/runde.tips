@@ -29,8 +29,8 @@ import { useAuthBroadcast } from '#utils/auth/user';
 import { getHints } from '#utils/theme/client-hints.server';
 import { getSession } from '#utils/theme/theme.server';
 
-import { useTheme } from '#utils/theme';
 import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
+import { useTheme } from '#utils/theme/theme';
 import styles from './styles/tailwind.css';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
