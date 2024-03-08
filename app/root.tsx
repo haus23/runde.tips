@@ -13,7 +13,6 @@ import {
   useLocation,
   useNavigate,
   useRouteError,
-  useRouteLoaderData,
 } from '@remix-run/react';
 
 import { NextUIProvider as UIProvider } from '@nextui-org/react';
@@ -27,10 +26,9 @@ import { getToast } from '#utils/toast.server';
 import { Icon, type IconName } from '#components';
 import { useAuthBroadcast } from '#utils/auth/user';
 import { getHints } from '#utils/theme/client-hints.server';
-import { MediaQueryFallback } from '#utils/theme/media-query-fallback';
-import { ThemeProvider, useThemeLegacy } from '#utils/theme/theme.provider';
 import { getSession } from '#utils/theme/theme.server';
 
+import { useTheme } from '#utils/theme';
 import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
 import styles from './styles/tailwind.css';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
@@ -58,7 +56,7 @@ function AppDocument() {
   const navigate = useNavigate();
   useAuthBroadcast();
 
-  const { theme } = useThemeLegacy();
+  const { theme } = useTheme();
   const {
     requestInfo: { toast },
   } = useLoaderData<typeof loader>();
@@ -78,7 +76,6 @@ function AppDocument() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content={theme.colorScheme} />
-        <MediaQueryFallback />
         {!!requestInfo.hints.fallback && <ClientHintsFallback />}
         <Meta />
         <Links />
@@ -97,24 +94,13 @@ function AppDocument() {
 }
 
 export default function AppRoot() {
-  const { requestInfo } = useLoaderData<typeof loader>();
-  console.log(requestInfo);
-  return (
-    <ThemeProvider
-      hints={requestInfo.hints}
-      sessionTheme={requestInfo.theme}
-      themeAction="/action/set-theme"
-      mediaQueryFallback
-    >
-      <AppDocument />
-    </ThemeProvider>
-  );
+  return <AppDocument />;
 }
 
 function ErrorDocument() {
   const { pathname } = useLocation();
   const error = useRouteError();
-  const { theme } = useThemeLegacy();
+  const { theme } = useTheme();
 
   let iconName: IconName = 'lucide/angry';
 
@@ -159,10 +145,5 @@ function ErrorDocument() {
 }
 
 export function ErrorBoundary() {
-  const data = useRouteLoaderData<typeof loader>('root');
-  return (
-    <ThemeProvider defaultColorScheme="dark">
-      <ErrorDocument />
-    </ThemeProvider>
-  );
+  return <ErrorDocument />;
 }
