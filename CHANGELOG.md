@@ -1,6 +1,18 @@
 # @tipprunde/www
 
 
+## v0.1.0
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.32...v0.1.0)
+
+### 🏡 Chore
+
+- Add readme and license ([a112283](https://github.com/haus23/runde.tips/commit/a112283))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.32
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.31...v0.0.32)
