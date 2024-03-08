@@ -1,6 +1,68 @@
 # @tipprunde/www
 
 
+## v0.0.31
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.30...v0.0.31)
+
+### 🚀 Enhancements
+
+- Load relevant data. ([29dbb21](https://github.com/haus23/runde.tips/commit/29dbb21))
+- Initial take on styling tables. ([140c8c8](https://github.com/haus23/runde.tips/commit/140c8c8))
+- Add menu icons. ([af49622](https://github.com/haus23/runde.tips/commit/af49622))
+- Add empty header. ([c9a703a](https://github.com/haus23/runde.tips/commit/c9a703a))
+- Start styling. ([62a8585](https://github.com/haus23/runde.tips/commit/62a8585))
+- Setup nextui. Resolves #52 ([#52](https://github.com/haus23/runde.tips/issues/52))
+- Add back minimal header. See issue #54 ([#54](https://github.com/haus23/runde.tips/issues/54))
+- Add minimal ranking styles. Resolves #55. Room for improvements.... ([#55](https://github.com/haus23/runde.tips/issues/55))
+- Add mobile navmenu in foh. ([7c58fd9](https://github.com/haus23/runde.tips/commit/7c58fd9))
+- First take on mobile nav done. ([56a979d](https://github.com/haus23/runde.tips/commit/56a979d))
+- First take on the login page. See #58 ([#58](https://github.com/haus23/runde.tips/issues/58))
+- First take on onboarding. Resolves #58 ([#58](https://github.com/haus23/runde.tips/issues/58))
+- First take on user menu. Resolves #59 ([#59](https://github.com/haus23/runde.tips/issues/59))
+- Add mobile nav for manager. Resolves #61 ([#61](https://github.com/haus23/runde.tips/issues/61))
+- Add component to set client cookie as fallback for client-hints ([40960aa](https://github.com/haus23/runde.tips/commit/40960aa))
+- Implement fallback to cookie based client hints ([8823725](https://github.com/haus23/runde.tips/commit/8823725))
+- Add provider-less useTheme hook. ([b3e8970](https://github.com/haus23/runde.tips/commit/b3e8970))
+- Listen to color scheme changes if in system mode. ([603d726](https://github.com/haus23/runde.tips/commit/603d726))
+
+### 🩹 Fixes
+
+- Implement account seeding. Resolves #46 ([#46](https://github.com/haus23/runde.tips/issues/46))
+- Wrong wrapped overlay arrow. ([1dbad46](https://github.com/haus23/runde.tips/commit/1dbad46))
+- Add props to underlying rac table. ([f880182](https://github.com/haus23/runde.tips/commit/f880182))
+- Add theme colors. See issue #52 ([#52](https://github.com/haus23/runde.tips/issues/52))
+- Add theme menu back. Resolves #56 ([#56](https://github.com/haus23/runde.tips/issues/56))
+- Change the buttons. See #60 ([#60](https://github.com/haus23/runde.tips/issues/60))
+- Uses cards on sync page. Resolves #60 ([#60](https://github.com/haus23/runde.tips/issues/60))
+- Adapt card for welcome page. Resolves #62 ([#62](https://github.com/haus23/runde.tips/issues/62))
+- Hide nav items with no championships. Resolves #54 ([#54](https://github.com/haus23/runde.tips/issues/54))
+- Use danger color. Resolves #63 ([#63](https://github.com/haus23/runde.tips/issues/63))
+- Remove last traces of custom rac components. See #64 ([#64](https://github.com/haus23/runde.tips/issues/64))
+- Delete custom rac components. Resolves #64 ([#64](https://github.com/haus23/runde.tips/issues/64))
+- Add same-site attribute. ([d53a295](https://github.com/haus23/runde.tips/commit/d53a295))
+- Adapt layout export feature. Resolves #18 ([#18](https://github.com/haus23/runde.tips/issues/18))
+
+### 💅 Refactors
+
+- Re-Start with emptied layout. ([c70a650](https://github.com/haus23/runde.tips/commit/c70a650))
+- Rename current hook to legacy hook. ([8076364](https://github.com/haus23/runde.tips/commit/8076364))
+- Use provider-less hook ([b861882](https://github.com/haus23/runde.tips/commit/b861882))
+- Drop legacy implementation ([0cd5851](https://github.com/haus23/runde.tips/commit/0cd5851))
+- Reorganize code. ([27de1f1](https://github.com/haus23/runde.tips/commit/27de1f1))
+- Provide fallback info via hook ([3e296b6](https://github.com/haus23/runde.tips/commit/3e296b6))
+
+### 🏡 Chore
+
+- Update env template. ([03454f4](https://github.com/haus23/runde.tips/commit/03454f4))
+- Update deps. ([61bc1e3](https://github.com/haus23/runde.tips/commit/61bc1e3))
+- Add nextui deps. ([54d7dbc](https://github.com/haus23/runde.tips/commit/54d7dbc))
+
+### ❤️ Contributors
+
+- Micha <micha@haus23.net>
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.30
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.29...v0.0.30)
