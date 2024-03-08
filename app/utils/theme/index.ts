@@ -4,7 +4,7 @@ import type { loader } from '#root';
 
 import { z } from 'zod';
 
-const colorSchemeSchema = z.enum(['light', 'dark']);
+export const colorSchemeSchema = z.enum(['light', 'dark']);
 export type ColorScheme = z.infer<typeof colorSchemeSchema>;
 
 type ThemeMode = 'session' | 'client';
