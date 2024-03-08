@@ -3,7 +3,7 @@ import { z } from 'zod';
 const envSchema = z.object({
   // Basics
   NODE_ENV: z.enum(['development', 'production']).optional(),
-  DATABASE_URL: z.string().endsWith('?connection_limit=1'),
+  DATABASE_URL: z.string(),
 
   // Secrets
   SESSION_SECRET: z.string(),

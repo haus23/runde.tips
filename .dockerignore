@@ -1,0 +1,38 @@
+# Remix Build
+**/.nitro
+**/.output
+
+# Remix cache
+**/.cache
+
+# Prisma
+db/dev.db
+
+# Docker
+**/.dockerignore
+**/docker-compose.yml
+**/Dockerfile
+
+# Sensible data
+**/.env*
+
+# Docs and icons
+docs
+icons
+sly.json
+
+# Git
+**/.git
+**/.gitignore
+
+# Editor
+**/.vscode
+**/.editorconfig
+
+# NPM
+**/node_modules
+
+# Project
+LICENSE
+README.md
+CHANGELOG.md
