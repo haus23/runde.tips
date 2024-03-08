@@ -15,7 +15,10 @@ const colorSchemeNames = ['light', 'dark'] as const;
 export type ColorScheme = (typeof colorSchemeNames)[number];
 export type ColorSchemeSource = 'client' | 'session';
 export type Theme = { colorScheme: ColorScheme };
-export type ClientHints = { colorScheme: ColorScheme | null };
+export type ClientHints = {
+  colorScheme: ColorScheme | null;
+  fallback?: boolean;
+};
 export type ThemeSessionData = { theme: Theme };
 
 // Validation Schema

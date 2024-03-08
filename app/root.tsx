@@ -31,6 +31,7 @@ import { MediaQueryFallback } from '#utils/theme/media-query-fallback';
 import { ThemeProvider, useTheme } from '#utils/theme/theme.provider';
 import { getSession } from '#utils/theme/theme.server';
 
+import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
 import styles from './styles/tailwind.css';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
@@ -53,6 +54,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 function AppDocument() {
+  const { requestInfo } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
   useAuthBroadcast();
 
@@ -77,6 +79,7 @@ function AppDocument() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content={theme.colorScheme} />
         <MediaQueryFallback />
+        {!!requestInfo.hints.fallback && <ClientHintsFallback />}
         <Meta />
         <Links />
       </head>
@@ -95,7 +98,7 @@ function AppDocument() {
 
 export default function AppRoot() {
   const { requestInfo } = useLoaderData<typeof loader>();
-
+  console.log(requestInfo);
   return (
     <ThemeProvider
       hints={requestInfo.hints}
