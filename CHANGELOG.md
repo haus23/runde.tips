@@ -1,6 +1,23 @@
 # @tipprunde/www
 
 
+## v0.0.32
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.31...v0.0.32)
+
+### 🚀 Enhancements
+
+- Add first take on docker file. Works for now. ([50f134d](https://github.com/haus23/runde.tips/commit/50f134d))
+
+### 🩹 Fixes
+
+- Move deps to production deps. ([e8ccdf3](https://github.com/haus23/runde.tips/commit/e8ccdf3))
+- No need to ensure connection limit when deploying ([a284673](https://github.com/haus23/runde.tips/commit/a284673))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.31
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.30...v0.0.31)
