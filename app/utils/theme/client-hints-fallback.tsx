@@ -17,7 +17,7 @@ const clientHintsCode = `
     : 'dark';
 
   if (currentCookieColorScheme !== colorScheme && navigator.cookieEnabled) {
-      document.cookie = '${cookieName}' + '=' + colorScheme + '; Max-Age=31536000; path=/';
+      document.cookie = '${cookieName}' + '=' + colorScheme + '; Max-Age=31536000; path=/; SameSite=Lax';
       window.location.reload();
   }
 })();
@@ -31,7 +31,7 @@ export function ClientHintsFallback() {
       const handleChange = (ev: MediaQueryListEvent) => {
         const colorScheme = ev.matches ? 'light' : 'dark';
         if (theme.colorScheme !== colorScheme && navigator.cookieEnabled) {
-          document.cookie = `${cookieName}=${colorScheme}; Max-Age=31536000; path=/`;
+          document.cookie = `${cookieName}=${colorScheme}; Max-Age=31536000; path=/; SameSite=Lax`;
           window.location.reload();
         }
       };
