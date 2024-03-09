@@ -24,7 +24,7 @@ import { Toaster, toast as showToast } from 'sonner';
 import { getUser } from '#utils/auth/auth.server';
 import { getToast } from '#utils/toast.server';
 
-import { Icon, type IconName } from '#components';
+import { Icon, type IconName } from '#components/ui';
 import { useAuthBroadcast } from '#utils/auth/user';
 import { getHints } from '#utils/theme/client-hints.server';
 import { getSession } from '#utils/theme/theme.server';
