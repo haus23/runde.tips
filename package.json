@@ -34,7 +34,6 @@
     "jsx-email": "^1.10.12",
     "prisma": "^5.10.2",
     "react": "^18.2.0",
-    "react-aria-components": "^1.1.1",
     "react-dom": "^18.2.0",
     "remix-auth": "^3.6.0",
     "remix-auth-totp": "^3.0.0",
