@@ -21,8 +21,9 @@
   },
   "dependencies": {
     "@epic-web/cachified": "^5.1.2",
-    "@nextui-org/react": "^2.2.10",
     "@prisma/client": "^5.10.2",
+    "@react-aria/overlays": "^3.21.1",
+    "@react-aria/utils": "^3.23.2",
     "@remix-run/node": "^2.8.0",
     "@remix-run/react": "^2.8.0",
     "@remix-run/serve": "^2.8.0",
