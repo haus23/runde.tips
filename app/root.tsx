@@ -28,7 +28,7 @@ import { useTheme } from '#utils/theme/theme';
 import { getSession } from '#utils/theme/theme.server';
 import { getToast } from '#utils/toast.server';
 
-import styles from './styles/tailwind.css';
+import styles from './styles/tailwind.css?url';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -79,7 +79,6 @@ export function Layout({ children }: { children: ReactNode }) {
           {children}
           <Scripts />
           <ScrollRestoration />
-          <LiveReload />
         </UIProvider>
       </body>
     </html>
