@@ -1,1 +1,17 @@
 @import 'tailwindcss';
+
+:root {
+  --app-bg: white;
+  --app-fg: #010600E3;
+}
+
+.dark {
+  --app-bg: #111210;
+  --app-fg: #FDFFFDED;
+}
+
+@theme {
+  --background-color-app: var(--app-bg);
+  --text-color-app: var(--app-fg);
+
+}

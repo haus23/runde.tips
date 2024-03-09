@@ -74,7 +74,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-app text-app">
         <UIProvider>
           {children}
           <Scripts />
