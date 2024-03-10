@@ -2,10 +2,16 @@
 
 @import '@radix-ui/colors/olive.css';
 @import '@radix-ui/colors/olive-dark.css';
+@import '@radix-ui/colors/grass.css';
+@import '@radix-ui/colors/grass-dark.css';
 
 :root {
   --app-bg: white;
   --app-fg: var(--olive-12);
+
+  --ca-bg: var(--grass-3);
+
+  --divider-default: var(--olive-6);
 }
 
 .dark {
@@ -14,5 +20,9 @@
 
 @theme {
   --background-color-app: var(--app-bg);
+  --background-color-ca: var(--ca-bg);
+
   --text-color-app: var(--app-fg);
+
+  --divide-color-default: var(--divider-default);
 }

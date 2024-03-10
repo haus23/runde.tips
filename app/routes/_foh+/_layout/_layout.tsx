@@ -11,7 +11,7 @@ export default function FohLayout() {
   return (
     <>
       <Header />
-      <main className="mx-auto max-w-5xl pb-10 px-2 sm:px-6 lg:px-8 mt-2">
+      <main className="mx-auto max-w-4xl pb-10 sm:px-6 lg:px-8 mt-2">
         <Outlet />
       </main>
     </>
