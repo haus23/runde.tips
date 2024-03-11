@@ -7,11 +7,6 @@
 
 :root {
   --app-bg: white;
-  --app-fg: var(--olive-12);
-
-  --ca-bg: var(--grass-3);
-
-  --divider-default: var(--olive-6);
 }
 
 .dark {
@@ -19,10 +14,23 @@
 }
 
 @theme {
+
+  /* Default App Foregorund/Background */
+  --text-color-app: var(--olive-12);
   --background-color-app: var(--app-bg);
-  --background-color-ca: var(--ca-bg);
 
-  --text-color-app: var(--app-fg);
+  /* Subtle border/dividers */
+  --border-color-default: var(--olive-6);
+  --divide-color-default: var(--olive-6);
 
-  --divide-color-default: var(--divider-default);
+  /* Focus Ring */
+  --ring-color-default: var(--olive-7);
+  --ring-offset-color-default: var(--app-bg);
+
+  /* Accent Backgrounds */
+  --background-color-ca: var(--grass-3);
+
+  /* Ghost Toolbar Btn */
+  --background-color-btn-toolbar: var(--olive-5);
+  --border-color-btn-toolbar: var(--olive-5);
 }
