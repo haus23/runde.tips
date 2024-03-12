@@ -7,9 +7,6 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
   "json.validate.enable": false,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
@@ -25,5 +22,8 @@
   ],
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
   }
 }
