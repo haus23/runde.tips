@@ -7,17 +7,21 @@
 
 :root {
   --app-bg: white;
+  --content-bg: var(--olive-1);
 }
 
 .dark {
   --app-bg: var(--olive-1);
+  --content-bg: var(--olive-2);
 }
 
 @theme {
-
   /* Default App Foregorund/Background */
   --text-color-app: var(--olive-12);
   --background-color-app: var(--app-bg);
+
+  /* Content Background */
+  --background-color-content: var(--content-bg);
 
   /* Subtle border/dividers */
   --border-color-default: var(--olive-6);
