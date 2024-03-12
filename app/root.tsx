@@ -28,8 +28,7 @@ import { useTheme } from '#utils/theme/theme';
 import { getSession } from '#utils/theme/theme.server';
 import { getToast } from '#utils/toast.server';
 
-import styles from './styles.css?url';
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
+import './styles.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request);
