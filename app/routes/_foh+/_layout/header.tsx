@@ -1,19 +1,17 @@
 import { Logo } from '#components/logo';
-import { Button, Icon } from '#components/ui';
+import { ThemeMenu } from '#components/theme-menu';
 import { usePageTitle } from '#utils/foh/use-page-title';
 
 export function Header() {
   const pageTitle = usePageTitle();
 
   return (
-    <header className="h-14 bg-app sticky top-0 grid px-2 sm:px-4">
+    <header className="h-14 bg-app sticky top-0 grid max-w-6xl mx-auto px-2 sm:px-4">
       <div className="hidden sm:grid grid-cols-[auto_1fr_auto] gap-x-4 items-center">
         <Logo />
         <nav />
         <div>
-          <Button variant="toolbar">
-            <Icon name="lucide/moon" />
-          </Button>
+          <ThemeMenu />
         </div>
       </div>
       <div className="grid sm:hidden grid-cols-[auto_1fr_auto] gap-x-2 items-center">

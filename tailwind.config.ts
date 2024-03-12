@@ -8,14 +8,17 @@ export default {
     backgroundColor: ({ theme }) => ({
       ...theme('colors'),
       app: 'var(--background-color-app)',
-      content: 'var(--background-color-content)',
-      'btn-toolbar': 'var(--background-color-btn-toolbar)',
+      content: {
+        DEFAULT: 'var(--background-color-content)',
+        hover: 'var(--background-color-content-hover)',
+        active: 'var(--background-color-content-active)',
+      },
       ca: 'var(--background-color-ca)',
+      popover: 'var(--background-color-popover)',
     }),
     borderColor: ({ theme }) => ({
       ...theme('colors'),
       default: 'var(--border-color-default)',
-      'btn-toolbar': 'var(--border-color-btn-toolbar)',
     }),
     divideColor: ({ theme }) => ({
       ...theme('colors'),
@@ -23,6 +26,7 @@ export default {
     }),
     fill: ({ theme }) => ({
       ...theme('colors'),
+      popover: 'var(--fill-color-popover)',
     }),
     ringColor: ({ theme }) => ({
       ...theme('colors'),
@@ -34,6 +38,7 @@ export default {
     }),
     stroke: ({ theme }) => ({
       ...theme('colors'),
+      'border-default': 'var(--stroke-color-border-default)',
     }),
     textColor: ({ theme }) => ({
       ...theme('colors'),

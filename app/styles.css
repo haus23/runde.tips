@@ -26,8 +26,14 @@
     --text-color-app-subtle: var(--olive-11);
     --background-color-app: var(--app-bg);
 
-    /* Content Background */
-    --background-color-content: var(--olive-2);
+    /* Content Colors */
+    --background-color-content: var(--olive-3);
+    --background-color-content-hover: var(--olive-4);
+    --background-color-content-active: var(--olive-5);
+
+    /* Popover Colors */
+    --background-color-popover: var(--olive-2);
+    --fill-color-popover: var(--olive-2);
 
     /* Accent Backgrounds */
     --background-color-ca: var(--grass-3);
@@ -35,13 +41,10 @@
     /* Subtle border/dividers */
     --border-color-default: var(--olive-6);
     --divide-color-default: var(--olive-6);
+    --stroke-color-border-default: var(--olive-6);
 
     /* Focus Ring */
     --default-ring-color: var(--olive-7);
     --default-ring-offset-color: var(--app-bg);
-
-    /* Ghost Toolbar Btn */
-    --background-color-btn-toolbar: var(--olive-5);
-    --border-color-btn-toolbar: var(--olive-5);
   }
 }
