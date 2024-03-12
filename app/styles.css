@@ -1,40 +1,8 @@
-@import 'tailwindcss';
-
 @import '@radix-ui/colors/olive.css';
 @import '@radix-ui/colors/olive-dark.css';
 @import '@radix-ui/colors/grass.css';
 @import '@radix-ui/colors/grass-dark.css';
 
-:root {
-  --app-bg: white;
-  --content-bg: var(--olive-1);
-}
-
-.dark {
-  --app-bg: var(--olive-1);
-  --content-bg: var(--olive-2);
-}
-
-@theme {
-  /* Default App Foregorund/Background */
-  --text-color-app: var(--olive-12);
-  --background-color-app: var(--app-bg);
-
-  /* Content Background */
-  --background-color-content: var(--content-bg);
-
-  /* Subtle border/dividers */
-  --border-color-default: var(--olive-6);
-  --divide-color-default: var(--olive-6);
-
-  /* Focus Ring */
-  --ring-color-default: var(--olive-7);
-  --ring-offset-color-default: var(--app-bg);
-
-  /* Accent Backgrounds */
-  --background-color-ca: var(--grass-3);
-
-  /* Ghost Toolbar Btn */
-  --background-color-btn-toolbar: var(--olive-5);
-  --border-color-btn-toolbar: var(--olive-5);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

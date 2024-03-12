@@ -14,7 +14,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "package.json": "package-lock.json",
-    "vite.config.ts": "env.d.ts, tsconfig.json, tailwind.config.ts, sly.json",
+    "vite.config.ts": "env.d.ts, .postcssrc.json, sly.json, tsconfig.json, tailwind.config.ts",
     "biome.json": ".editorconfig",
     "README.md": "CHANGELOG.md, LICENSE",
     "Dockerfile": ".dockerignore, docker-compose.yml",
