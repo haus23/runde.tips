@@ -8,7 +8,7 @@ import { focusRingStyles } from '../base-styles';
 
 const styles = tv({
   extend: focusRingStyles,
-  base: 'flex items-center px-4 py-2 transition data-[pressed=true]:scale-[0.95]',
+  base: 'flex items-center px-4 py-2 transition pressed:scale-95',
   variants: {
     color: {
       neutral: '',
