@@ -14,6 +14,7 @@ export default {
         active: 'var(--background-color-content-active)',
       },
       accent: 'var(--background-color-accent)',
+      card: 'var(--background-color-card)',
       popover: 'var(--background-color-popover)',
     }),
     borderColor: ({ theme }) => ({
@@ -50,7 +51,13 @@ export default {
         DEFAULT: 'var(--text-color-accent)',
       },
     }),
-    extend: {},
+    extend: {
+      boxShadow: {
+        small: 'var(--ui-box-shadow-medium)',
+        medium: 'var(--ui-box-shadow-medium)',
+        large: 'var(--ui-box-shadow-medium)',
+      },
+    },
   },
   plugins: [ariaComponents()],
 } satisfies Config;

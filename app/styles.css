@@ -11,10 +11,14 @@
 
   :root {
     --app-bg: white;
+    --content-bg: white;
+    --popover-bg: white;
   }
 
   .dark {
     --app-bg: var(--olive-1);
+    --popover-bg: var(--olive-2);
+    --content-bg: var(--olive-3);
   }
 
   /*
@@ -37,9 +41,12 @@
     /* Accent Content */
     --background-color-accent: var(--grass-3);
 
-    /* Popover Colors */
-    --background-color-popover: var(--olive-2);
-    --fill-color-popover: var(--olive-2);
+    /* Cards */
+    --background-color-card: var(--content-bg);
+
+    /* Popovers */
+    --background-color-popover: var(--popover-bg);
+    --fill-color-popover: var(--popover-bg);
 
     /* Subtle border/dividers */
     --border-color-default: var(--olive-6);
@@ -49,5 +56,19 @@
     /* Focus Ring */
     --default-ring-color: var(--olive-7);
     --default-ring-offset-color: var(--app-bg);
+
+    /* Shadows */
+    --ui-box-shadow-small:
+      0px 0px 5px 0px rgb(0 0 0 / .02),
+      0px 2px 10px 0px rgb(0 0 0 / .06),
+      0px 0px 1px 0px rgb(0 0 0 / .3);
+    --ui-box-shadow-medium:
+      0px 0px 15px 0px rgb(0 0 0 / .03),
+      0px 2px 30px 0px rgb(0 0 0 / .08),
+      0px 0px 1px 0px rgb(0 0 0 / .3);
+    --ui-box-shadow-large:
+      0px 0px 30px 0px rgb(0 0 0 / .04),
+      0px 30px 60px 0px rgb(0 0 0 / .12),
+      0px 0px 1px 0px rgb(0 0 0 / .3);
   }
 }

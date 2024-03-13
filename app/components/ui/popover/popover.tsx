@@ -7,7 +7,7 @@ import { tv } from 'tailwind-variants';
 
 const styles = tv({
   base: [
-    'bg-popover border border-default rounded-xl shadow-lg',
+    'bg-popover border border-default rounded-xl shadow-medium',
     'forced-colors:bg-[Canvas]',
   ],
 });

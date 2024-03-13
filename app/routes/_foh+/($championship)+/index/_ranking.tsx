@@ -35,7 +35,7 @@ export default function RankingRoute() {
         </h2>
       </div>
       <Table className="text-sm" aria-labelledby="tableLabel">
-        <TableHeader className="bg-ca text-xs uppercase">
+        <TableHeader className="bg-accent text-xs uppercase">
           <Column className="py-2 px-2 md:px-6 text-right">Platz</Column>
           <Column className="px-2 md:px-6 text-left" isRowHeader>
             Name
