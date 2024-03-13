@@ -13,7 +13,7 @@ export default {
         hover: 'var(--background-color-content-hover)',
         active: 'var(--background-color-content-active)',
       },
-      ca: 'var(--background-color-ca)',
+      accent: 'var(--background-color-accent)',
       popover: 'var(--background-color-popover)',
     }),
     borderColor: ({ theme }) => ({
@@ -45,6 +45,9 @@ export default {
       app: {
         DEFAULT: 'var(--text-color-app)',
         subtle: 'var(--text-color-app-subtle)',
+      },
+      accent: {
+        DEFAULT: 'var(--text-color-accent)',
       },
     }),
     extend: {},

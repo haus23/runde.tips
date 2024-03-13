@@ -26,17 +26,20 @@
     --text-color-app-subtle: var(--olive-11);
     --background-color-app: var(--app-bg);
 
+    /* App Accent Foreground */
+    --text-color-accent: var(--grass-11);
+
     /* Content Colors */
     --background-color-content: var(--olive-3);
     --background-color-content-hover: var(--olive-4);
     --background-color-content-active: var(--olive-5);
 
+    /* Accent Content */
+    --background-color-accent: var(--grass-3);
+
     /* Popover Colors */
     --background-color-popover: var(--olive-2);
     --fill-color-popover: var(--olive-2);
-
-    /* Accent Backgrounds */
-    --background-color-ca: var(--grass-3);
 
     /* Subtle border/dividers */
     --border-color-default: var(--olive-6);
