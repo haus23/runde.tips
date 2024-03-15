@@ -1,6 +1,6 @@
 import { Logo } from '#components/logo';
 import { ThemeMenu } from '#components/theme-menu';
-import { NavLink } from '#components/ui';
+import { Divider, NavLink } from '#components/ui';
 import { usePageTitle } from '#utils/foh/use-page-title';
 
 export function Header() {
@@ -15,8 +15,8 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-x-2">
           <ThemeMenu />
-          <div className="flex items-center gap-x-2">
-            <span className="border border-default h-10 ml-2" />
+          <div className="flex items-center gap-x-2 h-14">
+            <Divider orientation="vertical" className="h-10 ml-2" />
             <NavLink href="/login">Log In</NavLink>
           </div>
         </div>

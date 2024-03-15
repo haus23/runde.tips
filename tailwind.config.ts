@@ -15,6 +15,7 @@ export default {
       },
       accent: 'var(--background-color-accent)',
       card: 'var(--background-color-card)',
+      divider: 'var(--divide-color-default)',
       popover: 'var(--background-color-popover)',
     }),
     borderColor: ({ theme }) => ({
