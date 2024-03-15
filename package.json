@@ -22,6 +22,7 @@
   "dependencies": {
     "@epic-web/cachified": "^5.1.2",
     "@prisma/client": "^5.10.2",
+    "@radix-ui/react-slot": "^1.0.2",
     "@react-aria/overlays": "^3.21.1",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
@@ -43,7 +44,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.6.0",
+    "@biomejs/biome": "1.6.1",
     "@radix-ui/colors": "^3.0.0",
     "@remix-run/dev": "^2.8.1",
     "@sly-cli/sly": "^1.10.0",
