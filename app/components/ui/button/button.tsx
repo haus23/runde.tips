@@ -8,7 +8,7 @@ import { focusRingStyles } from '../base-styles';
 
 const styles = tv({
   extend: focusRingStyles,
-  base: 'flex items-center px-4 py-2 transition pressed:scale-95 cursor-default',
+  base: 'flex items-center px-4 py-2 transition pressed:scale-95 cursor-default rounded-lg font-semibold',
   variants: {
     color: {
       neutral: '',
@@ -32,7 +32,7 @@ const styles = tv({
     {
       variant: 'solid',
       color: 'accent',
-      className: '',
+      className: 'bg-acs hover:bg-acs-hover text-white',
     },
     {
       variant: 'toolbar',

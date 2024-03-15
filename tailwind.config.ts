@@ -17,6 +17,10 @@ export default {
       card: 'var(--background-color-card)',
       divider: 'var(--divide-color-default)',
       popover: 'var(--background-color-popover)',
+      acs: {
+        DEFAULT: 'var(--background-color-acs)',
+        hover: 'var(--background-color-acs-hover)',
+      },
     }),
     borderColor: ({ theme }) => ({
       ...theme('colors'),

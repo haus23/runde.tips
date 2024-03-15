@@ -38,7 +38,7 @@
     --background-color-content-hover: var(--olive-4);
     --background-color-content-active: var(--olive-5);
 
-    /* Accent Content */
+    /* Accent Content / Header */
     --background-color-accent: var(--grass-3);
 
     /* Cards */
@@ -47,6 +47,10 @@
     /* Popovers */
     --background-color-popover: var(--popover-bg);
     --fill-color-popover: var(--popover-bg);
+
+    /* Accent Components Solid */
+    --background-color-acs: var(--grass-9);
+    --background-color-acs-hover: var(--grass-10);
 
     /* Subtle border/dividers */
     --border-color-default: var(--olive-6);
