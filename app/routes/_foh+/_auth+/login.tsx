@@ -1,5 +1,6 @@
 import { Form } from 'react-aria-components';
-import { Button, TextField } from '#components/ui';
+import { Card, CardBody, CardHeader } from '#components/card';
+import { Button, Divider, TextField } from '#components/ui';
 
 export const handle = {
   pageTitle: 'Log In',
@@ -7,15 +8,20 @@ export const handle = {
 
 export default function LogInRoute() {
   return (
-    <div>
-      <h2>Anmeldung</h2>
-      <Form>
-        <TextField />
-        <Button variant="solid" color="accent">
-          Code anfordern
-        </Button>
-      </Form>
-    </div>
+    <Card className="sm:mt-8">
+      <CardHeader asChild>
+        <h2>Anmeldung</h2>
+      </CardHeader>
+      <Divider />
+      <CardBody>
+        <Form className="flex flex-col gap-y-4">
+          <TextField />
+          <Button variant="solid" color="accent" className="self-start">
+            Code anfordern
+          </Button>
+        </Form>
+      </CardBody>
+    </Card>
   );
 }
 /*
