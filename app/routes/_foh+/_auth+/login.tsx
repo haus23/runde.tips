@@ -15,8 +15,27 @@ export default function LogInRoute() {
       <Divider />
       <CardBody>
         <Form className="flex flex-col gap-y-4">
-          <TextField label="Email" />
-          <Button variant="solid" color="accent" className="self-start">
+          <TextField
+            isRequired
+            type="email"
+            label="E-Mail"
+            description="Deine für die Tipprunde genutzte E-Mail Adresse."
+            errorMessage={({ validationDetails, validationErrors }) =>
+              validationDetails.valueMissing
+                ? 'Ohne Email-Adresse geht es nicht.'
+                : validationDetails.typeMismatch
+                  ? 'Ungültige Email-Adresse.'
+                  : validationDetails.customError
+                    ? validationErrors.join()
+                    : ''
+            }
+          />
+          <Button
+            variant="solid"
+            color="accent"
+            className="self-start"
+            type="submit"
+          >
             Code anfordern
           </Button>
         </Form>

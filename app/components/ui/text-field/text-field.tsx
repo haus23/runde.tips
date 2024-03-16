@@ -1,5 +1,6 @@
 import {
   FieldError,
+  type FieldErrorProps,
   Input,
   type InputProps,
   Label,
@@ -7,6 +8,7 @@ import {
   Text,
   TextField,
   type TextFieldProps,
+  type TextProps,
   type ValidationResult,
   composeRenderProps,
 } from 'react-aria-components';
@@ -39,6 +41,28 @@ function InputWrapper({ className, ...props }: InputProps) {
   );
 }
 
+function Description({ className, ...props }: TextProps) {
+  return (
+    <Text
+      {...props}
+      slot="description"
+      className={twMerge('text-sm text-app-subtle', className)}
+    />
+  );
+}
+
+function FieldErrorWrapper({ className, ...props }: FieldErrorProps) {
+  return (
+    <FieldError
+      {...props}
+      className={composeTailwindRenderProps(
+        className,
+        'text-sm text-error forced-colors:text-[Mark]',
+      )}
+    />
+  );
+}
+
 const inputStyles = tv({
   extend: focusRingStyles,
   base: ['border-2 rounded-md transition-colors', fieldBorderStyles.base],
@@ -63,6 +87,7 @@ function _TextField({
   errorMessage,
   ...props
 }: _TextFieldProps) {
+  console.log(errorMessage);
   return (
     <TextField
       {...props}
@@ -76,8 +101,10 @@ function _TextField({
             inputStyles({ ...renderProps, className }),
         )}
       />
-      <Text slot="description" />
-      <FieldError />
+      {description && (
+        <Description className="hidden last:block">{description}</Description>
+      )}
+      <FieldErrorWrapper>{errorMessage}</FieldErrorWrapper>
     </TextField>
   );
 }
