@@ -15,7 +15,7 @@ export default function LogInRoute() {
       <Divider />
       <CardBody>
         <Form className="flex flex-col gap-y-4">
-          <TextField />
+          <TextField label="Email" />
           <Button variant="solid" color="accent" className="self-start">
             Code anfordern
           </Button>
@@ -24,10 +24,3 @@ export default function LogInRoute() {
     </Card>
   );
 }
-/*
-.shadow-medium {
-  --tw-shadow: var(--nextui-box-shadow-medium);
-  --tw-shadow-colored: var(--nextui-box-shadow-medium);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow)
-}
-*/

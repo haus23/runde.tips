@@ -8,3 +8,15 @@ export const focusRingStyles = tv({
     },
   },
 });
+
+export const fieldBorderStyles = tv({
+  base: 'border-default forced-colors:border-[ButtonBorder]',
+  variants: {
+    isFocusWithin: {
+      true: 'border-focused forced-colors:border-[Highlight]',
+    },
+    isInvalid: {
+      true: 'border-error forced-colors:border-[Mark]',
+    },
+  },
+});

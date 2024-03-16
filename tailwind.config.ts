@@ -25,6 +25,8 @@ export default {
     borderColor: ({ theme }) => ({
       ...theme('colors'),
       default: 'var(--border-color-default)',
+      focused: 'var(--border-color-focused)',
+      error: 'var(--border-color-error)',
     }),
     divideColor: ({ theme }) => ({
       ...theme('colors'),
