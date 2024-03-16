@@ -123,7 +123,7 @@ export function ErrorBoundary() {
   }
   return (
     <div className="h-dvh flex flex-col gap-y-8 items-center justify-center">
-      <Icon name={iconName} className="size-40 text-danger-200" />
+      <Icon name={iconName} className="size-40 text-error" />
       <p className="inline-flex text-2xl text-center mx-4 leading-snug">
         {errorMsg}
       </p>

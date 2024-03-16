@@ -27,13 +27,14 @@
     Theme
   */
   :root {
-    /* App Foreground/Background */
-    --text-color-app: var(--olive-12);
-    --text-color-app-subtle: var(--olive-11);
+    /* App Background */
     --background-color-app: var(--app-bg);
 
-    /* App Accent Foreground */
+    /* App Foregrounds */
+    --text-color-app: var(--olive-12);
+    --text-color-app-subtle: var(--olive-11);
     --text-color-accent: var(--grass-11);
+    --text-color-error: var(--red-9);
 
     /* Content Colors */
     --background-color-content: var(--olive-3);
