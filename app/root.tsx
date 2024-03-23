@@ -1,8 +1,7 @@
-import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import {
   Link,
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -16,7 +15,7 @@ import {
 } from '@remix-run/react';
 
 import { type ReactNode, useEffect } from 'react';
-import { Toaster, toast as showToast } from 'sonner';
+import { toast as showToast } from 'sonner';
 
 import { Icon, type IconName, UIProvider } from '#components/ui';
 
@@ -28,6 +27,7 @@ import { useTheme } from '#utils/theme/theme';
 import { getSession } from '#utils/theme/theme.server';
 import { getToast } from '#utils/toast.server';
 
+import { Toaster } from '#components/toaster';
 import './styles.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -103,7 +103,7 @@ export default function AppRoot() {
   return (
     <>
       <Outlet />
-      <Toaster position="top-right" />
+      <Toaster />
     </>
   );
 }
