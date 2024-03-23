@@ -13,12 +13,14 @@
 
   :root {
     --app-bg: white;
+    --app-bg-subtle: var(--olive-1);
     --content-bg: white;
     --popover-bg: white;
   }
 
   .dark {
     --app-bg: var(--olive-1);
+    --app-bg-subtle: var(--olive-2);
     --popover-bg: var(--olive-2);
     --content-bg: var(--olive-3);
   }
@@ -29,10 +31,12 @@
   :root {
     /* App Background */
     --background-color-app: var(--app-bg);
+    --background-color-app-subtle: var(--app-bg-subtle);
 
     /* App Foregrounds */
     --text-color-app: var(--olive-12);
     --text-color-app-subtle: var(--olive-11);
+    --text-color-app-notice: var(--olive-10);
     --text-color-accent: var(--grass-11);
     --text-color-error: var(--red-9);
 

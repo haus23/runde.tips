@@ -21,6 +21,14 @@ export function UserMenu() {
       </Button>
       <Popover placement="bottom">
         <Menu className="p-1.5 w-[180px] outline-none" onAction={handleAction}>
+          {user.role.includes('ADMIN') && (
+            <MenuItem
+              className="flex text-sm select-none cursor-pointer py-2 pl-3 pr-1 rounded-lg outline-none transition-colors data-[focused]:bg-content-hover"
+              href="/manager"
+            >
+              <Icon name="lucide/settings">Manager</Icon>
+            </MenuItem>
+          )}
           <MenuItem
             id="logout"
             className="text-sm select-none cursor-pointer py-2 pl-3 pr-1 rounded-lg outline-none transition-colors data-[focused]:bg-content-hover"

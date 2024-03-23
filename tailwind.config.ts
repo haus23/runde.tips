@@ -7,7 +7,10 @@ export default {
   theme: {
     backgroundColor: ({ theme }) => ({
       ...theme('colors'),
-      app: 'var(--background-color-app)',
+      app: {
+        DEFAULT: 'var(--background-color-app)',
+        subtle: 'var(--background-color-app-subtle)',
+      },
       content: {
         DEFAULT: 'var(--background-color-content)',
         hover: 'var(--background-color-content-hover)',
@@ -53,6 +56,7 @@ export default {
       app: {
         DEFAULT: 'var(--text-color-app)',
         subtle: 'var(--text-color-app-subtle)',
+        notice: 'var(--text-color-app-notice)',
       },
       accent: {
         DEFAULT: 'var(--text-color-accent)',

@@ -7,21 +7,36 @@ import {
 import { tv } from 'tailwind-variants';
 import { focusRingStyles } from '../base-styles';
 
-const navLinkStyles = tv({
+const linkStyles = tv({
   extend: focusRingStyles,
-  base: [
-    'px-2 py-1.5 rounded-lg text-app-subtle transition-colors font-medium',
-  ],
+  base: ['rounded-lg'],
+});
+
+const navLinkStyles = tv({
+  extend: linkStyles,
+  base: ['px-2 py-1.5 text-app-subtle transition-colors font-medium'],
   variants: {
     isCurrent: { true: 'text-accent', false: 'hover:text-app' },
   },
 });
 
-interface _NavLinkProps extends LinkProps {
+interface _LinkProps extends LinkProps {
   href: string;
 }
 
-function _NavLink({ className, href, ...props }: _NavLinkProps) {
+function _Link({ className, href, ...props }: _LinkProps) {
+  return (
+    <Link
+      {...props}
+      href={href}
+      className={composeRenderProps(className, (className, renderProps) =>
+        linkStyles({ ...renderProps, className }),
+      )}
+    />
+  );
+}
+
+function _NavLink({ className, href, ...props }: _LinkProps) {
   // See: https://github.com/remix-run/react-router/blob/main/packages/react-router-dom/index.tsx#L1030
   const path = useResolvedPath(href);
   const location = useLocation();
@@ -40,4 +55,4 @@ function _NavLink({ className, href, ...props }: _NavLinkProps) {
   );
 }
 
-export { _NavLink as NavLink };
+export { _Link as Link, _NavLink as NavLink };
