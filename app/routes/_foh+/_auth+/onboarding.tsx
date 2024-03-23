@@ -1,12 +1,62 @@
+import {
+  type ActionFunctionArgs,
+  type LoaderFunctionArgs,
+  json,
+  redirect,
+} from '@remix-run/node';
+import { useLoaderData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
 import { Card, CardBody, CardHeader } from '#components/card';
 import { Button, Divider, TextField } from '#components/ui';
+import {
+  authenticator,
+  commitSession,
+  getSession,
+} from '#utils/auth/auth.server';
 
 export const handle = {
   pageTitle: 'Boarding',
 };
 
+export async function loader({ request }: LoaderFunctionArgs) {
+  await authenticator.isAuthenticated(request, {
+    successRedirect: '/',
+  });
+
+  const session = await getSession(request);
+  const authEmail = session.get('auth:email');
+  const authError = session.get(authenticator.sessionErrorKey);
+
+  if (!authEmail) return redirect('/login');
+
+  const errors = authError ? { code: authError?.message } : undefined;
+  return json(
+    { errors },
+    {
+      headers: {
+        'set-cookie': await commitSession(session),
+      },
+    },
+  );
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  await authenticator.authenticate('TOTP', request, {
+    successRedirect: '/onboarding',
+    failureRedirect: '/onboarding',
+  });
+}
+
 export default function OnboardingRoute() {
+  const submit = useSubmit();
+
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    submit(e.currentTarget);
+  }
+
+  const loaderData = useLoaderData<typeof loader>();
+
   return (
     <Card className="sm:mt-8">
       <CardHeader asChild>
@@ -14,7 +64,12 @@ export default function OnboardingRoute() {
       </CardHeader>
       <Divider />
       <CardBody>
-        <Form className="flex flex-col gap-y-4">
+        <Form
+          className="flex flex-col gap-y-4"
+          method="post"
+          onSubmit={onSubmit}
+          validationErrors={loaderData.errors}
+        >
           <TextField
             type="text"
             name="code"
