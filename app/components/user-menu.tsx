@@ -23,7 +23,7 @@ export function UserMenu() {
         <Menu className="p-1.5 w-[180px] outline-none" onAction={handleAction}>
           <MenuItem
             id="logout"
-            className="flex items-center text-sm select-none py-2 pl-3 pr-1 rounded-lg outline-none transition-colors data-[focused]:bg-content-hover"
+            className="text-sm select-none cursor-pointer py-2 pl-3 pr-1 rounded-lg outline-none transition-colors data-[focused]:bg-content-hover"
           >
             <Icon name="lucide/log-out">Log Out</Icon>
           </MenuItem>
