@@ -1,6 +1,70 @@
 # @tipprunde/www
 
 
+## v0.2.0
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0...v0.2.0)
+
+### 🚀 Enhancements
+
+- Add foh page header. ([8f5aa32](https://github.com/haus23/runde.tips/commit/8f5aa32))
+- Add styled ranking back. ([464143c](https://github.com/haus23/runde.tips/commit/464143c))
+- Add toolbar ghost btn variant. ([c72e5e6](https://github.com/haus23/runde.tips/commit/c72e5e6))
+- Bring back welcome page. ([73fb350](https://github.com/haus23/runde.tips/commit/73fb350))
+- Implement theme menu. Simplify ghost button. ([b581073](https://github.com/haus23/runde.tips/commit/b581073))
+- Start with textfield ([0cd7451](https://github.com/haus23/runde.tips/commit/0cd7451))
+- Extract card and divider components ([8a55b7b](https://github.com/haus23/runde.tips/commit/8a55b7b))
+- Add solid button variant. ([93017f0](https://github.com/haus23/runde.tips/commit/93017f0))
+- Implement base styling of text-field. ([77bb885](https://github.com/haus23/runde.tips/commit/77bb885))
+- Define error text color. ([aaf83bc](https://github.com/haus23/runde.tips/commit/aaf83bc))
+- Add description and field-error. Resolves #79 ([#79](https://github.com/haus23/runde.tips/issues/79))
+- Add onboarding page. ([7755cd1](https://github.com/haus23/runde.tips/commit/7755cd1))
+- Bring back login process. ([b83728a](https://github.com/haus23/runde.tips/commit/b83728a))
+- Add user-menu and logout action. ([08017c3](https://github.com/haus23/runde.tips/commit/08017c3))
+- Add magic-link route. ([4444229](https://github.com/haus23/runde.tips/commit/4444229))
+- Add manager area with layout. ([b592139](https://github.com/haus23/runde.tips/commit/b592139))
+
+### 🩹 Fixes
+
+- Drop NextUI ([cfddc57](https://github.com/haus23/runde.tips/commit/cfddc57))
+- Switch to npm. Resolves #73 ([#73](https://github.com/haus23/runde.tips/issues/73))
+- Switch to vite. Resolves #74. Breaks tailwind w/o postcss config now. ([#74](https://github.com/haus23/runde.tips/issues/74))
+- Use new colors ([7b633e3](https://github.com/haus23/runde.tips/commit/7b633e3))
+- Add simple but working popover. Resolves #76 ([#76](https://github.com/haus23/runde.tips/issues/76))
+- Implement NavLink wrapper. Resolves #77 ([#77](https://github.com/haus23/runde.tips/issues/77))
+
+### 💅 Refactors
+
+- Emptying the app ... ([95e13f2](https://github.com/haus23/runde.tips/commit/95e13f2))
+- Move icon component to its new home. ([f7b7b73](https://github.com/haus23/runde.tips/commit/f7b7b73))
+- Reorganize project root folder. ([d0a4313](https://github.com/haus23/runde.tips/commit/d0a4313))
+- Go with single react aria packages by now. ([5ea1ab9](https://github.com/haus23/runde.tips/commit/5ea1ab9))
+- Use radix colors directly ([e022386](https://github.com/haus23/runde.tips/commit/e022386))
+- Import styles as side effect. ([73e464e](https://github.com/haus23/runde.tips/commit/73e464e))
+- Switch baxck to tailwindcss v3. ([5ca27a3](https://github.com/haus23/runde.tips/commit/5ca27a3))
+- Bring back the color system. ([8753986](https://github.com/haus23/runde.tips/commit/8753986))
+- Use RAC plugin. ([efdef84](https://github.com/haus23/runde.tips/commit/efdef84))
+- Change design system colors and shadows. ([32b66aa](https://github.com/haus23/runde.tips/commit/32b66aa))
+- Simplify card ([bf77a10](https://github.com/haus23/runde.tips/commit/bf77a10))
+- Reorganize navigation without championships. ([341ae16](https://github.com/haus23/runde.tips/commit/341ae16))
+
+### 🏡 Chore
+
+- Update biome. ([4f9845d](https://github.com/haus23/runde.tips/commit/4f9845d))
+- Ignore local docker compose file. ([90c6467](https://github.com/haus23/runde.tips/commit/90c6467))
+- Update typescript. ([4b43ae5](https://github.com/haus23/runde.tips/commit/4b43ae5))
+- Drop currently unused framer-motion. ([c7f0b50](https://github.com/haus23/runde.tips/commit/c7f0b50))
+- Update tailwind. ([fa338b6](https://github.com/haus23/runde.tips/commit/fa338b6))
+- **dx:** Update biome ([0f44665](https://github.com/haus23/runde.tips/commit/0f44665))
+- Update deps. ([d7c7ffa](https://github.com/haus23/runde.tips/commit/d7c7ffa))
+- **dx:** Use excact version for unreleased packages. ([8f9dd8f](https://github.com/haus23/runde.tips/commit/8f9dd8f))
+- Update deps. ([0868d8d](https://github.com/haus23/runde.tips/commit/0868d8d))
+- Update biome. ([75273ad](https://github.com/haus23/runde.tips/commit/75273ad))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.1.0
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.32...v0.1.0)
