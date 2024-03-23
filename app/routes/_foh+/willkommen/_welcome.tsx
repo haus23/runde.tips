@@ -1,6 +1,6 @@
-import { Card, CardBody, CardHeader } from '@nextui-org/react';
-
 import { redirect } from '@remix-run/react';
+import { Card, CardBody, CardHeader } from '#components/card';
+import { Divider } from '#components/ui';
 import { getPublishedChampionships } from '#utils/foh/championships.server';
 
 export const handle = {
@@ -18,11 +18,12 @@ export async function loader() {
 
 export default function WelcomeRoute() {
   return (
-    <Card className="max-w-3xl mx-auto mt-4 p-4">
-      <CardHeader>
-        <h2 className="text-3xl font-medium">Marie 23 Tipprunde</h2>
+    <Card className="sm:mt-8">
+      <CardHeader asChild>
+        <h2>Marie 23 Tipprunde</h2>
       </CardHeader>
-      <CardBody className="flex flex-col gap-y-4 text-lg">
+      <Divider />
+      <CardBody className="text-lg">
         <p>Willkommen bei unserer kleinen Fussball-Tipprunde!</p>
         <p>
           Leider gibt es noch keine Turniere und nichts zu tippen. Wir warten

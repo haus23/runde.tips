@@ -11,28 +11,24 @@ import {
   json,
   useLoaderData,
   useLocation,
-  useNavigate,
   useRevalidator,
   useRouteError,
 } from '@remix-run/react';
 
-import { NextUIProvider as UIProvider } from '@nextui-org/react';
-
 import { type ReactNode, useEffect } from 'react';
 import { Toaster, toast as showToast } from 'sonner';
 
+import { Icon, type IconName, UIProvider } from '#components/ui';
+
 import { getUser } from '#utils/auth/auth.server';
+import { useAuthBroadcast } from '#utils/auth/user';
+import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
+import { getHints } from '#utils/theme/client-hints.server';
+import { useTheme } from '#utils/theme/theme';
+import { getSession } from '#utils/theme/theme.server';
 import { getToast } from '#utils/toast.server';
 
-import { Icon, type IconName } from '#components';
-import { useAuthBroadcast } from '#utils/auth/user';
-import { getHints } from '#utils/theme/client-hints.server';
-import { getSession } from '#utils/theme/theme.server';
-
-import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
-import { useTheme } from '#utils/theme/theme';
-import styles from './styles/tailwind.css';
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
+import './styles.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request);
@@ -73,24 +69,22 @@ export function Layout({ children }: { children: ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="color-scheme" content={theme.colorScheme} />
         {needsFallback && <ClientHintsFallback />}
         <Meta />
         <Links />
       </head>
-      <body className="text-foreground bg-background">
-        {children}
-        <Scripts />
-        <ScrollRestoration />
-        <LiveReload />
+      <body className="bg-app text-app">
+        <UIProvider>
+          {children}
+          <Scripts />
+          <ScrollRestoration />
+        </UIProvider>
       </body>
     </html>
   );
 }
 
 export default function AppRoot() {
-  const navigate = useNavigate();
-
   useAuthBroadcast();
 
   const {
@@ -107,10 +101,10 @@ export default function AppRoot() {
   }, [toast]);
 
   return (
-    <UIProvider navigate={navigate}>
+    <>
       <Outlet />
       <Toaster position="top-right" />
-    </UIProvider>
+    </>
   );
 }
 
@@ -129,7 +123,7 @@ export function ErrorBoundary() {
   }
   return (
     <div className="h-dvh flex flex-col gap-y-8 items-center justify-center">
-      <Icon name={iconName} className="size-40 text-danger-200" />
+      <Icon name={iconName} className="size-40 text-error" />
       <p className="inline-flex text-2xl text-center mx-4 leading-snug">
         {errorMsg}
       </p>

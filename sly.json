@@ -3,7 +3,7 @@
   "libraries": [
     {
       "name": "lucide-icons",
-      "directory": "./icons/lucide",
+      "directory": "./resources/icons/lucide",
       "transformers": []
     }
   ]

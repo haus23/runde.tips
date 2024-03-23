@@ -1,0 +1,87 @@
+@import '@radix-ui/colors/olive.css';
+@import '@radix-ui/colors/olive-dark.css';
+@import '@radix-ui/colors/grass.css';
+@import '@radix-ui/colors/grass-dark.css';
+@import '@radix-ui/colors/red.css';
+@import '@radix-ui/colors/red-dark.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  :root {
+    --app-bg: white;
+    --app-bg-subtle: var(--olive-1);
+    --content-bg: white;
+    --popover-bg: white;
+  }
+
+  .dark {
+    --app-bg: var(--olive-1);
+    --app-bg-subtle: var(--olive-2);
+    --popover-bg: var(--olive-2);
+    --content-bg: var(--olive-3);
+  }
+
+  /*
+    Theme
+  */
+  :root {
+    /* App Background */
+    --background-color-app: var(--app-bg);
+    --background-color-app-subtle: var(--app-bg-subtle);
+
+    /* App Foregrounds */
+    --text-color-app: var(--olive-12);
+    --text-color-app-subtle: var(--olive-11);
+    --text-color-app-notice: var(--olive-10);
+    --text-color-accent: var(--grass-11);
+    --text-color-error: var(--red-9);
+
+    /* Content Colors */
+    --background-color-content: var(--olive-3);
+    --background-color-content-hover: var(--olive-4);
+    --background-color-content-active: var(--olive-5);
+
+    /* Accent Content / Header */
+    --background-color-accent: var(--grass-3);
+
+    /* Cards */
+    --background-color-card: var(--content-bg);
+
+    /* Popovers */
+    --background-color-popover: var(--popover-bg);
+    --fill-color-popover: var(--popover-bg);
+
+    /* Accent Components Solid */
+    --background-color-acs: var(--grass-9);
+    --background-color-acs-hover: var(--grass-10);
+
+    /* Border / Dividers */
+    --border-color-default: var(--olive-6);
+    --divide-color-default: var(--olive-6);
+    --stroke-color-border-default: var(--olive-6);
+    --border-color-focused: var(--grass-9);
+    --border-color-error: var(--red-9);
+
+    /* Focus Ring */
+    --default-ring-color: var(--olive-7);
+    --default-ring-offset-color: var(--app-bg);
+
+    /* Shadows */
+    --ui-box-shadow-small:
+      0px 0px 5px 0px rgb(0 0 0 / .02),
+      0px 2px 10px 0px rgb(0 0 0 / .06),
+      0px 0px 1px 0px rgb(0 0 0 / .3);
+    --ui-box-shadow-medium:
+      0px 0px 15px 0px rgb(0 0 0 / .03),
+      0px 2px 30px 0px rgb(0 0 0 / .08),
+      0px 0px 1px 0px rgb(0 0 0 / .3);
+    --ui-box-shadow-large:
+      0px 0px 30px 0px rgb(0 0 0 / .04),
+      0px 30px 60px 0px rgb(0 0 0 / .12),
+      0px 0px 1px 0px rgb(0 0 0 / .3);
+  }
+}

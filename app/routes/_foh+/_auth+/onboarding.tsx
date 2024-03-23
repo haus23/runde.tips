@@ -1,16 +1,13 @@
 import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Input,
-} from '@nextui-org/react';
-
-import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
-import { json, redirect, useLoaderData, useSubmit } from '@remix-run/react';
-
+  type ActionFunctionArgs,
+  type LoaderFunctionArgs,
+  json,
+  redirect,
+} from '@remix-run/node';
+import { useLoaderData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
+import { Card, CardBody, CardHeader } from '#components/card';
+import { Button, Divider, TextField } from '#components/ui';
 import {
   authenticator,
   commitSession,
@@ -18,7 +15,7 @@ import {
 } from '#utils/auth/auth.server';
 
 export const handle = {
-  pageTitle: 'Log In',
+  pageTitle: 'Boarding',
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -44,12 +41,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const url = new URL(request.url);
-  const currentPath = url.pathname;
-
   await authenticator.authenticate('TOTP', request, {
-    successRedirect: currentPath,
-    failureRedirect: currentPath,
+    successRedirect: '/onboarding',
+    failureRedirect: '/onboarding',
   });
 }
 
@@ -64,32 +58,47 @@ export default function OnboardingRoute() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <Card className="max-w-xl mx-auto mt-8">
-      <CardHeader className="flex flex-col">
-        <h2 className="text-center text-2xl font-medium">Code Eingabe</h2>
+    <Card className="sm:mt-8">
+      <CardHeader asChild>
+        <h2>Code Eingabe</h2>
       </CardHeader>
       <Divider />
-      <CardBody className="p-4">
-        <Form className="flex flex-col gap-4" method="post" onSubmit={onSubmit}>
-          <Input
-            className="w-40 self-center"
-            classNames={{
-              inputWrapper: 'h-unit-14',
-              input: 'text-4xl text-center',
-            }}
+      <CardBody>
+        <Form
+          className="flex flex-col gap-y-4"
+          method="post"
+          onSubmit={onSubmit}
+          validationErrors={loaderData.errors}
+        >
+          <TextField
             type="text"
             name="code"
-            aria-label="Code"
             inputMode="numeric"
             autoComplete="one-time-code"
+            aria-label="Code"
             isRequired
             pattern="\d{6}"
             maxLength={6}
-            errorMessage={loaderData.errors?.code}
+            className="text-center"
+            inputClassName="w-40 self-center text-4xl text-center"
+            errorMessage={({ validationErrors, validationDetails }) =>
+              validationDetails.valueMissing
+                ? 'Ohne Code geht es nicht weiter.'
+                : validationDetails.patternMismatch
+                  ? 'Kein Code. Ein Code hat genau sechs Ziffern.'
+                  : validationDetails.customError
+                    ? validationErrors.join()
+                    : ''
+            }
           />
-          <div className="flex justify-center">
-            <Button type="submit">Anmelden</Button>
-          </div>
+          <Button
+            variant="solid"
+            color="accent"
+            className="self-center"
+            type="submit"
+          >
+            Prüfen
+          </Button>
         </Form>
       </CardBody>
     </Card>

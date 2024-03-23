@@ -1,7 +1,3 @@
-import logoHref from './logo.svg';
-
-export { logoHref };
-
 export function Logo() {
   return (
     <div className="flex items-center gap-x-1">
@@ -10,7 +6,7 @@ export function Logo() {
         role="img"
         aria-label="Haus23 Logo"
       >
-        <use href={`${logoHref}#logo`} />
+        <use href="/img/logo.svg#logo" />
       </svg>
       <span className="text-xl font-medium -translate-y-0.5">runde.tips</span>
     </div>

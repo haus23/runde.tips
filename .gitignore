@@ -13,3 +13,6 @@ build/
 # Dev DB
 db/dev.db
 db/dev.db-journal
+
+# Local docker compose config
+docker-compose.yml

@@ -1,7 +1,7 @@
 import type { SVGProps } from 'react';
 
 import { twMerge } from 'tailwind-merge';
-import type { IconName } from './icons/name.d.ts';
+import type { IconName } from './icons/name.js';
 import iconsHref from './icons/sprite.svg';
 
 export { iconsHref };

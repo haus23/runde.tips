@@ -1,16 +1,12 @@
 import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Input,
-} from '@nextui-org/react';
-
-import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
-import { json, useLoaderData, useSubmit } from '@remix-run/react';
-
+  type ActionFunctionArgs,
+  type LoaderFunctionArgs,
+  json,
+} from '@remix-run/node';
+import { useLoaderData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
+import { Card, CardBody, CardHeader } from '#components/card';
+import { Button, Divider, TextField } from '#components/ui';
 import {
   authenticator,
   commitSession,
@@ -47,7 +43,7 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 }
 
-export default function LoginRoute() {
+export default function LogInRoute() {
   const submit = useSubmit();
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -58,25 +54,42 @@ export default function LoginRoute() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <Card className="max-w-xl mx-auto mt-8">
-      <CardHeader className="flex flex-col">
-        <h2 className="text-center text-2xl font-medium">Anmeldung</h2>
+    <Card className="sm:mt-8">
+      <CardHeader asChild>
+        <h2>Anmeldung</h2>
       </CardHeader>
       <Divider />
-      <CardBody className="p-4">
-        <Form className="flex flex-col gap-4" method="post" onSubmit={onSubmit}>
-          <Input
-            type="email"
+      <CardBody>
+        <Form
+          className="flex flex-col gap-y-4"
+          method="post"
+          onSubmit={onSubmit}
+          validationErrors={loaderData.errors}
+        >
+          <TextField
             name="email"
-            label="Email"
-            labelPlacement="outside"
-            placeholder="Die in der Tipprunde benutzte Adresse."
             isRequired
-            errorMessage={loaderData.errors?.email}
+            type="email"
+            label="E-Mail"
+            description="Deine für die Tipprunde genutzte E-Mail Adresse."
+            errorMessage={({ validationDetails, validationErrors }) =>
+              validationDetails.valueMissing
+                ? 'Ohne Email-Adresse geht es nicht.'
+                : validationDetails.typeMismatch
+                  ? 'Ungültige Email-Adresse.'
+                  : validationDetails.customError
+                    ? validationErrors.join()
+                    : ''
+            }
           />
-          <div className="flex justify-center">
-            <Button type="submit">Code anfordern</Button>
-          </div>
+          <Button
+            variant="solid"
+            color="accent"
+            className="self-start"
+            type="submit"
+          >
+            Code anfordern
+          </Button>
         </Form>
       </CardBody>
     </Card>

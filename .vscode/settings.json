@@ -7,20 +7,23 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
   "json.validate.enable": false,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml, .npmrc",
-    "remix.config.js": "remix.env.d.ts, tsconfig.json, tailwind.config.ts, sly.json",
-    "biome.json": ".editorconfig"
+    "package.json": "package-lock.json",
+    "vite.config.ts": "env.d.ts, .postcssrc.json, sly.json, tsconfig.json, tailwind.config.ts",
+    "biome.json": ".editorconfig",
+    "README.md": "CHANGELOG.md, LICENSE",
+    "Dockerfile": ".dockerignore, docker-compose.yml",
+    ".env": ".env.*"
   },
   "tailwindCSS.experimental.classRegex": [
     ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
   }
 }
