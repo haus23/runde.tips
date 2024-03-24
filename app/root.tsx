@@ -25,9 +25,9 @@ import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
 import { getHints } from '#utils/theme/client-hints.server';
 import { useTheme } from '#utils/theme/theme';
 import { getSession } from '#utils/theme/theme.server';
-import { getToast } from '#utils/toast.server';
+import { getToast } from '#utils/toast/toast.server';
+import { Toaster } from '#utils/toast/toaster';
 
-import { Toaster } from '#components/toaster';
 import './styles.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -93,9 +93,9 @@ export default function AppRoot() {
 
   useEffect(() => {
     if (toast) {
-      const { type, msg } = toast;
+      const { type, text } = toast;
       setTimeout(() => {
-        showToast[type](msg);
+        showToast[type](text);
       }, 0);
     }
   }, [toast]);
