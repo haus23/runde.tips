@@ -1,4 +1,5 @@
-import { createCookieSessionStorage, json } from '@remix-run/node';
+import { createCookieSessionStorage, json, redirect } from '@remix-run/node';
+import { combineHeaders } from '#utils/misc';
 import type { Toast } from './types';
 
 type SessionData = unknown;
@@ -33,24 +34,11 @@ export async function getToast(request: Request) {
   return { toast, headers };
 }
 
-async function createToastHeader(toast: Toast) {
+async function createToastHeaders(toast: Toast) {
   const session = await toastSessionStorage.getSession();
   session.flash('toast', toast);
   const cookie = await toastSessionStorage.commitSession(session);
   return new Headers({ 'Set-Cookie': cookie });
-}
-
-function combineHeaders(
-  ...headers: Array<ResponseInit['headers'] | null | undefined>
-) {
-  const combined = new Headers();
-  for (const header of headers) {
-    if (!header) continue;
-    for (const [key, value] of new Headers(header).entries()) {
-      combined.append(key, value);
-    }
-  }
-  return combined;
 }
 
 export async function jsonWithToast<T>(
@@ -58,10 +46,20 @@ export async function jsonWithToast<T>(
   toast: Toast,
   init?: ResponseInit,
 ) {
-  const toastHeader = await createToastHeader(toast);
-  const headers = new Headers(init?.headers);
+  const toastHeader = await createToastHeaders(toast);
   return json(data, {
     ...init,
     headers: combineHeaders(init?.headers, toastHeader),
+  });
+}
+
+export async function redirectWithToast(
+  url: string,
+  toast: Toast,
+  init?: ResponseInit,
+) {
+  return redirect(url, {
+    ...init,
+    headers: combineHeaders(init?.headers, await createToastHeaders(toast)),
   });
 }
