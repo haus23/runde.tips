@@ -28,6 +28,8 @@ function _Toaster() {
       }}
       icons={{
         success: <Icon className="text-accent" name="lucide/check" />,
+        info: <Icon className="text-app" name="lucide/info" />,
+        error: <Icon className="text-error" name="lucide/circle-alert" />,
       }}
     />
   );

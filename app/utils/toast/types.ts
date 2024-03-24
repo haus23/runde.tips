@@ -1,4 +1,4 @@
 export type Toast = {
-  type: 'success';
+  type: 'success' | 'info' | 'error';
   text: string;
 };
