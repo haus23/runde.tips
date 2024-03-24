@@ -1,13 +1,13 @@
 import { db } from '#utils/db.server';
 import { invariant } from '#utils/misc';
-import type { ToastMessage } from '#utils/toast.server';
+import type { Toast } from '#utils/toast/types';
 import { getFirestoreChampionshipById } from '../firestore/championship';
 import { getLegacyMatches } from '../firestore/championship-match';
 import { getLegacyChampionshipPlayers } from '../firestore/championship-player';
 import { getLegacyRounds } from '../firestore/championship-round';
 import { getLegacyTips } from '../firestore/championship-tip';
 
-export async function syncChampionship(slug: string): Promise<ToastMessage> {
+export async function syncChampionship(slug: string): Promise<Toast> {
   // Look for championship in local data
   const championship = await db.championship.findUnique({ where: { slug } });
 
@@ -15,7 +15,7 @@ export async function syncChampionship(slug: string): Promise<ToastMessage> {
   if (championship?.completed) {
     return {
       type: 'info',
-      msg: 'Turnier war schon abgeschlossen und aktuell.',
+      text: 'Turnier war schon abgeschlossen und aktuell.',
     };
   }
 
@@ -30,15 +30,15 @@ export async function syncChampionship(slug: string): Promise<ToastMessage> {
 
   const result = {
     type: 'error',
-    msg: 'Diese Art des Abgleichs ist noch nicht implementiert',
-  } satisfies ToastMessage;
+    text: 'Diese Art des Abgleichs ist noch nicht implementiert',
+  } satisfies Toast;
 
   if (championship === null) {
     if (legacyChampionship.completed) {
       await syncBySimpleInsert(legacyChampionship);
       return {
         type: 'success',
-        msg: `Turnier ${legacyChampionship.name} geladen.`,
+        text: `Turnier ${legacyChampionship.name} geladen.`,
       };
     }
     return result;

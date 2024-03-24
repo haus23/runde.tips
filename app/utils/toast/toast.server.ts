@@ -1,13 +1,9 @@
 import { createCookieSessionStorage, json } from '@remix-run/node';
-
-export type ToastMessage = {
-  type: 'success' | 'info' | 'error';
-  msg: string;
-};
+import type { Toast } from './types';
 
 type SessionData = unknown;
 type SessionFlashData = {
-  toast: ToastMessage;
+  toast: Toast;
 };
 
 const toastSessionStorage = createCookieSessionStorage<
@@ -37,7 +33,7 @@ export async function getToast(request: Request) {
   return { toast, headers };
 }
 
-async function createToastHeader(toast: ToastMessage) {
+async function createToastHeader(toast: Toast) {
   const session = await toastSessionStorage.getSession();
   session.flash('toast', toast);
   const cookie = await toastSessionStorage.commitSession(session);
@@ -59,7 +55,7 @@ function combineHeaders(
 
 export async function jsonWithToast<T>(
   data: T,
-  toast: ToastMessage,
+  toast: Toast,
   init?: ResponseInit,
 ) {
   const toastHeader = await createToastHeader(toast);

@@ -13,15 +13,19 @@ import {
   commitSession,
   getSession,
 } from '#utils/auth/auth.server';
+import { emitter } from '#utils/emitter.server';
 
 export const handle = {
   pageTitle: 'Boarding',
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  await authenticator.isAuthenticated(request, {
-    successRedirect: '/',
-  });
+  const user = await authenticator.isAuthenticated(request);
+
+  if (user) {
+    emitter.emit('toast', { type: 'success', text: 'Du bist eingeloggt.' });
+    throw redirect('/');
+  }
 
   const session = await getSession(request);
   const authEmail = session.get('auth:email');
