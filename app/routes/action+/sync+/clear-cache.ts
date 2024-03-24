@@ -1,4 +1,4 @@
-import { jsonWithToast } from '#utils/toast.server';
+import { jsonWithToast } from '#utils/toast/toast.server';
 
 export async function action() {
   // TODO: Get options from request
@@ -15,6 +15,6 @@ export async function action() {
 
   return jsonWithToast(
     { invalidationResults },
-    { type: 'success', msg: 'Cache-Daten erfolgreich gelöscht.' },
+    { type: 'success', text: 'Cache-Daten erfolgreich gelöscht.' },
   );
 }
