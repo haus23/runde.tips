@@ -55,9 +55,11 @@
     --background-color-popover: var(--popover-bg);
     --fill-color-popover: var(--popover-bg);
 
-    /* Accent Components Solid */
-    --background-color-acs: var(--grass-9);
-    --background-color-acs-hover: var(--grass-10);
+    /* Solid Components */
+    --background-color-component: var(--olive-9);
+    --background-color-component-hover: var(--olive-10);
+    --background-color-component-accent: var(--grass-9);
+    --background-color-component-accent-hover: var(--grass-10);
 
     /* Border / Dividers */
     --border-color-default: var(--olive-6);

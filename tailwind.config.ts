@@ -11,6 +11,14 @@ export default {
         DEFAULT: 'var(--background-color-app)',
         subtle: 'var(--background-color-app-subtle)',
       },
+      component: {
+        DEFAULT: 'var(--background-color-component)',
+        hover: 'var(--background-color-component-hover)',
+        accent: {
+          DEFAULT: 'var(--background-color-component-accent)',
+          hover: 'var(--background-color-component-accent-hover)',
+        },
+      },
       content: {
         DEFAULT: 'var(--background-color-content)',
         hover: 'var(--background-color-content-hover)',
@@ -20,10 +28,6 @@ export default {
       card: 'var(--background-color-card)',
       divider: 'var(--divide-color-default)',
       popover: 'var(--background-color-popover)',
-      acs: {
-        DEFAULT: 'var(--background-color-acs)',
-        hover: 'var(--background-color-acs-hover)',
-      },
     }),
     borderColor: ({ theme }) => ({
       ...theme('colors'),

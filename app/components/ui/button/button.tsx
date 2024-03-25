@@ -20,19 +20,20 @@ const styles = tv({
       toolbar: 'p-2 bg-transparent border-2 rounded-xl',
     },
     isDisabled: {
-      true: '',
+      true: 'opacity-40 forced-colors:text-[GrayText]',
     },
   },
   compoundVariants: [
     {
       variant: 'solid',
       color: 'neutral',
-      className: '',
+      className: 'bg-component hover:bg-component-hover text-white',
     },
     {
       variant: 'solid',
       color: 'accent',
-      className: 'bg-acs hover:bg-acs-hover text-white',
+      className:
+        'bg-component-accent hover:bg-component-accent-hover text-white',
     },
     {
       variant: 'toolbar',
