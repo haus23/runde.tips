@@ -1,12 +1,24 @@
+import { useRouteLoaderData } from '@remix-run/react';
 import { useEffect } from 'react';
 import { useEventSource } from 'remix-utils/sse/react';
 import { Toaster, toast } from 'sonner';
 import { Icon } from '#components/ui';
+import type { loader } from '#root';
 import type { Toast } from './types';
 
 function _Toaster() {
+  // Listen to HTTP/Cookie toasts
+  const loaderData = useRouteLoaderData<typeof loader>('root');
   // Listen to SSE toasts
   const toastData = useEventSource('/sse/toast', { event: 'toast' });
+
+  useEffect(() => {
+    const cookieToast = loaderData?.requestInfo.toast;
+    if (cookieToast) {
+      const { type, text } = cookieToast;
+      toast[type](text);
+    }
+  }, [loaderData?.requestInfo.toast]);
 
   useEffect(() => {
     if (toastData) {

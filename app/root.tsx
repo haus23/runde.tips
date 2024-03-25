@@ -8,14 +8,12 @@ import {
   ScrollRestoration,
   isRouteErrorResponse,
   json,
-  useLoaderData,
   useLocation,
   useRevalidator,
   useRouteError,
 } from '@remix-run/react';
 
 import { type ReactNode, useEffect } from 'react';
-import { toast as showToast } from 'sonner';
 
 import { Icon, type IconName, UIProvider } from '#components/ui';
 
@@ -86,19 +84,6 @@ export function Layout({ children }: { children: ReactNode }) {
 
 export default function AppRoot() {
   useAuthBroadcast();
-
-  const {
-    requestInfo: { toast },
-  } = useLoaderData<typeof loader>();
-
-  useEffect(() => {
-    if (toast) {
-      const { type, text } = toast;
-      setTimeout(() => {
-        showToast[type](text);
-      }, 0);
-    }
-  }, [toast]);
 
   return (
     <>
