@@ -1,27 +1,28 @@
 import { toast } from 'sonner';
-import type { Toast } from './types';
+import type { TaskToast, Toast } from './types';
 
 function _toast(type: Toast['type'], text: string) {
   toast[type](text);
 }
 
-type PromiseResolveType = { text: string; description?: string };
-type PromiseResolver = ((props: PromiseResolveType) => void) | undefined;
+type PromiseData = Pick<TaskToast, 'text' | 'description'>;
+type PromiseResolver = ((props: PromiseData) => void) | undefined;
+
 const serverPromises = new Map<
   ReturnType<typeof toast.promise>,
   { resolve: PromiseResolver }
 >();
 
-export function manualToast(text: string, description?: string) {
+export function taskToast(text: string, description?: string) {
   let resolve: PromiseResolver = undefined;
-  const promise = new Promise<PromiseResolveType>((resolv) => {
+  const promise = new Promise<PromiseData>((resolv) => {
     resolve = resolv;
   });
 
   const toastId = toast.promise(promise, {
     loading: text,
-    success: ({ text }: PromiseResolveType) => text,
-    description: ({ description }: PromiseResolveType) => description,
+    success: ({ text }: PromiseData) => text,
+    description: ({ description }: PromiseData) => description,
   });
   // Found no way to set the description eager and with updating/resolving
   toast(text, { id: toastId, description });
@@ -30,8 +31,8 @@ export function manualToast(text: string, description?: string) {
   return toastId;
 }
 
-export function updateManualToast(
-  toastId: ReturnType<typeof toast.promise>,
+export function updateTaskToast(
+  toastId: number,
   text: string,
   description?: string,
 ) {
@@ -46,8 +47,8 @@ export function updateManualToast(
   }
 }
 
-export function resolveManualToast(
-  toastId: ReturnType<typeof toast.promise>,
+export function resolveTaskToast(
+  toastId: number,
   text: string,
   description?: string,
 ) {

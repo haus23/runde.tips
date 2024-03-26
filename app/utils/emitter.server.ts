@@ -2,10 +2,11 @@ import crypto from 'node:crypto';
 import EventEmitter from 'node:events';
 
 import { singleton } from './singleton.server';
-import type { Toast } from './toast/types';
+import type { TaskToast, Toast } from './toast/types';
 
 export type Events = {
   toast: Toast;
+  task: TaskToast;
 };
 
 export const emitter = singleton('emitter', () => {

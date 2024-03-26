@@ -4,14 +4,16 @@ import { useEventSource } from 'remix-utils/sse/react';
 import { Toaster } from 'sonner';
 import { Icon } from '#components/ui';
 import type { loader } from '#root';
-import { toast } from './toast.client';
-import type { Toast } from './types';
+import { resolveTaskToast, toast, updateTaskToast } from './toast.client';
+import type { TaskToast, Toast } from './types';
 
 function _Toaster() {
   // Listen to HTTP/Cookie toasts
   const loaderData = useRouteLoaderData<typeof loader>('root');
   // Listen to SSE toasts
   const toastData = useEventSource('/sse/toast', { event: 'toast' });
+  // Listen to SSE manual toast updates
+  const taskToastData = useEventSource('/sse/toast', { event: 'task' });
 
   useEffect(() => {
     const cookieToast = loaderData?.requestInfo.toast;
@@ -27,6 +29,19 @@ function _Toaster() {
       toast(type, text);
     }
   }, [toastData]);
+
+  useEffect(() => {
+    if (taskToastData) {
+      const { taskId, mode, text, description } = JSON.parse(
+        taskToastData,
+      ) as TaskToast;
+      if (mode === 'resolve') {
+        resolveTaskToast(taskId, text, description);
+      } else {
+        updateTaskToast(taskId, text, description);
+      }
+    }
+  }, [taskToastData]);
 
   return (
     <Toaster
