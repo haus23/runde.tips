@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import { tv } from 'tailwind-variants';
 
 export const cardStyles = tv({
@@ -11,12 +11,12 @@ export const cardStyles = tv({
 
 const { wrapper, header, content } = cardStyles();
 
-export function CardHeader({
-  className,
-  ...props
-}: { children: ReactNode; className?: string; asChild?: boolean }) {
+interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {}
+
+export function CardHeader({ className, ...props }: CardHeaderProps) {
   return <div className={header({ className })} {...props} />;
 }
+
 export function CardContent({
   className,
   ...props
