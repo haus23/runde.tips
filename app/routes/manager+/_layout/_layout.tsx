@@ -14,7 +14,7 @@ export default function ManagerLayout() {
   return (
     <div className="md:ml-52">
       <Sidebar />
-      <main className="relative p-4">
+      <main className="relative pt-2 px-4 pb-4">
         <div className="absolute top-2 right-4">
           <ThemeMenu />
         </div>
