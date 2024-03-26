@@ -1,5 +1,5 @@
 import { redirect } from '@remix-run/react';
-import { Card, CardBody, CardHeader } from '#components/card';
+import { Card, CardBody, CardHeader } from '#components/card-legacy';
 import { Divider } from '#components/ui';
 import { getPublishedChampionships } from '#utils/foh/championships.server';
 

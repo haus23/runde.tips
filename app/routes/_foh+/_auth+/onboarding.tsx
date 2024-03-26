@@ -6,7 +6,7 @@ import {
 } from '@remix-run/node';
 import { useLoaderData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
-import { Card, CardBody, CardHeader } from '#components/card';
+import { Card, CardBody, CardHeader } from '#components/card-legacy';
 import { Button, Divider, TextField } from '#components/ui';
 import {
   authenticator,
