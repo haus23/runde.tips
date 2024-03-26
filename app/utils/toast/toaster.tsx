@@ -1,9 +1,10 @@
 import { useRouteLoaderData } from '@remix-run/react';
 import { useEffect } from 'react';
 import { useEventSource } from 'remix-utils/sse/react';
-import { Toaster, toast } from 'sonner';
+import { Toaster } from 'sonner';
 import { Icon } from '#components/ui';
 import type { loader } from '#root';
+import { toast } from './toast.client';
 import type { Toast } from './types';
 
 function _Toaster() {
@@ -16,14 +17,14 @@ function _Toaster() {
     const cookieToast = loaderData?.requestInfo.toast;
     if (cookieToast) {
       const { type, text } = cookieToast;
-      toast[type](text);
+      toast(type, text);
     }
   }, [loaderData?.requestInfo.toast]);
 
   useEffect(() => {
     if (toastData) {
       const { type, text } = JSON.parse(toastData) as Toast;
-      toast[type](text);
+      toast(type, text);
     }
   }, [toastData]);
 
