@@ -1,6 +1,45 @@
 # @tipprunde/www
 
 
+## v0.2.1
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.2.0...v0.2.1)
+
+### 🚀 Enhancements
+
+- Basic toast design. ([cb67003](https://github.com/haus23/runde.tips/commit/cb67003))
+- Implement a typed node event-emitter. ([2d5450c](https://github.com/haus23/runde.tips/commit/2d5450c))
+- Implement sending and receiving SSE toasts. ([ebb96c9](https://github.com/haus23/runde.tips/commit/ebb96c9))
+- Add more toast types. ([ee1ed23](https://github.com/haus23/runde.tips/commit/ee1ed23))
+- Add redirect with toast method. ([42a9116](https://github.com/haus23/runde.tips/commit/42a9116))
+- Bring back first sync actions. ([dbe8c86](https://github.com/haus23/runde.tips/commit/dbe8c86))
+- Implement a controlled promise based toast, which can be updated and resolved manually. ([9b409af](https://github.com/haus23/runde.tips/commit/9b409af))
+- Implement sse controlled task toasts. Resolves #91 ([#91](https://github.com/haus23/runde.tips/issues/91))
+- Implement syncing completed championships. ([5f04e15](https://github.com/haus23/runde.tips/commit/5f04e15))
+
+### 🩹 Fixes
+
+- Generated icon names. Inconsisten and wrong in windows. ([798994e](https://github.com/haus23/runde.tips/commit/798994e))
+- Typo in trophy icon name. ([da391ed](https://github.com/haus23/runde.tips/commit/da391ed))
+- Set browser color scheme. ([b1353f8](https://github.com/haus23/runde.tips/commit/b1353f8))
+
+### 💅 Refactors
+
+- Extract toast type. ([58b96c5](https://github.com/haus23/runde.tips/commit/58b96c5))
+- Provide demo for SSE toast. ([58eb655](https://github.com/haus23/runde.tips/commit/58eb655))
+- Update toast type. ([210cfd7](https://github.com/haus23/runde.tips/commit/210cfd7))
+- Move cookie toast handling to toaster. ([6061718](https://github.com/haus23/runde.tips/commit/6061718))
+- Rename compent colors and complete the button. Resolves #86 ([#86](https://github.com/haus23/runde.tips/issues/86))
+- Create collapsible and card component. Visually aligned. Resolves #87 ([#87](https://github.com/haus23/runde.tips/issues/87))
+- Adapt the new ui components. ([f0d5de1](https://github.com/haus23/runde.tips/commit/f0d5de1))
+- Add simple abstraction layer. Resolves #89 ([#89](https://github.com/haus23/runde.tips/issues/89))
+- Style the toast description. Resolves #90 ([#90](https://github.com/haus23/runde.tips/issues/90))
+- Implement better component props. ([0faa335](https://github.com/haus23/runde.tips/commit/0faa335))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.2.0
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0...v0.2.0)
