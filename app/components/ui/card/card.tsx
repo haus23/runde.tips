@@ -4,8 +4,8 @@ import { tv } from 'tailwind-variants';
 export const cardStyles = tv({
   slots: {
     wrapper: 'bg-content rounded-xl shadow-medium',
-    header: 'text-xl px-4 py-2',
-    content: 'pt-2 px-4 pb-4',
+    header: 'text-xl px-4 py-2 md:px-8',
+    content: 'p-4 md:px-8',
   },
 });
 

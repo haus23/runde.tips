@@ -6,8 +6,14 @@ import {
 } from '@remix-run/node';
 import { useLoaderData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
-import { Card, CardBody, CardHeader } from '#components/card-legacy';
-import { Button, Divider, TextField } from '#components/ui';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  TextField,
+} from '#components/ui';
 import {
   authenticator,
   commitSession,
@@ -62,12 +68,12 @@ export default function OnboardingRoute() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <Card className="sm:mt-8">
-      <CardHeader asChild>
+    <Card className="sm:mt-8 mx-2">
+      <CardHeader className="p-4 text-2xl">
         <h2>Code Eingabe</h2>
       </CardHeader>
       <Divider />
-      <CardBody>
+      <CardContent className="pb-8">
         <Form
           className="flex flex-col gap-y-4"
           method="post"
@@ -104,7 +110,7 @@ export default function OnboardingRoute() {
             Prüfen
           </Button>
         </Form>
-      </CardBody>
+      </CardContent>
     </Card>
   );
 }
