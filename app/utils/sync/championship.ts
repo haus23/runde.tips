@@ -1,22 +1,23 @@
+import type { Championship } from '@prisma/client';
 import { db } from '#utils/db.server';
+import { emitter } from '#utils/emitter.server';
 import { invariant } from '#utils/misc';
-import type { Toast } from '#utils/toast/types';
 import { getFirestoreChampionshipById } from '../firestore/championship';
 import { getLegacyMatches } from '../firestore/championship-match';
 import { getLegacyChampionshipPlayers } from '../firestore/championship-player';
 import { getLegacyRounds } from '../firestore/championship-round';
 import { getLegacyTips } from '../firestore/championship-tip';
 
-export async function syncChampionship(slug: string): Promise<Toast> {
+export async function syncChampionship(
+  slug: string,
+  taskId: number,
+): Promise<Championship> {
   // Look for championship in local data
   const championship = await db.championship.findUnique({ where: { slug } });
 
   // Nothing todo if already complete
   if (championship?.completed) {
-    return {
-      type: 'info',
-      text: 'Turnier war schon abgeschlossen und aktuell.',
-    };
+    throw new Error('Fehler: Turnier war schon abgeschlossen und ist aktuell.');
   }
 
   // Load legacy championship
@@ -28,25 +29,15 @@ export async function syncChampionship(slug: string): Promise<Toast> {
   // 3. Remote uncomplete, local defined -> Sync with helper data
   // 4. Remote complete, local defined -> Last sync with helper data and delete helper data
 
-  const result = {
-    type: 'error',
-    text: 'Diese Art des Abgleichs ist noch nicht implementiert',
-  } satisfies Toast;
-
   if (championship === null) {
     if (legacyChampionship.completed) {
-      await syncBySimpleInsert(legacyChampionship);
-      return {
-        type: 'success',
-        text: `Turnier ${legacyChampionship.name} geladen.`,
-      };
+      return await syncBySimpleInsert(legacyChampionship, taskId);
     }
-    return result;
   }
-  if (!legacyChampionship.completed) {
-    return result;
-  }
-  return result;
+
+  throw new Error(
+    'Fehler: Diese Art des Abgleichs ist noch nicht implementiert',
+  );
 }
 
 async function getLegacyStandings(championshipId: string) {
@@ -69,8 +60,16 @@ async function getMasterData() {
 
 async function syncBySimpleInsert(
   legacyCampionship: Awaited<ReturnType<typeof getFirestoreChampionshipById>>,
+  taskId: number,
 ) {
   const legacyData = await getLegacyStandings(legacyCampionship.id);
+  emitter.emit('task', {
+    taskId,
+    mode: 'update',
+    text: `Abgleich ${legacyCampionship.name}.`,
+    description: 'Stand aus dem Backend geladen',
+  });
+
   const masterData = await getMasterData();
 
   const ruleset = masterData.rulesets.find(
@@ -107,6 +106,13 @@ async function syncBySimpleInsert(
     r.entityId = round.id;
   }
 
+  emitter.emit('task', {
+    taskId,
+    mode: 'update',
+    text: `Abgleich ${legacyCampionship.name}.`,
+    description: 'Runden wurden übertragen',
+  });
+
   // Extract matches
   for (const m of legacyData.legacyMatches) {
     const round = legacyData.legacyRounds.find((r) => r.id === m.roundId);
@@ -136,6 +142,13 @@ async function syncBySimpleInsert(
     m.entityId = match.id;
   }
 
+  emitter.emit('task', {
+    taskId,
+    mode: 'update',
+    text: `Abgleich ${legacyCampionship.name}.`,
+    description: 'Spiele wurden übertragen',
+  });
+
   // Extract players
   for (const p of legacyData.legacyPlayers) {
     const user = masterData.users.find((u) => u.slug === p.playerId);
@@ -153,6 +166,13 @@ async function syncBySimpleInsert(
     });
     p.entityId = player.id;
   }
+
+  emitter.emit('task', {
+    taskId,
+    mode: 'update',
+    text: `Abgleich ${legacyCampionship.name}.`,
+    description: 'Spieler wurden übertragen',
+  });
 
   // Extract tips and keep order of tips
   for (const p of legacyData.legacyPlayers) {
@@ -178,4 +198,13 @@ async function syncBySimpleInsert(
       });
     }
   }
+
+  emitter.emit('task', {
+    taskId,
+    mode: 'update',
+    text: `Abgleich ${legacyCampionship.name}.`,
+    description: 'Tipps wurden übertragen',
+  });
+
+  return championship;
 }

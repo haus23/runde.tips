@@ -1,20 +1,64 @@
-import { useFetcher, useFetchers } from '@remix-run/react';
+import { json, useFetcher, useFetchers, useLoaderData } from '@remix-run/react';
+import {
+  Cell,
+  Column,
+  Row,
+  Table,
+  TableBody,
+  TableHeader,
+} from 'react-aria-components';
 import {
   Button,
+  Card,
+  CardContent,
+  CardHeader,
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
   Divider,
 } from '#components/ui';
+import { db } from '#utils/db.server';
+import { getFirestoreChampionships } from '#utils/firestore/championship';
+import { taskToast } from '#utils/toast/toast.client';
 
-export default function SyncRoot() {
+export async function loader() {
+  const championships = await db.championship.findMany();
+  const legacyChampionships = await getFirestoreChampionships();
+  return json({ championships, legacyChampionships });
+}
+
+export default function SyncRoute() {
   const cacheData = useFetcher();
   const masterData = useFetcher();
+  const championshipData = useFetcher();
 
   const fetchers = useFetchers();
   const isSubmmitting = fetchers.some(
     (fetcher) => fetcher.state === 'submitting',
   );
+
+  const { championships, legacyChampionships } = useLoaderData<typeof loader>();
+
+  for (const legacyChampionship of legacyChampionships) {
+    const current = championships.find((c) => c.slug === legacyChampionship.id);
+    legacyChampionship.synced = !!current;
+  }
+
+  function syncChampionship(
+    c: Awaited<ReturnType<typeof getFirestoreChampionships>>[0],
+  ) {
+    const taskId = taskToast(
+      `Abgleich ${c.name}.`,
+      'Es wird einige Zeit dauern.',
+    );
+    championshipData.submit(
+      { slug: c.id, taskId },
+      {
+        method: 'post',
+        action: '/action/sync/championship-data',
+      },
+    );
+  }
 
   return (
     <div className="flex flex-col gap-y-6">
@@ -106,6 +150,53 @@ export default function SyncRoot() {
           </masterData.Form>
         </CollapsibleContent>
       </Collapsible>
+      <Card>
+        <CardHeader id="tableLabel">Turnierdaten</CardHeader>
+        <Divider />
+        <CardContent>
+          <Table className="text-sm" aria-labelledby="tableLabel">
+            <TableHeader className="bg-accent text-xs uppercase">
+              <Column className="py-2 px-2 md:px-6 text-right">Nr</Column>
+              <Column className="px-2 md:px-6 text-left" isRowHeader>
+                Titel
+              </Column>
+              <Column className="px-2 md:px-6">Status</Column>
+              <Column className="px-2 md:px-6">Aktion</Column>
+            </TableHeader>
+            <TableBody className="divide-y divide-default">
+              {legacyChampionships.map((lc) => (
+                <Row key={lc.id}>
+                  <Cell className="pr-4 md:px-6 text-right">{lc.nr}</Cell>
+                  <Cell className="w-full sm:py-2.5 px-2 md:px-6">
+                    {lc.name}
+                  </Cell>
+                  <Cell className="text-center px-2 md:px-6">
+                    {lc.synced
+                      ? lc.completed
+                        ? 'Abgeschlossen'
+                        : 'Laufend'
+                      : 'Nicht geladen'}
+                  </Cell>
+                  <Cell className="text-center px-2 md:px-6">
+                    {lc.synced && lc.completed ? (
+                      <span>Keine</span>
+                    ) : (
+                      <Button
+                        onPress={() => syncChampionship(lc)}
+                        variant="solid"
+                        color="accent"
+                        className="my-2"
+                      >
+                        Abgleich
+                      </Button>
+                    )}
+                  </Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }
