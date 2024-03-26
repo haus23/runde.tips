@@ -37,6 +37,7 @@ function _Toaster() {
         classNames: {
           toast:
             'bg-popover border border-default rounded-lg shadow-medium w-full flex items-center gap-x-2 px-4 py-2',
+          description: 'text-app-subtle',
         },
       }}
       icons={{
