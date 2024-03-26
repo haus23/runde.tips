@@ -1,5 +1,5 @@
 import { type Params, redirect } from '@remix-run/react';
-import { cached } from '#utils/cache.server';
+import { cached, invalidate } from '#utils/cache.server';
 import { db } from '#utils/db.server';
 
 export function getPublishedChampionships() {
@@ -9,6 +9,10 @@ export function getPublishedChampionships() {
       orderBy: { nr: 'desc' },
     });
   });
+}
+
+export async function resetPublishedChampionships() {
+  await invalidate('publishedChampionships');
 }
 
 export async function requireChampionship(params: Params<string>) {

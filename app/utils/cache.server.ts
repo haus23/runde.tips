@@ -1,5 +1,4 @@
-import { cachified } from '@epic-web/cachified';
-import { db } from './db.server';
+import { cachified, softPurge } from '@epic-web/cachified';
 import { singleton } from './singleton.server';
 
 const cache = singleton('cache', () => new Map());
@@ -12,4 +11,8 @@ export function cached<Value>(key: string, fetcher: () => Promise<Value>) {
     key,
     getFreshValue: fetcher,
   });
+}
+
+export async function invalidate(key: string) {
+  await softPurge({ cache, key, staleWhileRevalidate: 1000 });
 }

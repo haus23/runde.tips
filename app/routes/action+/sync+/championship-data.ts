@@ -1,5 +1,6 @@
 import { type ActionFunctionArgs, json } from '@remix-run/node';
 import { emitter } from '#utils/emitter.server';
+import { resetPublishedChampionships } from '#utils/foh/championships.server';
 import { invariant } from '#utils/misc';
 import { syncChampionship } from '#utils/sync/championship';
 
@@ -22,6 +23,8 @@ export async function action({ request }: ActionFunctionArgs) {
     text: `Abgleich ${championship.name}.`,
     description: 'Fertig. Synchronisierung abgeschlossen.',
   });
+
+  await resetPublishedChampionships();
 
   return json(null);
 }
