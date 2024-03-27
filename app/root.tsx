@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
+import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import {
   Link,
   Links,
@@ -26,7 +26,8 @@ import { getSession } from '#utils/theme/theme.server';
 import { getToast } from '#utils/toast/toast.server';
 import { Toaster } from '#utils/toast/toaster';
 
-import './styles.css';
+import styles from './styles.css?url';
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request);
