@@ -1,5 +1,5 @@
 import type { Championship } from '@prisma/client';
-import { useParams } from '@remix-run/react';
+import { useNavigate, useParams } from '@remix-run/react';
 import {
   type Dispatch,
   type ReactNode,
@@ -35,7 +35,9 @@ export function ChampionshipProvider({ children }: { children: ReactNode }) {
 }
 
 export function useCurrentChampionship() {
+  const publishedChampionships = usePublishedChampionships();
   const ctx = useContext(ChampionshipContext);
+  const navigate = useNavigate();
 
   if (!ctx) {
     throw new Error('No ChampionshipProvider in component hierarchy.');
@@ -44,5 +46,22 @@ export function useCurrentChampionship() {
   const { championship, setChampionship } = ctx;
   invariant(typeof championship !== 'undefined');
 
-  return { championship, setChampionship };
+  function setChampionshipWithNavigation(championship: Championship) {
+    setChampionship(championship);
+    const championshipSegment =
+      championship === publishedChampionships[0] ? '' : championship.slug;
+    navigate(`/${championshipSegment}`);
+  }
+
+  return { championship, setChampionship: setChampionshipWithNavigation };
+}
+
+export function useOptionalChampionship() {
+  const ctx = useContext(ChampionshipContext);
+
+  if (!ctx) {
+    throw new Error('No ChampionshipProvider in component hierarchy.');
+  }
+
+  return ctx.championship;
 }
