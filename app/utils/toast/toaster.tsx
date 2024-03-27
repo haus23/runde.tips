@@ -1,19 +1,13 @@
 import { useRouteLoaderData } from '@remix-run/react';
 import { useEffect } from 'react';
-import { useEventSource } from 'remix-utils/sse/react';
 import { Toaster } from 'sonner';
 import { Icon } from '#components/ui';
 import type { loader } from '#root';
-import { resolveTaskToast, toast, updateTaskToast } from './toast.client';
-import type { TaskToast, Toast } from './types';
+import { toast } from './toast.client';
 
 function _Toaster() {
   // Listen to HTTP/Cookie toasts
   const loaderData = useRouteLoaderData<typeof loader>('root');
-  // Listen to SSE toasts
-  const toastData = useEventSource('/sse/toast', { event: 'toast' });
-  // Listen to SSE manual toast updates
-  const taskToastData = useEventSource('/sse/toast', { event: 'task' });
 
   useEffect(() => {
     const cookieToast = loaderData?.requestInfo.toast;
@@ -22,26 +16,6 @@ function _Toaster() {
       toast(type, text);
     }
   }, [loaderData?.requestInfo.toast]);
-
-  useEffect(() => {
-    if (toastData) {
-      const { type, text } = JSON.parse(toastData) as Toast;
-      toast(type, text);
-    }
-  }, [toastData]);
-
-  useEffect(() => {
-    if (taskToastData) {
-      const { taskId, mode, text, description } = JSON.parse(
-        taskToastData,
-      ) as TaskToast;
-      if (mode === 'resolve') {
-        resolveTaskToast(taskId, text, description);
-      } else {
-        updateTaskToast(taskId, text, description);
-      }
-    }
-  }, [taskToastData]);
 
   return (
     <Toaster
