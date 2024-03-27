@@ -1,4 +1,5 @@
 import { json, useFetcher, useFetchers, useLoaderData } from '@remix-run/react';
+import { nanoid } from 'nanoid';
 import {
   Cell,
   Column,
@@ -19,45 +20,44 @@ import {
 } from '#components/ui';
 import { db } from '#utils/db.server';
 import { getFirestoreChampionships } from '#utils/firestore/championship';
-import { taskToast } from '#utils/toast/toast.client';
+import { useTask } from '#utils/task';
 
 export async function loader() {
   const championships = await db.championship.findMany();
   const legacyChampionships = await getFirestoreChampionships();
-  return json({ championships, legacyChampionships });
+  const taskId = nanoid();
+  return json({ championships, legacyChampionships, taskId });
 }
 
 export default function SyncRoute() {
+  const { championships, legacyChampionships, taskId } =
+    useLoaderData<typeof loader>();
+
   const cacheData = useFetcher();
   const masterData = useFetcher();
-  const championshipData = useFetcher();
+
+  const { startTask } = useTask(taskId, '/action/sync/championship');
 
   const fetchers = useFetchers();
   const isSubmmitting = fetchers.some(
     (fetcher) => fetcher.state === 'submitting',
   );
 
-  const { championships, legacyChampionships } = useLoaderData<typeof loader>();
-
   for (const legacyChampionship of legacyChampionships) {
     const current = championships.find((c) => c.slug === legacyChampionship.id);
     legacyChampionship.synced = !!current;
   }
 
-  function syncChampionship(
-    c: Awaited<ReturnType<typeof getFirestoreChampionships>>[0],
+  function syncChmpionship(
+    championship: Awaited<ReturnType<typeof getFirestoreChampionships>>[number],
   ) {
-    const taskId = taskToast(
-      `Abgleich ${c.name}.`,
-      'Es wird einige Zeit dauern.',
-    );
-    championshipData.submit(
-      { slug: c.id, taskId },
-      {
-        method: 'post',
-        action: '/action/sync/championship-data',
-      },
-    );
+    const formData = new FormData();
+    formData.set('championshipSlug', championship.id);
+    startTask(formData, {
+      title: `Abgleich ${championship.name}`,
+      loading: 'Spiele und Mitspieler ...',
+      success: 'Synchronisierung erfolgreich',
+    });
   }
 
   return (
@@ -182,10 +182,11 @@ export default function SyncRoute() {
                       <span>Keine</span>
                     ) : (
                       <Button
-                        onPress={() => syncChampionship(lc)}
+                        onPress={() => syncChmpionship(lc)}
                         variant="solid"
                         color="accent"
                         className="my-2"
+                        isDisabled={isSubmmitting}
                       >
                         Abgleich
                       </Button>

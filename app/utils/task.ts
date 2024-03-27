@@ -1,6 +1,11 @@
 import { useBlocker, useFetcher } from '@remix-run/react';
 import { useEffect, useRef } from 'react';
-import { resolveTaskToast, taskToast } from './toast/toast.client';
+import { useEventSource } from 'remix-utils/sse/react';
+import {
+  resolveTaskToast,
+  taskToast,
+  updateTaskToast,
+} from './toast/toast.client';
 
 export function useTask(taskId: string, action: string) {
   const taskFetcher = useFetcher();
@@ -11,6 +16,10 @@ export function useTask(taskId: string, action: string) {
   // TODO: block UI visually while waiting
   useBlocker(() => {
     return taskFetcher.state !== 'idle';
+  });
+
+  const taskProgress = useEventSource(`/sse/task/${taskId}`, {
+    event: taskId,
   });
 
   function startTask(
@@ -27,6 +36,17 @@ export function useTask(taskId: string, action: string) {
     payload.set('taskId', taskId);
     taskFetcher.submit(payload, { method: 'post', action });
   }
+
+  useEffect(() => {
+    if (taskProgress) {
+      const { message } = JSON.parse(taskProgress);
+      updateTaskToast(
+        toastId.current,
+        titleMsg.current || message,
+        titleMsg.current && message,
+      );
+    }
+  }, [taskProgress]);
 
   useEffect(() => {
     if (taskFetcher.data) {

@@ -1,6 +1,6 @@
 import type { Championship } from '@prisma/client';
 import { db } from '#utils/db.server';
-import { emitter } from '#utils/emitter.server';
+import { taskProgressEventBus } from '#utils/eventbus/task-progress.server';
 import { invariant } from '#utils/misc';
 import { getFirestoreChampionshipById } from '../firestore/championship';
 import { getLegacyMatches } from '../firestore/championship-match';
@@ -10,7 +10,7 @@ import { getLegacyTips } from '../firestore/championship-tip';
 
 export async function syncChampionship(
   slug: string,
-  taskId: number,
+  taskId: string,
 ): Promise<Championship> {
   // Look for championship in local data
   const championship = await db.championship.findUnique({ where: { slug } });
@@ -60,16 +60,9 @@ async function getMasterData() {
 
 async function syncBySimpleInsert(
   legacyCampionship: Awaited<ReturnType<typeof getFirestoreChampionshipById>>,
-  taskId: number,
+  taskId: string,
 ) {
   const legacyData = await getLegacyStandings(legacyCampionship.id);
-  emitter.emit('task', {
-    taskId,
-    mode: 'update',
-    text: `Abgleich ${legacyCampionship.name}.`,
-    description: 'Stand aus dem Backend geladen',
-  });
-
   const masterData = await getMasterData();
 
   const ruleset = masterData.rulesets.find(
@@ -106,13 +99,6 @@ async function syncBySimpleInsert(
     r.entityId = round.id;
   }
 
-  emitter.emit('task', {
-    taskId,
-    mode: 'update',
-    text: `Abgleich ${legacyCampionship.name}.`,
-    description: 'Runden wurden übertragen',
-  });
-
   // Extract matches
   for (const m of legacyData.legacyMatches) {
     const round = legacyData.legacyRounds.find((r) => r.id === m.roundId);
@@ -142,13 +128,6 @@ async function syncBySimpleInsert(
     m.entityId = match.id;
   }
 
-  emitter.emit('task', {
-    taskId,
-    mode: 'update',
-    text: `Abgleich ${legacyCampionship.name}.`,
-    description: 'Spiele wurden übertragen',
-  });
-
   // Extract players
   for (const p of legacyData.legacyPlayers) {
     const user = masterData.users.find((u) => u.slug === p.playerId);
@@ -167,11 +146,9 @@ async function syncBySimpleInsert(
     p.entityId = player.id;
   }
 
-  emitter.emit('task', {
+  taskProgressEventBus.emit({
     taskId,
-    mode: 'update',
-    text: `Abgleich ${legacyCampionship.name}.`,
-    description: 'Spieler wurden übertragen',
+    message: '... und jetzt noch die Tipps.',
   });
 
   // Extract tips and keep order of tips
@@ -198,13 +175,6 @@ async function syncBySimpleInsert(
       });
     }
   }
-
-  emitter.emit('task', {
-    taskId,
-    mode: 'update',
-    text: `Abgleich ${legacyCampionship.name}.`,
-    description: 'Tipps wurden übertragen',
-  });
 
   return championship;
 }
