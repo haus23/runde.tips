@@ -18,7 +18,7 @@ export const collapsibleStyles = tv({
   slots: {
     header: [
       focusRingStyles.base,
-      'group w-full flex items-center justify-between rounded-t-xl hover:bg-content-hover [&_svg]:selected:-rotate-90',
+      'group w-full flex items-center justify-between rounded-t-xl hover:bg-content-hover cursor-default [&_svg]:selected:-rotate-90',
     ],
   },
   variants: {
