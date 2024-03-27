@@ -28,7 +28,7 @@ export function taskToast(text: string, description?: string) {
   toast(text, { id: toastId, description });
 
   serverPromises.set(toastId, { resolve });
-  return toastId;
+  return Number(toastId);
 }
 
 export function updateTaskToast(
