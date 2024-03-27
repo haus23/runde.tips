@@ -1,6 +1,32 @@
 # @tipprunde/www
 
 
+## v0.2.2
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.2.1...v0.2.2)
+
+### 🚀 Enhancements
+
+- Finally add a championship provider. Wasn't that hard ;-) ([36b829f](https://github.com/haus23/runde.tips/commit/36b829f))
+- Use context to update nav items and consolidate navigation. ([fe2d520](https://github.com/haus23/runde.tips/commit/fe2d520))
+- Implement championship switch. Resolves #41 ([#41](https://github.com/haus23/runde.tips/issues/41))
+
+### 🩹 Fixes
+
+- Invalidate championcache after sync. Resolves 95 ([9f41b2c](https://github.com/haus23/runde.tips/commit/9f41b2c))
+- Remove sse toasts. Resolves #94 for now. ([#94](https://github.com/haus23/runde.tips/issues/94))
+- Use default cursor on buttons. ([d68b79a](https://github.com/haus23/runde.tips/commit/d68b79a))
+- Add robots file. Resolves #97 ([#97](https://github.com/haus23/runde.tips/issues/97))
+
+### 💅 Refactors
+
+- Create an abstraction for long running tasks and there toasts. No sse needed. ([7413bc4](https://github.com/haus23/runde.tips/commit/7413bc4))
+- Reimplement long running task handling. Resolves #96. ([#96](https://github.com/haus23/runde.tips/issues/96))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.2.1
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.2.0...v0.2.1)
