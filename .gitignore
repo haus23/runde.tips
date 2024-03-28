@@ -11,8 +11,8 @@ build/
 .env
 
 # Dev DB
-db/dev.db
-db/dev.db-journal
+prisma/dev.db
+prisma/dev.db-journal
 
 # Local docker compose config
 docker-compose.yml

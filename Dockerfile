@@ -29,23 +29,25 @@ FROM base as build
 WORKDIR /app
 
 COPY --from=deps /app/node_modules /app/node_modules
-ADD package.json ./
+ADD prisma .
+RUN npx prisma generate
 ADD . .
-RUN npm run db:generate
 RUN npm run build
 
 # final production image
 FROM base
 
 WORKDIR /app
+
 COPY --from=production-deps /app/node_modules /app/node_modules
+COPY --from=build /app/node_modules/.prisma /app/node_modules/.prisma
 COPY --from=build /app/build /app/build
-COPY --from=build /app/db /app/db
+COPY --from=build /app/prisma /app/prisma
 COPY --from=build /app/package.json /app/package.json
 
-VOLUME [ "/app/data" ]
+RUN mkdir -p /app/data
 
-RUN npm run db:push
+VOLUME [ "/app/data" ]
 
 EXPOSE 3000
 CMD ["npm", "start"]
