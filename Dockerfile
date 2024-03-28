@@ -45,7 +45,7 @@ COPY --from=build /app/package.json /app/package.json
 
 VOLUME [ "/app/data" ]
 
-RUN npm db:push
+RUN npm run db:push
 
 EXPOSE 3000
 CMD ["npm", "start"]
