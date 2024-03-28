@@ -22,7 +22,6 @@ export function getErrorMessage(error: unknown) {
   ) {
     return error.message;
   }
-  console.error('Unable to get error message for error', error);
   return 'Unbekannter Fehler';
 }
 
@@ -51,9 +50,6 @@ export function GeneralErrorBoundary({
   const error = useRouteError();
   const params = useParams();
 
-  if (typeof document !== 'undefined') {
-    console.error(error);
-  }
   return (
     <div className="h-dvh container mx-auto flex flex-col items-center justify-center gap-y-8">
       {isRouteErrorResponse(error)
