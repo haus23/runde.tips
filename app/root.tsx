@@ -1,21 +1,17 @@
 import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import {
-  Link,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  isRouteErrorResponse,
   json,
-  useLocation,
   useRevalidator,
-  useRouteError,
 } from '@remix-run/react';
 
 import { type ReactNode, useEffect } from 'react';
 
-import { Icon, type IconName, UIProvider } from '#components/ui';
+import { UIProvider } from '#components/ui';
 
 import { getUser } from '#utils/auth/auth.server';
 import { useAuthBroadcast } from '#utils/auth/user';
@@ -26,6 +22,7 @@ import { getSession } from '#utils/theme/theme.server';
 import { getToast } from '#utils/toast/toast.server';
 import { Toaster } from '#utils/toast/toaster';
 
+import { GeneralErrorBoundary } from '#components/error-boundary';
 import styles from './styles.css?url';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
@@ -85,7 +82,6 @@ export function Layout({ children }: { children: ReactNode }) {
 
 export default function AppRoot() {
   useAuthBroadcast();
-
   return (
     <>
       <Outlet />
@@ -95,31 +91,5 @@ export default function AppRoot() {
 }
 
 export function ErrorBoundary() {
-  const { pathname } = useLocation();
-  const error = useRouteError();
-
-  let iconName: IconName = 'lucide/angry';
-
-  let errorMsg = 'Hier läuft etwas schief!';
-  if (isRouteErrorResponse(error)) {
-    if (error.status === 404) {
-      iconName = 'lucide/frown';
-      errorMsg = 'Da hast du dich aber vertippt ...';
-    }
-  }
-  return (
-    <div className="h-dvh flex flex-col gap-y-8 items-center justify-center">
-      <Icon name={iconName} className="size-40 text-error" />
-      <p className="inline-flex text-2xl text-center mx-4 leading-snug">
-        {errorMsg}
-      </p>
-      {pathname === '/' ? (
-        <p className="block text-2xl">Bitte Micha informieren!</p>
-      ) : (
-        <Link to="/" className="block text-2xl underline underline-offset-4">
-          Zur Startseite
-        </Link>
-      )}
-    </div>
-  );
+  return <GeneralErrorBoundary />;
 }
