@@ -6,7 +6,6 @@ import { Sidebar } from './sidebar';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await requireAdmin(request);
-
   return null;
 }
 

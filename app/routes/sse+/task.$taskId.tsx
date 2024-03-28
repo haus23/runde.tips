@@ -1,5 +1,6 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { eventStream } from 'remix-utils/sse/server';
+import { requireAdmin } from '#utils/auth/auth.server';
 import {
   type TaskProgressEvent,
   taskProgressEventBus,
@@ -7,6 +8,8 @@ import {
 import { invariant } from '#utils/misc';
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
+  await requireAdmin(request);
+
   const taskId = params.taskId;
   invariant(typeof taskId === 'string');
 
