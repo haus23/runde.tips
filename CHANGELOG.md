@@ -1,6 +1,25 @@
 # @tipprunde/www
 
 
+## v0.3.0
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.2.2...v0.3.0)
+
+### 🩹 Fixes
+
+- Just works now. Resolves #82 ([#82](https://github.com/haus23/runde.tips/issues/82))
+- Add splat route. Resolves #45 ([#45](https://github.com/haus23/runde.tips/issues/45))
+- Invalidate cache after championship sync. ([6c1f2fe](https://github.com/haus23/runde.tips/commit/6c1f2fe))
+- Secure all routes. Resolves #92 ([#92](https://github.com/haus23/runde.tips/issues/92))
+
+### 💅 Refactors
+
+- Extract error-boundary. ([57c9caf](https://github.com/haus23/runde.tips/commit/57c9caf))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.2.2
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.2.1...v0.2.2)
