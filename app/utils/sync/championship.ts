@@ -36,6 +36,10 @@ export async function syncChampionship(
     return await syncByPrepareTrackingData(legacyChampionship, taskId);
   }
 
+  if (!legacyChampionship.completed) {
+    return await syncWithPreparedTrackingData(legacyChampionship, taskId);
+  }
+
   throw new Error(
     'Fehler: Diese Art des Abgleichs ist noch nicht implementiert',
   );
@@ -317,11 +321,62 @@ async function syncWithPreparedTrackingData(
   legacyCampionship: Awaited<ReturnType<typeof getFirestoreChampionshipById>>,
   taskId: string,
 ) {
+  const legacyData = await getLegacyStandings(legacyCampionship.id);
+  const masterData = await getMasterData();
+
   // 1. Turnier muss aktualisiert werden weil mglweise Zusatztipps veröffentlicht wurden
+  //    -> Theoretisch kann eine Regelwerk-Änderung passieren (plötzlich Doppelrunden, ...)
+  //    -> Zum Testen erlaube ich auch Namensänderungen
   //    -> Neues Turnier kann über den Slug gefunden werden
-  // 2. Runden müssten zur Zeit nicht aktualisiert werden
+
+  const ruleset = masterData.rulesets.find(
+    (rs) => rs.slug === legacyCampionship.rulesId,
+  );
+  if (!ruleset) {
+    throw new Error(`Unknown ruleset ${legacyCampionship.rulesId}`);
+  }
+
+  const championship = await db.championship.update({
+    data: {
+      name: legacyCampionship.name,
+      extraPointsPublished: legacyCampionship.extraPointsPublished,
+      rulesetId: ruleset.id,
+    },
+    where: {
+      slug: legacyCampionship.id,
+    },
+  });
+
+  // 2. Runden müssen aktualisiert werden (neue Runde!)
   //    -> Runde könnte gefunden werden über Turnier-ID und Runden-Nr
   //    -> Ich werde aber in der Mapping-Tabelle einen Eintrag machen
+
+  // Extract rounds
+  for (const r of legacyData.legacyRounds) {
+    // Find id
+    const { sqliteId } = await db.firestoreMapping.findFirstOrThrow({
+      where: { firebaseId: r.id },
+    });
+    const round = await db.round.upsert({
+      create: {
+        nr: r.nr,
+        isDoubleRound: r.isDoubleRound,
+        championshipId: championship.id,
+        published: true,
+        completed: true,
+        tipsPublished: true,
+      },
+      update: {
+        nr: r.nr,
+        isDoubleRound: r.isDoubleRound,
+      },
+      where: {
+        id: sqliteId,
+      },
+    });
+    r.entityId = round.id;
+  }
+
   // 3. Spiele müssen aktualisiert werden (Datum, Ergebnis, ...)
   //    -> Spiel könnte gefunden werden über Turnier-ID und Spiel-Nr
   //    -> Ich werde aber in der Mapping-Tabelle einen Eintrag machen
@@ -331,4 +386,6 @@ async function syncWithPreparedTrackingData(
   // 5. Tipps müssen aktualisiert werden
   //    -> Hier muss die Mapping-Tabelle benutzt werden
   //    -> Achtung: nachträglich hinzugefügte Tipps müssen erfasst werden (upsert?)
+
+  return championship;
 }
