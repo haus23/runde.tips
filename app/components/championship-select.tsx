@@ -68,7 +68,7 @@ export function ChampionshipSelect() {
                     value={c.slug}
                     className={clsx(
                       'flex items-center justify-between select-none px-4 py-2 rounded-lg font-semibold transition-colors data-[selected=true]:bg-content-hover',
-                      championship.id === c.id && 'text-accent',
+                      championship.id === c.id && 'text-selected',
                     )}
                     onSelect={handleSelect}
                   >

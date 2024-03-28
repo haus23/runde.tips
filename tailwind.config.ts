@@ -65,6 +65,7 @@ export default {
       accent: {
         DEFAULT: 'var(--text-color-accent)',
       },
+      selected: 'var(--text-color-accent)',
       error: 'var(--text-color-error)',
     }),
     extend: {

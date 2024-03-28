@@ -75,7 +75,13 @@ export function ThemeMenu() {
             <MenuItem
               key={cs.name}
               id={cs.name}
-              className="flex items-center justify-between text-sm gap-4 select-none py-2 pl-3 pr-1 rounded-lg outline-none transition-colors data-[focused]:bg-content-hover"
+              className={({ isFocused, isSelected }) =>
+                twMerge(
+                  'flex items-center justify-between text-sm gap-4 select-none py-2 pl-3 pr-1 rounded-lg outline-none transition-colors',
+                  isFocused && 'bg-content-hover',
+                  isSelected && 'text-selected',
+                )
+              }
             >
               {({ isSelected }) => (
                 <>

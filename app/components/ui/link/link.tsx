@@ -16,7 +16,7 @@ const navLinkStyles = tv({
   extend: linkStyles,
   base: ['px-2 py-1.5 text-app-subtle transition-colors font-medium'],
   variants: {
-    isCurrent: { true: 'text-accent', false: 'hover:text-app' },
+    isCurrent: { true: 'text-selected', false: 'hover:text-app' },
   },
 });
 
