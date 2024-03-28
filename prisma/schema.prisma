@@ -144,3 +144,8 @@ model Tip {
 
   @@unique([playerId, matchId])
 }
+
+model FirestoreMapping {
+  firebaseId String @id
+  sqliteId   Int
+}
