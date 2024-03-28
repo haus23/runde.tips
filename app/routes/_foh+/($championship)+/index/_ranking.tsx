@@ -28,7 +28,9 @@ export default function RankingRoute() {
   return (
     <div className="grid gap-y-4">
       <div className="flex text-xl gap-x-1.5">
-        <h1 className="hidden sm:block">{championship.name}</h1>
+        <h1 className="hidden sm:block text-xl font-medium">
+          {championship.name}
+        </h1>
         <span className="hidden sm:block">-</span>
         <h2 id="tableLabel" className="px-2 sm:px-0 text-xl font-medium">
           Abschlusstabelle
