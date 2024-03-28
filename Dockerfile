@@ -3,35 +3,36 @@ FROM node:20-bookworm-slim as base
 
 ENV NODE_ENV production
 RUN apt-get update && apt-get install -y openssl
-RUN corepack enable
 
 ENV DATABASE_URL="file:/app/data/sqlite.db"
 
 # npm dependencies including dev dependencies
 FROM base as deps
 
-ENV NODE_ENV development
 WORKDIR /app
-ADD package.json pnpm-lock.yaml .npmrc  ./
-RUN pnpm install
+
+ADD package.json package-lock.json ./
+RUN npm install --include=dev
 
 # npm production dependencies
 FROM base as production-deps
 
 WORKDIR /app
+
 COPY --from=deps /app/node_modules /app/node_modules
-ADD package.json pnpm-lock.yaml .npmrc ./
-RUN pnpm install
+ADD package.json package-lock.json ./
+RUN npm prune --omit=dev
 
 # app build
 FROM base as build
 
 WORKDIR /app
+
 COPY --from=deps /app/node_modules /app/node_modules
-COPY --from=deps /app/package.json /app/package.json
+ADD package.json ./
 ADD . .
-RUN pnpm db:generate
-RUN pnpm build
+RUN npm run db:generate
+RUN npm run build
 
 # final production image
 FROM base
@@ -44,7 +45,7 @@ COPY --from=build /app/package.json /app/package.json
 
 VOLUME [ "/app/data" ]
 
-RUN pnpm db:push
+RUN npm db:push
 
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]
