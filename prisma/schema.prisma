@@ -73,7 +73,8 @@ model Championship {
 }
 
 model Round {
-  id Int @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
+  firestoreId String @unique
 
   nr            Int
   isDoubleRound Boolean @default(false)
@@ -88,7 +89,8 @@ model Round {
 }
 
 model Match {
-  id Int @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
+  firestoreId String @unique
 
   nr     Int
   date   String?
@@ -110,7 +112,8 @@ model Match {
 }
 
 model Player {
-  id Int @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
+  firestoreId String @unique
 
   points      Int     @default(0)
   extraPoints Decimal @default(0)
@@ -127,7 +130,8 @@ model Player {
 }
 
 model Tip {
-  id Int @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
+  firestoreId String @unique
 
   tip        String
   joker      Boolean?
@@ -143,9 +147,4 @@ model Tip {
   match          Match        @relation(fields: [matchId], references: [id])
 
   @@unique([playerId, matchId])
-}
-
-model FirestoreMapping {
-  firebaseId String @id
-  sqliteId   Int
 }
