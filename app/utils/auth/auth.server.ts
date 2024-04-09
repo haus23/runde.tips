@@ -64,6 +64,7 @@ authenticator.use(
         expiredTotp: 'Abgelaufener Code.',
         invalidTotp: 'Falscher Code.',
       },
+      maxAge: 60 * 60 * 24 * 30,
     },
     async ({ email }) => {
       const user = await getUserByEmail(email);
