@@ -23,18 +23,14 @@ export async function syncChampionship(
   // Load legacy championship
   const legacyChampionship = await getFirestoreChampionshipById(slug);
 
-  // Three ways to syncronize:
-  // 1. Remote complete, local undefined -> Simple insert with inserting firestore ids
-  // 2. Remote uncomplete, local undefined -> Simple insert with inserting firestore ids
-  // 3. Remote uncomplete, local defined -> Sync with firestore ids
+  // Two ways to syncronize:
+  // 1. Local undefined -> Simple insert with inserting firestore ids
+  // 2. Local defined -> Sync with firestore ids
 
   if (championship === null) {
     return await syncBySimpleInsertWithTrackingIds(legacyChampionship, taskId);
   }
-
-  throw new Error(
-    'Fehler: Diese Art des Abgleichs ist noch nicht implementiert',
-  );
+  return await syncWithPreparedTrackingIds(legacyChampionship, taskId);
 }
 
 async function getLegacyStandings(championshipId: string) {
@@ -213,8 +209,6 @@ async function syncWithPreparedTrackingIds(
   });
 
   // 2. Runden müssen aktualisiert werden
-
-  // Extract rounds
   for (const r of legacyData.legacyRounds) {
     const round = await db.round.upsert({
       create: {
@@ -230,6 +224,10 @@ async function syncWithPreparedTrackingIds(
       update: {
         nr: r.nr,
         isDoubleRound: r.isDoubleRound,
+        // Features are not implemented on legacy data
+        published: true,
+        completed: true,
+        tipsPublished: true,
       },
       where: {
         firestoreId: r.id,
@@ -239,8 +237,113 @@ async function syncWithPreparedTrackingIds(
   }
 
   // 3. Spiele müssen aktualisiert werden (Datum, Ergebnis, ...)
+  for (const m of legacyData.legacyMatches) {
+    const round = legacyData.legacyRounds.find((r) => r.id === m.roundId);
+    invariant(typeof round !== 'undefined');
+
+    const league = masterData.leagues.find((l) => l.slug === m.leagueId);
+    const hometeam = masterData.teams.find((t) => t.slug === m.hometeamId);
+    const awayteam = masterData.teams.find((t) => t.slug === m.awayteamId);
+
+    const optionalProps = {
+      date: m.date || undefined,
+      leagueId: league?.id,
+      hometeamId: hometeam?.id,
+      awayteamId: awayteam?.id,
+    };
+
+    const match = await db.match.upsert({
+      create: {
+        nr: m.nr,
+        firestoreId: m.id,
+        result: m.result,
+        points: m.points,
+        championshipId: championship.id,
+        roundId: round.entityId,
+        ...optionalProps,
+      },
+      update: {
+        nr: m.nr,
+        result: m.result,
+        points: m.points,
+        ...optionalProps,
+      },
+      where: {
+        firestoreId: m.id,
+      },
+    });
+
+    m.entityId = match.id;
+  }
+
   // 4. Spieler müssen aktualisiert werden (Punkte, ...)
+  for (const p of legacyData.legacyPlayers) {
+    const user = masterData.users.find((u) => u.slug === p.playerId);
+    invariant(typeof user !== 'undefined');
+
+    const player = await db.player.upsert({
+      create: {
+        firestoreId: p.id,
+        points: p.points,
+        extraPoints: p.extraPoints,
+        totalPoints: p.totalPoints,
+        rank: p.rank,
+        userId: user.id,
+        championshipId: championship.id,
+      },
+      update: {
+        points: p.points,
+        extraPoints: p.extraPoints,
+        totalPoints: p.totalPoints,
+        rank: p.rank,
+      },
+      where: {
+        firestoreId: p.id,
+      },
+    });
+    p.entityId = player.id;
+  }
+
+  taskProgressEventBus.emit({
+    taskId,
+    message: '... und jetzt noch die Tipps.',
+  });
+
   // 5. Tipps müssen aktualisiert werden
+  for (const p of legacyData.legacyPlayers) {
+    const legacyPlayerTips = legacyData.legacyTips.filter(
+      (lt) => lt.playerId === p.id,
+    );
+
+    for (const m of legacyData.legacyMatches) {
+      const legacyTip = legacyPlayerTips.find((lt) => lt.matchId === m.id);
+      if (!legacyTip) continue;
+
+      await db.tip.upsert({
+        create: {
+          firestoreId: legacyTip.id,
+          championshipId: championship.id,
+          playerId: p.entityId,
+          matchId: m.entityId,
+          tip: legacyTip.tip,
+          joker: legacyTip.joker || undefined,
+          extraJoker: legacyTip.extraJoker || undefined,
+          lonelyHit: legacyTip.lonelyHit || undefined,
+          points: legacyTip.points,
+        },
+        update: {
+          tip: legacyTip.tip,
+          joker: legacyTip.joker || undefined,
+          extraJoker: legacyTip.extraJoker || undefined,
+          lonelyHit: legacyTip.lonelyHit || undefined,
+          points: legacyTip.points,
+        },
+        where: {
+          firestoreId: legacyTip.id,
+        },
+      });
+    }
+  }
 
   return championship;
 }
