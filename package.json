@@ -35,7 +35,7 @@
     "react-dom": "^18.2.0",
     "remix-auth": "^3.6.0",
     "remix-auth-totp": "^3.0.0",
-    "remix-utils": "~7.5.0",
+    "remix-utils": "~7.6.0",
     "sonner": "^1.4.3",
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "0.2.1",
