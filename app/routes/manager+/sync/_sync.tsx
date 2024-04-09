@@ -170,7 +170,7 @@ export default function SyncRoute() {
                   <Cell className="w-full sm:py-2.5 px-2 md:px-6">
                     {lc.name}
                   </Cell>
-                  <Cell className="text-center px-2 md:px-6">
+                  <Cell className="text-center px-2 md:px-6 sm:whitespace-nowrap">
                     {lc.synced
                       ? lc.completed
                         ? 'Abgeschlossen'
