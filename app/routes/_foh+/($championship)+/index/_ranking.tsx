@@ -1,26 +1,18 @@
 import { type LoaderFunctionArgs, json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import clsx from 'clsx';
-import {
-  Cell,
-  Column,
-  Dialog,
-  DialogTrigger,
-  OverlayArrow,
-  Row,
-  Table,
-  TableBody,
-  TableHeader,
-} from 'react-aria-components';
+import { Table, TableBody, TableHeader } from 'react-aria-components';
 import { Fragment } from 'react/jsx-runtime';
 import {
   Button,
+  Cell,
+  Column,
   HoverBox,
   HoverBoxContent,
   HoverBoxTrigger,
   Icon,
+  Row,
 } from '#components/ui';
-import { Popover } from '#components/ui/popover/popover';
 import { db } from '#utils/db.server';
 import { requireChampionship } from '#utils/foh/championships.server';
 import { getCurrentTips } from '#utils/foh/current-tips.server';
@@ -73,9 +65,7 @@ export default function RankingRoute() {
           )}
 
           {!championship.completed && currentTips.length > 0 && (
-            <Column className="px-2 md:px-6">
-              <span className="sr-only">Aktuelle Tipps</span>
-            </Column>
+            <Column className="text-center px-2">Tipps</Column>
           )}
         </TableHeader>
         <TableBody className="divide-y divide-default">
@@ -97,7 +87,7 @@ export default function RankingRoute() {
                 )}
                 <Cell className="text-center">{player.totalPoints}</Cell>
                 {!championship.completed && currentTips.length > 0 && (
-                  <Cell className="text-center px-2">
+                  <Cell className="px-4">
                     <HoverBox>
                       <HoverBoxTrigger>
                         <Button variant="trigger">
