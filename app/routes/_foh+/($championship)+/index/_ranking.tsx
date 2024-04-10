@@ -162,7 +162,7 @@ export default function RankingRoute() {
                                         'text-accent bg-content',
                                     )}
                                   >
-                                    {tip?.points}
+                                    {m.result && tip?.points}
                                   </div>
                                 </Fragment>
                               );
