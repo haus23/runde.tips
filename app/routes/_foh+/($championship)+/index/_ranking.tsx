@@ -1,15 +1,23 @@
 import { type LoaderFunctionArgs, json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import clsx from 'clsx';
 import {
   Cell,
   Column,
+  Dialog,
+  DialogTrigger,
+  OverlayArrow,
   Row,
   Table,
   TableBody,
   TableHeader,
 } from 'react-aria-components';
+import { Fragment } from 'react/jsx-runtime';
+import { Button, Icon } from '#components/ui';
+import { Popover } from '#components/ui/popover/popover';
 import { db } from '#utils/db.server';
 import { requireChampionship } from '#utils/foh/championships.server';
+import { getCurrentTips } from '#utils/foh/current-tips.server';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const championship = await requireChampionship(params);
@@ -18,12 +26,13 @@ export async function loader({ params }: LoaderFunctionArgs) {
     orderBy: { rank: 'asc' },
     include: { user: true },
   });
+  const currentTips = await getCurrentTips(championship);
 
-  return json({ championship, ranks });
+  return json({ championship, ranks, currentTips });
 }
 
 export default function RankingRoute() {
-  const { championship, ranks } = useLoaderData<typeof loader>();
+  const { championship, ranks, currentTips } = useLoaderData<typeof loader>();
 
   return (
     <div className="grid gap-y-4">
@@ -33,23 +42,35 @@ export default function RankingRoute() {
         </h1>
         <span className="hidden sm:block">-</span>
         <h2 id="tableLabel" className="px-2 sm:px-0 text-xl font-medium">
-          Abschlusstabelle
+          {championship.completed ? 'Abschlusstabelle' : 'Aktuelle Tabelle'}
         </h2>
       </div>
-      <Table className="text-sm" aria-labelledby="tableLabel">
+      <Table className="text-sm font-semibold" aria-labelledby="tableLabel">
         <TableHeader className="bg-accent text-xs uppercase">
           <Column className="py-2 px-2 md:px-6 text-right">Platz</Column>
           <Column className="px-2 md:px-6 text-left" isRowHeader>
             Name
           </Column>
-          <Column className="px-2 md:px-6">
-            <span className="hidden sm:inline">Zusatzpunkte</span>
-            <span className="sm:hidden">Zusatzpkt</span>
-          </Column>
-          <Column className="px-2 md:px-6">
-            <span className="hidden sm:inline">Gesamtpunkte</span>
-            <span className="sm:hidden">Gesamt</span>
-          </Column>
+          {championship.extraPointsPublished ? (
+            <>
+              <Column className="px-2 md:px-6">
+                <span className="hidden sm:inline">Zusatzpunkte</span>
+                <span className="sm:hidden">Zusatzpkt</span>
+              </Column>
+              <Column className="px-2 md:px-6">
+                <span className="hidden sm:inline">Gesamtpunkte</span>
+                <span className="sm:hidden">Gesamt</span>
+              </Column>
+            </>
+          ) : (
+            <Column className="px-2 md:px-6">Punkte</Column>
+          )}
+
+          {!championship.completed && currentTips.length > 0 && (
+            <Column className="px-2 md:px-6">
+              <span className="sr-only">Aktuelle Tipps</span>
+            </Column>
+          )}
         </TableHeader>
         <TableBody className="divide-y divide-default">
           {ranks.map((player, ix) => {
@@ -65,8 +86,93 @@ export default function RankingRoute() {
                 <Cell className="w-full py-2 sm:py-2.5 px-2 md:px-6">
                   {player.user.name}
                 </Cell>
-                <Cell className="text-center">{player.extraPoints}</Cell>
+                {championship.extraPointsPublished && (
+                  <Cell className="text-center">{player.extraPoints}</Cell>
+                )}
                 <Cell className="text-center">{player.totalPoints}</Cell>
+                {!championship.completed && currentTips.length > 0 && (
+                  <Cell className="text-center px-2">
+                    <DialogTrigger>
+                      <Button variant="trigger">
+                        <Icon
+                          className="text-app-subtle"
+                          name="lucide/calendar"
+                        />
+                      </Button>
+                      <Popover placement="top" offset={2} isNonModal>
+                        <OverlayArrow className="group">
+                          <svg
+                            role="img"
+                            aria-label="Kleiner Pfeil"
+                            width={12}
+                            height={12}
+                            viewBox="0 0 12 12"
+                            className="block fill-popover stroke-1 stroke-border-default group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90"
+                          >
+                            <path d="M0 0 L6 6 L12 0" />
+                          </svg>
+                        </OverlayArrow>
+
+                        <Dialog className="focus:outline-none">
+                          <div className="grid w-[240px] grid-cols-[1fr_repeat(2,_auto)] pb-2 text-sm">
+                            <div className="border-b border-default py-2 pl-2">
+                              Spiel
+                            </div>
+                            <div className="border-b border-default p-2 text-center">
+                              Tipp
+                            </div>
+                            <div className="border-b border-default p-2 text-center">
+                              Pkt
+                            </div>
+                            {currentTips.map((m) => {
+                              const tip = m.tips.find(
+                                (t) => t.playerId === player.id,
+                              );
+                              return (
+                                <Fragment key={m.id}>
+                                  <div
+                                    className={clsx(
+                                      'py-1 pl-2',
+                                      (tip?.joker ||
+                                        tip?.lonelyHit ||
+                                        tip?.extraJoker) &&
+                                        'text-accent bg-content',
+                                    )}
+                                  >
+                                    {m.hometeam?.shortname}-
+                                    {m.awayteam?.shortname}
+                                  </div>
+                                  <div
+                                    className={clsx(
+                                      'py-1 text-center',
+                                      (tip?.joker ||
+                                        tip?.lonelyHit ||
+                                        tip?.extraJoker) &&
+                                        'text-accent bg-content',
+                                    )}
+                                  >
+                                    {tip?.tip}
+                                  </div>
+                                  <div
+                                    className={clsx(
+                                      'py-1 text-center',
+                                      (tip?.joker ||
+                                        tip?.lonelyHit ||
+                                        tip?.extraJoker) &&
+                                        'text-accent bg-content',
+                                    )}
+                                  >
+                                    {tip?.points}
+                                  </div>
+                                </Fragment>
+                              );
+                            })}
+                          </div>
+                        </Dialog>
+                      </Popover>
+                    </DialogTrigger>
+                  </Cell>
+                )}
               </Row>
             );
           })}

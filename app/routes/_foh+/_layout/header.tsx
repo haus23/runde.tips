@@ -42,7 +42,7 @@ export function Header() {
         </div>
       </div>
       <div className="grid sm:hidden grid-cols-[auto_1fr_auto] gap-x-2 items-center">
-        <h1 className="text-xl">{pageTitle}</h1>
+        <h1 className="text-xl font-medium">{pageTitle}</h1>
       </div>
     </header>
   );
