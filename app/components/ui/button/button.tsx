@@ -18,7 +18,7 @@ const styles = tv({
       solid: '',
       outline: '',
       toolbar: 'p-2 bg-transparent border-2 rounded-xl',
-      trigger: '',
+      trigger: 'px-1 py-0.5 bg-transparent rounded',
     },
     isDisabled: {
       true: 'opacity-40 forced-colors:text-[GrayText]',

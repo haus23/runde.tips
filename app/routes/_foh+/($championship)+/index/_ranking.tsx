@@ -13,7 +13,13 @@ import {
   TableHeader,
 } from 'react-aria-components';
 import { Fragment } from 'react/jsx-runtime';
-import { Button, Icon } from '#components/ui';
+import {
+  Button,
+  HoverBox,
+  HoverBoxContent,
+  HoverBoxTrigger,
+  Icon,
+} from '#components/ui';
 import { Popover } from '#components/ui/popover/popover';
 import { db } from '#utils/db.server';
 import { requireChampionship } from '#utils/foh/championships.server';
@@ -92,85 +98,72 @@ export default function RankingRoute() {
                 <Cell className="text-center">{player.totalPoints}</Cell>
                 {!championship.completed && currentTips.length > 0 && (
                   <Cell className="text-center px-2">
-                    <DialogTrigger>
-                      <Button variant="trigger">
-                        <Icon
-                          className="text-app-subtle"
-                          name="lucide/calendar"
-                        />
-                      </Button>
-                      <Popover placement="top" offset={2} isNonModal>
-                        <OverlayArrow className="group">
-                          <svg
-                            role="img"
-                            aria-label="Kleiner Pfeil"
-                            width={12}
-                            height={12}
-                            viewBox="0 0 12 12"
-                            className="block fill-popover stroke-1 stroke-border-default group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90"
-                          >
-                            <path d="M0 0 L6 6 L12 0" />
-                          </svg>
-                        </OverlayArrow>
-
-                        <Dialog className="focus:outline-none">
-                          <div className="grid w-[240px] grid-cols-[1fr_repeat(2,_auto)] pb-2 text-sm">
-                            <div className="border-b border-default py-2 pl-2">
-                              Spiel
-                            </div>
-                            <div className="border-b border-default p-2 text-center">
-                              Tipp
-                            </div>
-                            <div className="border-b border-default p-2 text-center">
-                              Pkt
-                            </div>
-                            {currentTips.map((m) => {
-                              const tip = m.tips.find(
-                                (t) => t.playerId === player.id,
-                              );
-                              return (
-                                <Fragment key={m.id}>
-                                  <div
-                                    className={clsx(
-                                      'py-1 pl-2',
-                                      (tip?.joker ||
-                                        tip?.lonelyHit ||
-                                        tip?.extraJoker) &&
-                                        'text-accent bg-content',
-                                    )}
-                                  >
-                                    {m.hometeam?.shortname}-
-                                    {m.awayteam?.shortname}
-                                  </div>
-                                  <div
-                                    className={clsx(
-                                      'py-1 text-center',
-                                      (tip?.joker ||
-                                        tip?.lonelyHit ||
-                                        tip?.extraJoker) &&
-                                        'text-accent bg-content',
-                                    )}
-                                  >
-                                    {tip?.tip}
-                                  </div>
-                                  <div
-                                    className={clsx(
-                                      'py-1 text-center',
-                                      (tip?.joker ||
-                                        tip?.lonelyHit ||
-                                        tip?.extraJoker) &&
-                                        'text-accent bg-content',
-                                    )}
-                                  >
-                                    {m.result && tip?.points}
-                                  </div>
-                                </Fragment>
-                              );
-                            })}
+                    <HoverBox>
+                      <HoverBoxTrigger>
+                        <Button variant="trigger">
+                          <Icon
+                            className="text-app-subtle"
+                            name="lucide/calendar"
+                          />
+                        </Button>
+                      </HoverBoxTrigger>
+                      <HoverBoxContent>
+                        <div className="grid w-[240px] grid-cols-[1fr_repeat(2,_auto)] pb-2 text-sm">
+                          <div className="border-b border-default py-2 pl-2">
+                            Spiel
                           </div>
-                        </Dialog>
-                      </Popover>
-                    </DialogTrigger>
+                          <div className="border-b border-default p-2 text-center">
+                            Tipp
+                          </div>
+                          <div className="border-b border-default p-2 text-center">
+                            Pkt
+                          </div>
+                          {currentTips.map((m) => {
+                            const tip = m.tips.find(
+                              (t) => t.playerId === player.id,
+                            );
+                            return (
+                              <Fragment key={m.id}>
+                                <div
+                                  className={clsx(
+                                    'py-1 pl-2',
+                                    (tip?.joker ||
+                                      tip?.lonelyHit ||
+                                      tip?.extraJoker) &&
+                                      'text-accent bg-content',
+                                  )}
+                                >
+                                  {m.hometeam?.shortname}-
+                                  {m.awayteam?.shortname}
+                                </div>
+                                <div
+                                  className={clsx(
+                                    'py-1 text-center',
+                                    (tip?.joker ||
+                                      tip?.lonelyHit ||
+                                      tip?.extraJoker) &&
+                                      'text-accent bg-content',
+                                  )}
+                                >
+                                  {tip?.tip}
+                                </div>
+                                <div
+                                  className={clsx(
+                                    'py-1 text-center',
+                                    (tip?.joker ||
+                                      tip?.lonelyHit ||
+                                      tip?.extraJoker) &&
+                                      'text-accent bg-content',
+                                  )}
+                                >
+                                  {m.result && tip?.points}
+                                </div>
+                              </Fragment>
+                            );
+                          })}
+                        </div>
+                      </HoverBoxContent>
+                    </HoverBox>
                   </Cell>
                 )}
               </Row>
