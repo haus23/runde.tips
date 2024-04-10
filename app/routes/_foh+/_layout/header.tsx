@@ -15,7 +15,7 @@ export function Header() {
   const championship = useOptionalChampionship();
 
   const championshipSegment =
-    (championship === championships[0] ? '' : championship?.slug) || '';
+    (championship?.id === championships[0]?.id ? '' : championship?.slug) || '';
 
   return (
     <header className="h-14 bg-app sticky top-0 grid max-w-6xl mx-auto px-2 sm:px-4">
