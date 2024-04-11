@@ -15,6 +15,9 @@ const styles = tv({
 function _Popover({ className, ...props }: PopoverProps) {
   return (
     <Popover
+      ref={(ref) =>
+        ref?.addEventListener('touchend', (e) => e.preventDefault())
+      }
       offset={8}
       className={composeRenderProps(className, (className, renderProps) =>
         styles({ ...renderProps, className }),
