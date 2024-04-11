@@ -28,7 +28,7 @@ export function HoverBoxContent({ children }: { children: ReactNode }) {
   const { hoverProps } = useHover({ onHoverChange });
 
   return (
-    <Popover placement="left" isNonModal containerPadding={4}>
+    <Popover placement="left" isNonModal>
       <OverlayArrow className="group">
         <svg
           role="img"
