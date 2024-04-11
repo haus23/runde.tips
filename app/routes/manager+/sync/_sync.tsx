@@ -109,7 +109,7 @@ export default function SyncRoute() {
             synchronisiert werden.
           </p>
           <masterData.Form method="post" action="/action/sync/master-data">
-            <div className="flex flex-wrap justify-around">
+            <div className="flex flex-wrap justify-around gap-4">
               <Button
                 isDisabled={isSubmmitting}
                 color="accent"
@@ -153,7 +153,7 @@ export default function SyncRoute() {
       <Card>
         <CardHeader id="tableLabel">Turnierdaten</CardHeader>
         <Divider />
-        <CardContent>
+        <CardContent className="px-0 sm:px-4">
           <Table className="text-sm" aria-labelledby="tableLabel">
             <TableHeader className="bg-accent text-xs uppercase">
               <Column className="py-2 px-2 md:px-6 text-right">Nr</Column>
@@ -166,14 +166,12 @@ export default function SyncRoute() {
             <TableBody className="divide-y divide-default">
               {legacyChampionships.map((lc) => (
                 <Row key={lc.id}>
-                  <Cell className="pr-4 md:px-6 text-right">{lc.nr}</Cell>
-                  <Cell className="w-full sm:py-2.5 px-2 md:px-6">
-                    {lc.name}
-                  </Cell>
+                  <Cell className="pr-2 md:px-6 text-end">{lc.nr}</Cell>
+                  <Cell className="w-full py-2.5 px-2 md:px-6">{lc.name}</Cell>
                   <Cell className="text-center px-2 md:px-6 sm:whitespace-nowrap">
                     {lc.synced
                       ? lc.completed
-                        ? 'Abgeschlossen'
+                        ? 'Fertig'
                         : 'Laufend'
                       : 'Nicht geladen'}
                   </Cell>
