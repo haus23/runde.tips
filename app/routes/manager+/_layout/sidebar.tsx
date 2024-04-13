@@ -100,7 +100,7 @@ export function Sidebar() {
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-default focus-visible:ring-offset-default
                 "
               >
-                <Icon name="lucide/user">Log Out</Icon>
+                <Icon name="lucide/log-out">Log Out</Icon>
               </button>
             </Form>
           </div>
