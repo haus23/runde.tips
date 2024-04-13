@@ -39,7 +39,7 @@ export function ChampionshipSelect() {
     <DialogTrigger isOpen={open} onOpenChange={setOpen}>
       <Button variant="toolbar" className="gap-x-1 text-app-subtle">
         <Icon name="lucide/search" />
-        <span className="text-sm">Turnier</span>
+        <span className="sr-only text-sm sm:not-sr-only">Turnier</span>
       </Button>
       <ModalOverlay
         className="fixed inset-0 z-20 backdrop-blur-sm"

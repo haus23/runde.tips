@@ -15,6 +15,7 @@ export type IconName =
   | 'lucide/info'
   | 'lucide/laptop'
   | 'lucide/loader'
+  | 'lucide/log-in'
   | 'lucide/log-out'
   | 'lucide/menu'
   | 'lucide/moon'
