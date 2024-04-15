@@ -90,10 +90,14 @@ export function Header() {
                     <nav className="flex flex-col p-2 gap-y-2">
                       {championships.length > 0 ? (
                         <>
-                          <NavLink href={`/${championshipSegment}`}>
+                          <NavLink
+                            className="hover:bg-content-hover data-[current]:bg-content-hover"
+                            href={`/${championshipSegment}`}
+                          >
                             Tabelle
                           </NavLink>
                           <NavLink
+                            className="hover:bg-content-hover data-[current]:bg-content-hover"
                             href={`/${[championshipSegment, 'spieler']
                               .filter(Boolean)
                               .join('/')}`}
@@ -101,6 +105,7 @@ export function Header() {
                             Spieler
                           </NavLink>
                           <NavLink
+                            className="hover:bg-content-hover data-[current]:bg-content-hover"
                             href={`/${[championshipSegment, 'spiele']
                               .filter(Boolean)
                               .join('/')}`}
@@ -121,7 +126,10 @@ export function Header() {
                       </div>
                       {isAuthenticated ? (
                         <>
-                          <NavLink href="/manager">
+                          <NavLink
+                            href="/manager"
+                            className="hover:bg-content-hover"
+                          >
                             <Icon name="lucide/settings">Manager</Icon>
                           </NavLink>
                           <Form action="/logout" method="post" className="flex">
@@ -137,7 +145,10 @@ export function Header() {
                           </Form>
                         </>
                       ) : (
-                        <NavLink href="/login">
+                        <NavLink
+                          href="/login"
+                          className="hover:bg-content-hover data-[current]:bg-content-hover"
+                        >
                           <Icon name="lucide/log-in">Log In</Icon>
                         </NavLink>
                       )}
