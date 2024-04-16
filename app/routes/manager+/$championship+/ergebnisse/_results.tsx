@@ -6,6 +6,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return null;
 }
 
-export default function DashboardRoute() {
+export default function ResultsRoute() {
   return <div />;
 }
