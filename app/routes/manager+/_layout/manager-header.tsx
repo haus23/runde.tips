@@ -6,12 +6,18 @@ import {
   Modal,
   ModalOverlay,
 } from 'react-aria-components';
+import { ChampionshipSelect } from '#components/championship-select';
 import { ThemeMenu } from '#components/theme-menu';
 import { Button, Icon } from '#components/ui';
+import { useCurrentChampionship } from '#utils/manager/championship.context';
+import { useChampionships } from '#utils/manager/use-championships';
 import { usePageTitle } from '#utils/manager/use-page-title';
 import { ManagerNav } from './manager-nav';
 
 export function ManagerHeader() {
+  const championships = useChampionships();
+  const { championship, setChampionship } = useCurrentChampionship();
+
   const pageTitle = usePageTitle();
 
   const [isOpen, setOpen] = useState(false);
@@ -66,7 +72,14 @@ export function ManagerHeader() {
         </DialogTrigger>
         <h1 className="font-medium text-xl">{pageTitle}</h1>
       </div>
-      <ThemeMenu />
+      <div className="flex gap-x-2">
+        <ChampionshipSelect
+          championships={championships}
+          selected={championship}
+          onSelectionChanged={setChampionship}
+        />
+        <ThemeMenu />
+      </div>
     </div>
   );
 }
