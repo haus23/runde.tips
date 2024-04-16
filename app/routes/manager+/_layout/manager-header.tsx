@@ -60,7 +60,7 @@ export function ManagerHeader() {
                     <Button
                       onPress={close}
                       variant="toolbar"
-                      className="absolute top-2 left-56"
+                      className="absolute top-2 left-56 bg-popover"
                     >
                       <Icon name="lucide/x" />
                     </Button>

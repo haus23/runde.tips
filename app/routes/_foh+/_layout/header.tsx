@@ -100,7 +100,7 @@ export function Header() {
                             className="data-[current]:bg-content-hover hover:bg-content-hover"
                             href={`/${championshipSegment}`}
                           >
-                            Tabelle
+                            <Icon name="lucide/list-ordered">Tabelle</Icon>
                           </NavLink>
                           <NavLink
                             className="data-[current]:bg-content-hover hover:bg-content-hover"
@@ -108,7 +108,7 @@ export function Header() {
                               .filter(Boolean)
                               .join('/')}`}
                           >
-                            Spieler
+                            <Icon name="lucide/users">Spieler</Icon>
                           </NavLink>
                           <NavLink
                             className="data-[current]:bg-content-hover hover:bg-content-hover"
@@ -116,7 +116,7 @@ export function Header() {
                               .filter(Boolean)
                               .join('/')}`}
                           >
-                            Spiele
+                            <Icon name="lucide/dices">Spiele</Icon>
                           </NavLink>
                         </>
                       ) : (
@@ -124,12 +124,6 @@ export function Header() {
                       )}
                     </nav>
                     <div className="flex flex-col gap-y-2 p-2">
-                      <div className="flex items-center justify-between px-2">
-                        <span className="font-medium text-app-subtle">
-                          Hell-/Dunkel-Modus
-                        </span>
-                        <ThemeMenu />
-                      </div>
                       {isAuthenticated ? (
                         <>
                           <NavLink
@@ -163,11 +157,14 @@ export function Header() {
           </ModalOverlay>
         </DialogTrigger>
         <h1 className="font-medium text-xl">{pageTitle}</h1>
-        <ChampionshipSelect
-          championships={championships}
-          selected={championship}
-          onSelectionChanged={setChampionship}
-        />
+        <div className="flex gap-x-2">
+          <ChampionshipSelect
+            championships={championships}
+            selected={championship}
+            onSelectionChanged={setChampionship}
+          />
+          <ThemeMenu />
+        </div>
       </div>
     </header>
   );
