@@ -34,7 +34,7 @@ export function ManagerHeader() {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="flex items-center gap-x-4">
+      <div className="flex items-center gap-x-2">
         <DialogTrigger isOpen={isOpen} onOpenChange={setOpen}>
           <Button variant="toolbar" className="flex md:hidden">
             <Icon name="lucide/menu" />
@@ -61,7 +61,7 @@ export function ManagerHeader() {
             </Modal>
           </ModalOverlay>
         </DialogTrigger>
-        <h1 className="text-2xl">{pageTitle}</h1>
+        <h1 className="font-medium text-xl">{pageTitle}</h1>
       </div>
       <ThemeMenu />
     </div>
