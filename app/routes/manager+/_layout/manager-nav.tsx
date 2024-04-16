@@ -2,8 +2,11 @@ import clsx from 'clsx';
 import { Form } from 'react-aria-components';
 import { Logo } from '#components/logo';
 import { Icon, Link, NavLink } from '#components/ui';
+import { useCurrentChampionship } from '#utils/manager/championship.context';
 
 export function ManagerNav({ className }: { className?: string }) {
+  const { championship } = useCurrentChampionship();
+
   return (
     <div className={clsx('flex flex-col', className)}>
       <div className="flex flex-col p-2">
@@ -18,36 +21,40 @@ export function ManagerNav({ className }: { className?: string }) {
         >
           <Icon name="lucide/home">Dashboard</Icon>
         </NavLink>
-        <NavLink
-          href="/manager/rr2324/"
-          className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
-        >
-          <Icon name="lucide/folder">Turnier</Icon>
-        </NavLink>
-        <NavLink
-          href="/manager/rr2324/spiele"
-          className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
-        >
-          <Icon name="lucide/calendar">Spiele</Icon>
-        </NavLink>
-        <NavLink
-          href="/manager/rr2324/tipps"
-          className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
-        >
-          <Icon name="lucide/dices">Tipps</Icon>
-        </NavLink>
-        <NavLink
-          href="/manager/rr2324/ergebnisse"
-          className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
-        >
-          <Icon name="lucide/scale">Ergebnisse</Icon>
-        </NavLink>
-        <NavLink
-          href="/manager/rr2324/zusatzpunkte"
-          className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
-        >
-          <Icon name="lucide/smile-plus">Zusatzpunkte</Icon>
-        </NavLink>
+        {championship && (
+          <>
+            <NavLink
+              href={`/manager/${championship.slug}`}
+              className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
+            >
+              <Icon name="lucide/folder">Turnier</Icon>
+            </NavLink>
+            <NavLink
+              href={`/manager/${championship.slug}/spiele`}
+              className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
+            >
+              <Icon name="lucide/calendar">Spiele</Icon>
+            </NavLink>
+            <NavLink
+              href={`/manager/${championship.slug}/tipps`}
+              className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
+            >
+              <Icon name="lucide/dices">Tipps</Icon>
+            </NavLink>
+            <NavLink
+              href={`/manager/${championship.slug}/ergebnisse`}
+              className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
+            >
+              <Icon name="lucide/scale">Ergebnisse</Icon>
+            </NavLink>
+            <NavLink
+              href={`/manager/${championship.slug}/zusatzpunkte`}
+              className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
+            >
+              <Icon name="lucide/smile-plus">Zusatzpunkte</Icon>
+            </NavLink>
+          </>
+        )}
         <NavLink
           href="/manager/sync"
           className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
