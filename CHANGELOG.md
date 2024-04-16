@@ -1,6 +1,67 @@
 # @tipprunde/www
 
 
+## v0.4.0
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.3.0...v0.4.0)
+
+### 🚀 Enhancements
+
+- Sync initially current championship with preps for subsequent syncs. Resolves #100 ([#100](https://github.com/haus23/runde.tips/issues/100))
+- Start syncing current championshp. See #101 ([#101](https://github.com/haus23/runde.tips/issues/101))
+- Implement current ranking. Resolves #40 ([#40](https://github.com/haus23/runde.tips/issues/40))
+- Extract popover into hoverbox component. ([978010d](https://github.com/haus23/runde.tips/commit/978010d))
+
+### 🩹 Fixes
+
+- Remaining trace of pnpm removed. ([01912d7](https://github.com/haus23/runde.tips/commit/01912d7))
+- Align font weight. ([6cd5c6b](https://github.com/haus23/runde.tips/commit/6cd5c6b))
+- Add initial prisma migration. Resolves #69 ([#69](https://github.com/haus23/runde.tips/issues/69))
+- Don't break column text on bigger devices. ([e3f1116](https://github.com/haus23/runde.tips/commit/e3f1116))
+- Sync current championship. Solves #101 ([#101](https://github.com/haus23/runde.tips/issues/101))
+- Add maxAge to totp strategy. Try to solve #104 ([#104](https://github.com/haus23/runde.tips/issues/104))
+- Hide points if match not played. ([6b8b6fa](https://github.com/haus23/runde.tips/commit/6b8b6fa))
+- Do not rely on object identity. Resolves #105 ([#105](https://github.com/haus23/runde.tips/issues/105))
+- Move hoverbox to the left. Better UX. ([b9f7564](https://github.com/haus23/runde.tips/commit/b9f7564))
+- Improve mobile styling. Resolves #106 ([#106](https://github.com/haus23/runde.tips/issues/106))
+- Added workaround due to https://github.com/adobe/react-spectrum/issues/1513 ([f01f43e](https://github.com/haus23/runde.tips/commit/f01f43e))
+- Wrong icon ([b7f8f51](https://github.com/haus23/runde.tips/commit/b7f8f51))
+- Provide mobile nav. See #99 ([#99](https://github.com/haus23/runde.tips/issues/99))
+- Add mobile nav to manager layout. Resolves #99 ([#99](https://github.com/haus23/runde.tips/issues/99))
+- Delay openening to prevent eager press on first nav item. ([372f1aa](https://github.com/haus23/runde.tips/commit/372f1aa))
+
+### 💅 Refactors
+
+- Create text-selected color ([badfff5](https://github.com/haus23/runde.tips/commit/badfff5))
+- Remove logs. No use-case for me. Mark #28 as fixed as well. ([#28](https://github.com/haus23/runde.tips/issues/28))
+- Add firestoreId columns and drop mapping model. ([a365d52](https://github.com/haus23/runde.tips/commit/a365d52))
+- Adapt schema changes. Greatly simplifies syncing scenarios. ([b0426e6](https://github.com/haus23/runde.tips/commit/b0426e6))
+- Apply consistent focus styling. ([97fa4aa](https://github.com/haus23/runde.tips/commit/97fa4aa))
+- Add migration for the tracking ids. ([052c4b5](https://github.com/haus23/runde.tips/commit/052c4b5))
+- Remove offset correction. Not needed any more. ([2cbcfb9](https://github.com/haus23/runde.tips/commit/2cbcfb9))
+- Remove unneeded container padding. ([69c28c6](https://github.com/haus23/runde.tips/commit/69c28c6))
+- Align hover styling incase some has such a device. ([0611bc9](https://github.com/haus23/runde.tips/commit/0611bc9))
+- Recreate current manager layout. Looks more solid. ([2e8ecd6](https://github.com/haus23/runde.tips/commit/2e8ecd6))
+- Align pageTitle styles with foh. ([74a7fdc](https://github.com/haus23/runde.tips/commit/74a7fdc))
+
+### 🏡 Chore
+
+- **dx:** Update docker file to npm. ([4ba2f2f](https://github.com/haus23/runde.tips/commit/4ba2f2f))
+- **dx:** Simplify workflow. Rename db folder to standard prisma. ([84bdfc7](https://github.com/haus23/runde.tips/commit/84bdfc7))
+- **dx:** Slow down package upgrades. ([e6c6846](https://github.com/haus23/runde.tips/commit/e6c6846))
+- Patch update deps. ([280c942](https://github.com/haus23/runde.tips/commit/280c942))
+- Upgrade remix-utils. ([206a128](https://github.com/haus23/runde.tips/commit/206a128))
+- **dx:** Update biome. ([6ef3b0f](https://github.com/haus23/runde.tips/commit/6ef3b0f))
+- Upgrade prisma. ([a94b05b](https://github.com/haus23/runde.tips/commit/a94b05b))
+- **dx:** Raise usable ECMAScript version. ([dc9f539](https://github.com/haus23/runde.tips/commit/dc9f539))
+- Patch update deps. ([99748b4](https://github.com/haus23/runde.tips/commit/99748b4))
+- **dx:** Upgrde biome. ([f36d098](https://github.com/haus23/runde.tips/commit/f36d098))
+- **dx:** Let biome handle class name sorting. Will do it incrementally. ([85e3e39](https://github.com/haus23/runde.tips/commit/85e3e39))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.3.0
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.2.2...v0.3.0)

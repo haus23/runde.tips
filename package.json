@@ -1,7 +1,7 @@
 {
   "name": "@haus23/runde.tips",
   "license": "MIT",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "imports": {
     "#*": "./app/*"
