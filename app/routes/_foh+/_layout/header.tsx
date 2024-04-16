@@ -21,7 +21,7 @@ export function Header() {
   const pageTitle = usePageTitle();
   const isAuthenticated = useIsAuthenticated();
   const championships = usePublishedChampionships();
-  const { championship } = useCurrentChampionship();
+  const { championship, setChampionship } = useCurrentChampionship();
 
   const [isOpen, setOpen] = useState(false);
   const { state } = useNavigation();
@@ -56,7 +56,13 @@ export function Header() {
           )}
         </nav>
         <div className="flex items-center gap-x-2">
-          {championships.length > 1 && <ChampionshipSelect />}
+          {championships.length > 1 && (
+            <ChampionshipSelect
+              championships={championships}
+              selected={championship}
+              onSelectionChanged={setChampionship}
+            />
+          )}
           <ThemeMenu />
           {isAuthenticated ? (
             <UserMenu />
@@ -157,7 +163,11 @@ export function Header() {
           </ModalOverlay>
         </DialogTrigger>
         <h1 className="font-medium text-xl">{pageTitle}</h1>
-        <ChampionshipSelect />
+        <ChampionshipSelect
+          championships={championships}
+          selected={championship}
+          onSelectionChanged={setChampionship}
+        />
       </div>
     </header>
   );

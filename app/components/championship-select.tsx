@@ -1,3 +1,4 @@
+import type { Championship } from '@prisma/client';
 import clsx from 'clsx';
 import { Command } from 'cmdk';
 import { useEffect, useState } from 'react';
@@ -7,18 +8,23 @@ import {
   Modal,
   ModalOverlay,
 } from 'react-aria-components';
-import { useCurrentChampionship } from '#utils/foh/championship.context';
-import { usePublishedChampionships } from '#utils/foh/use-championships';
 import { Button, Icon } from './ui';
 
-export function ChampionshipSelect() {
-  const championships = usePublishedChampionships();
-  const { championship, setChampionship } = useCurrentChampionship();
+type ChampionshipSelectProps = {
+  championships: Championship[];
+  selected?: Championship;
+  onSelectionChanged: (championship: Championship) => void;
+};
 
+export function ChampionshipSelect({
+  championships,
+  selected,
+  onSelectionChanged,
+}: ChampionshipSelectProps) {
   function handleSelect(slug: string) {
     setOpen(false);
     const nextChampionship = championships.find((c) => c.slug === slug);
-    if (nextChampionship) setChampionship(nextChampionship);
+    if (nextChampionship) onSelectionChanged(nextChampionship);
   }
 
   const [open, setOpen] = useState(false);
@@ -69,12 +75,12 @@ export function ChampionshipSelect() {
                     value={c.slug}
                     className={clsx(
                       'flex select-none items-center justify-between rounded-lg px-4 py-2 font-semibold transition-colors data-[selected=true]:bg-content-hover',
-                      championship?.id === c.id && 'text-selected',
+                      selected?.id === c.id && 'text-selected',
                     )}
                     onSelect={handleSelect}
                   >
                     <span>{c.name}</span>
-                    {championship?.id === c.id && <Icon name="lucide/check" />}
+                    {selected?.id === c.id && <Icon name="lucide/check" />}
                   </Command.Item>
                 ))}
               </Command.List>
