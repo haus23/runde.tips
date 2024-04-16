@@ -1,3 +1,4 @@
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json, useFetcher, useFetchers, useLoaderData } from '@remix-run/react';
 import { nanoid } from 'nanoid';
 import {
@@ -18,13 +19,15 @@ import {
   CollapsibleTrigger,
   Divider,
 } from '#components/ui';
+import { requireAdmin } from '#utils/auth/auth.server.js';
 import { db } from '#utils/db.server';
 import { getFirestoreChampionships } from '#utils/firestore/championship';
 import { useTask } from '#utils/task';
 
 export const handle = { pageTitle: 'Datenabgleich' };
 
-export async function loader() {
+export async function loader({ request }: LoaderFunctionArgs) {
+  await requireAdmin(request);
   const championships = await db.championship.findMany();
   const legacyChampionships = await getFirestoreChampionships();
   const taskId = nanoid();
