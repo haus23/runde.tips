@@ -17,7 +17,8 @@ export function ChampionshipSelect() {
 
   function handleSelect(slug: string) {
     setOpen(false);
-    setChampionship(championships.find((c) => c.slug === slug) || championship);
+    const nextChampionship = championships.find((c) => c.slug === slug);
+    if (nextChampionship) setChampionship(nextChampionship);
   }
 
   const [open, setOpen] = useState(false);
@@ -53,7 +54,7 @@ export function ChampionshipSelect() {
                 placeholder="Turnier"
                 className="w-full rounded-xl bg-popover px-6 py-2.5 font-semibold text-app placeholder:text-app-subtle focus:outline-none"
               />
-              <Command.List className="p-2 border-default border-t">
+              <Command.List className="border-default border-t p-2">
                 <Command.Empty>
                   <div className="flex items-center justify-center gap-x-2 px-4 py-10 text-app-subtle">
                     <Icon name="lucide/folder" aria-hidden="true" />
@@ -67,13 +68,13 @@ export function ChampionshipSelect() {
                     key={c.id}
                     value={c.slug}
                     className={clsx(
-                      'flex items-center justify-between select-none px-4 py-2 rounded-lg font-semibold transition-colors data-[selected=true]:bg-content-hover',
-                      championship.id === c.id && 'text-selected',
+                      'flex select-none items-center justify-between rounded-lg px-4 py-2 font-semibold transition-colors data-[selected=true]:bg-content-hover',
+                      championship?.id === c.id && 'text-selected',
                     )}
                     onSelect={handleSelect}
                   >
                     <span>{c.name}</span>
-                    {championship.id === c.id && <Icon name="lucide/check" />}
+                    {championship?.id === c.id && <Icon name="lucide/check" />}
                   </Command.Item>
                 ))}
               </Command.List>

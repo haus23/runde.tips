@@ -44,7 +44,6 @@ export function useCurrentChampionship() {
   }
 
   const { championship, setChampionship } = ctx;
-  invariant(typeof championship !== 'undefined');
 
   function setChampionshipWithNavigation(championship: Championship) {
     setChampionship(championship);
@@ -54,14 +53,4 @@ export function useCurrentChampionship() {
   }
 
   return { championship, setChampionship: setChampionshipWithNavigation };
-}
-
-export function useOptionalChampionship() {
-  const ctx = useContext(ChampionshipContext);
-
-  if (!ctx) {
-    throw new Error('No ChampionshipProvider in component hierarchy.');
-  }
-
-  return ctx.championship;
 }

@@ -13,7 +13,7 @@ import { ThemeMenu } from '#components/theme-menu';
 import { Button, Divider, Icon, NavLink } from '#components/ui';
 import { UserMenu } from '#components/user-menu';
 import { useIsAuthenticated } from '#utils/auth/user';
-import { useOptionalChampionship } from '#utils/foh/championship.context';
+import { useCurrentChampionship } from '#utils/foh/championship.context';
 import { usePublishedChampionships } from '#utils/foh/use-championships';
 import { usePageTitle } from '#utils/foh/use-page-title';
 
@@ -21,7 +21,7 @@ export function Header() {
   const pageTitle = usePageTitle();
   const isAuthenticated = useIsAuthenticated();
   const championships = usePublishedChampionships();
-  const championship = useOptionalChampionship();
+  const { championship } = useCurrentChampionship();
 
   const [isOpen, setOpen] = useState(false);
   const { state } = useNavigation();
@@ -45,8 +45,8 @@ export function Header() {
     (championship?.id === championships[0]?.id ? '' : championship?.slug) || '';
 
   return (
-    <header className="h-14 bg-app sticky top-0 grid max-w-6xl mx-auto px-2 sm:px-4">
-      <div className="hidden sm:grid grid-cols-[auto_1fr_auto] gap-x-4 items-center">
+    <header className="sticky top-0 mx-auto grid h-14 max-w-6xl bg-app px-2 sm:px-4">
+      <div className="hidden grid-cols-[auto_1fr_auto] items-center gap-x-4 sm:grid">
         <Logo />
         <nav>
           {championships.length > 0 ? (
@@ -61,14 +61,14 @@ export function Header() {
           {isAuthenticated ? (
             <UserMenu />
           ) : (
-            <div className="flex items-center gap-x-2 h-14">
-              <Divider orientation="vertical" className="h-10 ml-2" />
+            <div className="flex h-14 items-center gap-x-2">
+              <Divider orientation="vertical" className="ml-2 h-10" />
               <NavLink href="/login">Log In</NavLink>
             </div>
           )}
         </div>
       </div>
-      <div className="grid sm:hidden grid-cols-[auto_1fr_auto] gap-x-2 items-center">
+      <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-2 sm:hidden">
         <DialogTrigger isOpen={isOpen} onOpenChange={setOpen}>
           <Button variant="toolbar">
             <Icon name="lucide/menu" />
@@ -78,26 +78,26 @@ export function Header() {
             isDismissable
           >
             <Modal className="fixed inset-4 bottom-auto z-20 mx-auto max-w-xl rounded-xl bg-popover shadow-medium ring-1 ring-default focus:outline-none">
-              <Dialog className="flex flex-col focus:outline-none divide-y divide-default">
+              <Dialog className="flex flex-col divide-y divide-default focus:outline-none">
                 {({ close }) => (
                   <>
-                    <header className="flex justify-between items-center p-2">
+                    <header className="flex items-center justify-between p-2">
                       <Logo />
                       <Button variant="trigger" onPress={close}>
                         <Icon className="size-6" name="lucide/x" />
                       </Button>
                     </header>
-                    <nav className="flex flex-col p-2 gap-y-2">
+                    <nav className="flex flex-col gap-y-2 p-2">
                       {championships.length > 0 ? (
                         <>
                           <NavLink
-                            className="hover:bg-content-hover data-[current]:bg-content-hover"
+                            className="data-[current]:bg-content-hover hover:bg-content-hover"
                             href={`/${championshipSegment}`}
                           >
                             Tabelle
                           </NavLink>
                           <NavLink
-                            className="hover:bg-content-hover data-[current]:bg-content-hover"
+                            className="data-[current]:bg-content-hover hover:bg-content-hover"
                             href={`/${[championshipSegment, 'spieler']
                               .filter(Boolean)
                               .join('/')}`}
@@ -105,7 +105,7 @@ export function Header() {
                             Spieler
                           </NavLink>
                           <NavLink
-                            className="hover:bg-content-hover data-[current]:bg-content-hover"
+                            className="data-[current]:bg-content-hover hover:bg-content-hover"
                             href={`/${[championshipSegment, 'spiele']
                               .filter(Boolean)
                               .join('/')}`}
@@ -117,9 +117,9 @@ export function Header() {
                         <NavLink href="/">Startseite</NavLink>
                       )}
                     </nav>
-                    <div className="flex flex-col p-2 gap-y-2">
-                      <div className="flex justify-between items-center px-2">
-                        <span className="text-app-subtle font-medium">
+                    <div className="flex flex-col gap-y-2 p-2">
+                      <div className="flex items-center justify-between px-2">
+                        <span className="font-medium text-app-subtle">
                           Hell-/Dunkel-Modus
                         </span>
                         <ThemeMenu />
@@ -135,10 +135,7 @@ export function Header() {
                           <Form action="/logout" method="post" className="flex">
                             <button
                               type="submit"
-                              className="grow py-1.5 px-2 rounded-lg font-medium text-sm
-                  text-app-subtle hover:text-app hover:bg-content-hover
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-default focus-visible:ring-offset-default
-                "
+                              className="grow rounded-lg px-2 py-1.5 font-medium text-app-subtle text-sm hover:bg-content-hover hover:text-app focus:outline-none focus-visible:ring-2 focus-visible:ring-default focus-visible:ring-offset-2 focus-visible:ring-offset-default"
                             >
                               <Icon name="lucide/log-out">Log Out</Icon>
                             </button>
@@ -147,7 +144,7 @@ export function Header() {
                       ) : (
                         <NavLink
                           href="/login"
-                          className="hover:bg-content-hover data-[current]:bg-content-hover"
+                          className="data-[current]:bg-content-hover hover:bg-content-hover"
                         >
                           <Icon name="lucide/log-in">Log In</Icon>
                         </NavLink>
@@ -159,7 +156,7 @@ export function Header() {
             </Modal>
           </ModalOverlay>
         </DialogTrigger>
-        <h1 className="text-xl font-medium">{pageTitle}</h1>
+        <h1 className="font-medium text-xl">{pageTitle}</h1>
         <ChampionshipSelect />
       </div>
     </header>
