@@ -35,7 +35,10 @@ export function ManagerHeader() {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-x-2">
-        <DialogTrigger isOpen={isOpen} onOpenChange={setOpen}>
+        <DialogTrigger
+          isOpen={isOpen}
+          onOpenChange={(isOpen) => setTimeout(() => setOpen(isOpen), 50)}
+        >
           <Button variant="toolbar" className="flex md:hidden">
             <Icon name="lucide/menu" />
           </Button>
