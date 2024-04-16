@@ -1,7 +1,5 @@
+export const handle = { pageTitle: 'Dashboard' };
+
 export default function DashboardRoute() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
-  );
+  return <div />;
 }

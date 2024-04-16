@@ -22,6 +22,8 @@ import { db } from '#utils/db.server';
 import { getFirestoreChampionships } from '#utils/firestore/championship';
 import { useTask } from '#utils/task';
 
+export const handle = { pageTitle: 'Datenabgleich' };
+
 export async function loader() {
   const championships = await db.championship.findMany();
   const legacyChampionships = await getFirestoreChampionships();
@@ -62,12 +64,10 @@ export default function SyncRoute() {
 
   return (
     <div className="flex flex-col gap-y-6">
-      <h2 className="text-2xl">Datenabgleich</h2>
-
       <Collapsible defaultOpen>
         <CollapsibleTrigger>Backend-Daten</CollapsibleTrigger>
         <Divider />
-        <CollapsibleContent className="p-4 flex flex-col gap-y-4">
+        <CollapsibleContent className="flex flex-col gap-y-4 p-4">
           <p className="text-app-subtle">
             Hiermit werden die Cache-Daten des Backends gelöscht. Damit kann die
             zur Zeit noch laufende Tipprunden-Anwendung wieder aktuelle Daten
@@ -156,8 +156,8 @@ export default function SyncRoute() {
         <CardContent className="px-0 sm:px-4">
           <Table className="text-sm" aria-labelledby="tableLabel">
             <TableHeader className="bg-accent text-xs uppercase">
-              <Column className="py-2 px-2 md:px-6 text-right">Nr</Column>
-              <Column className="px-2 md:px-6 text-left" isRowHeader>
+              <Column className="px-2 py-2 text-right md:px-6">Nr</Column>
+              <Column className="px-2 text-left md:px-6" isRowHeader>
                 Titel
               </Column>
               <Column className="px-2 md:px-6">Status</Column>
@@ -166,16 +166,16 @@ export default function SyncRoute() {
             <TableBody className="divide-y divide-default">
               {legacyChampionships.map((lc) => (
                 <Row key={lc.id}>
-                  <Cell className="pr-2 md:px-6 text-end">{lc.nr}</Cell>
-                  <Cell className="w-full py-2.5 px-2 md:px-6">{lc.name}</Cell>
-                  <Cell className="text-center px-2 md:px-6 sm:whitespace-nowrap">
+                  <Cell className="pr-2 text-end md:px-6">{lc.nr}</Cell>
+                  <Cell className="w-full px-2 py-2.5 md:px-6">{lc.name}</Cell>
+                  <Cell className="px-2 text-center sm:whitespace-nowrap md:px-6">
                     {lc.synced
                       ? lc.completed
                         ? 'Fertig'
                         : 'Laufend'
                       : 'Nicht geladen'}
                   </Cell>
-                  <Cell className="text-center px-2 md:px-6">
+                  <Cell className="px-2 text-center md:px-6">
                     {lc.synced && lc.completed ? (
                       <span>Keine</span>
                     ) : (
