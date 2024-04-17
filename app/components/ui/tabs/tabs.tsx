@@ -74,7 +74,7 @@ interface _TabPanelProps extends TabPanelProps {
 }
 
 function _TabPanel({ className, ...props }: _TabPanelProps) {
-  return <TabPanel className={clsx('mt-2', className)} {...props} />;
+  return <TabPanel className={clsx('mt-4', className)} {...props} />;
 }
 
 export {
