@@ -9,7 +9,6 @@ import {
   Column,
   HoverBox,
   HoverBoxContent,
-  HoverBoxTrigger,
   Icon,
   Row,
 } from '#components/ui';
@@ -34,19 +33,19 @@ export default function RankingRoute() {
 
   return (
     <div className="grid gap-y-4">
-      <div className="flex text-xl gap-x-1.5">
-        <h1 className="hidden sm:block text-xl font-medium">
+      <div className="flex gap-x-1.5 text-xl">
+        <h1 className="hidden font-medium text-xl sm:block">
           {championship.name}
         </h1>
         <span className="hidden sm:block">-</span>
-        <h2 id="tableLabel" className="px-2 sm:px-0 text-xl font-medium">
+        <h2 id="tableLabel" className="px-2 font-medium text-xl sm:px-0">
           {championship.completed ? 'Abschlusstabelle' : 'Aktuelle Tabelle'}
         </h2>
       </div>
-      <Table className="text-sm font-semibold" aria-labelledby="tableLabel">
+      <Table className="font-semibold text-sm" aria-labelledby="tableLabel">
         <TableHeader className="bg-accent text-xs uppercase">
-          <Column className="py-2 px-2 md:px-6 text-right">Platz</Column>
-          <Column className="px-2 md:px-6 text-left" isRowHeader>
+          <Column className="px-2 py-2 text-right md:px-6">Platz</Column>
+          <Column className="px-2 text-left md:px-6" isRowHeader>
             Name
           </Column>
           {championship.extraPointsPublished ? (
@@ -65,7 +64,7 @@ export default function RankingRoute() {
           )}
 
           {!championship.completed && currentTips.length > 0 && (
-            <Column className="text-center px-2">Tipps</Column>
+            <Column className="px-2 text-center">Tipps</Column>
           )}
         </TableHeader>
         <TableBody className="divide-y divide-default">
@@ -78,8 +77,8 @@ export default function RankingRoute() {
                   : '';
             return (
               <Row key={player.id}>
-                <Cell className="pr-4 md:px-6 text-right">{rank}</Cell>
-                <Cell className="w-full py-2 sm:py-2.5 px-2 md:px-6">
+                <Cell className="pr-4 text-right md:px-6">{rank}</Cell>
+                <Cell className="w-full px-2 py-2 md:px-6 sm:py-2.5">
                   {player.user.name}
                 </Cell>
                 {championship.extraPointsPublished && (
@@ -89,23 +88,21 @@ export default function RankingRoute() {
                 {!championship.completed && currentTips.length > 0 && (
                   <Cell className="px-4">
                     <HoverBox>
-                      <HoverBoxTrigger>
-                        <Button variant="trigger">
-                          <Icon
-                            className="text-app-subtle"
-                            name="lucide/calendar"
-                          />
-                        </Button>
-                      </HoverBoxTrigger>
+                      <Button variant="trigger">
+                        <Icon
+                          className="text-app-subtle"
+                          name="lucide/calendar"
+                        />
+                      </Button>
                       <HoverBoxContent>
                         <div className="grid w-[240px] grid-cols-[1fr_repeat(2,_auto)] pb-2 text-sm">
-                          <div className="border-b border-default py-2 pl-2">
+                          <div className="border-default border-b py-2 pl-2">
                             Spiel
                           </div>
-                          <div className="border-b border-default p-2 text-center">
+                          <div className="border-default border-b p-2 text-center">
                             Tipp
                           </div>
-                          <div className="border-b border-default p-2 text-center">
+                          <div className="border-default border-b p-2 text-center">
                             Pkt
                           </div>
                           {currentTips.map((m) => {
@@ -120,7 +117,7 @@ export default function RankingRoute() {
                                     (tip?.joker ||
                                       tip?.lonelyHit ||
                                       tip?.extraJoker) &&
-                                      'text-accent bg-content',
+                                      'bg-content text-accent',
                                   )}
                                 >
                                   {m.hometeam?.shortname}-
@@ -132,7 +129,7 @@ export default function RankingRoute() {
                                     (tip?.joker ||
                                       tip?.lonelyHit ||
                                       tip?.extraJoker) &&
-                                      'text-accent bg-content',
+                                      'bg-content text-accent',
                                   )}
                                 >
                                   {tip?.tip}
@@ -143,7 +140,7 @@ export default function RankingRoute() {
                                     (tip?.joker ||
                                       tip?.lonelyHit ||
                                       tip?.extraJoker) &&
-                                      'text-accent bg-content',
+                                      'bg-content text-accent',
                                   )}
                                 >
                                   {m.result && tip?.points}

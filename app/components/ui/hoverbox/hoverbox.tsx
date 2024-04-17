@@ -1,4 +1,4 @@
-import { useHover } from '@react-aria/interactions';
+import { type PressEvent, useHover } from '@react-aria/interactions';
 import {
   type ReactNode,
   createContext,
@@ -9,8 +9,8 @@ import {
 import {
   ButtonContext,
   Dialog,
-  DialogTrigger,
   OverlayArrow,
+  PopoverContext,
   Provider,
 } from 'react-aria-components';
 import { Popover } from '../popover/popover';
@@ -18,10 +18,6 @@ import { Popover } from '../popover/popover';
 const HoverBoxContext = createContext<{
   onHoverChange: (isHovering: boolean) => void;
 }>(undefined as never);
-
-export function HoverBoxTrigger({ children }: { children: ReactNode }) {
-  return children;
-}
 
 export function HoverBoxContent({ children }: { children: ReactNode }) {
   const { onHoverChange } = useContext(HoverBoxContext);
@@ -36,12 +32,12 @@ export function HoverBoxContent({ children }: { children: ReactNode }) {
           width={12}
           height={12}
           viewBox="0 0 12 12"
-          className="block fill-popover stroke-1 stroke-border-default group-placement-bottom:rotate-180 group-placement-left:-rotate-90 group-placement-right:rotate-90"
+          className="group-placement-left:-rotate-90 block fill-popover stroke-1 stroke-border-default group-placement-bottom:rotate-180 group-placement-right:rotate-90"
         >
           <path d="M0 0 L6 6 L12 0" />
         </svg>
       </OverlayArrow>
-      <Dialog className="focus:outline-none">
+      <Dialog className="focus:outline-none" aria-label="Aktuelle Tips">
         <div {...hoverProps}>{children}</div>
       </Dialog>
     </Popover>
@@ -51,22 +47,34 @@ export function HoverBoxContent({ children }: { children: ReactNode }) {
 export function HoverBox({ children }: { children: ReactNode }) {
   const debounceRef = useRef<ReturnType<typeof setTimeout>>();
   const [isOpen, setOpen] = useState(false);
+  const triggerRef = useRef(null);
 
   function onHoverChange(isHovering: boolean) {
     clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => setOpen(isHovering), 50);
   }
 
+  function onPress(e: PressEvent) {
+    setOpen(!isOpen);
+  }
+
   return (
     <Provider
       values={[
-        [ButtonContext, { onHoverChange }],
+        [ButtonContext, { onHoverChange, onPress, ref: triggerRef }],
+        [
+          PopoverContext,
+          {
+            isOpen,
+            onOpenChange: setOpen,
+            triggerRef,
+            shouldCloseOnInteractOutside: (elt) => elt !== triggerRef.current,
+          },
+        ],
         [HoverBoxContext, { onHoverChange }],
       ]}
     >
-      <DialogTrigger isOpen={isOpen} onOpenChange={setOpen}>
-        {children}
-      </DialogTrigger>
+      {children}
     </Provider>
   );
 }
