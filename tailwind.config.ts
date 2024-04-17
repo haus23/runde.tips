@@ -32,6 +32,7 @@ export default {
     borderColor: ({ theme }) => ({
       ...theme('colors'),
       default: 'var(--border-color-default)',
+      ring: 'var(--border-color-ring)',
       focused: 'var(--border-color-focused)',
       error: 'var(--border-color-error)',
     }),
@@ -50,6 +51,7 @@ export default {
     ringOffsetColor: ({ theme }) => ({
       ...theme('colors'),
       default: 'var(--default-ring-offset-color)',
+      card: 'var(--background-color-card)',
     }),
     stroke: ({ theme }) => ({
       ...theme('colors'),

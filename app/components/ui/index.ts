@@ -9,6 +9,7 @@ export * from './divider/divider';
 export * from './hoverbox/hoverbox';
 export * from './link/link';
 export * from './table/table';
+export * from './tabs/tabs';
 export * from './text-field/text-field';
 
 // App Components

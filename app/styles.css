@@ -63,6 +63,7 @@
 
     /* Border / Dividers */
     --border-color-default: var(--olive-6);
+    --border-color-ring: var(--olive-7);
     --divide-color-default: var(--olive-6);
     --stroke-color-border-default: var(--olive-6);
     --border-color-focused: var(--grass-9);
