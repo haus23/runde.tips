@@ -11,5 +11,8 @@ export const fieldBorderStyles = tv({
     isFocused: {
       true: 'border-focused forced-colors:border-[Highlight]',
     },
+    isInvalid: {
+      true: 'border-error forced-colors:border-[Mark]',
+    },
   },
 });

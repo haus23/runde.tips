@@ -6,6 +6,7 @@ import {
   CardHeader,
   Description,
   Divider,
+  FieldError,
   Input,
   Label,
   TextField,
@@ -20,18 +21,20 @@ export default function CreateChampionshipRoute() {
         <Form className="flex flex-col gap-y-4">
           <TextField orientation="vertical">
             <Label>Name</Label>
-            <Input placeholder="Zum Beispiel Hinrunde 23/24" />
+            <Input placeholder="Zum Beispiel Hinrunde 23/24" required />
             <Description>Das ist der Titel des Turniers</Description>
+            <FieldError />
           </TextField>
-          <TextField defaultValue="Hooray" orientation="horizontal">
+          <TextField orientation="horizontal">
             <Label className="mt-1 self-start text-base">Turnierkürzel:</Label>
             <div className="flex grow flex-col gap-y-1.5">
-              <Input />
+              <Input minLength={3} required />
               <Description>Abkürzung in der Form ab1234</Description>
+              <FieldError errorMessage="*" />
             </div>
           </TextField>
           <div>
-            <Button variant="solid" color="accent">
+            <Button variant="solid" color="accent" type="submit">
               Anlegen
             </Button>
           </div>
