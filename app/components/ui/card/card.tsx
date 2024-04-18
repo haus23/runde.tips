@@ -3,8 +3,8 @@ import { tv } from 'tailwind-variants';
 
 export const cardStyles = tv({
   slots: {
-    wrapper: 'bg-content rounded-xl shadow-medium',
-    header: 'text-xl px-4 py-2 md:px-8',
+    wrapper: 'rounded-xl bg-content shadow-medium',
+    header: 'px-4 py-2 font-medium text-app text-xl md:px-8',
     content: 'p-4 md:px-8',
   },
 });
