@@ -8,6 +8,8 @@ import {
   Cell,
   Column,
   Divider,
+  FieldError,
+  Input,
   Row,
   Tab,
   TabList,
@@ -16,6 +18,7 @@ import {
   TableBody,
   TableHeader,
   Tabs,
+  TextField,
 } from '#components/ui';
 import { requireAdmin } from '#utils/auth/auth.server';
 import { db } from '#utils/db.server';
@@ -74,7 +77,19 @@ export default function ResultsRoute() {
                           <span className="hidden sm:block">{`${match.hometeam?.name} - ${match.awayteam?.name}`}</span>
                           <span className="block sm:hidden">{`${match.hometeam?.shortname} - ${match.awayteam?.shortname}`}</span>
                         </Cell>
-                        <Cell className="text-center">{match.result}</Cell>
+                        <Cell className="text-center">
+                          <TextField
+                            defaultValue={match.result}
+                            aria-label="Spielergebnis"
+                            pattern="\d+:\d+"
+                            className="relative"
+                          >
+                            <Input className="w-12" />
+                            <FieldError className="absolute top-1/3 right-0">
+                              *
+                            </FieldError>
+                          </TextField>
+                        </Cell>
                       </Row>
                     )}
                   </TableBody>
