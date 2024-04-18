@@ -1,6 +1,50 @@
 # @tipprunde/www
 
 
+## v0.4.1
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.4.0...v0.4.1)
+
+### 🚀 Enhancements
+
+- Create a match result abstraction with tests. ([5895038](https://github.com/haus23/runde.tips/commit/5895038))
+- Implement manager context. Fixes #110 ([#110](https://github.com/haus23/runde.tips/issues/110))
+- Display matches with results. See #42 ([#42](https://github.com/haus23/runde.tips/issues/42))
+- Add first wrappers and a future route to demo them. ([6d324ed](https://github.com/haus23/runde.tips/commit/6d324ed))
+- Add label and orientation variant. ([ad5912a](https://github.com/haus23/runde.tips/commit/ad5912a))
+- Add description and placeholder stylings. ([177d983](https://github.com/haus23/runde.tips/commit/177d983))
+- Add first ideas for the field-error ([10c1577](https://github.com/haus23/runde.tips/commit/10c1577))
+
+### 🩹 Fixes
+
+- Start developing the api. And stop here as well. Will go top-down way. ([5e24d75](https://github.com/haus23/runde.tips/commit/5e24d75))
+- Use context to build nav items and hide if no championship. See #112 ([#112](https://github.com/haus23/runde.tips/issues/112))
+- Add championship select to manager. Resolves #111 ([#111](https://github.com/haus23/runde.tips/issues/111))
+- Simplify HoverBox and fixes #113 ([#113](https://github.com/haus23/runde.tips/issues/113))
+- Provide an initial tabs wrapper. Fixes #114 ([#114](https://github.com/haus23/runde.tips/issues/114))
+- Implement table wrapper. Simplifies usage in ranking. Fixes #115 ([#115](https://github.com/haus23/runde.tips/issues/115))
+
+### 💅 Refactors
+
+- Use championship name as title with no page title set. ([5be7904](https://github.com/haus23/runde.tips/commit/5be7904))
+- Remove the optional hook. ([a1e8c3e](https://github.com/haus23/runde.tips/commit/a1e8c3e))
+- Make championship-select more flexible using props. ([ea70261](https://github.com/haus23/runde.tips/commit/ea70261))
+- Align the foh and manager layouts ([651b5c7](https://github.com/haus23/runde.tips/commit/651b5c7))
+- Rename text-field to legacy name. ([1f2c0c8](https://github.com/haus23/runde.tips/commit/1f2c0c8))
+- Use the new created text-field wrappers in the results page. ([0eeec6b](https://github.com/haus23/runde.tips/commit/0eeec6b))
+- Refine field error handling. ([d153890](https://github.com/haus23/runde.tips/commit/d153890))
+- Use new wrappers and remove legacy text-field. ([7bc0c52](https://github.com/haus23/runde.tips/commit/7bc0c52))
+- Small style changes. ([42eee5a](https://github.com/haus23/runde.tips/commit/42eee5a))
+
+### 🏡 Chore
+
+- Patch update deps. ([83f1f0f](https://github.com/haus23/runde.tips/commit/83f1f0f))
+- Update and clean-up. ([c7ee058](https://github.com/haus23/runde.tips/commit/c7ee058))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.4.0
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.3.0...v0.4.0)
