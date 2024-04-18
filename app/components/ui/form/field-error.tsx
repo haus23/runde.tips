@@ -11,13 +11,12 @@ const fieldErrorStyles = tv({
 
 interface _FieldErrorProps extends FieldErrorProps {
   hideMessage?: boolean;
-  errorMessage?: string;
 }
 
 function _FieldError({
+  children,
   className,
   hideMessage,
-  errorMessage,
   ...props
 }: _FieldErrorProps) {
   return (
@@ -28,7 +27,11 @@ function _FieldError({
       {...props}
     >
       {(validationResult) =>
-        hideMessage ? '' : errorMessage || validationResult.validationErrors
+        hideMessage
+          ? ''
+          : typeof children === 'function'
+            ? children(validationResult)
+            : children || validationResult.validationErrors
       }
     </FieldError>
   );

@@ -28,9 +28,11 @@ export default function CreateChampionshipRoute() {
           <TextField orientation="horizontal">
             <Label className="mt-1 self-start text-base">Turnierkürzel:</Label>
             <div className="flex grow flex-col gap-y-1.5">
-              <Input minLength={3} required />
-              <Description>Abkürzung in der Form ab1234</Description>
-              <FieldError errorMessage="*" />
+              <Input required pattern="[a-z]{2}\d{4}" />
+              <Description hideOnError={false}>
+                Abkürzung in der Form hr2324 (Zwei Buchstaben und vier Ziffern)
+              </Description>
+              <FieldError />
             </div>
           </TextField>
           <div>

@@ -1,20 +1,24 @@
 import { useContext } from 'react';
-import {
-  InputContext,
-  Text,
-  TextFieldContext,
-  type TextProps,
-  useSlottedContext,
-} from 'react-aria-components';
+import { FieldErrorContext, Text, type TextProps } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
 
 const descriptionStyles = tv({
   base: 'ml-1 text-app-notice text-xs',
 });
 
-function Description({ className, ...props }: TextProps) {
-  const ctx = useSlottedContext(InputContext);
-  console.log(ctx);
+interface DescriptionProps extends TextProps {
+  hideOnError?: boolean;
+}
+
+function Description({ className, hideOnError, ...props }: DescriptionProps) {
+  hideOnError ??= true;
+
+  const validation = useContext(FieldErrorContext);
+
+  if (hideOnError && validation?.isInvalid) {
+    return null;
+  }
+
   return (
     <Text
       slot="description"

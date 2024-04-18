@@ -85,10 +85,9 @@ export default function ResultsRoute() {
                             className="relative"
                           >
                             <Input className="w-12" />
-                            <FieldError
-                              className="absolute top-1/3 right-0"
-                              errorMessage="*"
-                            />
+                            <FieldError className="absolute top-1/3 right-0">
+                              *
+                            </FieldError>
                           </TextField>
                         </Cell>
                       </Row>
