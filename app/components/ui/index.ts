@@ -10,7 +10,7 @@ export * from './hoverbox/hoverbox';
 export * from './link/link';
 export * from './table/table';
 export * from './tabs/tabs';
-export * from './text-field/text-field';
+export * from './text-field/legacy-text-field';
 
 // App Components
 export * from './icon/icon';

@@ -108,4 +108,4 @@ function _TextField({
   );
 }
 
-export { _TextField as TextField };
+export { _TextField as LegacyTextField };

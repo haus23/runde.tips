@@ -11,7 +11,7 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  TextField,
+  LegacyTextField,
 } from '#components/ui';
 import {
   authenticator,
@@ -72,7 +72,7 @@ export default function LogInRoute() {
           onSubmit={onSubmit}
           validationErrors={loaderData.errors}
         >
-          <TextField
+          <LegacyTextField
             name="email"
             isRequired
             type="email"

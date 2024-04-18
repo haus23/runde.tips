@@ -12,7 +12,7 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  TextField,
+  LegacyTextField,
 } from '#components/ui';
 import {
   authenticator,
@@ -80,7 +80,7 @@ export default function OnboardingRoute() {
           onSubmit={onSubmit}
           validationErrors={loaderData.errors}
         >
-          <TextField
+          <LegacyTextField
             type="text"
             name="code"
             inputMode="numeric"
