@@ -10,8 +10,12 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Description,
   Divider,
-  LegacyTextField,
+  FieldError,
+  Input,
+  Label,
+  TextField,
 } from '#components/ui';
 import {
   authenticator,
@@ -60,7 +64,7 @@ export default function LogInRoute() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <Card className="sm:mt-8 mx-2">
+    <Card className="mx-2 sm:mt-8">
       <CardHeader className="p-4 text-2xl">
         <h2>Anmeldung</h2>
       </CardHeader>
@@ -72,22 +76,14 @@ export default function LogInRoute() {
           onSubmit={onSubmit}
           validationErrors={loaderData.errors}
         >
-          <LegacyTextField
-            name="email"
-            isRequired
-            type="email"
-            label="E-Mail"
-            description="Deine für die Tipprunde genutzte E-Mail Adresse."
-            errorMessage={({ validationDetails, validationErrors }) =>
-              validationDetails.valueMissing
-                ? 'Ohne Email-Adresse geht es nicht.'
-                : validationDetails.typeMismatch
-                  ? 'Ungültige Email-Adresse.'
-                  : validationDetails.customError
-                    ? validationErrors.join()
-                    : ''
-            }
-          />
+          <TextField isRequired name="email" type="email">
+            <Label>E-Mail</Label>
+            <Input />
+            <Description>
+              Deine für die Tipprunde genutzte E-Mail Adresse.
+            </Description>
+            <FieldError />
+          </TextField>
           <Button
             variant="solid"
             color="accent"

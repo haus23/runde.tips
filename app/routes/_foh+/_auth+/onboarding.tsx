@@ -12,7 +12,9 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  LegacyTextField,
+  FieldError,
+  Input,
+  TextField,
 } from '#components/ui';
 import {
   authenticator,
@@ -68,45 +70,41 @@ export default function OnboardingRoute() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <Card className="sm:mt-8 mx-2">
+    <Card className="mx-2 sm:mt-8">
       <CardHeader className="p-4 text-2xl">
         <h2>Code Eingabe</h2>
       </CardHeader>
       <Divider />
       <CardContent className="pb-8">
         <Form
-          className="flex flex-col gap-y-4"
+          className="flex flex-col items-center gap-y-4"
           method="post"
           onSubmit={onSubmit}
           validationErrors={loaderData.errors}
         >
-          <LegacyTextField
-            type="text"
+          <TextField
             name="code"
             inputMode="numeric"
             autoComplete="one-time-code"
             aria-label="Code"
             isRequired
-            pattern="\d{6}"
             maxLength={6}
-            className="text-center"
-            inputClassName="w-40 self-center text-4xl text-center"
-            errorMessage={({ validationErrors, validationDetails }) =>
-              validationDetails.valueMissing
-                ? 'Ohne Code geht es nicht weiter.'
-                : validationDetails.patternMismatch
-                  ? 'Kein Code. Ein Code hat genau sechs Ziffern.'
-                  : validationDetails.customError
-                    ? validationErrors.join()
-                    : ''
-            }
-          />
-          <Button
-            variant="solid"
-            color="accent"
-            className="self-center"
-            type="submit"
+            pattern="\d{6}"
           >
+            <Input className="w-40 text-center text-4xl" />
+            <FieldError className="mt-2 text-center">
+              {({ validationErrors, validationDetails }) =>
+                validationDetails.valueMissing
+                  ? 'Ohne Code geht es nicht weiter.'
+                  : validationDetails.patternMismatch
+                    ? 'Kein Code. Ein Code hat genau sechs Ziffern.'
+                    : validationDetails.customError
+                      ? validationErrors.join()
+                      : ''
+              }
+            </FieldError>
+          </TextField>
+          <Button variant="solid" color="accent" type="submit">
             Prüfen
           </Button>
         </Form>
