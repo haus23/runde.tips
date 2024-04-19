@@ -17,7 +17,7 @@ import { tv } from 'tailwind-variants';
 import { focusRingStyles } from '../base-styles';
 
 const tableStyles = tv({
-  base: 'font-semibold text-sm',
+  base: 'text-sm',
 });
 
 const tableHeaderStyles = tv({

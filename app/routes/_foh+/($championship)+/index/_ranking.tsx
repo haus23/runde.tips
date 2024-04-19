@@ -44,7 +44,7 @@ export default function RankingRoute() {
           {championship.completed ? 'Abschlusstabelle' : 'Aktuelle Tabelle'}
         </h2>
       </div>
-      <Table aria-labelledby="tableLabel">
+      <Table aria-labelledby="tableLabel" className="font-semibold">
         <TableHeader>
           <Column className="text-right">Platz</Column>
           <Column className="text-left" isRowHeader>

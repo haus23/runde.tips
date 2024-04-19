@@ -1,5 +1,6 @@
 import { type LoaderFunctionArgs, json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { useReducer } from 'react';
 import { Collection } from 'react-aria-components';
 import {
   Card,
@@ -23,26 +24,45 @@ import {
 import { requireAdmin } from '#utils/auth/auth.server';
 import { db } from '#utils/db.server';
 import { useCurrentChampionship } from '#utils/manager/championship.context.js';
+import { invariant } from '#utils/misc.js';
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   await requireAdmin(request);
   const { championship: slug } = params;
-  const championshipRounds = await db.round.findMany({
+  const rounds = await db.round.findMany({
+    where: { championship: { slug } },
+    select: { id: true, nr: true },
+  });
+  const matches = await db.match.findMany({
     where: { championship: { slug } },
     include: {
-      matches: {
-        include: {
-          hometeam: true,
-          awayteam: true,
-        },
-      },
+      hometeam: true,
+      awayteam: true,
     },
+    orderBy: { nr: 'asc' },
   });
-  return json({ rounds: championshipRounds });
+  return json({ rounds, matches });
+}
+
+type ResultsState = Array<{
+  id: number;
+  original: string;
+  changed?: string;
+  dirty: boolean;
+}>;
+
+type ResultsChangeAction = { id: number; result: string };
+
+function resultsReducer(state: ResultsState, action: ResultsChangeAction) {
+  return state.map((r) =>
+    r.id === action.id
+      ? { ...r, changed: action.result, dirty: r.original !== action.result }
+      : r,
+  );
 }
 
 export default function ResultsRoute() {
-  const { rounds } = useLoaderData<typeof loader>();
+  const { rounds, matches } = useLoaderData<typeof loader>();
   const { championship } = useCurrentChampionship();
 
   return (
@@ -69,7 +89,9 @@ export default function ResultsRoute() {
                     </Column>
                     <Column>Ergebnis</Column>
                   </TableHeader>
-                  <TableBody items={round.matches}>
+                  <TableBody
+                    items={matches.filter((m) => m.roundId === round.id)}
+                  >
                     {(match) => (
                       <Row>
                         <Cell className="text-right">{match.nr}</Cell>
@@ -80,12 +102,13 @@ export default function ResultsRoute() {
                         <Cell className="text-center">
                           <TextField
                             defaultValue={match.result}
-                            aria-label="Spielergebnis"
+                            aria-label={`Ergebnis ${match.hometeam?.shortname} - ${match.awayteam?.shortname} (Spiel Nr ${match.nr})`}
                             pattern="\d+:\d+"
-                            className="relative"
+                            className="relative mx-auto w-12"
+                            orientation="horizontal"
                           >
-                            <Input className="w-12" />
-                            <FieldError className="absolute top-1/3 right-0">
+                            <Input />
+                            <FieldError className="-right-2.5 absolute top-1/3">
                               *
                             </FieldError>
                           </TextField>
