@@ -17,11 +17,13 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@conform-to/react": "^1.1.0",
+    "@conform-to/zod": "^1.1.0",
     "@epic-web/cachified": "^5.1.2",
     "@prisma/client": "~5.12.0",
     "@react-aria/interactions": "^3.21.1",
-    "@react-aria/utils": "^3.23.2",
     "@react-aria/overlays": "^3.21.1",
+    "@react-aria/utils": "^3.23.2",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
     "@remix-run/serve": "^2.8.1",
