@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Description,
   Divider,
   FieldError,
   Input,
@@ -15,6 +16,13 @@ import {
 export const handle = { pageTitle: 'Mannschaften / Vereine' };
 
 export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+
+  const name = String(formData.get('name'));
+  const shortname = String(formData.get('shortname'));
+  const slug = String(formData.get('slug'));
+
+  console.log(`Create league ${JSON.stringify({ name, shortname, slug })}`);
   return json(null);
 }
 
@@ -25,19 +33,22 @@ export default function TeamsRoute() {
       <Divider />
       <CardContent className="px-0 sm:px-4">
         <Form method="post" className="flex flex-col gap-y-4">
-          <TextField>
+          <TextField isRequired>
             <Label>Bezeichnung</Label>
-            <Input required type="text" name="name" />
+            <Input type="text" name="name" />
             <FieldError />
           </TextField>
-          <TextField>
+          <TextField isRequired>
             <Label>Kurzname</Label>
-            <Input required type="text" name="shortname" />
+            <Input type="text" name="shortname" />
             <FieldError />
           </TextField>
-          <TextField>
+          <TextField isRequired pattern="[a-z0-9\-]+">
             <Label>Kennung</Label>
-            <Input required type="text" name="slug" />
+            <Input type="text" name="slug" />
+            <Description hideOnError={false}>
+              Gültige Zeichen: Kleinbuchstaben, Ziffern und der Bindestrich.
+            </Description>
             <FieldError />
           </TextField>
           <div>
