@@ -1,3 +1,5 @@
+import slugifyString from 'slugify';
+
 /**
  * Helper to handle readonly arrays
  * See: https://fettblog.eu/typescript-array-includes/
@@ -48,4 +50,15 @@ export function combineHeaders(
     }
   }
   return combined;
+}
+
+/**
+ * Slugifies a string
+ * @see https://byby.dev/js-slugify-string
+ *
+ * @param str String to slugify
+ * @returns Slugified String
+ */
+export function slugify(str: string) {
+  return slugifyString(str, { lower: true, locale: 'de' });
 }
