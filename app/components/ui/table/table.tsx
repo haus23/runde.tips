@@ -1,120 +1,50 @@
-import {
-  Cell,
-  type CellProps,
-  Column,
-  type ColumnProps,
-  Row,
-  type RowProps,
-  Table,
-  TableBody,
-  type TableBodyProps,
-  TableHeader,
-  type TableHeaderProps,
-  type TableProps,
-  composeRenderProps,
-} from 'react-aria-components';
-import { tv } from 'tailwind-variants';
-import { focusRingStyles } from '../base-styles';
+import type { ComponentPropsWithoutRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-const tableStyles = tv({
-  base: 'text-sm',
-});
+interface TableProps extends ComponentPropsWithoutRef<'table'> {}
+interface TableHeaderProps extends ComponentPropsWithoutRef<'thead'> {}
+interface ColumnProps extends ComponentPropsWithoutRef<'th'> {}
+interface TableBodyProps extends ComponentPropsWithoutRef<'tbody'> {}
+interface RowProps extends ComponentPropsWithoutRef<'tr'> {}
+interface CellProps extends ComponentPropsWithoutRef<'td'> {}
 
-const tableHeaderStyles = tv({
-  base: 'bg-accent text-xs uppercase',
-});
-
-const tableBodyStyles = tv({
-  base: 'divide-y divide-default',
-});
-
-const columnStyles = tv({
-  extend: focusRingStyles,
-  base: 'p-2 md:px-6',
-});
-
-const cellStyles = tv({
-  extend: focusRingStyles,
-  base: 'p-2 md:px-6',
-});
-
-const rowStyles = tv({
-  extend: focusRingStyles,
-  base: '',
-});
-
-function _Table({ className, ...props }: TableProps) {
-  return (
-    <Table
-      {...props}
-      className={composeRenderProps(className, (className, renderProps) =>
-        tableStyles({ ...renderProps, className }),
-      )}
-    />
-  );
+export function Table({ className, ...props }: TableProps) {
+  return <table {...props} className={twMerge('text-sm', className)} />;
 }
 
-function _TableHeader<T extends object>({
+export function TableHeader<T extends object>({
   className,
+  children,
   ...props
-}: TableHeaderProps<T>) {
+}: TableHeaderProps) {
   return (
-    <TableHeader {...props} className={tableHeaderStyles({ className })} />
+    <thead {...props}>
+      <tr className={twMerge('bg-accent text-xs uppercase', className)}>
+        {children}
+      </tr>
+    </thead>
   );
 }
 
-function _Column({ className, ...props }: ColumnProps) {
+export function Column({ className, ...props }: ColumnProps) {
   return (
-    <Column
+    <th scope="col" {...props} className={twMerge('p-2 md:px-6', className)} />
+  );
+}
+
+export function TableBody({ className, ...props }: TableBodyProps) {
+  return (
+    <tbody
       {...props}
-      className={composeRenderProps(className, (className, renderProps) =>
-        columnStyles({ ...renderProps, className }),
-      )}
+      className={twMerge('divide-y divide-default', className)}
     />
   );
 }
 
-function _TableBody<T extends object>({
-  className,
-  ...props
-}: TableBodyProps<T>) {
-  return (
-    <TableBody
-      {...props}
-      className={composeRenderProps(className, (className, renderProps) =>
-        tableBodyStyles({ ...renderProps, className }),
-      )}
-    />
-  );
+export function Row({ className, ...props }: RowProps) {
+  return <tr {...props} className={className} />;
 }
 
-function _Cell({ className, ...props }: CellProps) {
-  return (
-    <Cell
-      {...props}
-      className={composeRenderProps(className, (className, renderProps) =>
-        cellStyles({ ...renderProps, className }),
-      )}
-    />
-  );
+export function Cell({ className, ...props }: CellProps) {
+  return <td {...props} className={twMerge('p-2 md:px-6', className)} />;
 }
-
-function _Row<T extends object>({ className, ...props }: RowProps<T>) {
-  return (
-    <Row
-      {...props}
-      className={composeRenderProps(className, (className, renderProps) =>
-        rowStyles({ ...renderProps, className }),
-      )}
-    />
-  );
-}
-
-export {
-  _Table as Table,
-  _TableHeader as TableHeader,
-  _TableBody as TableBody,
-  _Column as Column,
-  _Cell as Cell,
-  _Row as Row,
-};

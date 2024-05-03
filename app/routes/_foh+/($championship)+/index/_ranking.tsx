@@ -47,9 +47,7 @@ export default function RankingRoute() {
       <Table aria-labelledby="tableLabel" className="font-semibold">
         <TableHeader>
           <Column className="text-right">Platz</Column>
-          <Column className="text-left" isRowHeader>
-            Name
-          </Column>
+          <Column className="text-left">Name</Column>
           {championship.extraPointsPublished ? (
             <>
               <Column>
@@ -80,7 +78,9 @@ export default function RankingRoute() {
             return (
               <Row key={player.id}>
                 <Cell className="text-right">{rank}</Cell>
-                <Cell className="w-full">{player.user.name}</Cell>
+                <Cell className="w-full" role="rowheader">
+                  {player.user.name}
+                </Cell>
                 {championship.extraPointsPublished && (
                   <Cell className="text-center">{player.extraPoints}</Cell>
                 )}

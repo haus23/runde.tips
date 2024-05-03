@@ -1,3 +1,4 @@
+import { FocusScope } from '@react-aria/focus';
 import { type LoaderFunctionArgs, json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { useReducer } from 'react';
@@ -84,37 +85,35 @@ export default function ResultsRoute() {
                 <Table aria-label={`Spiele der Runde ${round.nr}`}>
                   <TableHeader>
                     <Column className="text-right">Nr</Column>
-                    <Column isRowHeader className="w-full text-left">
-                      Spiel
-                    </Column>
+                    <Column className="w-full text-left">Spiel</Column>
                     <Column>Ergebnis</Column>
                   </TableHeader>
-                  <TableBody
-                    items={matches.filter((m) => m.roundId === round.id)}
-                  >
-                    {(match) => (
-                      <Row>
-                        <Cell className="text-right">{match.nr}</Cell>
-                        <Cell>
-                          <span className="hidden sm:block">{`${match.hometeam?.name} - ${match.awayteam?.name}`}</span>
-                          <span className="block sm:hidden">{`${match.hometeam?.shortname} - ${match.awayteam?.shortname}`}</span>
-                        </Cell>
-                        <Cell className="text-center">
-                          <TextField
-                            defaultValue={match.result}
-                            aria-label={`Ergebnis ${match.hometeam?.shortname} - ${match.awayteam?.shortname} (Spiel Nr ${match.nr})`}
-                            pattern="\d+:\d+"
-                            className="relative mx-auto w-12"
-                            orientation="horizontal"
-                          >
-                            <Input />
-                            <FieldError className="-right-2.5 absolute top-1/3">
-                              *
-                            </FieldError>
-                          </TextField>
-                        </Cell>
-                      </Row>
-                    )}
+                  <TableBody>
+                    {matches
+                      .filter((m) => m.roundId === round.id)
+                      .map((match) => (
+                        <Row key={match.id}>
+                          <Cell className="text-right">{match.nr}</Cell>
+                          <Cell role="rowheader">
+                            <span className="hidden sm:block">{`${match.hometeam?.name} - ${match.awayteam?.name}`}</span>
+                            <span className="block sm:hidden">{`${match.hometeam?.shortname} - ${match.awayteam?.shortname}`}</span>
+                          </Cell>
+                          <Cell className="text-center">
+                            <TextField
+                              defaultValue={match.result}
+                              aria-label={`Ergebnis ${match.hometeam?.shortname} - ${match.awayteam?.shortname} (Spiel Nr ${match.nr})`}
+                              pattern="\d+:\d+"
+                              className="relative mx-auto w-12"
+                              orientation="horizontal"
+                            >
+                              <Input />
+                              <FieldError className="-right-2.5 absolute top-1/3">
+                                *
+                              </FieldError>
+                            </TextField>
+                          </Cell>
+                        </Row>
+                      ))}
                   </TableBody>
                 </Table>
               </TabPanel>
