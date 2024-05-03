@@ -1,7 +1,5 @@
-import { FocusScope } from '@react-aria/focus';
 import { type LoaderFunctionArgs, json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { useReducer } from 'react';
 import { Collection } from 'react-aria-components';
 import {
   Card,
@@ -25,7 +23,6 @@ import {
 import { requireAdmin } from '#utils/auth/auth.server';
 import { db } from '#utils/db.server';
 import { useCurrentChampionship } from '#utils/manager/championship.context.js';
-import { invariant } from '#utils/misc.js';
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   await requireAdmin(request);
@@ -43,23 +40,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     orderBy: { nr: 'asc' },
   });
   return json({ rounds, matches });
-}
-
-type ResultsState = Array<{
-  id: number;
-  original: string;
-  changed?: string;
-  dirty: boolean;
-}>;
-
-type ResultsChangeAction = { id: number; result: string };
-
-function resultsReducer(state: ResultsState, action: ResultsChangeAction) {
-  return state.map((r) =>
-    r.id === action.id
-      ? { ...r, changed: action.result, dirty: r.original !== action.result }
-      : r,
-  );
 }
 
 export default function ResultsRoute() {
