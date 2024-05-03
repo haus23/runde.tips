@@ -1,6 +1,42 @@
 # @tipprunde/www
 
 
+## v0.4.2
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.4.1...v0.4.2)
+
+### 🚀 Enhancements
+
+- Create the two forms. ([cf887ea](https://github.com/haus23/runde.tips/commit/cf887ea))
+- Add client validation. ([3a3c080](https://github.com/haus23/runde.tips/commit/3a3c080))
+- Implement desired features with a raw rac controlled form. ([063e92c](https://github.com/haus23/runde.tips/commit/063e92c))
+- Clean-up. Did not manage to implement additionl features. ([5565677](https://github.com/haus23/runde.tips/commit/5565677))
+
+### 🩹 Fixes
+
+- Change table stylings ([5aaacdd](https://github.com/haus23/runde.tips/commit/5aaacdd))
+- Drop RAC tables. Resolves #124 ([#124](https://github.com/haus23/runde.tips/issues/124))
+
+### 💅 Refactors
+
+- Trying to use conform with rac. Not working by now. ([8f80e54](https://github.com/haus23/runde.tips/commit/8f80e54))
+
+### 🏡 Chore
+
+- Add conform-to deps. ([561de69](https://github.com/haus23/runde.tips/commit/561de69))
+- Simple minor and patch updates. ([267bde2](https://github.com/haus23/runde.tips/commit/267bde2))
+- Patch update deps and narrow versions. ([85e8220](https://github.com/haus23/runde.tips/commit/85e8220))
+- Update dev deps. ([e4c4864](https://github.com/haus23/runde.tips/commit/e4c4864))
+- Upgrade prisma. ([d3020b6](https://github.com/haus23/runde.tips/commit/d3020b6))
+- **dx:** Update biome. ([4d7309e](https://github.com/haus23/runde.tips/commit/4d7309e))
+- Update remix. ([ba50188](https://github.com/haus23/runde.tips/commit/ba50188))
+- Update conform. ([b525b40](https://github.com/haus23/runde.tips/commit/b525b40))
+- Update react aria ([9a87501](https://github.com/haus23/runde.tips/commit/9a87501))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.4.1
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.4.0...v0.4.1)
