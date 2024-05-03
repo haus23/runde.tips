@@ -70,7 +70,7 @@ export default function LeaguesRoute() {
             isInvalid={!fields.name.valid}
           >
             <Label>Bezeichnung</Label>
-            <Input type="text" name="name" />
+            <Input />
             <FieldError>{fields.name.errors}</FieldError>
           </TextField>
           <TextField
@@ -79,7 +79,7 @@ export default function LeaguesRoute() {
             isInvalid={!fields.shortname.valid}
           >
             <Label>Kürzel</Label>
-            <Input type="text" name="shortname" />
+            <Input />
             <FieldError>{fields.shortname.errors}</FieldError>
           </TextField>
           <TextField
@@ -88,7 +88,7 @@ export default function LeaguesRoute() {
             isInvalid={!fields.slug.valid}
           >
             <Label>Kennung</Label>
-            <Input type="text" name="slug" />
+            <Input />
             <FieldError>{fields.slug.errors}</FieldError>
           </TextField>
           <div>
