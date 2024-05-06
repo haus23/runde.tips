@@ -39,7 +39,7 @@ FROM base
 WORKDIR /app
 COPY --from=production-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app/build
-COPY --from=build /app/db /app/db
+COPY --from=build /app/prisma /app/prisma
 COPY --from=build /app/package.json /app/package.json
 
 VOLUME [ "/app/data" ]
