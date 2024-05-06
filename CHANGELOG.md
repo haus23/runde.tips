@@ -1,6 +1,26 @@
 # @tipprunde/www
 
 
+## v0.5.0
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.4.2...v0.5.0)
+
+### 🩹 Fixes
+
+- Switching to headlessui solves my results view problems. ([95190b3](https://github.com/haus23/runde.tips/commit/95190b3))
+- Switch back to pnpm. See #122 ([#122](https://github.com/haus23/runde.tips/issues/122))
+- Restore pnpm dockerfile. ([c5aa823](https://github.com/haus23/runde.tips/commit/c5aa823))
+- Missed to remove .npmrc file. ([8937801](https://github.com/haus23/runde.tips/commit/8937801))
+- Missed to update prisma path. ([5910513](https://github.com/haus23/runde.tips/commit/5910513))
+
+### 💅 Refactors
+
+- Still evaluating conform. Form update breaks focus handling. ([235b0f9](https://github.com/haus23/runde.tips/commit/235b0f9))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.4.2
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.4.1...v0.4.2)
