@@ -10,7 +10,7 @@
   "json.validate.enable": false,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    "package.json": "package-lock.json",
+    "package.json": "package-lock.json, pnpm-lock.yaml",
     "vite.config.ts": "env.d.ts, .postcssrc.json, sly.json, tsconfig.json, tailwind.config.ts",
     "biome.json": ".editorconfig",
     "README.md": "CHANGELOG.md, LICENSE",
