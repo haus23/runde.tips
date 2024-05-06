@@ -1,44 +1,39 @@
-import clsx from 'clsx';
 import {
   Tab,
+  TabGroup,
+  type TabGroupProps,
   TabList,
   type TabListProps,
   TabPanel,
   type TabPanelProps,
+  TabPanels,
+  type TabPanelsProps,
   type TabProps,
-  Tabs,
-  type TabsProps,
-  composeRenderProps,
-} from 'react-aria-components';
+} from '@headlessui/react';
+import { composeRenderProps } from 'react-aria-components';
+import { twMerge } from 'tailwind-merge';
 import { tv } from 'tailwind-variants';
+import { composeTailwindRenderProps } from '../utils';
 
-function _Tabs({ ...props }: TabsProps) {
-  return <Tabs {...props} />;
+function _TabGroup({ ...props }: TabGroupProps) {
+  return <TabGroup {...props} />;
 }
 
-interface _TabListProps<T> extends TabListProps<T> {
+interface _TabListProps extends TabListProps {
   className?: string;
   label?: string;
 }
 
-function _TabList<T extends object>({
-  className,
-  label,
-  ...props
-}: _TabListProps<T>) {
+function _TabList({ className, label, ...props }: _TabListProps) {
   return (
     <div className="flex flex-col items-center gap-x-4 border-default border-b sm:flex-row">
       {label && <span className="p-2 text-app-subtle">{label}</span>}
       <TabList
-        className={clsx('flex items-center gap-x-2', className)}
+        className={twMerge('flex items-center gap-x-2', className)}
         {...props}
       />
     </div>
   );
-}
-
-interface _TabProps extends TabProps {
-  className?: string;
 }
 
 const tabStyles = tv({
@@ -46,40 +41,48 @@ const tabStyles = tv({
     'relative cursor-default border-transparent border-b-2 px-4 py-2 outline-none transition-colors',
   ],
   variants: {
-    isFocusVisible: {
+    focus: {
       true: 'after:absolute after:inset-1 after:rounded-lg after:border after:border-ring',
     },
-    isHovered: {
+    hover: {
       true: 'border-ring',
     },
-    isSelected: {
+    selected: {
       true: 'border-focused text-selected',
     },
   },
 });
 
+interface _TabProps extends TabProps {
+  className?: string;
+}
+
 function _Tab({ className, ...props }: _TabProps) {
   return (
     <Tab
-      className={composeRenderProps(className, (className, renderProps) =>
-        tabStyles({ ...renderProps, className }),
-      )}
+      className={(renderProps) => tabStyles({ ...renderProps, className })}
       {...props}
     />
   );
 }
 
-interface _TabPanelProps extends TabPanelProps {
-  className?: string;
+function _TabPanels({ className, ...props }: TabPanelsProps) {
+  return (
+    <TabPanels
+      {...props}
+      className={composeTailwindRenderProps(className, 'mt-4')}
+    />
+  );
 }
 
-function _TabPanel({ className, ...props }: _TabPanelProps) {
-  return <TabPanel className={clsx('mt-4', className)} {...props} />;
+function _TabPanel({ ...props }: TabPanelProps) {
+  return <TabPanel {...props} />;
 }
 
 export {
-  _Tabs as Tabs,
+  _TabGroup as TabGroup,
   _TabList as TabList,
   _Tab as Tab,
+  _TabPanels as TabPanels,
   _TabPanel as TabPanel,
 };
