@@ -59,6 +59,6 @@ export function combineHeaders(
  * @param str String to slugify
  * @returns Slugified String
  */
-export function slugify(str: string) {
-  return slugifyString(str, { lower: true, locale: 'de' });
+export function slugify(str: string | undefined) {
+  return slugifyString(str || '', { lower: true, locale: 'de' });
 }
