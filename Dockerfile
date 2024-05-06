@@ -12,7 +12,7 @@ FROM base as deps
 
 ENV NODE_ENV development
 WORKDIR /app
-ADD package.json pnpm-lock.yaml .npmrc  ./
+ADD package.json pnpm-lock.yaml ./
 RUN pnpm install
 
 # npm production dependencies
@@ -20,7 +20,7 @@ FROM base as production-deps
 
 WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
-ADD package.json pnpm-lock.yaml .npmrc ./
+ADD package.json pnpm-lock.yaml ./
 RUN pnpm install
 
 # app build
