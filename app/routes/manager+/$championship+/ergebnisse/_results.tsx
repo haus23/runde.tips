@@ -3,8 +3,9 @@ import {
   type LoaderFunctionArgs,
   json,
 } from '@remix-run/node';
-import { Form, useLoaderData, useSubmit } from '@remix-run/react';
-import { type FormEvent, useRef, useState } from 'react';
+import { useFetcher, useLoaderData } from '@remix-run/react';
+import { type FormEvent, useEffect, useRef, useState } from 'react';
+import { z } from 'zod';
 import {
   Button,
   Card,
@@ -31,6 +32,11 @@ import { requireAdmin } from '#utils/auth/auth.server';
 import { db } from '#utils/db.server';
 import { useCurrentChampionship } from '#utils/manager/championship.context';
 import { toast } from '#utils/toast/toast.client.js';
+import { jsonWithToast } from '#utils/toast/toast.server.js';
+
+const schema = z.array(
+  z.object({ matchId: z.number(), result: z.string().regex(/^\d+:\d+$/) }),
+);
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   await requireAdmin(request);
@@ -52,8 +58,25 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.json();
-  console.log(data);
-  return json(null);
+  const changedResults = schema.safeParse(data);
+
+  if (!changedResults.success) {
+    return jsonWithToast(
+      { success: false },
+      {
+        type: 'error',
+        text: 'Ungültige Ergebnisse.',
+      },
+    );
+  }
+
+  return jsonWithToast(
+    { success: false },
+    {
+      type: 'success',
+      text: 'Ergebnisse gespeichert.',
+    },
+  );
 }
 
 function isValid(result: string) {
@@ -64,9 +87,6 @@ export default function ResultsRoute() {
   // Loader
   const { rounds, matches } = useLoaderData<typeof loader>();
   const { championship } = useCurrentChampionship();
-
-  // Action
-  const submit = useSubmit();
 
   // State
   const frm = useRef<HTMLFormElement>(null);
@@ -80,6 +100,25 @@ export default function ResultsRoute() {
       shouldCalculate: false,
     })),
   );
+
+  // Action
+  const fetcher = useFetcher();
+  useEffect(() => {
+    if (fetcher.state === 'submitting') {
+      console.log('submitting');
+      setResults((results) =>
+        results.map((m) =>
+          m.shouldCalculate
+            ? {
+                ...m,
+                shouldCalculate: false,
+                result: m.currentResult,
+              }
+            : m,
+        ),
+      );
+    }
+  }, [fetcher.state]);
 
   function handleTabChange(ix: number) {
     if (
@@ -122,14 +161,19 @@ export default function ResultsRoute() {
 
   function handleSubmit(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
-    const changedResults = results
-      .filter((r) => r.shouldCalculate)
-      .map((r) => ({ matchId: r.id, result: r.currentResult }));
-    submit(changedResults, { method: 'post', encType: 'application/json' });
+    const changedResults = schema.parse(
+      results
+        .filter((r) => r.shouldCalculate)
+        .map((r) => ({ matchId: r.id, result: r.currentResult })),
+    );
+    fetcher.submit(changedResults, {
+      method: 'post',
+      encType: 'application/json',
+    });
   }
 
   return (
-    <Form ref={frm} method="post" onSubmit={handleSubmit}>
+    <fetcher.Form ref={frm} method="post" onSubmit={handleSubmit}>
       <Card>
         <CardHeader className="sticky top-0 z-10 flex items-center justify-between rounded-t-xl bg-content text-base">
           <span className="text-xl">Ergebnisse</span>
@@ -207,6 +251,6 @@ export default function ResultsRoute() {
           </TabGroup>
         </CardContent>
       </Card>
-    </Form>
+    </fetcher.Form>
   );
 }
