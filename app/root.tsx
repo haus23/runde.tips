@@ -22,6 +22,7 @@ import { getSession } from '#utils/theme/theme.server';
 import { getToast } from '#utils/toast/toast.server';
 import { Toaster } from '#utils/toast/toaster';
 
+import clsx from 'clsx';
 import { GeneralErrorBoundary } from '#components/error-boundary';
 import styles from './styles.css?url';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
@@ -61,7 +62,7 @@ export function Layout({ children }: { children: ReactNode }) {
   }, [revalidate, mode]);
 
   return (
-    <html lang="de" className={theme.colorScheme}>
+    <html lang="de" className={clsx(theme.colorScheme, 'overflow-clip')}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -69,7 +70,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-app text-app">
+      <body className="h-dvh overflow-y-auto bg-app text-app">
         <UIProvider>
           {children}
           <Scripts />
