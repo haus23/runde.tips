@@ -42,6 +42,7 @@ export default {
     }),
     fill: ({ theme }) => ({
       ...theme('colors'),
+      none: 'none',
       popover: 'var(--fill-color-popover)',
     }),
     ringColor: ({ theme }) => ({
