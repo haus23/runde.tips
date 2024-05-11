@@ -1,13 +1,10 @@
+import type { TipRuleId } from '#api/model/ruleset';
+
 type Rule = {
   id: string;
   name: string;
   description?: string;
 };
-
-export type TipRuleId =
-  | 'drei-oder-ein-punkt-joker-verdoppelt'
-  | 'drei-zwei-oder-ein-punkt-joker-verdoppelt';
-
 export type TipRule = Rule & {
   id: TipRuleId;
 };

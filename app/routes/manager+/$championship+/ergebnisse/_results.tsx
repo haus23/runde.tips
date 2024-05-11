@@ -6,6 +6,7 @@ import {
 import { useFetcher, useLoaderData } from '@remix-run/react';
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
+import { setMatchResults } from '#api/calculations/index.js';
 import {
   Button,
   Card,
@@ -70,6 +71,8 @@ export async function action({ request }: ActionFunctionArgs) {
     );
   }
 
+  await setMatchResults(changedResults.data);
+
   return jsonWithToast(
     { success: false },
     {
@@ -105,7 +108,6 @@ export default function ResultsRoute() {
   const fetcher = useFetcher();
   useEffect(() => {
     if (fetcher.state === 'submitting') {
-      console.log('submitting');
       setResults((results) =>
         results.map((m) =>
           m.shouldCalculate

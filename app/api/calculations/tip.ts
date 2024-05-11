@@ -1,10 +1,10 @@
 import type { Tip } from '@prisma/client';
+import type { TipRuleId } from '#api/model/ruleset';
 import { Result } from '#api/types/result';
-import type { TipRuleId } from '#api/types/rules';
 
 export function calculateTip(tip: Tip, result: Result, tipRule: TipRuleId) {
   const tipResult = Result.makeFrom(tip.tip);
-  if (tipResult.isEmpty) return 0;
+  if (tipResult.isEmpty || result.isEmpty) return 0;
 
   // Wrong toto tendence?
   if (tipResult.totoTendence !== result.totoTendence) return 0;
