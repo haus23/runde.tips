@@ -4,11 +4,7 @@ import type { TipRuleId } from './rules';
 
 export * from './rules';
 
-export async function calculateTip(
-  tip: Tip,
-  result: string,
-  tipRule: TipRuleId,
-) {
+export function calculateTip(tip: Tip, result: string, tipRule: TipRuleId) {
   const points = tipCalculator[tipRule](tip, result);
 
   return { ...tip, points } satisfies Tip;
