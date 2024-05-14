@@ -5,7 +5,7 @@ const matchRuleNames = [
   'alleiniger-treffer-drei-punkte',
 ] as const;
 
-const matchRuleSchema = z.enum(matchRuleNames);
+export const matchRuleSchema = z.enum(matchRuleNames);
 
 export type MatchRuleId = z.infer<typeof matchRuleSchema>;
 

@@ -5,7 +5,7 @@ const tipRuleNames = [
   'drei-zwei-oder-ein-punkt-joker-verdoppelt',
 ] as const;
 
-const tipRuleSchema = z.enum(tipRuleNames);
+export const tipRuleSchema = z.enum(tipRuleNames);
 
 export type TipRuleId = z.infer<typeof tipRuleSchema>;
 

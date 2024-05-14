@@ -19,5 +19,5 @@ export async function calculateMatch(
     result,
   );
 
-  return { match: { ...match, points }, tips };
+  return { match: { ...match, result, points }, tips };
 }

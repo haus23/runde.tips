@@ -6,7 +6,7 @@ import {
 import { useFetcher, useLoaderData } from '@remix-run/react';
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
-import { setMatchResults } from '#api/calculations/index.js';
+import { setMatchResults } from '#api/use-cases/set-match-results';
 import {
   Button,
   Card,
