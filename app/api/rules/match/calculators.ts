@@ -33,11 +33,11 @@ export const matchCalculator: RuleCalculators<MatchRuleId, MatchCalculationFn> =
       const tips = originalTips.map((t) =>
         calculateTip(t, resultString, tipRuleId),
       );
-      const points = tips.reduce((sum, t) => sum + t.points, 0);
+      let points = tips.reduce((sum, t) => sum + t.points, 0);
 
       let lonelyHitTip: Tip | null = null;
       for (const tip of tips) {
-        if (tip.points > 0 && lonelyHitTip !== null) {
+        if (tip.points > 0 && lonelyHitTip === null) {
           lonelyHitTip = tip;
         } else if (tip.points > 0) {
           lonelyHitTip = null;
@@ -45,7 +45,10 @@ export const matchCalculator: RuleCalculators<MatchRuleId, MatchCalculationFn> =
         }
       }
 
-      if (lonelyHitTip) lonelyHitTip.points += 3;
+      if (lonelyHitTip) {
+        lonelyHitTip.points += 3;
+        points += 3;
+      }
 
       return { points, tips };
     },
