@@ -45,7 +45,7 @@ async function getLegacyStandings(championshipId: string) {
 async function getMasterData() {
   const rulesets = await db.ruleset.findMany();
   const users = await db.user.findMany();
-  const leagues = await db.user.findMany();
+  const leagues = await db.league.findMany();
   const teams = await db.team.findMany();
 
   return { rulesets, users, leagues, teams };
@@ -272,7 +272,6 @@ async function syncWithPreparedTrackingIds(
         firestoreId: m.id,
       },
     });
-
     m.entityId = match.id;
   }
 
