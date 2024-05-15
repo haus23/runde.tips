@@ -1,6 +1,46 @@
 # @tipprunde/www
 
 
+## v0.5.1
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.5.0...v0.5.1)
+
+### 🚀 Enhancements
+
+- Add checkbox component. ([4685d60](https://github.com/haus23/runde.tips/commit/4685d60))
+- Implement result editing. See #42 ([#42](https://github.com/haus23/runde.tips/issues/42))
+- Implement an idea for the API folder. Resolves #107 ([#107](https://github.com/haus23/runde.tips/issues/107))
+- Implement tip calculation. ([be29037](https://github.com/haus23/runde.tips/commit/be29037))
+- Implement match calculation. ([66d9a94](https://github.com/haus23/runde.tips/commit/66d9a94))
+- Add use-case for match result checking. Refine API. ([a52c535](https://github.com/haus23/runde.tips/commit/a52c535))
+- Initial implementation of ranking calculation. Resolves #42 ([#42](https://github.com/haus23/runde.tips/issues/42))
+
+### 🩹 Fixes
+
+- Removing weired footer space at results page. ([5cda0a6](https://github.com/haus23/runde.tips/commit/5cda0a6))
+- Spotted and solved two bugs. ([6d4fe17](https://github.com/haus23/runde.tips/commit/6d4fe17))
+- Fetched the wrong resources. Resolves #133 ([#133](https://github.com/haus23/runde.tips/issues/133))
+- Changes mapping to float. Fixes #135 ([#135](https://github.com/haus23/runde.tips/issues/135))
+
+### 💅 Refactors
+
+- Refined validation, submission and added optimistic ui ([a41ad4e](https://github.com/haus23/runde.tips/commit/a41ad4e))
+- Working with the Tipprunde API. WIP. See #107 ([#107](https://github.com/haus23/runde.tips/issues/107))
+
+### 📖 Documentation
+
+- Start documenting the use-cases. ([d34462e](https://github.com/haus23/runde.tips/commit/d34462e))
+
+### 🏡 Chore
+
+- **dx:** Update biome. ([cc546f5](https://github.com/haus23/runde.tips/commit/cc546f5))
+- Patch updates and align versioning. ([dd7ddfb](https://github.com/haus23/runde.tips/commit/dd7ddfb))
+- Patch update deps. ([3f0d308](https://github.com/haus23/runde.tips/commit/3f0d308))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.5.0
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.4.2...v0.5.0)
