@@ -1,5 +1,6 @@
 import { db } from '#utils/db.server';
 import { invariant } from '#utils/misc.js';
+import { calculateChampionship } from '../rules/championship';
 import { calculateMatch, matchRuleSchema } from '../rules/match';
 import { tipRuleSchema } from '../rules/tip';
 
@@ -48,4 +49,5 @@ export async function setMatchResults(
   }
 
   // Turnier neu berechnen
+  await calculateChampionship(championship);
 }
