@@ -53,6 +53,8 @@ model Ruleset {
   championships Championship[]
 }
 
+//  Maintanable and extandable solid implementation of the calculation API
+
 model Championship {
   id   Int    @id @default(autoincrement())
   slug String @unique
@@ -115,10 +117,10 @@ model Player {
   id          Int    @id @default(autoincrement())
   firestoreId String @unique
 
-  points      Int     @default(0)
-  extraPoints Decimal @default(0)
-  totalPoints Decimal @default(0)
-  rank        Int     @default(0)
+  points      Int   @default(0)
+  extraPoints Float @default(0)
+  totalPoints Float @default(0)
+  rank        Int   @default(0)
 
   championshipId Int
   championship   Championship @relation(fields: [championshipId], references: [id])
