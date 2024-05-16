@@ -21,11 +21,13 @@ function _Toaster() {
     <Toaster
       position="top-right"
       gap={6}
+      duration={20000}
+      className="sm:-mt-2 mr-2 xl:mr-0"
       toastOptions={{
         unstyled: true,
         classNames: {
           toast:
-            'bg-popover border border-default rounded-lg shadow-medium w-full flex items-center gap-x-2 px-4 py-2',
+            'bg-popover border border-default rounded-lg shadow-medium w-full flex items-center gap-x-2 px-4 py-4',
           description: 'text-app-subtle',
         },
       }}
