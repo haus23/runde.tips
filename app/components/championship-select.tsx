@@ -78,6 +78,7 @@ export function ChampionshipSelect({
                       selected?.id === c.id && 'text-selected',
                     )}
                     onSelect={handleSelect}
+                    keywords={[c.name]}
                   >
                     <span>{c.name}</span>
                     {selected?.id === c.id && <Icon name="lucide/check" />}
