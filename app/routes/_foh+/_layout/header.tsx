@@ -52,7 +52,7 @@ export function Header() {
           {championships.length > 0 ? (
             <NavLink href={`/${championshipSegment}`}>Tabelle</NavLink>
           ) : (
-            <NavLink href="/">Startseite</NavLink>
+            <NavLink href="/willkommen">Startseite</NavLink>
           )}
         </nav>
         <div className="flex items-center gap-x-2">
