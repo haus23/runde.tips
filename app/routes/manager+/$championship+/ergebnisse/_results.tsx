@@ -31,7 +31,7 @@ import {
 } from '#components/ui';
 import { requireAdmin } from '#utils/auth/auth.server';
 import { db } from '#utils/db.server';
-import { useCurrentChampionship } from '#utils/manager/championship.context';
+import { useChampionship } from '#utils/manager/championship.context';
 import { toast } from '#utils/toast/toast.client.js';
 import { jsonWithToast } from '#utils/toast/toast.server.js';
 
@@ -89,12 +89,12 @@ function isValid(result: string) {
 export default function ResultsRoute() {
   // Loader
   const { rounds, matches } = useLoaderData<typeof loader>();
-  const { championship } = useCurrentChampionship();
+  const { currentChampionship } = useChampionship();
 
   // State
   const frm = useRef<HTMLFormElement>(null);
   const [selectedRoundIx, setSelectedRoundIx] = useState(
-    championship?.completed ? 0 : rounds.length - 1,
+    currentChampionship?.completed ? 0 : rounds.length - 1,
   );
   const [results, setResults] = useState(
     matches.map((m) => ({

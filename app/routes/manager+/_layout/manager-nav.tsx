@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import { Form } from 'react-aria-components';
 import { Logo } from '#components/logo';
 import { Icon, Link, NavLink } from '#components/ui';
-import { useCurrentChampionship } from '#utils/manager/championship.context';
+import { useChampionship } from '#utils/manager/championship.context';
 
 export function ManagerNav({ className }: { className?: string }) {
-  const { championship } = useCurrentChampionship();
+  const { currentChampionship } = useChampionship();
 
   return (
     <div className={clsx('flex flex-col', className)}>
@@ -21,34 +21,34 @@ export function ManagerNav({ className }: { className?: string }) {
         >
           <Icon name="lucide/home">Dashboard</Icon>
         </NavLink>
-        {championship && (
+        {currentChampionship && (
           <>
             <NavLink
-              href={`/manager/${championship.slug}`}
+              href={`/manager/${currentChampionship.slug}`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
               <Icon name="lucide/folder">Turnier</Icon>
             </NavLink>
             <NavLink
-              href={`/manager/${championship.slug}/spiele`}
+              href={`/manager/${currentChampionship.slug}/spiele`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
               <Icon name="lucide/calendar">Spiele</Icon>
             </NavLink>
             <NavLink
-              href={`/manager/${championship.slug}/tipps`}
+              href={`/manager/${currentChampionship.slug}/tipps`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
               <Icon name="lucide/dices">Tipps</Icon>
             </NavLink>
             <NavLink
-              href={`/manager/${championship.slug}/ergebnisse`}
+              href={`/manager/${currentChampionship.slug}/ergebnisse`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
               <Icon name="lucide/scale">Ergebnisse</Icon>
             </NavLink>
             <NavLink
-              href={`/manager/${championship.slug}/zusatzpunkte`}
+              href={`/manager/${currentChampionship.slug}/zusatzpunkte`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
               <Icon name="lucide/smile-plus">Zusatzpunkte</Icon>

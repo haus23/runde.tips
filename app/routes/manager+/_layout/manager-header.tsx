@@ -9,14 +9,13 @@ import {
 import { ChampionshipSelect } from '#components/championship-select';
 import { ThemeMenu } from '#components/theme-menu';
 import { Button, Icon } from '#components/ui';
-import { useCurrentChampionship } from '#utils/manager/championship.context';
-import { useChampionships } from '#utils/manager/use-championships';
+import { useChampionship } from '#utils/manager/championship.context';
 import { usePageTitle } from '#utils/manager/use-page-title';
 import { ManagerNav } from './manager-nav';
 
 export function ManagerHeader() {
-  const championships = useChampionships();
-  const { championship, setChampionship } = useCurrentChampionship();
+  const { currentChampionship, setCurrentChampionship, championships } =
+    useChampionship();
 
   const pageTitle = usePageTitle();
 
@@ -75,8 +74,8 @@ export function ManagerHeader() {
       <div className="flex gap-x-2">
         <ChampionshipSelect
           championships={championships}
-          selected={championship}
-          onSelectionChanged={setChampionship}
+          selected={currentChampionship}
+          onSelectionChanged={setCurrentChampionship}
         />
         <ThemeMenu />
       </div>
