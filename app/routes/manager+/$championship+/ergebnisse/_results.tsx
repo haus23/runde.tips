@@ -87,12 +87,14 @@ function isValid(result: string) {
 }
 
 export default function ResultsRoute() {
+  // DOM
+  const frm = useRef<HTMLFormElement>(null);
+
   // Loader
   const { rounds, matches } = useLoaderData<typeof loader>();
   const { currentChampionship } = useChampionship();
 
-  // State
-  const frm = useRef<HTMLFormElement>(null);
+  // Derived State
   const [selectedRoundIx, setSelectedRoundIx] = useState(
     currentChampionship?.completed ? 0 : rounds.length - 1,
   );
