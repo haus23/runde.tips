@@ -1,6 +1,27 @@
 # @tipprunde/www
 
 
+## v0.5.2
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.5.1...v0.5.2)
+
+### 🩹 Fixes
+
+- Better aligning for toast. See #127 ([#127](https://github.com/haus23/runde.tips/issues/127))
+- Change welcome page link. Resolves #130 ([#130](https://github.com/haus23/runde.tips/issues/130))
+- Add championship name as keyword. Partially resolves #132 ([#132](https://github.com/haus23/runde.tips/issues/132))
+- Refactor manager context. Resolves #128 ([#128](https://github.com/haus23/runde.tips/issues/128))
+- Do not try to over implement anything. See #138 ([#138](https://github.com/haus23/runde.tips/issues/138))
+- Remove championship select from header. Resolves #138 ([#138](https://github.com/haus23/runde.tips/issues/138))
+
+### 🏡 Chore
+
+- Upgrade prisma and patch update node typings. ([8b697db](https://github.com/haus23/runde.tips/commit/8b697db))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.5.1
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.5.0...v0.5.1)
