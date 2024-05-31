@@ -12,8 +12,8 @@ import { usePublishedChampionships } from './use-championships';
 
 type ContextType = {
   championships: Championship[];
-  championship: Championship | undefined;
-  setChampionship: Dispatch<Championship>;
+  currentChampionship: Championship | undefined;
+  setCurrentChampionship: Dispatch<Championship>;
 };
 
 const ChampionshipContext = createContext<ContextType>(undefined as never);
@@ -30,15 +30,18 @@ export function ChampionshipProvider({ children }: { children: ReactNode }) {
 
   return (
     <ChampionshipContext.Provider
-      value={{ championships, championship, setChampionship }}
+      value={{
+        championships,
+        currentChampionship: championship,
+        setCurrentChampionship: setChampionship,
+      }}
     >
       {children}
     </ChampionshipContext.Provider>
   );
 }
 
-export function useCurrentChampionship() {
-  const publishedChampionships = usePublishedChampionships();
+export function useChampionship() {
   const ctx = useContext(ChampionshipContext);
   const navigate = useNavigate();
 
@@ -46,14 +49,15 @@ export function useCurrentChampionship() {
     throw new Error('No ChampionshipProvider in component hierarchy.');
   }
 
-  const { championship, setChampionship } = ctx;
-
-  function setChampionshipWithNavigation(championship: Championship) {
-    setChampionship(championship);
+  function setCurrentChampionship(championship: Championship) {
+    ctx.setCurrentChampionship(championship);
     const championshipSegment =
-      championship === publishedChampionships[0] ? '' : championship.slug;
+      championship === ctx.championships[0] ? '' : championship.slug;
     navigate(`/${championshipSegment}`);
   }
 
-  return { championship, setChampionship: setChampionshipWithNavigation };
+  return {
+    ...ctx,
+    setCurrentChampionship,
+  };
 }

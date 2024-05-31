@@ -12,7 +12,7 @@ import { ThemeMenu } from '#components/theme-menu';
 import { Button, Divider, Icon, NavLink } from '#components/ui';
 import { UserMenu } from '#components/user-menu';
 import { useIsAuthenticated } from '#utils/auth/user';
-import { useCurrentChampionship } from '#utils/foh/championship.context';
+import { useChampionship } from '#utils/foh/championship.context';
 import { usePublishedChampionships } from '#utils/foh/use-championships';
 import { usePageTitle } from '#utils/foh/use-page-title';
 
@@ -22,7 +22,7 @@ export function Header() {
   const pageTitle = usePageTitle();
   const isAuthenticated = useIsAuthenticated();
   const championships = usePublishedChampionships();
-  const { championship, setChampionship } = useCurrentChampionship();
+  const { currentChampionship, setCurrentChampionship } = useChampionship();
 
   const [isOpen, setOpen] = useState(false);
   const { state } = useNavigation();
@@ -43,7 +43,9 @@ export function Header() {
   }, []);
 
   const championshipSegment =
-    (championship?.id === championships[0]?.id ? '' : championship?.slug) || '';
+    (currentChampionship?.id === championships[0]?.id
+      ? ''
+      : currentChampionship?.slug) || '';
 
   return (
     <header className="sticky top-0 mx-auto grid h-14 max-w-6xl bg-app px-2 sm:px-4">
@@ -60,8 +62,8 @@ export function Header() {
           {championships.length > 1 && (
             <ChampionshipSelect
               championships={championships}
-              selected={championship}
-              onSelectionChanged={setChampionship}
+              selected={currentChampionship}
+              onSelectionChanged={setCurrentChampionship}
             />
           )}
           <ThemeMenu />
@@ -161,8 +163,8 @@ export function Header() {
         <div className="flex gap-x-2">
           <ChampionshipSelect
             championships={championships}
-            selected={championship}
-            onSelectionChanged={setChampionship}
+            selected={currentChampionship}
+            onSelectionChanged={setCurrentChampionship}
           />
           <ThemeMenu />
         </div>
