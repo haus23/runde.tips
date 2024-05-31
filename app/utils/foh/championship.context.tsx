@@ -11,6 +11,7 @@ import { invariant } from '#utils/misc';
 import { usePublishedChampionships } from './use-championships';
 
 type ContextType = {
+  championships: Championship[];
   championship: Championship | undefined;
   setChampionship: Dispatch<Championship>;
 };
@@ -18,17 +19,19 @@ type ContextType = {
 const ChampionshipContext = createContext<ContextType>(undefined as never);
 
 export function ChampionshipProvider({ children }: { children: ReactNode }) {
-  const publishedChampionships = usePublishedChampionships();
+  const championships = usePublishedChampionships();
   const { championship: slug } = useParams();
 
   const currentChampionship = slug
-    ? publishedChampionships.find((c) => c.slug === slug)
-    : publishedChampionships[0];
+    ? championships.find((c) => c.slug === slug)
+    : championships[0];
 
   const [championship, setChampionship] = useState(currentChampionship);
 
   return (
-    <ChampionshipContext.Provider value={{ championship, setChampionship }}>
+    <ChampionshipContext.Provider
+      value={{ championships, championship, setChampionship }}
+    >
       {children}
     </ChampionshipContext.Provider>
   );
