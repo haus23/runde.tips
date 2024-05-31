@@ -7,7 +7,6 @@ import {
   Modal,
   ModalOverlay,
 } from 'react-aria-components';
-import { ChampionshipSelect } from '#components/championship-select';
 import { Logo } from '#components/logo';
 import { ThemeMenu } from '#components/theme-menu';
 import { Button, Divider, Icon, NavLink } from '#components/ui';
@@ -16,6 +15,8 @@ import { useIsAuthenticated } from '#utils/auth/user';
 import { useCurrentChampionship } from '#utils/foh/championship.context';
 import { usePublishedChampionships } from '#utils/foh/use-championships';
 import { usePageTitle } from '#utils/foh/use-page-title';
+
+import { ChampionshipSelect } from './championship-select';
 
 export function Header() {
   const pageTitle = usePageTitle();

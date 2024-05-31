@@ -8,7 +8,7 @@ import {
   Modal,
   ModalOverlay,
 } from 'react-aria-components';
-import { Button, Icon } from './ui';
+import { Button, Icon } from '#components/ui';
 
 type ChampionshipSelectProps = {
   championships: Championship[];
