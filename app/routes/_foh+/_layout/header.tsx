@@ -59,13 +59,7 @@ export function Header() {
           )}
         </nav>
         <div className="flex items-center gap-x-2">
-          {championships.length > 1 && (
-            <ChampionshipSelect
-              championships={championships}
-              selected={currentChampionship}
-              onSelectionChanged={setCurrentChampionship}
-            />
-          )}
+          {championships.length > 1 && <ChampionshipSelect />}
           <ThemeMenu />
           {isAuthenticated ? (
             <UserMenu />
@@ -161,11 +155,7 @@ export function Header() {
         </DialogTrigger>
         <h1 className="font-medium text-xl">{pageTitle}</h1>
         <div className="flex gap-x-2">
-          <ChampionshipSelect
-            championships={championships}
-            selected={currentChampionship}
-            onSelectionChanged={setCurrentChampionship}
-          />
+          <ChampionshipSelect />
           <ThemeMenu />
         </div>
       </div>
