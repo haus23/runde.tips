@@ -1,6 +1,6 @@
 import { redirect } from '@remix-run/react';
 import { Card, CardContent, CardHeader, Divider } from '#components/ui';
-import { getPublishedChampionships } from '#utils/foh/championships.server';
+import { getPublishedChampionships } from '#utils/app/foh/championships.server';
 
 export const handle = {
   pageTitle: 'Willkommen',
@@ -17,7 +17,7 @@ export async function loader() {
 
 export default function WelcomeRoute() {
   return (
-    <Card className="sm:mt-8 mx-2">
+    <Card className="mx-2 sm:mt-8">
       <CardHeader className="p-4 text-2xl">
         <h2>Marie 23 Tipprunde</h2>
       </CardHeader>

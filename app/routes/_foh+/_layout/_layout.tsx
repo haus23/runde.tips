@@ -1,6 +1,6 @@
 import { Outlet, json, useLoaderData } from '@remix-run/react';
 import { ChampionshipProvider } from '#utils/app/championship.context';
-import { getPublishedChampionships } from '#utils/foh/championships.server';
+import { getPublishedChampionships } from '#utils/app/foh/championships.server';
 import { Header } from './header';
 
 export async function loader() {
