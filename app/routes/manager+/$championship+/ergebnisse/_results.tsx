@@ -29,9 +29,9 @@ import {
   TableHeader,
   TextField,
 } from '#components/ui';
+import { useChampionship } from '#utils/app/manager/use-championship';
 import { requireAdmin } from '#utils/auth/auth.server';
 import { db } from '#utils/db.server';
-import { useChampionship } from '#utils/manager/championship.context';
 import { toast } from '#utils/toast/toast.client.js';
 import { jsonWithToast } from '#utils/toast/toast.server.js';
 

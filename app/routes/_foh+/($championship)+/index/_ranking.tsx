@@ -14,9 +14,9 @@ import {
   TableBody,
   TableHeader,
 } from '#components/ui';
+import { requireChampionship } from '#utils/app/foh/championships.server';
+import { getCurrentTips } from '#utils/app/foh/current-tips.server';
 import { db } from '#utils/db.server';
-import { requireChampionship } from '#utils/foh/championships.server';
-import { getCurrentTips } from '#utils/foh/current-tips.server';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const championship = await requireChampionship(params);

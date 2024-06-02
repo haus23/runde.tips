@@ -1,4 +1,4 @@
-import { resetPublishedChampionships } from '#utils/foh/championships.server';
+import { resetPublishedChampionships } from '#utils/app/foh/championships.server';
 import { invariant } from '#utils/misc';
 import { syncChampionship } from '#utils/sync/championship';
 import { createTaskAction } from '#utils/task.server';
