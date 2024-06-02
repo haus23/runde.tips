@@ -1,5 +1,6 @@
-import { useMatches, useParams } from '@remix-run/react';
-import { useChampionship } from './use-championship';
+import { useMatches } from '@remix-run/react';
+import { useContext } from 'react';
+import { ChampionshipContext } from './championship.context';
 
 type RouteHandle = {
   pageTitle: string;
@@ -11,8 +12,7 @@ function hasPageTitle(handle: unknown): handle is RouteHandle {
 
 export function usePageTitle() {
   const matches = useMatches();
-  const { championship: slug } = useParams();
-  const { championships } = useChampionship();
+  const { currentChampionship } = useContext(ChampionshipContext);
 
   const handle = matches.at(-1)?.handle;
 
@@ -20,7 +20,5 @@ export function usePageTitle() {
     return handle.pageTitle;
   }
 
-  const championship =
-    championships.find((c) => c.slug === slug) || championships[0];
-  return championship?.name || '';
+  return currentChampionship?.name || '';
 }

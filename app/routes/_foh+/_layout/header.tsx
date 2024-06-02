@@ -11,9 +11,9 @@ import { Logo } from '#components/logo';
 import { ThemeMenu } from '#components/theme-menu';
 import { Button, Divider, Icon, NavLink } from '#components/ui';
 import { UserMenu } from '#components/user-menu';
+import { usePageTitle } from '#utils/app/use-page-title';
 import { useIsAuthenticated } from '#utils/auth/user';
 import { useChampionship } from '#utils/foh/use-championship';
-import { usePageTitle } from '#utils/foh/use-page-title';
 
 import { ChampionshipSelect } from './championship-select';
 

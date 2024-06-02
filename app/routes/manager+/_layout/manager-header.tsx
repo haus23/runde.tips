@@ -8,7 +8,7 @@ import {
 } from 'react-aria-components';
 import { ThemeMenu } from '#components/theme-menu';
 import { Button, Icon } from '#components/ui';
-import { usePageTitle } from '#utils/manager/use-page-title';
+import { usePageTitle } from '#utils/app/use-page-title';
 import { ManagerNav } from './manager-nav';
 
 export function ManagerHeader() {
@@ -64,7 +64,7 @@ export function ManagerHeader() {
             </Modal>
           </ModalOverlay>
         </DialogTrigger>
-        <h1 className="font-medium text-xl">{pageTitle}</h1>
+        <h1 className="font-medium text-xl">{pageTitle || 'Manager'}</h1>
       </div>
       <div className="flex gap-x-2">
         <ThemeMenu />
