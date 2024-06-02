@@ -13,7 +13,6 @@ import { Button, Divider, Icon, NavLink } from '#components/ui';
 import { UserMenu } from '#components/user-menu';
 import { useIsAuthenticated } from '#utils/auth/user';
 import { useChampionship } from '#utils/foh/championship.context';
-import { usePublishedChampionships } from '#utils/foh/use-championships';
 import { usePageTitle } from '#utils/foh/use-page-title';
 
 import { ChampionshipSelect } from './championship-select';
@@ -21,8 +20,7 @@ import { ChampionshipSelect } from './championship-select';
 export function Header() {
   const pageTitle = usePageTitle();
   const isAuthenticated = useIsAuthenticated();
-  const championships = usePublishedChampionships();
-  const { currentChampionship, setCurrentChampionship } = useChampionship();
+  const { championships, currentChampionship } = useChampionship();
 
   const [isOpen, setOpen] = useState(false);
   const { state } = useNavigation();

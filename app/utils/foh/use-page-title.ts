@@ -1,5 +1,5 @@
 import { useMatches, useParams } from '@remix-run/react';
-import { usePublishedChampionships } from './use-championships';
+import { useChampionship } from './championship.context';
 
 type RouteHandle = {
   pageTitle: string;
@@ -12,7 +12,7 @@ function hasPageTitle(handle: unknown): handle is RouteHandle {
 export function usePageTitle() {
   const matches = useMatches();
   const { championship: slug } = useParams();
-  const championships = usePublishedChampionships();
+  const { championships } = useChampionship();
 
   const handle = matches.at(-1)?.handle;
 

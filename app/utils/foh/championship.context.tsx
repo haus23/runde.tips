@@ -1,5 +1,5 @@
 import type { Championship } from '@prisma/client';
-import { useNavigate, useParams } from '@remix-run/react';
+import { useNavigate, useParams, useRouteLoaderData } from '@remix-run/react';
 import {
   type Dispatch,
   type ReactNode,
@@ -7,8 +7,8 @@ import {
   useContext,
   useState,
 } from 'react';
+import type { loader } from '#routes/_foh+/_layout/_layout';
 import { invariant } from '#utils/misc';
-import { usePublishedChampionships } from './use-championships';
 
 type ContextType = {
   championships: Championship[];
@@ -19,7 +19,12 @@ type ContextType = {
 const ChampionshipContext = createContext<ContextType>(undefined as never);
 
 export function ChampionshipProvider({ children }: { children: ReactNode }) {
-  const championships = usePublishedChampionships();
+  const data = useRouteLoaderData<typeof loader>(
+    'routes/_foh+/_layout/_layout',
+  );
+  invariant(typeof data !== 'undefined');
+
+  const { championships } = data;
   const { championship: slug } = useParams();
 
   const currentChampionship = slug
