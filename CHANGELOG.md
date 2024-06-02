@@ -1,6 +1,28 @@
 # @tipprunde/www
 
 
+## v0.5.3
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.5.2...v0.5.3)
+
+### 🚀 Enhancements
+
+- Export championships from context ([0ad4f99](https://github.com/haus23/runde.tips/commit/0ad4f99))
+
+### 💅 Refactors
+
+- Move foh-only component away from common components folder. ([6ac460c](https://github.com/haus23/runde.tips/commit/6ac460c))
+- Align the API with backend context ([a8902b1](https://github.com/haus23/runde.tips/commit/a8902b1))
+- Simplify the select with using the context. ([edc9e92](https://github.com/haus23/runde.tips/commit/edc9e92))
+- Eliminate unneeded usePublished- Hook ([cc679c1](https://github.com/haus23/runde.tips/commit/cc679c1))
+- Remove redundant foh and manager contexts in favor of an app context. ([0c5a130](https://github.com/haus23/runde.tips/commit/0c5a130))
+- Reduce redundant page-title hooks ([5fe3194](https://github.com/haus23/runde.tips/commit/5fe3194))
+- Reorganize folder structure. ([664bae3](https://github.com/haus23/runde.tips/commit/664bae3))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.5.2
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.5.1...v0.5.2)
