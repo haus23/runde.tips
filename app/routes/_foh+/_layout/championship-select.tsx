@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from 'react-aria-components';
 import { Button, Icon } from '#components/ui';
-import { useChampionship } from '#utils/foh/championship.context';
+import { useChampionship } from '#utils/foh/use-championship';
 
 export function ChampionshipSelect() {
   const { championships, currentChampionship, setCurrentChampionship } =

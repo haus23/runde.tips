@@ -1,5 +1,5 @@
 import { useMatches } from '@remix-run/react';
-import { useChampionship } from './championship.context';
+import { useChampionship } from './use-championship';
 
 type RouteHandle = {
   pageTitle: string;

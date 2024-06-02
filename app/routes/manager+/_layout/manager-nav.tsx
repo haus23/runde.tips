@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Form } from 'react-aria-components';
 import { Logo } from '#components/logo';
 import { Icon, Link, NavLink } from '#components/ui';
-import { useChampionship } from '#utils/manager/championship.context';
+import { useChampionship } from '#utils/manager/use-championship';
 
 export function ManagerNav({ className }: { className?: string }) {
   const { currentChampionship } = useChampionship();

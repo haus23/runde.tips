@@ -1,5 +1,5 @@
-import { Outlet, json } from '@remix-run/react';
-import { ChampionshipProvider } from '#utils/foh/championship.context';
+import { Outlet, json, useLoaderData } from '@remix-run/react';
+import { ChampionshipProvider } from '#utils/app/championship.context';
 import { getPublishedChampionships } from '#utils/foh/championships.server';
 import { Header } from './header';
 
@@ -9,10 +9,11 @@ export async function loader() {
 }
 
 export default function FohLayout() {
+  const { championships } = useLoaderData<typeof loader>();
   return (
-    <ChampionshipProvider>
+    <ChampionshipProvider championships={championships}>
       <Header />
-      <main className="mx-auto max-w-4xl pb-10 sm:px-6 lg:px-8 mt-2">
+      <main className="mx-auto mt-2 max-w-4xl pb-10 lg:px-8 sm:px-6">
         <Outlet />
       </main>
     </ChampionshipProvider>

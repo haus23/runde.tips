@@ -31,7 +31,7 @@ import {
 } from '#components/ui';
 import { requireAdmin } from '#utils/auth/auth.server';
 import { db } from '#utils/db.server';
-import { useChampionship } from '#utils/manager/championship.context';
+import { useChampionship } from '#utils/manager/use-championship';
 import { toast } from '#utils/toast/toast.client.js';
 import { jsonWithToast } from '#utils/toast/toast.server.js';
 
