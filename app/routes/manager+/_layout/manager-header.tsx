@@ -6,7 +6,6 @@ import {
   Modal,
   ModalOverlay,
 } from 'react-aria-components';
-import { ThemeMenu } from '#components/theme-menu';
 import { Button, Icon } from '#components/ui';
 import { usePageTitle } from '#utils/app/use-page-title';
 import { ManagerNav } from './manager-nav';
@@ -65,9 +64,6 @@ export function ManagerHeader() {
           </ModalOverlay>
         </DialogTrigger>
         <h1 className="font-medium text-xl">{pageTitle || 'Manager'}</h1>
-      </div>
-      <div className="flex gap-x-2">
-        <ThemeMenu />
       </div>
     </div>
   );
