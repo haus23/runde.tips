@@ -12,7 +12,7 @@
     "start": "remix-serve ./build/server/index.js",
     "icons:add": "sly add",
     "icons:build": "icons build -i ./resources/icons -o ./app/components/ui/icon/icons --optimize 0",
-    "check": "biome check --apply .",
+    "check": "biome check --write",
     "test": "vitest",
     "typecheck": "tsc"
   },
@@ -48,7 +48,7 @@
     "zod": "~3.23.8"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.7.3",
+    "@biomejs/biome": "1.8.0",
     "@radix-ui/colors": "~3.0.0",
     "@remix-run/dev": "~2.9.2",
     "@sly-cli/sly": "~1.10.0",
