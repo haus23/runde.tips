@@ -11,7 +11,7 @@ import {
 
 import { type ReactNode, useEffect } from 'react';
 
-import { UIProvider } from '#components/ui';
+import UI from '#components/ui';
 
 import { getUser } from '#utils/auth/auth.server';
 import { useAuthBroadcast } from '#utils/auth/user';
@@ -74,11 +74,11 @@ export function Layout({ children }: { children: ReactNode }) {
         <Links />
       </head>
       <body>
-        <UIProvider>
+        <UI.Provider>
           {children}
           <Scripts />
           <ScrollRestoration />
-        </UIProvider>
+        </UI.Provider>
       </body>
     </html>
   );

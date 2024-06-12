@@ -1,6 +1,3 @@
-// Provider
-export * from './ui-provider';
-
 // React Aria Wrappers
 export * from './button/button';
 export * from './card/card';
@@ -14,3 +11,8 @@ export * from './tabs/tabs';
 
 // App Components
 export * from './icon/icon';
+
+// Provider
+import * as Provider from './ui-provider';
+
+export default { ...Provider };

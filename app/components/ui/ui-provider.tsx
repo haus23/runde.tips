@@ -4,7 +4,7 @@ import { RouterProvider } from '@react-aria/utils';
 import { useNavigate } from '@remix-run/react';
 import type { ReactNode } from 'react';
 
-export function UIProvider({ children }: { children: ReactNode }) {
+export function Provider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   return (
