@@ -9,7 +9,7 @@ import {
 } from 'react-aria-components';
 import { Logo } from '#components/logo';
 import { ThemeMenu } from '#components/theme-menu';
-import { Button, Divider, Icon, NavLink } from '#components/ui';
+import UI from '#components/ui';
 import { UserMenu } from '#components/user-menu';
 import { useChampionship } from '#utils/app/foh/use-championship';
 import { usePageTitle } from '#utils/app/use-page-title';
@@ -51,9 +51,9 @@ export function Header() {
         <Logo />
         <nav>
           {championships.length > 0 ? (
-            <NavLink href={`/${championshipSegment}`}>Tabelle</NavLink>
+            <UI.NavLink href={`/${championshipSegment}`}>Tabelle</UI.NavLink>
           ) : (
-            <NavLink href="/willkommen">Startseite</NavLink>
+            <UI.NavLink href="/willkommen">Startseite</UI.NavLink>
           )}
         </nav>
         <div className="flex items-center gap-x-2">
@@ -63,17 +63,17 @@ export function Header() {
             <UserMenu />
           ) : (
             <div className="flex h-14 items-center gap-x-2">
-              <Divider orientation="vertical" className="ml-2 h-10" />
-              <NavLink href="/login">Log In</NavLink>
+              <UI.Divider orientation="vertical" className="ml-2 h-10" />
+              <UI.NavLink href="/login">Log In</UI.NavLink>
             </div>
           )}
         </div>
       </div>
       <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-2 sm:hidden">
         <DialogTrigger isOpen={isOpen} onOpenChange={setOpen}>
-          <Button variant="toolbar">
-            <Icon name="lucide/menu" />
-          </Button>
+          <UI.Button variant="toolbar">
+            <UI.Icon name="lucide/menu" />
+          </UI.Button>
           <ModalOverlay
             className="fixed inset-0 z-20 backdrop-blur-sm"
             isDismissable
@@ -84,65 +84,67 @@ export function Header() {
                   <>
                     <header className="flex items-center justify-between p-2">
                       <Logo />
-                      <Button variant="trigger" onPress={close}>
-                        <Icon className="size-6" name="lucide/x" />
-                      </Button>
+                      <UI.Button variant="trigger" onPress={close}>
+                        <UI.Icon className="size-6" name="lucide/x" />
+                      </UI.Button>
                     </header>
                     <nav className="flex flex-col gap-y-2 p-2">
                       {championships.length > 0 ? (
                         <>
-                          <NavLink
+                          <UI.NavLink
                             className="data-[current]:bg-content-hover hover:bg-content-hover"
                             href={`/${championshipSegment}`}
                           >
-                            <Icon name="lucide/list-ordered">Tabelle</Icon>
-                          </NavLink>
-                          <NavLink
+                            <UI.Icon name="lucide/list-ordered">
+                              Tabelle
+                            </UI.Icon>
+                          </UI.NavLink>
+                          <UI.NavLink
                             className="data-[current]:bg-content-hover hover:bg-content-hover"
                             href={`/${[championshipSegment, 'spieler']
                               .filter(Boolean)
                               .join('/')}`}
                           >
-                            <Icon name="lucide/users">Spieler</Icon>
-                          </NavLink>
-                          <NavLink
+                            <UI.Icon name="lucide/users">Spieler</UI.Icon>
+                          </UI.NavLink>
+                          <UI.NavLink
                             className="data-[current]:bg-content-hover hover:bg-content-hover"
                             href={`/${[championshipSegment, 'spiele']
                               .filter(Boolean)
                               .join('/')}`}
                           >
-                            <Icon name="lucide/dices">Spiele</Icon>
-                          </NavLink>
+                            <UI.Icon name="lucide/dices">Spiele</UI.Icon>
+                          </UI.NavLink>
                         </>
                       ) : (
-                        <NavLink href="/">Startseite</NavLink>
+                        <UI.NavLink href="/">Startseite</UI.NavLink>
                       )}
                     </nav>
                     <div className="flex flex-col gap-y-2 p-2">
                       {isAuthenticated ? (
                         <>
-                          <NavLink
+                          <UI.NavLink
                             href="/manager"
                             className="hover:bg-content-hover"
                           >
-                            <Icon name="lucide/settings">Manager</Icon>
-                          </NavLink>
+                            <UI.Icon name="lucide/settings">Manager</UI.Icon>
+                          </UI.NavLink>
                           <Form action="/logout" method="post" className="flex">
                             <button
                               type="submit"
                               className="grow rounded-lg px-2 py-1.5 font-medium text-app-subtle text-sm hover:bg-content-hover hover:text-app focus:outline-none focus-visible:ring-2 focus-visible:ring-default focus-visible:ring-offset-2 focus-visible:ring-offset-default"
                             >
-                              <Icon name="lucide/log-out">Log Out</Icon>
+                              <UI.Icon name="lucide/log-out">Log Out</UI.Icon>
                             </button>
                           </Form>
                         </>
                       ) : (
-                        <NavLink
+                        <UI.NavLink
                           href="/login"
                           className="data-[current]:bg-content-hover hover:bg-content-hover"
                         >
-                          <Icon name="lucide/log-in">Log In</Icon>
-                        </NavLink>
+                          <UI.Icon name="lucide/log-in">Log In</UI.Icon>
+                        </UI.NavLink>
                       )}
                     </div>
                   </>

@@ -1,5 +1,5 @@
 import { redirect } from '@remix-run/react';
-import { Card, CardContent, CardHeader, Divider } from '#components/ui';
+import UI from '#components/ui';
 import { getPublishedChampionships } from '#utils/app/foh/championships.server';
 
 export const handle = {
@@ -17,12 +17,12 @@ export async function loader() {
 
 export default function WelcomeRoute() {
   return (
-    <Card className="mx-2 sm:mt-8">
-      <CardHeader className="p-4 text-2xl">
+    <UI.Card className="mx-2 sm:mt-8">
+      <UI.CardHeader className="p-4 text-2xl">
         <h2>Marie 23 Tipprunde</h2>
-      </CardHeader>
-      <Divider />
-      <CardContent className="flex flex-col gap-y-4 pb-8 text-lg">
+      </UI.CardHeader>
+      <UI.Divider />
+      <UI.CardContent className="flex flex-col gap-y-4 pb-8 text-lg">
         <p>Willkommen bei unserer kleinen Fussball-Tipprunde!</p>
         <p>
           Leider gibt es noch keine Turniere und nichts zu tippen. Wir warten
@@ -30,7 +30,7 @@ export default function WelcomeRoute() {
           wird. Bis dahin empfehle ich ein kühles Blondes am Lieblingstresen
           deiner Stadt.
         </p>
-      </CardContent>
-    </Card>
+      </UI.CardContent>
+    </UI.Card>
   );
 }

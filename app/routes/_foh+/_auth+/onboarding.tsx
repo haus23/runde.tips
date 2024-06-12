@@ -6,16 +6,7 @@ import {
 } from '@remix-run/node';
 import { useLoaderData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  FieldError,
-  Input,
-  TextField,
-} from '#components/ui';
+import UI from '#components/ui';
 import {
   authenticator,
   commitSession,
@@ -70,19 +61,19 @@ export default function OnboardingRoute() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <Card className="mx-2 sm:mt-8">
-      <CardHeader className="p-4 text-2xl">
+    <UI.Card className="mx-2 sm:mt-8">
+      <UI.CardHeader className="p-4 text-2xl">
         <h2>Code Eingabe</h2>
-      </CardHeader>
-      <Divider />
-      <CardContent className="pb-8">
+      </UI.CardHeader>
+      <UI.Divider />
+      <UI.CardContent className="pb-8">
         <Form
           className="flex flex-col items-center gap-y-4"
           method="post"
           onSubmit={onSubmit}
           validationErrors={loaderData.errors}
         >
-          <TextField
+          <UI.TextField
             name="code"
             inputMode="numeric"
             autoComplete="one-time-code"
@@ -91,8 +82,8 @@ export default function OnboardingRoute() {
             maxLength={6}
             pattern="\d{6}"
           >
-            <Input className="w-40 text-center text-4xl" />
-            <FieldError className="mt-2 text-center">
+            <UI.Input className="w-40 text-center text-4xl" />
+            <UI.FieldError className="mt-2 text-center">
               {({ validationErrors, validationDetails }) =>
                 validationDetails.valueMissing
                   ? 'Ohne Code geht es nicht weiter.'
@@ -102,13 +93,13 @@ export default function OnboardingRoute() {
                       ? validationErrors.join()
                       : ''
               }
-            </FieldError>
-          </TextField>
-          <Button variant="solid" color="accent" type="submit">
+            </UI.FieldError>
+          </UI.TextField>
+          <UI.Button variant="solid" color="accent" type="submit">
             Prüfen
-          </Button>
+          </UI.Button>
         </Form>
-      </CardContent>
-    </Card>
+      </UI.CardContent>
+    </UI.Card>
   );
 }

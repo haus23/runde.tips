@@ -9,16 +9,7 @@ import {
   TableBody,
   TableHeader,
 } from 'react-aria-components';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-  Divider,
-} from '#components/ui';
+import UI from '#components/ui';
 import { requireAdmin } from '#utils/auth/auth.server.js';
 import { db } from '#utils/db.server';
 import { getFirestoreChampionships } from '#utils/firestore/championship';
@@ -67,10 +58,10 @@ export default function SyncRoute() {
 
   return (
     <div className="flex flex-col gap-y-6">
-      <Collapsible defaultOpen>
-        <CollapsibleTrigger>Backend-Daten</CollapsibleTrigger>
-        <Divider />
-        <CollapsibleContent className="flex flex-col gap-y-4 p-4">
+      <UI.Collapsible defaultOpen>
+        <UI.CollapsibleTrigger>Backend-Daten</UI.CollapsibleTrigger>
+        <UI.Divider />
+        <UI.CollapsibleContent className="flex flex-col gap-y-4 p-4">
           <p className="text-app-subtle">
             Hiermit werden die Cache-Daten des Backends gelöscht. Damit kann die
             zur Zeit noch laufende Tipprunden-Anwendung wieder aktuelle Daten
@@ -84,22 +75,22 @@ export default function SyncRoute() {
             realisert sein.
           </p>
           <cacheData.Form method="post" action="/action/sync/clear-cache">
-            <Button
+            <UI.Button
               type="submit"
               variant="solid"
               color="accent"
               isDisabled={isSubmmitting}
             >
               Cache löschen
-            </Button>
+            </UI.Button>
           </cacheData.Form>
-        </CollapsibleContent>
-      </Collapsible>
+        </UI.CollapsibleContent>
+      </UI.Collapsible>
 
-      <Collapsible>
-        <CollapsibleTrigger>Stammdaten</CollapsibleTrigger>
-        <Divider />
-        <CollapsibleContent className="flex flex-col gap-y-4">
+      <UI.Collapsible>
+        <UI.CollapsibleTrigger>Stammdaten</UI.CollapsibleTrigger>
+        <UI.Divider />
+        <UI.CollapsibleContent className="flex flex-col gap-y-4">
           <p className="text-app-subtle">
             Stammdaten sind die unveränderlichen Daten, die in den jeweiligen
             Turnieren benutzt werden: Spieler, Mannschaften/Teams, Ligen und
@@ -113,7 +104,7 @@ export default function SyncRoute() {
           </p>
           <masterData.Form method="post" action="/action/sync/master-data">
             <div className="flex flex-wrap justify-around gap-4">
-              <Button
+              <UI.Button
                 isDisabled={isSubmmitting}
                 color="accent"
                 type="submit"
@@ -121,8 +112,8 @@ export default function SyncRoute() {
                 value="players"
               >
                 Spieler
-              </Button>
-              <Button
+              </UI.Button>
+              <UI.Button
                 isDisabled={isSubmmitting}
                 color="accent"
                 type="submit"
@@ -130,8 +121,8 @@ export default function SyncRoute() {
                 value="teams"
               >
                 Teams
-              </Button>
-              <Button
+              </UI.Button>
+              <UI.Button
                 isDisabled={isSubmmitting}
                 color="accent"
                 type="submit"
@@ -139,8 +130,8 @@ export default function SyncRoute() {
                 value="leagues"
               >
                 Ligen
-              </Button>
-              <Button
+              </UI.Button>
+              <UI.Button
                 isDisabled={isSubmmitting}
                 color="accent"
                 type="submit"
@@ -148,15 +139,15 @@ export default function SyncRoute() {
                 value="rulesets"
               >
                 Regelwerke
-              </Button>
+              </UI.Button>
             </div>
           </masterData.Form>
-        </CollapsibleContent>
-      </Collapsible>
-      <Card>
-        <CardHeader id="tableLabel">Turnierdaten</CardHeader>
-        <Divider />
-        <CardContent className="px-0 sm:px-4">
+        </UI.CollapsibleContent>
+      </UI.Collapsible>
+      <UI.Card>
+        <UI.CardHeader id="tableLabel">Turnierdaten</UI.CardHeader>
+        <UI.Divider />
+        <UI.CardContent className="px-0 sm:px-4">
           <Table className="text-sm" aria-labelledby="tableLabel">
             <TableHeader className="bg-accent text-xs uppercase">
               <Column className="px-2 py-2 text-right md:px-6">Nr</Column>
@@ -182,7 +173,7 @@ export default function SyncRoute() {
                     {lc.synced && lc.completed ? (
                       <span>Keine</span>
                     ) : (
-                      <Button
+                      <UI.Button
                         onPress={() => syncChmpionship(lc)}
                         variant="solid"
                         color="accent"
@@ -190,15 +181,15 @@ export default function SyncRoute() {
                         isDisabled={isSubmmitting}
                       >
                         Abgleich
-                      </Button>
+                      </UI.Button>
                     )}
                   </Cell>
                 </Row>
               ))}
             </TableBody>
           </Table>
-        </CardContent>
-      </Card>
+        </UI.CardContent>
+      </UI.Card>
     </div>
   );
 }

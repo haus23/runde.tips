@@ -5,18 +5,7 @@ import {
 } from '@remix-run/node';
 import { useLoaderData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Description,
-  Divider,
-  FieldError,
-  Input,
-  Label,
-  TextField,
-} from '#components/ui';
+import UI from '#components/ui';
 import {
   authenticator,
   commitSession,
@@ -64,36 +53,36 @@ export default function LogInRoute() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <Card className="mx-2 sm:mt-8">
-      <CardHeader className="p-4 text-2xl">
+    <UI.Card className="mx-2 sm:mt-8">
+      <UI.CardHeader className="p-4 text-2xl">
         <h2>Anmeldung</h2>
-      </CardHeader>
-      <Divider />
-      <CardContent className="pb-8">
+      </UI.CardHeader>
+      <UI.Divider />
+      <UI.CardContent className="pb-8">
         <Form
           className="flex flex-col gap-y-4"
           method="post"
           onSubmit={onSubmit}
           validationErrors={loaderData.errors}
         >
-          <TextField isRequired name="email" type="email">
-            <Label>E-Mail</Label>
-            <Input />
-            <Description>
+          <UI.TextField isRequired name="email" type="email">
+            <UI.Label>E-Mail</UI.Label>
+            <UI.Input />
+            <UI.Description>
               Deine für die Tipprunde genutzte E-Mail Adresse.
-            </Description>
-            <FieldError />
-          </TextField>
-          <Button
+            </UI.Description>
+            <UI.FieldError />
+          </UI.TextField>
+          <UI.Button
             variant="solid"
             color="accent"
             className="self-start"
             type="submit"
           >
             Code anfordern
-          </Button>
+          </UI.Button>
         </Form>
-      </CardContent>
-    </Card>
+      </UI.CardContent>
+    </UI.Card>
   );
 }

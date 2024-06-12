@@ -2,18 +2,7 @@ import { type LoaderFunctionArgs, json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import clsx from 'clsx';
 import { Fragment } from 'react/jsx-runtime';
-import {
-  Button,
-  Cell,
-  Column,
-  HoverBox,
-  HoverBoxContent,
-  Icon,
-  Row,
-  Table,
-  TableBody,
-  TableHeader,
-} from '#components/ui';
+import UI from '#components/ui';
 import { requireChampionship } from '#utils/app/foh/championships.server';
 import { getCurrentTips } from '#utils/app/foh/current-tips.server';
 import { db } from '#utils/db.server';
@@ -44,30 +33,30 @@ export default function RankingRoute() {
           {championship.completed ? 'Abschlusstabelle' : 'Aktuelle Tabelle'}
         </h2>
       </div>
-      <Table aria-labelledby="tableLabel" className="font-semibold">
-        <TableHeader>
-          <Column className="text-right">Platz</Column>
-          <Column className="text-left">Name</Column>
+      <UI.Table aria-labelledby="tableLabel" className="font-semibold">
+        <UI.TableHeader>
+          <UI.Column className="text-right">Platz</UI.Column>
+          <UI.Column className="text-left">Name</UI.Column>
           {championship.extraPointsPublished ? (
             <>
-              <Column>
+              <UI.Column>
                 <span className="hidden sm:inline">Zusatzpunkte</span>
                 <span className="sm:hidden">Zusatzpkt</span>
-              </Column>
-              <Column>
+              </UI.Column>
+              <UI.Column>
                 <span className="hidden sm:inline">Gesamtpunkte</span>
                 <span className="sm:hidden">Gesamt</span>
-              </Column>
+              </UI.Column>
             </>
           ) : (
-            <Column>Punkte</Column>
+            <UI.Column>Punkte</UI.Column>
           )}
 
           {!championship.completed && currentTips.length > 0 && (
-            <Column className="text-center md:px-2">Tipps</Column>
+            <UI.Column className="text-center md:px-2">Tipps</UI.Column>
           )}
-        </TableHeader>
-        <TableBody>
+        </UI.TableHeader>
+        <UI.TableBody>
           {ranks.map((player, ix) => {
             const rank =
               ix === 0
@@ -76,25 +65,27 @@ export default function RankingRoute() {
                   ? `${player.rank}.`
                   : '';
             return (
-              <Row key={player.id}>
-                <Cell className="text-right">{rank}</Cell>
-                <Cell className="w-full" role="rowheader">
+              <UI.Row key={player.id}>
+                <UI.Cell className="text-right">{rank}</UI.Cell>
+                <UI.Cell className="w-full" role="rowheader">
                   {player.user.name}
-                </Cell>
+                </UI.Cell>
                 {championship.extraPointsPublished && (
-                  <Cell className="text-center">{player.extraPoints}</Cell>
+                  <UI.Cell className="text-center">
+                    {player.extraPoints}
+                  </UI.Cell>
                 )}
-                <Cell className="text-center">{player.totalPoints}</Cell>
+                <UI.Cell className="text-center">{player.totalPoints}</UI.Cell>
                 {!championship.completed && currentTips.length > 0 && (
-                  <Cell>
-                    <HoverBox>
-                      <Button variant="trigger">
-                        <Icon
+                  <UI.Cell>
+                    <UI.HoverBox>
+                      <UI.Button variant="trigger">
+                        <UI.Icon
                           className="text-app-subtle"
                           name="lucide/calendar"
                         />
-                      </Button>
-                      <HoverBoxContent>
+                      </UI.Button>
+                      <UI.HoverBoxContent>
                         <div className="grid w-[248px] grid-cols-[1fr_repeat(2,_auto)] pb-2 text-sm">
                           <div className="col-span-2 border-default border-b py-2 pl-2 font-semibold">
                             Tipps von {player.user.name}
@@ -146,15 +137,15 @@ export default function RankingRoute() {
                             );
                           })}
                         </div>
-                      </HoverBoxContent>
-                    </HoverBox>
-                  </Cell>
+                      </UI.HoverBoxContent>
+                    </UI.HoverBox>
+                  </UI.Cell>
                 )}
-              </Row>
+              </UI.Row>
             );
           })}
-        </TableBody>
-      </Table>
+        </UI.TableBody>
+      </UI.Table>
     </div>
   );
 }

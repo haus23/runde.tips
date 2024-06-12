@@ -4,8 +4,9 @@ import { type Key, Menu, MenuItem, MenuTrigger } from 'react-aria-components';
 import { twMerge } from 'tailwind-merge';
 import { includes } from '#utils/misc';
 import { type ColorScheme, useTheme } from '#utils/theme/theme';
-import { Button, Icon, type IconName } from './ui';
+import UI from './ui';
 import { Popover } from './ui/popover/popover';
+import type { IconName } from './ui/types';
 
 const colorSchemes: {
   name: ColorScheme | 'system';
@@ -40,33 +41,33 @@ export function ThemeMenu() {
 
   return (
     <MenuTrigger>
-      <Button
+      <UI.Button
         variant="toolbar"
         className={cx(
-          'aria-expanded:opacity-70 overflow-clip',
+          'overflow-clip aria-expanded:opacity-70',
           mode === 'client' && 'text-app-subtle',
         )}
       >
         <div className="relative size-5">
-          <Icon
+          <UI.Icon
             name="lucide/moon"
             className={twMerge(
               'absolute inset-0 origin-[50%_100px] rotate-90 transform transition-transform duration-300',
               theme.colorScheme === 'dark' && 'rotate-0',
             )}
           />
-          <Icon
+          <UI.Icon
             name="lucide/sun"
             className={twMerge(
-              'absolute inset-0 origin-[50%_100px] -rotate-90 transform transition-transform duration-300',
+              '-rotate-90 absolute inset-0 origin-[50%_100px] transform transition-transform duration-300',
               theme.colorScheme === 'light' && 'rotate-0',
             )}
           />
         </div>
-      </Button>
+      </UI.Button>
       <Popover placement="bottom">
         <Menu
-          className="p-1.5 w-[180px]"
+          className="w-[180px] p-1.5"
           selectionMode="single"
           selectedKeys={selectedColorScheme}
           onAction={handleAction}
@@ -77,7 +78,7 @@ export function ThemeMenu() {
               id={cs.name}
               className={({ isFocused, isSelected }) =>
                 twMerge(
-                  'flex items-center justify-between text-sm gap-4 select-none py-2 pl-3 pr-1 rounded-lg outline-none transition-colors',
+                  'flex select-none items-center justify-between gap-4 rounded-lg py-2 pr-1 pl-3 text-sm outline-none transition-colors',
                   isFocused && 'bg-content-hover',
                   isSelected && 'text-selected',
                 )
@@ -85,8 +86,8 @@ export function ThemeMenu() {
             >
               {({ isSelected }) => (
                 <>
-                  <Icon name={cs.icon}>{cs.label}</Icon>
-                  {isSelected && <Icon name="lucide/check" aria-hidden />}
+                  <UI.Icon name={cs.icon}>{cs.label}</UI.Icon>
+                  {isSelected && <UI.Icon name="lucide/check" aria-hidden />}
                 </>
               )}
             </MenuItem>
