@@ -1,6 +1,36 @@
 # @tipprunde/www
 
 
+## v0.5.4
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.5.3...v0.5.4)
+
+### 🩹 Fixes
+
+- Remove theme-switch from header. ([443cb4a](https://github.com/haus23/runde.tips/commit/443cb4a))
+- Remove all layout related stylings from doc root. ([1df7b91](https://github.com/haus23/runde.tips/commit/1df7b91))
+- Simplify layout. Resolves #139 ([#139](https://github.com/haus23/runde.tips/issues/139))
+- Simplify the popovers. Resolves #129 ([#129](https://github.com/haus23/runde.tips/issues/129))
+
+### 💅 Refactors
+
+- Bring back theme switch to manager header ([685de54](https://github.com/haus23/runde.tips/commit/685de54))
+- Proof of concept, export provider first. ([806090d](https://github.com/haus23/runde.tips/commit/806090d))
+- Export types differently ([c04628d](https://github.com/haus23/runde.tips/commit/c04628d))
+- Use the new default export. ([cdf307d](https://github.com/haus23/runde.tips/commit/cdf307d))
+
+### 🏡 Chore
+
+- **dx:** Update biome ([2ecebd0](https://github.com/haus23/runde.tips/commit/2ecebd0))
+- **dx:** Update pnpm. ([d6a6bbc](https://github.com/haus23/runde.tips/commit/d6a6bbc))
+- Update typings ([fe063f2](https://github.com/haus23/runde.tips/commit/fe063f2))
+- Update dev toolchain ([51bc479](https://github.com/haus23/runde.tips/commit/51bc479))
+- Patch update prod deps ([c6bd913](https://github.com/haus23/runde.tips/commit/c6bd913))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.5.3
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.5.2...v0.5.3)
