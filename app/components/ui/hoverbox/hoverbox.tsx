@@ -9,7 +9,6 @@ import {
 import {
   ButtonContext,
   Dialog,
-  OverlayArrow,
   PopoverContext,
   Provider,
 } from 'react-aria-components';
@@ -25,18 +24,6 @@ export function HoverBoxContent({ children }: { children: ReactNode }) {
 
   return (
     <Popover placement="left" isNonModal>
-      <OverlayArrow className="group">
-        <svg
-          role="img"
-          aria-label="Kleiner Pfeil"
-          width={12}
-          height={12}
-          viewBox="0 0 12 12"
-          className="group-placement-left:-rotate-90 block fill-popover stroke-1 stroke-border-default group-placement-bottom:rotate-180 group-placement-right:rotate-90"
-        >
-          <path d="M0 0 L6 6 L12 0" />
-        </svg>
-      </OverlayArrow>
       <Dialog className="focus:outline-none" aria-label="Aktuelle Tips">
         <div {...hoverProps}>{children}</div>
       </Dialog>

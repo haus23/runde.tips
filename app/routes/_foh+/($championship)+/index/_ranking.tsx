@@ -95,14 +95,11 @@ export default function RankingRoute() {
                         />
                       </Button>
                       <HoverBoxContent>
-                        <div className="grid w-[240px] grid-cols-[1fr_repeat(2,_auto)] pb-2 text-sm">
-                          <div className="border-default border-b py-2 pl-2">
-                            Spiel
+                        <div className="grid w-[248px] grid-cols-[1fr_repeat(2,_auto)] pb-2 text-sm">
+                          <div className="col-span-2 border-default border-b py-2 pl-2 font-semibold">
+                            Tipps von {player.user.name}
                           </div>
-                          <div className="border-default border-b p-2 text-center">
-                            Tipp
-                          </div>
-                          <div className="border-default border-b p-2 text-center">
+                          <div className="border-default border-b p-2 text-center font-semibold">
                             Pkt
                           </div>
                           {currentTips.map((m) => {
