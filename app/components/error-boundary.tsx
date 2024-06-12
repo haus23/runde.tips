@@ -5,7 +5,7 @@ import {
   useParams,
   useRouteError,
 } from '@remix-run/react';
-import { Icon, Link } from './ui';
+import UI from '#components/ui';
 
 type StatusHandler = (info: {
   error: ErrorResponse;
@@ -28,7 +28,7 @@ export function getErrorMessage(error: unknown) {
 export function GeneralErrorBoundary({
   defaultStatusHandler = ({ error }) => (
     <>
-      <Icon name="lucide/frown" className="size-40 text-error" />{' '}
+      <UI.Icon name="lucide/frown" className="size-40 text-error" />
       <p className="text-xl">
         {error.status} {error.data}
       </p>
@@ -37,7 +37,7 @@ export function GeneralErrorBoundary({
   statusHandlers,
   unexpectedErrorHandler = (error) => (
     <>
-      <Icon name="lucide/angry" className="size-40 text-error" />
+      <UI.Icon name="lucide/angry" className="size-40 text-error" />
       <p className="text-xl">{getErrorMessage(error)}</p>
     </>
   ),
@@ -51,7 +51,7 @@ export function GeneralErrorBoundary({
   const params = useParams();
 
   return (
-    <div className="h-dvh container mx-auto flex flex-col items-center justify-center gap-y-8">
+    <div className="container mx-auto flex h-dvh flex-col items-center justify-center gap-y-8">
       {isRouteErrorResponse(error)
         ? (statusHandlers?.[error.status] ?? defaultStatusHandler)({
             error,
@@ -61,12 +61,12 @@ export function GeneralErrorBoundary({
       {pathname === '/' ? (
         <p className="block text-xl">Bitte Micha informieren!</p>
       ) : (
-        <Link
+        <UI.Link
           href="/"
-          className="block text-xl px-4 py-1.5 underline underline-offset-4"
+          className="block px-4 py-1.5 text-xl underline underline-offset-4"
         >
           Zur Startseite
-        </Link>
+        </UI.Link>
       )}
     </div>
   );

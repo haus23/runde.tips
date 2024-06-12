@@ -8,9 +8,9 @@ import {
   useContextProps,
 } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
-import { Icon } from '..';
 import { focusRingStyles } from '../base-styles';
 import { cardStyles } from '../card/card';
+import { Icon } from '../icon/icon';
 import { pickChildren } from '../utils';
 
 export const collapsibleStyles = tv({
@@ -18,7 +18,7 @@ export const collapsibleStyles = tv({
   slots: {
     header: [
       focusRingStyles.base,
-      'group w-full flex items-center justify-between rounded-t-xl hover:bg-content-hover cursor-default [&_svg]:selected:-rotate-90',
+      'group [&_svg]:selected:-rotate-90 flex w-full cursor-default items-center justify-between rounded-t-xl hover:bg-content-hover',
     ],
   },
   variants: {

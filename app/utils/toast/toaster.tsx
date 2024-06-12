@@ -1,7 +1,7 @@
 import { useRouteLoaderData } from '@remix-run/react';
 import { useEffect } from 'react';
 import { Toaster } from 'sonner';
-import { Icon } from '#components/ui';
+import UI from '#components/ui';
 import type { loader } from '#root';
 import { toast } from './toast.client';
 
@@ -32,9 +32,9 @@ function _Toaster() {
         },
       }}
       icons={{
-        success: <Icon className="text-accent" name="lucide/check" />,
-        info: <Icon className="text-app" name="lucide/info" />,
-        error: <Icon className="text-error" name="lucide/circle-alert" />,
+        success: <UI.Icon className="text-accent" name="lucide/check" />,
+        info: <UI.Icon className="text-app" name="lucide/info" />,
+        error: <UI.Icon className="text-error" name="lucide/circle-alert" />,
       }}
     />
   );

@@ -7,7 +7,7 @@ import {
   Modal,
   ModalOverlay,
 } from 'react-aria-components';
-import { Button, Icon } from '#components/ui';
+import UI from '#components/ui';
 import { useChampionship } from '#utils/app/foh/use-championship';
 
 export function ChampionshipSelect() {
@@ -37,10 +37,10 @@ export function ChampionshipSelect() {
 
   return (
     <DialogTrigger isOpen={open} onOpenChange={setOpen}>
-      <Button variant="toolbar" className="gap-x-1 text-app-subtle">
-        <Icon name="lucide/search" />
+      <UI.Button variant="toolbar" className="gap-x-1 text-app-subtle">
+        <UI.Icon name="lucide/search" />
         <span className="sr-only text-sm sm:not-sr-only">Turnier</span>
-      </Button>
+      </UI.Button>
       <ModalOverlay
         className="fixed inset-0 z-20 backdrop-blur-sm"
         isDismissable
@@ -56,7 +56,7 @@ export function ChampionshipSelect() {
               <Command.List className="border-default border-t p-2">
                 <Command.Empty>
                   <div className="flex items-center justify-center gap-x-2 px-4 py-10 text-app-subtle">
-                    <Icon name="lucide/folder" aria-hidden="true" />
+                    <UI.Icon name="lucide/folder" aria-hidden="true" />
                     <p className="font-semibold">
                       Kein Turnier passt zu der Suche.
                     </p>
@@ -75,7 +75,7 @@ export function ChampionshipSelect() {
                   >
                     <span>{c.name}</span>
                     {currentChampionship?.id === c.id && (
-                      <Icon name="lucide/check" />
+                      <UI.Icon name="lucide/check" />
                     )}
                   </Command.Item>
                 ))}

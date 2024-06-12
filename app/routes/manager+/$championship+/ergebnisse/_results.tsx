@@ -7,28 +7,7 @@ import { useFetcher, useLoaderData } from '@remix-run/react';
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
 import { setMatchResults } from '#api/use-cases/set-match-results';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Cell,
-  Checkbox,
-  Column,
-  Divider,
-  FieldError,
-  Input,
-  Row,
-  Tab,
-  TabGroup,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Table,
-  TableBody,
-  TableHeader,
-  TextField,
-} from '#components/ui';
+import UI from '#components/ui';
 import { useChampionship } from '#utils/app/manager/use-championship';
 import { requireAdmin } from '#utils/auth/auth.server';
 import { db } from '#utils/db.server';
@@ -178,56 +157,59 @@ export default function ResultsRoute() {
 
   return (
     <fetcher.Form ref={frm} method="post" onSubmit={handleSubmit}>
-      <Card>
-        <CardHeader className="sticky top-0 z-10 flex items-center justify-between rounded-t-xl bg-content text-base">
+      <UI.Card>
+        <UI.CardHeader className="sticky top-0 z-10 flex items-center justify-between rounded-t-xl bg-content text-base">
           <span className="text-xl">Ergebnisse</span>
-          <Button
+          <UI.Button
             variant="solid"
             color="accent"
             isDisabled={!results.some((r) => r.shouldCalculate)}
             type="submit"
           >
             Speichern
-          </Button>
-        </CardHeader>
-        <Divider />
-        <CardContent className="px-0 sm:px-4">
-          <TabGroup selectedIndex={selectedRoundIx} onChange={handleTabChange}>
-            <TabList label="Runde">
+          </UI.Button>
+        </UI.CardHeader>
+        <UI.Divider />
+        <UI.CardContent className="px-0 sm:px-4">
+          <UI.TabGroup
+            selectedIndex={selectedRoundIx}
+            onChange={handleTabChange}
+          >
+            <UI.TabList label="Runde">
               {rounds.map((r) => (
-                <Tab key={r.id}>{r.nr}</Tab>
+                <UI.Tab key={r.id}>{r.nr}</UI.Tab>
               ))}
-            </TabList>
-            <TabPanels>
+            </UI.TabList>
+            <UI.TabPanels>
               {rounds.map((r) => (
-                <TabPanel key={r.id}>
-                  <Table aria-label={`Spiele der Runde ${r.nr}`}>
-                    <TableHeader>
-                      <Column className="text-right">Nr</Column>
-                      <Column className="w-full text-left">Spiel</Column>
-                      <Column className="sr-only">Berechnen</Column>
-                      <Column>Ergebnis</Column>
-                    </TableHeader>
-                    <TableBody>
+                <UI.TabPanel key={r.id}>
+                  <UI.Table aria-label={`Spiele der Runde ${r.nr}`}>
+                    <UI.TableHeader>
+                      <UI.Column className="text-right">Nr</UI.Column>
+                      <UI.Column className="w-full text-left">Spiel</UI.Column>
+                      <UI.Column className="sr-only">Berechnen</UI.Column>
+                      <UI.Column>Ergebnis</UI.Column>
+                    </UI.TableHeader>
+                    <UI.TableBody>
                       {results
                         .filter((m) => m.roundId === r.id)
                         .map((match) => (
-                          <Row key={match.id}>
-                            <Cell className="text-right">{match.nr}</Cell>
-                            <Cell role="rowheader">
+                          <UI.Row key={match.id}>
+                            <UI.Cell className="text-right">{match.nr}</UI.Cell>
+                            <UI.Cell role="rowheader">
                               <span className="hidden sm:block">{`${match.hometeam?.name} - ${match.awayteam?.name}`}</span>
                               <span className="block sm:hidden">{`${match.hometeam?.shortname} - ${match.awayteam?.shortname}`}</span>
-                            </Cell>
-                            <Cell className="pr-0 md:pr-0">
-                              <Checkbox
+                            </UI.Cell>
+                            <UI.Cell className="pr-0 md:pr-0">
+                              <UI.Checkbox
                                 isSelected={match.shouldCalculate}
                                 onChange={(dirty) =>
                                   toggleShouldCalculate(match.id, dirty)
                                 }
                               />
-                            </Cell>
-                            <Cell className="text-center">
-                              <TextField
+                            </UI.Cell>
+                            <UI.Cell className="text-center">
+                              <UI.TextField
                                 validationBehavior="aria"
                                 value={match.currentResult}
                                 onChange={(result) =>
@@ -239,22 +221,22 @@ export default function ResultsRoute() {
                                 orientation="horizontal"
                                 isInvalid={!isValid(match.currentResult)}
                               >
-                                <Input className={'text-center'} />
-                                <FieldError className="-right-2.5 absolute top-1/3">
+                                <UI.Input className={'text-center'} />
+                                <UI.FieldError className="-right-2.5 absolute top-1/3">
                                   *
-                                </FieldError>
-                              </TextField>
-                            </Cell>
-                          </Row>
+                                </UI.FieldError>
+                              </UI.TextField>
+                            </UI.Cell>
+                          </UI.Row>
                         ))}
-                    </TableBody>
-                  </Table>
-                </TabPanel>
+                    </UI.TableBody>
+                  </UI.Table>
+                </UI.TabPanel>
               ))}
-            </TabPanels>
-          </TabGroup>
-        </CardContent>
-      </Card>
+            </UI.TabPanels>
+          </UI.TabGroup>
+        </UI.CardContent>
+      </UI.Card>
     </fetcher.Form>
   );
 }

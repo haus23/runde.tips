@@ -2,18 +2,7 @@ import { type ActionFunctionArgs, json } from '@remix-run/node';
 import { useRef, useState } from 'react';
 import { Form } from 'react-aria-components';
 import { z } from 'zod';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Description,
-  Divider,
-  FieldError,
-  Input,
-  Label,
-  TextField,
-} from '#components/ui';
+import UI from '#components/ui';
 import { slugify } from '#utils/misc.js';
 
 export const handle = { pageTitle: 'Mannschaften / Vereine' };
@@ -67,22 +56,22 @@ export default function TeamsRoute() {
   }
 
   return (
-    <Card>
-      <CardHeader>Neue Mannschaft</CardHeader>
-      <Divider />
-      <CardContent className="px-0 sm:px-4">
+    <UI.Card>
+      <UI.CardHeader>Neue Mannschaft</UI.CardHeader>
+      <UI.Divider />
+      <UI.CardContent className="px-0 sm:px-4">
         <Form method="post" className="flex flex-col gap-y-4">
-          <TextField
+          <UI.TextField
             isRequired
             value={team.name}
             onChange={changeField('name')}
             onBlur={inferShortname}
           >
-            <Label>Bezeichnung</Label>
-            <Input type="text" name="name" />
-            <FieldError />
-          </TextField>
-          <TextField
+            <UI.Label>Bezeichnung</UI.Label>
+            <UI.Input type="text" name="name" />
+            <UI.FieldError />
+          </UI.TextField>
+          <UI.TextField
             isRequired
             value={team.shortname}
             onInput={() => {
@@ -91,11 +80,11 @@ export default function TeamsRoute() {
             onChange={changeField('shortname')}
             onBlur={inferSlug}
           >
-            <Label>Kurzname</Label>
-            <Input type="text" name="shortname" />
-            <FieldError />
-          </TextField>
-          <TextField
+            <UI.Label>Kurzname</UI.Label>
+            <UI.Input type="text" name="shortname" />
+            <UI.FieldError />
+          </UI.TextField>
+          <UI.TextField
             isRequired
             pattern="[a-z0-9\-]+"
             value={team.slug}
@@ -104,20 +93,20 @@ export default function TeamsRoute() {
             }}
             onChange={changeField('slug')}
           >
-            <Label>Kennung</Label>
-            <Input type="text" name="slug" />
-            <Description hideOnError={false}>
+            <UI.Label>Kennung</UI.Label>
+            <UI.Input type="text" name="slug" />
+            <UI.Description hideOnError={false}>
               Gültige Zeichen: Kleinbuchstaben, Ziffern und der Bindestrich.
-            </Description>
-            <FieldError />
-          </TextField>
+            </UI.Description>
+            <UI.FieldError />
+          </UI.TextField>
           <div>
-            <Button variant="solid" color="accent" type="submit">
+            <UI.Button variant="solid" color="accent" type="submit">
               Speichern
-            </Button>
+            </UI.Button>
           </div>
         </Form>
-      </CardContent>
-    </Card>
+      </UI.CardContent>
+    </UI.Card>
   );
 }

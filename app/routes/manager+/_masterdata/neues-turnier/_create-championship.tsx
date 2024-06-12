@@ -5,18 +5,7 @@ import { useActionData, useSubmit } from '@remix-run/react';
 import type { FormEvent } from 'react';
 import { Form } from 'react-aria-components';
 import { z } from 'zod';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Description,
-  Divider,
-  FieldError,
-  Input,
-  Label,
-  TextField,
-} from '#components/ui';
+import UI from '#components/ui';
 import { jsonWithToast } from '#utils/toast/toast.server.js';
 
 const schema = z.object({
@@ -71,10 +60,10 @@ export default function CreateChampionshipRoute() {
     ) as Record<string, string[]>);
 
   return (
-    <Card>
-      <CardHeader id="tableLabel">Neues Turnier</CardHeader>
-      <Divider />
-      <CardContent className="px-0 sm:px-4">
+    <UI.Card>
+      <UI.CardHeader id="tableLabel">Neues Turnier</UI.CardHeader>
+      <UI.Divider />
+      <UI.CardContent className="px-0 sm:px-4">
         <div>
           <Form
             validationErrors={validationErrors}
@@ -83,38 +72,38 @@ export default function CreateChampionshipRoute() {
             id={form.id}
             onSubmit={handleSubmit}
           >
-            <TextField>
-              <Label>Bezeichnung</Label>
-              <Input
+            <UI.TextField>
+              <UI.Label>Bezeichnung</UI.Label>
+              <UI.Input
                 required
                 type="text"
                 name={fields.name.name}
                 placeholder="Hinrunde 23/24 oder EM 2024"
               />
-              <FieldError />
-            </TextField>
-            <TextField isRequired pattern="[a-z]{2}\d{4}">
-              <Label>Kennung</Label>
-              <Input type="text" name={fields.slug.name} />
-              <Description hideOnError={false}>
+              <UI.FieldError />
+            </UI.TextField>
+            <UI.TextField isRequired pattern="[a-z]{2}\d{4}">
+              <UI.Label>Kennung</UI.Label>
+              <UI.Input type="text" name={fields.slug.name} />
+              <UI.Description hideOnError={false}>
                 Abkürzung in der Form hr2324 (Zwei Kleinbuchstaben und vier
                 Ziffern)
-              </Description>
-              <FieldError />
-            </TextField>
-            <TextField isRequired>
-              <Label>Nummer</Label>
-              <Input type="number" name={fields.nr.name} />
-              <FieldError />
-            </TextField>
+              </UI.Description>
+              <UI.FieldError />
+            </UI.TextField>
+            <UI.TextField isRequired>
+              <UI.Label>Nummer</UI.Label>
+              <UI.Input type="number" name={fields.nr.name} />
+              <UI.FieldError />
+            </UI.TextField>
             <div>
-              <Button variant="solid" color="accent" type="submit">
+              <UI.Button variant="solid" color="accent" type="submit">
                 Anlegen
-              </Button>
+              </UI.Button>
             </div>
           </Form>
         </div>
-      </CardContent>
-    </Card>
+      </UI.CardContent>
+    </UI.Card>
   );
 }

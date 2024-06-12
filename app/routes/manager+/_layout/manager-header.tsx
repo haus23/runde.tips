@@ -7,7 +7,7 @@ import {
   ModalOverlay,
 } from 'react-aria-components';
 import { ThemeMenu } from '#components/theme-menu';
-import { Button, Icon } from '#components/ui';
+import UI from '#components/ui';
 import { usePageTitle } from '#utils/app/use-page-title';
 import { ManagerNav } from './manager-nav';
 
@@ -39,9 +39,9 @@ export function ManagerHeader() {
           isOpen={isOpen}
           onOpenChange={(isOpen) => setTimeout(() => setOpen(isOpen), 50)}
         >
-          <Button variant="toolbar" className="flex md:hidden">
-            <Icon name="lucide/menu" />
-          </Button>
+          <UI.Button variant="toolbar" className="flex md:hidden">
+            <UI.Icon name="lucide/menu" />
+          </UI.Button>
           <ModalOverlay
             className="fixed inset-0 z-20 backdrop-blur-sm"
             isDismissable
@@ -51,13 +51,13 @@ export function ManagerHeader() {
                 {({ close }) => (
                   <>
                     <ManagerNav />
-                    <Button
+                    <UI.Button
                       onPress={close}
                       variant="toolbar"
                       className="absolute top-2 right-2 bg-popover "
                     >
-                      <Icon name="lucide/x" />
-                    </Button>
+                      <UI.Icon name="lucide/x" />
+                    </UI.Button>
                   </>
                 )}
               </Dialog>

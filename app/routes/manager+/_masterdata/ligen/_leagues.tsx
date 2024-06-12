@@ -4,13 +4,7 @@ import { type ActionFunctionArgs, json } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
 import { useRef } from 'react';
 import { z } from 'zod';
-import {
-  Button,
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-  Divider,
-} from '#components/ui';
+import UI from '#components/ui';
 export const handle = { pageTitle: 'Ligen / Runden' };
 
 const schema = z.object({
@@ -57,10 +51,10 @@ export default function LeaguesRoute() {
   }
 
   return (
-    <Collapsible defaultOpen>
-      <CollapsibleTrigger>Neue Liga</CollapsibleTrigger>
-      <Divider />
-      <CollapsibleContent className="px-0 sm:px-4">
+    <UI.Collapsible defaultOpen>
+      <UI.CollapsibleTrigger>Neue Liga</UI.CollapsibleTrigger>
+      <UI.Divider />
+      <UI.CollapsibleContent className="px-0 sm:px-4">
         <Form
           id={form.id}
           onSubmit={form.onSubmit}
@@ -95,12 +89,12 @@ export default function LeaguesRoute() {
             <div>{fields.slug.errors}</div>
           </div>
           <div>
-            <Button variant="solid" color="accent" type="submit">
+            <UI.Button variant="solid" color="accent" type="submit">
               Speichern
-            </Button>
+            </UI.Button>
           </div>
         </Form>
-      </CollapsibleContent>
-    </Collapsible>
+      </UI.CollapsibleContent>
+    </UI.Collapsible>
   );
 }
