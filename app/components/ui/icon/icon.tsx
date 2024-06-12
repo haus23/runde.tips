@@ -5,7 +5,6 @@ import type { IconName } from './icons/name.js';
 import iconsHref from './icons/sprite.svg';
 
 export { iconsHref };
-export type { IconName };
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;
@@ -25,7 +24,7 @@ export function Icon({ name, className, children, ...props }: IconProps) {
       {...props}
       role="img"
       aria-label={`${name} icon`}
-      className={twMerge('size-5 inline self-center', className)}
+      className={twMerge('inline size-5 self-center', className)}
     >
       <use href={`${iconsHref}#${name}`} />
     </svg>
