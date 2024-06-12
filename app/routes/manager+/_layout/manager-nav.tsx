@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { Form } from 'react-aria-components';
 import { Logo } from '#components/logo';
 import { Icon, Link, NavLink } from '#components/ui';
@@ -8,7 +7,7 @@ export function ManagerNav({ className }: { className?: string }) {
   const { currentChampionship } = useChampionship();
 
   return (
-    <div className={clsx('flex flex-col', className)}>
+    <div className="flex grow flex-col overflow-y-auto">
       <div className="flex flex-col p-2">
         <Link href="/">
           <Logo />

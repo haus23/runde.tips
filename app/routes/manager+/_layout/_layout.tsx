@@ -18,11 +18,13 @@ export default function ManagerLayout() {
   const { championships } = useLoaderData<typeof loader>();
   return (
     <ChampionshipProvider championships={championships}>
-      <div className="grid h-dvh grid-cols-[auto_1fr]">
-        <ManagerNav className="w-0 overflow-y-auto border-default border-r bg-app-subtle shadow-medium md:flex md:w-52" />
-        <div className="grid grid-rows-[56px_1fr] overflow-y-auto px-2 md:px-4">
+      <div className="relative isolate flex min-h-svh w-full md:flex-col">
+        <div className="fixed inset-y-0 left-0 hidden w-52 border-default border-r bg-app-subtle shadow-medium md:flex">
+          <ManagerNav />
+        </div>
+        <div className="flex flex-1 flex-col md:pl-52">
           <ManagerHeader />
-          <div className="pt-2 pb-4">
+          <div className="p-2 pb-4 md:px-4">
             <Outlet />
           </div>
         </div>

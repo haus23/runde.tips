@@ -32,7 +32,7 @@ export function ManagerHeader() {
   }, []);
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between p-2 pt-3 md:px-4">
       <div className="flex items-center gap-x-2">
         <DialogTrigger
           isOpen={isOpen}
@@ -45,15 +45,15 @@ export function ManagerHeader() {
             className="fixed inset-0 z-20 backdrop-blur-sm"
             isDismissable
           >
-            <Modal className="flex h-dvh w-52 bg-popover">
+            <Modal className="relative flex h-svh max-w-64 bg-popover">
               <Dialog className="flex grow focus:outline-none">
                 {({ close }) => (
                   <>
-                    <ManagerNav className="grow overflow-y-auto" />
+                    <ManagerNav />
                     <Button
                       onPress={close}
                       variant="toolbar"
-                      className="absolute top-2 left-56 bg-popover"
+                      className="absolute top-2 right-2 bg-popover "
                     >
                       <Icon name="lucide/x" />
                     </Button>
