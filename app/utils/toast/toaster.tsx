@@ -21,7 +21,6 @@ function _Toaster() {
     <Toaster
       position="top-right"
       gap={6}
-      duration={20000}
       className="sm:-mt-2 mr-2 xl:mr-0"
       toastOptions={{
         unstyled: true,
