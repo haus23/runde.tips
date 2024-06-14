@@ -42,6 +42,7 @@ export default function SyncRoute() {
   for (const legacyChampionship of legacyChampionships) {
     const current = championships.find((c) => c.slug === legacyChampionship.id);
     legacyChampionship.synced = !!current;
+    legacyChampionship.localCompleted = current?.completed || false;
   }
 
   function syncChmpionship(
@@ -164,13 +165,13 @@ export default function SyncRoute() {
                   <Cell className="w-full px-2 py-2.5 md:px-6">{lc.name}</Cell>
                   <Cell className="px-2 text-center sm:whitespace-nowrap md:px-6">
                     {lc.synced
-                      ? lc.completed
+                      ? lc.localCompleted
                         ? 'Fertig'
                         : 'Laufend'
                       : 'Nicht geladen'}
                   </Cell>
                   <Cell className="px-2 text-center md:px-6">
-                    {lc.synced && lc.completed ? (
+                    {lc.synced && lc.localCompleted ? (
                       <span>Keine</span>
                     ) : (
                       <UI.Button

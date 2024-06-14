@@ -8,7 +8,9 @@ type Championship = {
   published: boolean;
   extraPointsPublished: boolean;
   completed: boolean;
-  synced?: boolean; // MIGRATION: added optional prop used in sync code
+  // MIGRATION: added optional props used in sync code
+  synced?: boolean;
+  localCompleted?: boolean;
 };
 
 export async function getFirestoreChampionships() {
