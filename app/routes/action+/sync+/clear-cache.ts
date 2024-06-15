@@ -13,7 +13,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: '{"routes":true,"resources":[],"standings":"rr2324"}',
+    body: '{"routes":true,"resources":[],"standings":"em2024"}',
   };
 
   const invalidationResults = await fetch(
