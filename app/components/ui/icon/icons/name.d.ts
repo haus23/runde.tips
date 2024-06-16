@@ -5,6 +5,7 @@ export type IconName =
   | 'lucide/calendar'
   | 'lucide/check'
   | 'lucide/chevron-left'
+  | 'lucide/chevrons-up-down'
   | 'lucide/circle-alert'
   | 'lucide/dices'
   | 'lucide/folder-sync'

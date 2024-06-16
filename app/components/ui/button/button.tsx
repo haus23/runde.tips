@@ -8,7 +8,7 @@ import { focusRingStyles } from '../base-styles';
 
 const styles = tv({
   extend: focusRingStyles,
-  base: 'flex items-center px-4 py-2 transition pressed:scale-95 cursor-default rounded-lg font-semibold',
+  base: 'flex cursor-default items-center rounded-lg px-4 py-2 font-semibold transition pressed:scale-95',
   variants: {
     color: {
       neutral: '',
@@ -17,8 +17,9 @@ const styles = tv({
     variant: {
       solid: '',
       outline: '',
-      toolbar: 'p-2 bg-transparent border-2 rounded-xl',
-      trigger: 'px-1 py-0.5 bg-transparent rounded',
+      toolbar: 'rounded-xl border-2 bg-transparent p-2',
+      select: 'flex justify-between pressed:scale-100',
+      trigger: 'rounded bg-transparent px-1 py-0.5',
     },
     isDisabled: {
       true: 'opacity-40 forced-colors:text-[GrayText]',
@@ -28,18 +29,23 @@ const styles = tv({
     {
       variant: 'solid',
       color: 'neutral',
-      className: 'bg-component hover:bg-component-hover text-white',
+      className: 'bg-component text-white hover:bg-component-hover',
     },
     {
       variant: 'solid',
       color: 'accent',
       className:
-        'bg-component-accent hover:bg-component-accent-hover text-white',
+        'bg-component-accent text-white hover:bg-component-accent-hover',
     },
     {
       variant: 'toolbar',
       color: 'neutral',
-      className: 'hover:bg-content-hover border-default',
+      className: 'border-default hover:bg-content-hover',
+    },
+    {
+      variant: 'select',
+      color: 'neutral',
+      className: 'bg-component text-white hover:bg-component-hover',
     },
   ],
   defaultVariants: {
