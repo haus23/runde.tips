@@ -32,15 +32,15 @@ importers:
       '@react-aria/utils':
         specifier: ~3.24.1
         version: 3.24.1(react@18.3.1)
-      '@remix-run/express':
-        specifier: ~2.9.2
-        version: 2.9.2(express@4.19.2)(typescript@5.4.5)
       '@remix-run/node':
         specifier: ~2.9.2
         version: 2.9.2(typescript@5.4.5)
       '@remix-run/react':
         specifier: ~2.9.2
         version: 2.9.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
+      '@remix-run/serve':
+        specifier: ~2.9.2
+        version: 2.9.2(typescript@5.4.5)
       clsx:
         specifier: ~2.1.1
         version: 2.1.1
@@ -8450,7 +8450,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
-    optional: true
 
   '@remix-run/server-runtime@2.9.2(typescript@5.4.5)':
     dependencies:

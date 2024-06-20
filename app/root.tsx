@@ -11,8 +11,8 @@ import {
 
 import { type ReactNode, useEffect } from 'react';
 
+import { GeneralErrorBoundary } from '#components/error-boundary';
 import UI from '#components/ui';
-
 import { getUser } from '#utils/auth/auth.server';
 import { useAuthBroadcast } from '#utils/auth/user';
 import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
@@ -22,8 +22,6 @@ import { getSession } from '#utils/theme/theme.server';
 import { getToast } from '#utils/toast/toast.server';
 import { Toaster } from '#utils/toast/toaster';
 
-import clsx from 'clsx';
-import { GeneralErrorBoundary } from '#components/error-boundary';
 import styles from './styles.css?url';
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
@@ -64,7 +62,7 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="de"
-      className={clsx(theme.colorScheme, 'bg-app text-app antialiased')}
+      className={`${theme.colorScheme} bg-app text-app antialiased`}
     >
       <head>
         <meta charSet="utf-8" />
