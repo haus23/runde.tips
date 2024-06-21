@@ -53,8 +53,6 @@ model Ruleset {
   championships Championship[]
 }
 
-//  Maintanable and extandable solid implementation of the calculation API
-
 model Championship {
   id   Int    @id @default(autoincrement())
   slug String @unique
