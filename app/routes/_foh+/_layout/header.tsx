@@ -72,7 +72,7 @@ export function Header() {
       <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-2 sm:hidden">
         <DialogTrigger isOpen={isOpen} onOpenChange={setOpen}>
           <UI.Button variant="toolbar">
-            <UI.Icon name="lucide/menu" />
+            <UI.Icon name="menu" />
           </UI.Button>
           <ModalOverlay
             className="fixed inset-0 z-20 backdrop-blur-sm"
@@ -85,7 +85,7 @@ export function Header() {
                     <header className="flex items-center justify-between p-2">
                       <Logo />
                       <UI.Button variant="trigger" onPress={close}>
-                        <UI.Icon className="size-6" name="lucide/x" />
+                        <UI.Icon className="size-6" name="x" />
                       </UI.Button>
                     </header>
                     <nav className="flex flex-col gap-y-2 p-2">
@@ -95,9 +95,7 @@ export function Header() {
                             className="data-[current]:bg-content-hover hover:bg-content-hover"
                             href={`/${championshipSegment}`}
                           >
-                            <UI.Icon name="lucide/list-ordered">
-                              Tabelle
-                            </UI.Icon>
+                            <UI.Icon name="list-ordered">Tabelle</UI.Icon>
                           </UI.NavLink>
                           <UI.NavLink
                             className="data-[current]:bg-content-hover hover:bg-content-hover"
@@ -105,7 +103,7 @@ export function Header() {
                               .filter(Boolean)
                               .join('/')}`}
                           >
-                            <UI.Icon name="lucide/users">Spieler</UI.Icon>
+                            <UI.Icon name="users">Spieler</UI.Icon>
                           </UI.NavLink>
                           <UI.NavLink
                             className="data-[current]:bg-content-hover hover:bg-content-hover"
@@ -113,7 +111,7 @@ export function Header() {
                               .filter(Boolean)
                               .join('/')}`}
                           >
-                            <UI.Icon name="lucide/dices">Spiele</UI.Icon>
+                            <UI.Icon name="dices">Spiele</UI.Icon>
                           </UI.NavLink>
                         </>
                       ) : (
@@ -127,14 +125,14 @@ export function Header() {
                             href="/manager"
                             className="hover:bg-content-hover"
                           >
-                            <UI.Icon name="lucide/settings">Manager</UI.Icon>
+                            <UI.Icon name="settings">Manager</UI.Icon>
                           </UI.NavLink>
                           <Form action="/logout" method="post" className="flex">
                             <button
                               type="submit"
                               className="grow rounded-lg px-2 py-1.5 font-medium text-app-subtle text-sm hover:bg-content-hover hover:text-app focus:outline-none focus-visible:ring-2 focus-visible:ring-default focus-visible:ring-offset-2 focus-visible:ring-offset-default"
                             >
-                              <UI.Icon name="lucide/log-out">Log Out</UI.Icon>
+                              <UI.Icon name="log-out">Log Out</UI.Icon>
                             </button>
                           </Form>
                         </>
@@ -143,7 +141,7 @@ export function Header() {
                           href="/login"
                           className="data-[current]:bg-content-hover hover:bg-content-hover"
                         >
-                          <UI.Icon name="lucide/log-in">Log In</UI.Icon>
+                          <UI.Icon name="log-in">Log In</UI.Icon>
                         </UI.NavLink>
                       )}
                     </div>

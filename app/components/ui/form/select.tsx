@@ -65,7 +65,7 @@ function _Select<T extends object>({
         className="border-2 border-transparent group-data-[invalid]:border-error"
       >
         <SelectValue />
-        <Icon name="lucide/chevrons-up-down" />
+        <Icon name="chevrons-up-down" />
       </Button>
       <FieldError />
       <Popover className="min-w-[--trigger-width]">
@@ -89,7 +89,7 @@ function SelectItem(props: ListBoxItemProps) {
       {composeRenderProps(props.children, (children, { isSelected }) => (
         <div className="flex grow items-center justify-between group-selected:text-accent">
           <span>{children}</span>
-          {isSelected && <Icon name="lucide/check" />}
+          {isSelected && <Icon name="check" />}
         </div>
       ))}
     </ListBoxItem>

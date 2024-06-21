@@ -18,7 +18,7 @@ export function ManagerNav({ className }: { className?: string }) {
           href="/manager"
           className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
         >
-          <UI.Icon name="lucide/home">Dashboard</UI.Icon>
+          <UI.Icon name="home">Dashboard</UI.Icon>
         </UI.NavLink>
         {currentChampionship && (
           <>
@@ -26,31 +26,31 @@ export function ManagerNav({ className }: { className?: string }) {
               href={`/manager/${currentChampionship.slug}`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
-              <UI.Icon name="lucide/folder">Turnier</UI.Icon>
+              <UI.Icon name="folder">Turnier</UI.Icon>
             </UI.NavLink>
             <UI.NavLink
               href={`/manager/${currentChampionship.slug}/spiele`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
-              <UI.Icon name="lucide/calendar">Spiele</UI.Icon>
+              <UI.Icon name="calendar">Spiele</UI.Icon>
             </UI.NavLink>
             <UI.NavLink
               href={`/manager/${currentChampionship.slug}/tipps`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
-              <UI.Icon name="lucide/dices">Tipps</UI.Icon>
+              <UI.Icon name="dices">Tipps</UI.Icon>
             </UI.NavLink>
             <UI.NavLink
               href={`/manager/${currentChampionship.slug}/ergebnisse`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
-              <UI.Icon name="lucide/scale">Ergebnisse</UI.Icon>
+              <UI.Icon name="scale">Ergebnisse</UI.Icon>
             </UI.NavLink>
             <UI.NavLink
               href={`/manager/${currentChampionship.slug}/zusatzpunkte`}
               className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
             >
-              <UI.Icon name="lucide/smile-plus">Zusatzpunkte</UI.Icon>
+              <UI.Icon name="smile-plus">Zusatzpunkte</UI.Icon>
             </UI.NavLink>
           </>
         )}
@@ -58,7 +58,7 @@ export function ManagerNav({ className }: { className?: string }) {
           href="/manager/sync"
           className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
         >
-          <UI.Icon name="lucide/folder-sync">Synchronisierung</UI.Icon>
+          <UI.Icon name="folder-sync">Synchronisierung</UI.Icon>
         </UI.NavLink>
       </div>
       <div className="mt-4 flex flex-col">
@@ -70,31 +70,31 @@ export function ManagerNav({ className }: { className?: string }) {
             href="/manager/turniere"
             className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
           >
-            <UI.Icon name="lucide/folders">Turniere</UI.Icon>
+            <UI.Icon name="folders">Turniere</UI.Icon>
           </UI.NavLink>
           <UI.NavLink
             href="/manager/spieler"
             className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
           >
-            <UI.Icon name="lucide/users">Spieler</UI.Icon>
+            <UI.Icon name="users">Spieler</UI.Icon>
           </UI.NavLink>
           <UI.NavLink
             href="/manager/teams"
             className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
           >
-            <UI.Icon name="lucide/shield-half">Teams</UI.Icon>
+            <UI.Icon name="shield-half">Teams</UI.Icon>
           </UI.NavLink>
           <UI.NavLink
             href="/manager/ligen"
             className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
           >
-            <UI.Icon name="lucide/trophy">Ligen</UI.Icon>
+            <UI.Icon name="trophy">Ligen</UI.Icon>
           </UI.NavLink>
           <UI.NavLink
             href="/manager/regelwerke"
             className="text-sm data-[current]:bg-content-active hover:bg-content-hover"
           >
-            <UI.Icon name="lucide/pilcrow">Regelwerke</UI.Icon>
+            <UI.Icon name="pilcrow">Regelwerke</UI.Icon>
           </UI.NavLink>
         </div>
         <div className="flex flex-col border-default border-t py-2">
@@ -103,7 +103,7 @@ export function ManagerNav({ className }: { className?: string }) {
               type="submit"
               className="grow rounded-lg px-3 py-1.5 font-medium text-app-subtle text-sm hover:bg-content-hover hover:text-app focus:outline-none focus-visible:ring-2 focus-visible:ring-default focus-visible:ring-offset-2 focus-visible:ring-offset-default"
             >
-              <UI.Icon name="lucide/log-out">Log Out</UI.Icon>
+              <UI.Icon name="log-out">Log Out</UI.Icon>
             </button>
           </Form>
         </div>

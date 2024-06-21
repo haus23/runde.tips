@@ -80,10 +80,7 @@ export default function RankingRoute() {
                   <UI.Cell>
                     <UI.HoverBox>
                       <UI.Button variant="trigger">
-                        <UI.Icon
-                          className="text-app-subtle"
-                          name="lucide/calendar"
-                        />
+                        <UI.Icon className="text-app-subtle" name="calendar" />
                       </UI.Button>
                       <UI.HoverBoxContent>
                         <div className="grid w-[248px] grid-cols-[1fr_repeat(2,_auto)] pb-2 text-sm">

@@ -17,7 +17,7 @@ export function UserMenu() {
   return (
     <MenuTrigger>
       <UI.Button variant="toolbar" className="aria-expanded:opacity-70">
-        <UI.Icon name="lucide/user" />
+        <UI.Icon name="user" />
       </UI.Button>
       <Popover placement="bottom">
         <Menu className="w-[180px] p-1.5 outline-none" onAction={handleAction}>
@@ -26,14 +26,14 @@ export function UserMenu() {
               className="flex cursor-pointer select-none rounded-lg py-2 pr-1 pl-3 text-sm outline-none transition-colors data-[focused]:bg-content-hover"
               href="/manager"
             >
-              <UI.Icon name="lucide/settings">Manager</UI.Icon>
+              <UI.Icon name="settings">Manager</UI.Icon>
             </MenuItem>
           )}
           <MenuItem
             id="logout"
             className="cursor-pointer select-none rounded-lg py-2 pr-1 pl-3 text-sm outline-none transition-colors data-[focused]:bg-content-hover"
           >
-            <UI.Icon name="lucide/log-out">Log Out</UI.Icon>
+            <UI.Icon name="log-out">Log Out</UI.Icon>
           </MenuItem>
         </Menu>
       </Popover>

@@ -38,7 +38,7 @@ export function ChampionshipSelect() {
   return (
     <DialogTrigger isOpen={open} onOpenChange={setOpen}>
       <UI.Button variant="toolbar" className="gap-x-1 text-app-subtle">
-        <UI.Icon name="lucide/search" />
+        <UI.Icon name="search" />
         <span className="sr-only text-sm sm:not-sr-only">Turnier</span>
       </UI.Button>
       <ModalOverlay
@@ -56,7 +56,7 @@ export function ChampionshipSelect() {
               <Command.List className="border-default border-t p-2">
                 <Command.Empty>
                   <div className="flex items-center justify-center gap-x-2 px-4 py-10 text-app-subtle">
-                    <UI.Icon name="lucide/folder" aria-hidden="true" />
+                    <UI.Icon name="folder" aria-hidden="true" />
                     <p className="font-semibold">
                       Kein Turnier passt zu der Suche.
                     </p>
@@ -75,7 +75,7 @@ export function ChampionshipSelect() {
                   >
                     <span>{c.name}</span>
                     {currentChampionship?.id === c.id && (
-                      <UI.Icon name="lucide/check" />
+                      <UI.Icon name="check" />
                     )}
                   </Command.Item>
                 ))}

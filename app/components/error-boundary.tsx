@@ -28,7 +28,7 @@ export function getErrorMessage(error: unknown) {
 export function GeneralErrorBoundary({
   defaultStatusHandler = ({ error }) => (
     <>
-      <UI.Icon name="lucide/frown" className="size-40 text-error" />
+      <UI.Icon name="frown" className="size-40 text-error" />
       <p className="text-xl">
         {error.status} {error.data}
       </p>
@@ -37,7 +37,7 @@ export function GeneralErrorBoundary({
   statusHandlers,
   unexpectedErrorHandler = (error) => (
     <>
-      <UI.Icon name="lucide/angry" className="size-40 text-error" />
+      <UI.Icon name="angry" className="size-40 text-error" />
       <p className="text-xl">{getErrorMessage(error)}</p>
     </>
   ),

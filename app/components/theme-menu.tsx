@@ -13,9 +13,9 @@ const colorSchemes: {
   label: string;
   icon: IconName;
 }[] = [
-  { name: 'light', label: 'Hell', icon: 'lucide/sun' },
-  { name: 'dark', label: 'Dunkel', icon: 'lucide/moon' },
-  { name: 'system', label: 'System', icon: 'lucide/laptop' },
+  { name: 'light', label: 'Hell', icon: 'sun' },
+  { name: 'dark', label: 'Dunkel', icon: 'moon' },
+  { name: 'system', label: 'System', icon: 'laptop' },
 ];
 
 export function ThemeMenu() {
@@ -50,14 +50,14 @@ export function ThemeMenu() {
       >
         <div className="relative size-5">
           <UI.Icon
-            name="lucide/moon"
+            name="moon"
             className={twMerge(
               'absolute inset-0 origin-[50%_100px] rotate-90 transform transition-transform duration-300',
               theme.colorScheme === 'dark' && 'rotate-0',
             )}
           />
           <UI.Icon
-            name="lucide/sun"
+            name="sun"
             className={twMerge(
               '-rotate-90 absolute inset-0 origin-[50%_100px] transform transition-transform duration-300',
               theme.colorScheme === 'light' && 'rotate-0',
@@ -87,7 +87,7 @@ export function ThemeMenu() {
               {({ isSelected }) => (
                 <>
                   <UI.Icon name={cs.icon}>{cs.label}</UI.Icon>
-                  {isSelected && <UI.Icon name="lucide/check" aria-hidden />}
+                  {isSelected && <UI.Icon name="check" aria-hidden />}
                 </>
               )}
             </MenuItem>

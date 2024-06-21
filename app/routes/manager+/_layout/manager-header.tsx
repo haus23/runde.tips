@@ -40,7 +40,7 @@ export function ManagerHeader() {
           onOpenChange={(isOpen) => setTimeout(() => setOpen(isOpen), 50)}
         >
           <UI.Button variant="toolbar" className="flex md:hidden">
-            <UI.Icon name="lucide/menu" />
+            <UI.Icon name="menu" />
           </UI.Button>
           <ModalOverlay
             className="fixed inset-0 z-20 backdrop-blur-sm"
@@ -56,7 +56,7 @@ export function ManagerHeader() {
                       variant="toolbar"
                       className="absolute top-2 right-2 bg-popover "
                     >
-                      <UI.Icon name="lucide/x" />
+                      <UI.Icon name="x" />
                     </UI.Button>
                   </>
                 )}

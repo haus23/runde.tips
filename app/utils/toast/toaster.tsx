@@ -31,9 +31,9 @@ function _Toaster() {
         },
       }}
       icons={{
-        success: <UI.Icon className="text-accent" name="lucide/check" />,
-        info: <UI.Icon className="text-app" name="lucide/info" />,
-        error: <UI.Icon className="text-error" name="lucide/circle-alert" />,
+        success: <UI.Icon className="text-accent" name="check" />,
+        info: <UI.Icon className="text-app" name="info" />,
+        error: <UI.Icon className="text-error" name="circle-alert" />,
       }}
     />
   );

@@ -58,7 +58,7 @@ export function CollapsibleTrigger({
     >
       <>
         <span>{children}</span>
-        <Icon name="lucide/chevron-left" className="transition-transform" />
+        <Icon name="chevron-left" className="transition-transform" />
       </>
     </ToggleButton>
   );
