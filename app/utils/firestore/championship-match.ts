@@ -1,4 +1,4 @@
-import { firestore, modelConverter } from './firestore.server';
+import { firestore, modelConverter } from '../firestore.server';
 
 type Match = {
   id: string;

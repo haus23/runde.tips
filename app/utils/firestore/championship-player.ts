@@ -1,4 +1,4 @@
-import { firestore, modelConverter } from './firestore.server';
+import { firestore, modelConverter } from '../firestore.server';
 
 export type ChampionshipPlayer = {
   id: string;
