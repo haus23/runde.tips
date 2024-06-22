@@ -1,6 +1,37 @@
 # @tipprunde/www
 
 
+## v0.5.5
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.5.4...v0.5.5)
+
+### 🚀 Enhancements
+
+- Implement create championship. Resolves #150 ([#150](https://github.com/haus23/runde.tips/issues/150))
+
+### 🩹 Fixes
+
+- Sync is completed with local championship completed. Resolves #148 ([#148](https://github.com/haus23/runde.tips/issues/148))
+- Add initial select component. Resolves #151 ([#151](https://github.com/haus23/runde.tips/issues/151))
+- Align table row heights between completed und uncompleted championships. ([4837a03](https://github.com/haus23/runde.tips/commit/4837a03))
+- Align layouts. Resolves #149 ([#149](https://github.com/haus23/runde.tips/issues/149))
+- Bring back overlay arrows for the menus. ([f661b1f](https://github.com/haus23/runde.tips/commit/f661b1f))
+- Deferred the firstore loading. Resolves #145 ([#145](https://github.com/haus23/runde.tips/issues/145))
+
+### 💅 Refactors
+
+- Switch to custom server. ([cdaba69](https://github.com/haus23/runde.tips/commit/cdaba69))
+- Reveal custom server and cleanup entry files. ([0f2551e](https://github.com/haus23/runde.tips/commit/0f2551e))
+- Change icon sprite generation. Resolves #152 ([#152](https://github.com/haus23/runde.tips/issues/152))
+
+### 🏡 Chore
+
+- Update pnpm ([0018332](https://github.com/haus23/runde.tips/commit/0018332))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.5.4
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.5.3...v0.5.4)
