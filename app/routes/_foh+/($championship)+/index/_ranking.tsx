@@ -67,7 +67,7 @@ export default function RankingRoute() {
             return (
               <UI.Row key={player.id}>
                 <UI.Cell className="text-right">{rank}</UI.Cell>
-                <UI.Cell className="w-full" role="rowheader">
+                <UI.Cell className="w-full py-2.5" role="rowheader">
                   {player.user.name}
                 </UI.Cell>
                 {championship.extraPointsPublished && (
