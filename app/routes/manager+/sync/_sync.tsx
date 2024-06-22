@@ -1,6 +1,13 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
-import { json, useFetcher, useFetchers, useLoaderData } from '@remix-run/react';
+import {
+  Await,
+  defer,
+  useFetcher,
+  useFetchers,
+  useLoaderData,
+} from '@remix-run/react';
 import { nanoid } from 'nanoid';
+import { Suspense } from 'react';
 import {
   Cell,
   Column,
@@ -19,10 +26,14 @@ export const handle = { pageTitle: 'Datenabgleich' };
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await requireAdmin(request);
+  const legacyChampionshipsPromise = getFirestoreChampionships();
   const championships = await db.championship.findMany();
-  const legacyChampionships = await getFirestoreChampionships();
   const taskId = nanoid();
-  return json({ championships, legacyChampionships, taskId });
+  return defer({
+    championships,
+    legacyChampionships: legacyChampionshipsPromise,
+    taskId,
+  });
 }
 
 export default function SyncRoute() {
@@ -39,13 +50,7 @@ export default function SyncRoute() {
     (fetcher) => fetcher.state === 'submitting',
   );
 
-  for (const legacyChampionship of legacyChampionships) {
-    const current = championships.find((c) => c.slug === legacyChampionship.id);
-    legacyChampionship.synced = !!current;
-    legacyChampionship.localCompleted = current?.completed || false;
-  }
-
-  function syncChmpionship(
+  function syncChampionship(
     championship: Awaited<ReturnType<typeof getFirestoreChampionships>>[number],
   ) {
     const formData = new FormData();
@@ -145,52 +150,68 @@ export default function SyncRoute() {
           </masterData.Form>
         </UI.CollapsibleContent>
       </UI.Collapsible>
-      <UI.Card>
-        <UI.CardHeader id="tableLabel">Turnierdaten</UI.CardHeader>
-        <UI.Divider />
-        <UI.CardContent className="px-0 sm:px-4">
-          <Table className="text-sm" aria-labelledby="tableLabel">
-            <TableHeader className="bg-accent text-xs uppercase">
-              <Column className="px-2 py-2 text-right md:px-6">Nr</Column>
-              <Column className="px-2 text-left md:px-6" isRowHeader>
-                Titel
-              </Column>
-              <Column className="px-2 md:px-6">Status</Column>
-              <Column className="px-2 md:px-6">Aktion</Column>
-            </TableHeader>
-            <TableBody className="divide-y divide-default">
-              {legacyChampionships.map((lc) => (
-                <Row key={lc.id}>
-                  <Cell className="pr-2 text-end md:px-6">{lc.nr}</Cell>
-                  <Cell className="w-full px-2 py-2.5 md:px-6">{lc.name}</Cell>
-                  <Cell className="px-2 text-center sm:whitespace-nowrap md:px-6">
-                    {lc.synced
-                      ? lc.localCompleted
-                        ? 'Fertig'
-                        : 'Laufend'
-                      : 'Nicht geladen'}
-                  </Cell>
-                  <Cell className="px-2 text-center md:px-6">
-                    {lc.synced && lc.localCompleted ? (
-                      <span>Keine</span>
-                    ) : (
-                      <UI.Button
-                        onPress={() => syncChmpionship(lc)}
-                        variant="solid"
-                        color="accent"
-                        className="my-2"
-                        isDisabled={isSubmmitting}
-                      >
-                        Abgleich
-                      </UI.Button>
-                    )}
-                  </Cell>
-                </Row>
-              ))}
-            </TableBody>
-          </Table>
-        </UI.CardContent>
-      </UI.Card>
+
+      <Suspense>
+        <Await resolve={legacyChampionships}>
+          {(legacyChampionships) => (
+            <UI.Card>
+              <UI.CardHeader id="tableLabel">Turnierdaten</UI.CardHeader>
+              <UI.Divider />
+              <UI.CardContent className="px-0 sm:px-4">
+                <Table className="text-sm" aria-labelledby="tableLabel">
+                  <TableHeader className="bg-accent text-xs uppercase">
+                    <Column className="px-2 py-2 text-right md:px-6">Nr</Column>
+                    <Column className="px-2 text-left md:px-6" isRowHeader>
+                      Titel
+                    </Column>
+                    <Column className="px-2 md:px-6">Status</Column>
+                    <Column className="px-2 md:px-6">Aktion</Column>
+                  </TableHeader>
+                  <TableBody className="divide-y divide-default">
+                    {legacyChampionships.map((lc) => {
+                      const current = championships.find(
+                        (c) => c.slug === lc.id,
+                      );
+                      lc.synced = !!current;
+                      lc.localCompleted = current?.completed || false;
+                      return (
+                        <Row key={lc.id}>
+                          <Cell className="pr-2 text-end md:px-6">{lc.nr}</Cell>
+                          <Cell className="w-full px-2 py-2.5 md:px-6">
+                            {lc.name}
+                          </Cell>
+                          <Cell className="px-2 text-center sm:whitespace-nowrap md:px-6">
+                            {lc.synced
+                              ? lc.localCompleted
+                                ? 'Fertig'
+                                : 'Laufend'
+                              : 'Nicht geladen'}
+                          </Cell>
+                          <Cell className="px-2 text-center md:px-6">
+                            {lc.synced && lc.localCompleted ? (
+                              <span>Keine</span>
+                            ) : (
+                              <UI.Button
+                                onPress={() => syncChampionship(lc)}
+                                variant="solid"
+                                color="accent"
+                                className="my-2"
+                                isDisabled={isSubmmitting}
+                              >
+                                Abgleich
+                              </UI.Button>
+                            )}
+                          </Cell>
+                        </Row>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </UI.CardContent>
+            </UI.Card>
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 }
