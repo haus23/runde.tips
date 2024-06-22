@@ -1,5 +1,11 @@
 import cx from 'clsx';
-import { type Key, Menu, MenuItem, MenuTrigger } from 'react-aria-components';
+import {
+  type Key,
+  Menu,
+  MenuItem,
+  MenuTrigger,
+  OverlayArrow,
+} from 'react-aria-components';
 
 import { twMerge } from 'tailwind-merge';
 import { includes } from '#utils/misc';
@@ -65,7 +71,19 @@ export function ThemeMenu() {
           />
         </div>
       </UI.Button>
-      <Popover placement="bottom">
+      <Popover placement="bottom" offset={10} containerPadding={6}>
+        <OverlayArrow className="group">
+          <svg
+            role="img"
+            aria-label="Kleiner Pfeil"
+            width={12}
+            height={12}
+            viewBox="0 0 12 12"
+            className="group-placement-left:-rotate-90 block fill-popover stroke-1 stroke-border-default group-placement-bottom:rotate-180 group-placement-right:rotate-90"
+          >
+            <path d="M0 0 L6 6 L12 0" />
+          </svg>
+        </OverlayArrow>
         <Menu
           className="w-[180px] p-1.5"
           selectionMode="single"

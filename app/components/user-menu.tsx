@@ -1,5 +1,11 @@
 import { useSubmit } from '@remix-run/react';
-import { type Key, Menu, MenuItem, MenuTrigger } from 'react-aria-components';
+import {
+  type Key,
+  Menu,
+  MenuItem,
+  MenuTrigger,
+  OverlayArrow,
+} from 'react-aria-components';
 import { useUser } from '#utils/auth/user';
 import UI from './ui';
 import { Popover } from './ui/popover/popover';
@@ -19,7 +25,19 @@ export function UserMenu() {
       <UI.Button variant="toolbar" className="aria-expanded:opacity-70">
         <UI.Icon name="user" />
       </UI.Button>
-      <Popover placement="bottom">
+      <Popover placement="bottom" offset={10} containerPadding={6}>
+        <OverlayArrow className="group">
+          <svg
+            role="img"
+            aria-label="Kleiner Pfeil"
+            width={12}
+            height={12}
+            viewBox="0 0 12 12"
+            className="group-placement-left:-rotate-90 block fill-popover stroke-1 stroke-border-default group-placement-bottom:rotate-180 group-placement-right:rotate-90"
+          >
+            <path d="M0 0 L6 6 L12 0" />
+          </svg>
+        </OverlayArrow>
         <Menu className="w-[180px] p-1.5 outline-none" onAction={handleAction}>
           {user.role.includes('ADMIN') && (
             <MenuItem
