@@ -2,6 +2,7 @@ import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
 import { type SendTOTPOptions, TOTPStrategy } from 'remix-auth-totp';
 
+import type { User } from '@prisma/client';
 import { db } from '#utils/db.server';
 import { sendTotpWithPostmark, sendTotpWithResend } from '#utils/email.server';
 import { invariant } from '#utils/misc';
@@ -23,7 +24,7 @@ const getSession = (request: Request) =>
 export { getSession, commitSession };
 
 type AuthSessionData = {
-  userId: number;
+  sessionId: number;
 };
 
 export const authenticator = new Authenticator<AuthSessionData>(
@@ -52,36 +53,15 @@ async function sendTOTP({ email, code, magicLink }: SendTOTPOptions) {
   }
 }
 
-authenticator.use(
-  new TOTPStrategy(
-    {
-      secret: process.env.AUTH_ENCRYPTION_SECRET,
-      sendTOTP,
-      validateEmail: (email) => isKnownEmail(email),
-      totpGeneration: { period: 360, charSet: '0123456789' },
-      customErrors: {
-        invalidEmail: 'Unbekannte Email-Adresse. Wende dich an Micha.',
-        expiredTotp: 'Abgelaufener Code.',
-        invalidTotp: 'Falscher Code.',
-      },
-      maxAge: 60 * 60 * 24 * 30,
-    },
-    async ({ email }) => {
-      const user = await getUserByEmail(email);
-      return { userId: user.id };
-    },
-  ),
-);
-
 async function getUserById(id: number) {
   const user = await db.user.findUnique({ where: { id } });
   invariant(user !== null, `Unknown user id: ${id}`);
   return user;
 }
 
-export async function getUser(request: Request) {
+export async function getUser(request: Request): Promise<User | null> {
   const sessionData = await authenticator.isAuthenticated(request);
-  return sessionData ? getUserById(sessionData.userId) : null;
+  return null; // sessionData ? getUserById(sessionData.userId) : null;
 }
 
 export async function requireAdmin(request: Request) {
