@@ -17,6 +17,9 @@ importers:
       '@epic-web/cachified':
         specifier: ~5.2.0
         version: 5.2.0
+      '@epic-web/totp':
+        specifier: ~1.1.2
+        version: 1.1.2
       '@headlessui/react':
         specifier: ~2.0.4
         version: 2.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

@@ -1,11 +1,14 @@
+import { generateTOTP } from '@epic-web/totp';
+import type { User } from '@prisma/client';
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
-import { type SendTOTPOptions, TOTPStrategy } from 'remix-auth-totp';
 
-import type { User } from '@prisma/client';
-import { db } from '#utils/db.server';
-import { sendTotpWithPostmark, sendTotpWithResend } from '#utils/email.server';
-import { invariant } from '#utils/misc';
+import { db } from '#utils/db.server.ts';
+import {
+  sendTotpWithPostmark,
+  sendTotpWithResend,
+} from '#utils/email.server.ts';
+import { invariant } from '#utils/misc.ts';
 
 type AuthSessionData = {
   sessionId: number;
@@ -40,6 +43,35 @@ export async function isKnownEmail(email: string) {
   return user !== null;
 }
 
+async function sendTOTPEmail({
+  email,
+  code,
+  magicLink,
+}: { email: string; code: string; magicLink: string }) {
+  const user = await db.user.findUnique({ where: { email } });
+  invariant(user !== null, `Unknown user email: ${email}`);
+
+  try {
+    await sendTotpWithPostmark({ name: user.name, email, code, magicLink });
+  } catch {
+    await sendTotpWithResend({ name: user.name, email, code, magicLink });
+  }
+}
+
+export async function sendTOTP(request: Request, email: string) {
+  const user = await db.user.findUnique({ where: { email } });
+  invariant(user !== null, `Unknown user email: ${email}`);
+
+  const { otp } = generateTOTP({});
+
+  // Generate Magic Link
+  const url = new URL('/magic-link', new URL(request.url).origin);
+  url.searchParams.set('code', otp);
+  const magicLink = url.toString();
+
+  sendTOTPEmail({ email, code: otp, magicLink });
+}
+
 // TODO: refactor from here
 
 export async function getUserByEmail(email: string) {
@@ -47,16 +79,6 @@ export async function getUserByEmail(email: string) {
   const user = await db.user.findUnique({ where: { email } });
   invariant(user !== null, `Unknown user email: ${email}`);
   return { ...user, email };
-}
-
-async function sendTOTP({ email, code, magicLink }: SendTOTPOptions) {
-  const user = await getUserByEmail(email);
-
-  try {
-    await sendTotpWithPostmark({ name: user.name, email, code, magicLink });
-  } catch {
-    await sendTotpWithResend({ name: user.name, email, code, magicLink });
-  }
 }
 
 async function getUserById(id: number) {

@@ -19,6 +19,7 @@
     "@conform-to/react": "~1.1.4",
     "@conform-to/zod": "~1.1.4",
     "@epic-web/cachified": "~5.2.0",
+    "@epic-web/totp": "~1.1.2",
     "@headlessui/react": "~2.0.4",
     "@prisma/client": "~5.14.0",
     "@react-aria/interactions": "~3.21.3",

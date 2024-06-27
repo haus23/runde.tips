@@ -12,6 +12,7 @@ import {
   commitSession,
   getSession,
   isKnownEmail,
+  sendTOTP,
 } from '#utils/auth/auth.server.ts';
 import { redirectWithToast } from '#utils/toast/toast.server.ts';
 
@@ -42,6 +43,8 @@ export async function action({ request }: ActionFunctionArgs) {
       errors: { email: 'Unbekannte Email-Adresse. Wende dich an Micha.' },
     };
   }
+
+  sendTOTP(request, email);
 
   const session = await getSession(request);
   session.flash('email', email);
