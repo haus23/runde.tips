@@ -15,6 +15,7 @@ import { GeneralErrorBoundary } from '#components/error-boundary';
 import UI from '#components/ui';
 import { getUser } from '#utils/auth/auth.server';
 import { useAuthBroadcast } from '#utils/auth/user';
+import { combineHeaders } from '#utils/misc.ts';
 import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
 import { getHints } from '#utils/theme/client-hints.server';
 import { useTheme } from '#utils/theme/theme';
@@ -39,7 +40,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
         toast,
       },
     },
-    { headers },
+    { headers: combineHeaders(headers) },
   );
 }
 

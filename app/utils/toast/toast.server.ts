@@ -27,11 +27,14 @@ export async function getToast(request: Request) {
   );
   const toast = session.get('toast');
 
-  const headers = new Headers({
-    'Set-Cookie': await toastSessionStorage.commitSession(session),
-  });
-
-  return { toast, headers };
+  return {
+    toast,
+    headers: toast
+      ? new Headers({
+          'Set-Cookie': await toastSessionStorage.destroySession(session),
+        })
+      : null,
+  };
 }
 
 async function createToastHeaders(toast: Toast) {
