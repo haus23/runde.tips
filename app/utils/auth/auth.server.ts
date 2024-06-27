@@ -7,7 +7,14 @@ import { db } from '#utils/db.server';
 import { sendTotpWithPostmark, sendTotpWithResend } from '#utils/email.server';
 import { invariant } from '#utils/misc';
 
-export const authSessionStorage = createCookieSessionStorage({
+type AuthSessionData = {
+  sessionId: number;
+};
+
+const authSessionStorage = createCookieSessionStorage<
+  AuthSessionData,
+  { email: string }
+>({
   cookie: {
     name: '__auth',
     sameSite: 'lax',
@@ -18,25 +25,24 @@ export const authSessionStorage = createCookieSessionStorage({
   },
 });
 
-const { commitSession } = authSessionStorage;
-const getSession = (request: Request) =>
-  authSessionStorage.getSession(request.headers.get('Cookie'));
-export { getSession, commitSession };
-
-type AuthSessionData = {
-  sessionId: number;
+export const { commitSession, destroySession, getSession } = {
+  ...authSessionStorage,
+  getSession: (request: Request) =>
+    authSessionStorage.getSession(request.headers.get('Cookie')),
 };
 
 export const authenticator = new Authenticator<AuthSessionData>(
   authSessionStorage,
 );
 
-async function isKnownEmail(email: string) {
+export async function isKnownEmail(email: string) {
   const user = await db.user.findUnique({ where: { email } });
   return user !== null;
 }
 
-async function getUserByEmail(email: string) {
+// TODO: refactor from here
+
+export async function getUserByEmail(email: string) {
   invariant(email.length, 'Empty email argument');
   const user = await db.user.findUnique({ where: { email } });
   invariant(user !== null, `Unknown user email: ${email}`);

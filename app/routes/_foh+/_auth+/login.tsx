@@ -2,43 +2,54 @@ import {
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
   json,
+  redirect,
 } from '@remix-run/node';
-import { useLoaderData, useSubmit } from '@remix-run/react';
+import { useActionData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
 import UI from '#components/ui';
 import {
   authenticator,
   commitSession,
   getSession,
-} from '#utils/auth/auth.server';
+  isKnownEmail,
+} from '#utils/auth/auth.server.ts';
+import { redirectWithToast } from '#utils/toast/toast.server.ts';
 
 export const handle = {
   pageTitle: 'Log In',
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  await authenticator.isAuthenticated(request, {
-    successRedirect: '/',
-  });
+  const authSession = await authenticator.isAuthenticated(request);
 
-  const session = await getSession(request);
-  const authError = session.get(authenticator.sessionErrorKey);
-  const errors = authError ? { email: authError?.message } : undefined;
+  if (authSession) {
+    return redirectWithToast('/', {
+      type: 'info',
+      text: 'Du bist schon eingeloggt!',
+    });
+  }
 
-  return json(
-    { errors },
-    {
-      headers: {
-        'set-cookie': await commitSession(session),
-      },
-    },
-  );
+  return json(null);
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  await authenticator.authenticate('TOTP', request, {
-    successRedirect: '/onboarding',
-    failureRedirect: '/login',
+  const formData = await request.formData();
+  const email = String(formData.get('email'));
+
+  const validEmail = await isKnownEmail(email);
+  if (!validEmail) {
+    return {
+      errors: { email: 'Unbekannte Email-Adresse. Wende dich an Micha.' },
+    };
+  }
+
+  const session = await getSession(request);
+  session.flash('email', email);
+
+  throw redirect('/onboarding', {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
   });
 }
 
@@ -50,7 +61,7 @@ export default function LogInRoute() {
     submit(e.currentTarget);
   }
 
-  const loaderData = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
 
   return (
     <UI.Card className="mx-2 sm:mt-8">
@@ -63,7 +74,7 @@ export default function LogInRoute() {
           className="flex flex-col gap-y-4"
           method="post"
           onSubmit={onSubmit}
-          validationErrors={loaderData.errors}
+          validationErrors={actionData?.errors}
         >
           <UI.TextField isRequired name="email" type="email">
             <UI.Label>E-Mail</UI.Label>
