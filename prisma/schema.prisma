@@ -148,3 +148,18 @@ model Tip {
 
   @@unique([playerId, matchId])
 }
+
+model Verification {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  email String @unique
+
+  secret    String
+  algorithm String
+  digits    Int
+  period    Int
+  charSet   String
+
+  expiresAt DateTime?
+}

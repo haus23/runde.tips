@@ -62,7 +62,16 @@ export async function sendTOTP(request: Request, email: string) {
   const user = await db.user.findUnique({ where: { email } });
   invariant(user !== null, `Unknown user email: ${email}`);
 
-  const { otp } = generateTOTP({});
+  // Generate TOTP and save data
+  const { otp, secret, period, charSet, digits, algorithm } = generateTOTP({
+    period: 300,
+  });
+  const expiresAt = new Date(Date.now() + period * 1000);
+  await db.verification.upsert({
+    where: { email },
+    create: { email, secret, period, algorithm, digits, charSet, expiresAt },
+    update: { email, secret, period, algorithm, digits, charSet, expiresAt },
+  });
 
   // Generate Magic Link
   const url = new URL('/magic-link', new URL(request.url).origin);
