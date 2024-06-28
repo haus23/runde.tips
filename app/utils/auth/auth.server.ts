@@ -1,34 +1,17 @@
-import { createCookieSessionStorage, redirect } from '@remix-run/node';
-import { Authenticator } from 'remix-auth';
-import { type SendTOTPOptions, TOTPStrategy } from 'remix-auth-totp';
+import { generateTOTP, verifyTOTP } from '@epic-web/totp';
+import { json, redirect } from '@remix-run/node';
+import { redirectBack } from 'remix-utils/redirect-back';
 
-import { db } from '#utils/db.server';
-import { sendTotpWithPostmark, sendTotpWithResend } from '#utils/email.server';
-import { invariant } from '#utils/misc';
-
-export const authSessionStorage = createCookieSessionStorage({
-  cookie: {
-    name: '__auth',
-    sameSite: 'lax',
-    path: '/',
-    httpOnly: true,
-    secrets: [process.env.SESSION_SECRET],
-    secure: process.env.NODE_ENV === 'production',
-  },
-});
-
-const { commitSession } = authSessionStorage;
-const getSession = (request: Request) =>
-  authSessionStorage.getSession(request.headers.get('Cookie'));
-export { getSession, commitSession };
-
-type AuthSessionData = {
-  userId: number;
-};
-
-export const authenticator = new Authenticator<AuthSessionData>(
-  authSessionStorage,
-);
+import type { User } from '@prisma/client';
+import { db } from '#utils/db.server.ts';
+import {
+  sendMailWithPostmark,
+  sendMailWithResend,
+} from '#utils/email.server.ts';
+import { renderSendTotpEmail } from '#utils/emails/send-totp.email.tsx';
+import { invariant } from '#utils/misc.ts';
+import { redirectWithToast } from '#utils/toast/toast.server.ts';
+import { commitSession, destroySession, getSession } from './session.server';
 
 async function isKnownEmail(email: string) {
   const user = await db.user.findUnique({ where: { email } });
@@ -36,56 +19,279 @@ async function isKnownEmail(email: string) {
 }
 
 async function getUserByEmail(email: string) {
-  invariant(email.length, 'Empty email argument');
   const user = await db.user.findUnique({ where: { email } });
   invariant(user !== null, `Unknown user email: ${email}`);
   return { ...user, email };
 }
 
-async function sendTOTP({ email, code, magicLink }: SendTOTPOptions) {
+async function sendTOTPEmail({
+  email,
+  code,
+  magicLink,
+}: { email: string; code: string; magicLink: string }) {
   const user = await getUserByEmail(email);
 
+  const mailProps = {
+    from: 'Tipprunde <hallo@runde.tips>',
+    to: `${name} <${email}>`,
+    subject: 'Tipprunde Login Code',
+    category: 'totp',
+    ...(await renderSendTotpEmail({ name: user.name, code, magicLink })),
+  };
+
   try {
-    await sendTotpWithPostmark({ name: user.name, email, code, magicLink });
+    await sendMailWithPostmark(mailProps);
   } catch {
-    await sendTotpWithResend({ name: user.name, email, code, magicLink });
+    await sendMailWithResend(mailProps);
   }
 }
 
-authenticator.use(
-  new TOTPStrategy(
-    {
-      secret: process.env.AUTH_ENCRYPTION_SECRET,
-      sendTOTP,
-      validateEmail: (email) => isKnownEmail(email),
-      totpGeneration: { period: 360, charSet: '0123456789' },
-      customErrors: {
-        invalidEmail: 'Unbekannte Email-Adresse. Wende dich an Micha.',
-        expiredTotp: 'Abgelaufener Code.',
-        invalidTotp: 'Falscher Code.',
-      },
-      maxAge: 60 * 60 * 24 * 30,
-    },
-    async ({ email }) => {
-      const user = await getUserByEmail(email);
-      return { userId: user.id };
-    },
-  ),
-);
+export async function sendTOTP(request: Request, email: string) {
+  // Generate TOTP and save data
+  const { otp, secret, period, charSet, digits, algorithm } = generateTOTP({
+    period: 300,
+  });
+  const expiresAt = new Date(Date.now() + period * 1000);
+  await db.verification.upsert({
+    where: { email },
+    create: { email, secret, period, algorithm, digits, charSet, expiresAt },
+    update: { email, secret, period, algorithm, digits, charSet, expiresAt },
+  });
 
-async function getUserById(id: number) {
-  const user = await db.user.findUnique({ where: { id } });
-  invariant(user !== null, `Unknown user id: ${id}`);
-  return user;
+  // Generate Magic Link
+  const url = new URL('/magic-link', new URL(request.url).origin);
+  url.searchParams.set('code', otp);
+  const magicLink = url.toString();
+
+  sendTOTPEmail({ email, code: otp, magicLink });
 }
 
+/**
+ * Prepares user onboarding. Expects email in request form data.
+ *
+ * If no valid email address is in the form data, it returns an error.
+ * Otherwise it redirects to the onboarding page.
+ *
+ * @param request Request object
+ */
+export async function signup(request: Request) {
+  const formData = await request.formData();
+  const email = String(formData.get('email'));
+
+  const validEmail = await isKnownEmail(email);
+  if (!validEmail) {
+    return {
+      errors: { email: 'Unbekannte Email-Adresse. Wende dich an Micha.' },
+    };
+  }
+
+  sendTOTP(request, email);
+
+  const session = await getSession(request);
+  session.flash('email', email);
+
+  throw redirect('/onboarding', {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
+}
+
+/**
+ * Ensures ongoing signup action (email in session)
+ *
+ * @param request Request object
+ */
+export async function ensureSignup(request: Request) {
+  const session = await getSession(request);
+  const email = session.get('email');
+
+  if (!email)
+    throw await redirectWithToast('/login', {
+      type: 'error',
+      text: 'Kein Login gestartet.',
+    });
+
+  const validEmail = await isKnownEmail(email);
+  if (!validEmail) throw Error('Netter Versuch!');
+
+  return json(null);
+}
+
+/**
+ * Performs user login
+ *
+ * Expects valid email in session and totp code in request.
+ * Returns error for invalid data. Redirects to home otherwise.
+ *
+ * @param request Request object
+ */
+export async function login(request: Request) {
+  const session = await getSession(request);
+  const email = session.get('email');
+
+  if (!email || !(await isKnownEmail(email))) {
+    throw new Error('Netter Versuch! Keine gültige Email-Adresse!');
+  }
+
+  // Get code from form data or magic link
+  let code: string | undefined = undefined;
+  if (request.method === 'POST') {
+    const formData = await request.formData();
+    code = String(formData.get('code'));
+  } else if (request.method === 'GET') {
+    const url = new URL(request.url);
+    if (url.pathname !== '/magic-link') {
+      throw new Error('Netter Versuch!');
+    }
+    if (url.searchParams.has('code')) {
+      code = decodeURIComponent(url.searchParams.get('code') ?? '');
+    }
+  }
+  if (typeof code === 'undefined' || code === '') {
+    throw new Error('Netter Versuch! Kein gültiger Login Code!');
+  }
+
+  // Verify code
+  const verificationData = await db.verification.findUnique({
+    where: { email },
+    select: {
+      secret: true,
+      algorithm: true,
+      period: true,
+      digits: true,
+      charSet: true,
+      expiresAt: true,
+    },
+  });
+
+  if (!verificationData) {
+    throw new Error(
+      'Netter Versuch! Keine Anmeldung für diese Email-Adresse vorhanden!',
+    );
+  }
+
+  if (new Date() > verificationData.expiresAt) {
+    return {
+      errors: { code: 'Abgelaufener Code.' },
+    };
+  }
+
+  const isValid = verifyTOTP({ otp: code, ...verificationData });
+  if (isValid === null) {
+    return {
+      errors: { code: 'Ungültiger Code.' },
+    };
+  }
+
+  // Create Server Session
+  const user = await getUserByEmail(email);
+
+  const SESSION_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30;
+  const expirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME);
+
+  const sessionData = await db.session.create({
+    select: { id: true },
+    data: {
+      userId: user.id,
+      expirationDate,
+    },
+  });
+
+  session.set('sessionId', sessionData.id);
+  session.set('expires', expirationDate);
+
+  throw redirect('/', {
+    headers: { 'Set-Cookie': await commitSession(session) },
+  });
+}
+
+/**
+ * Logs user out. If no redirectFallback is set, it returns the destroy session cookie
+ * header. With redirectFallback it redirects to the referer or the fallback route
+ * and destroys the session cookie itself.
+ *
+ * @param request Request object
+ * @param redirectFallback Fallback URL if no referer in request
+ * @returns destroy session cookie header
+ */
+
+export async function logout(request: Request, redirectFallback?: string) {
+  const authSession = await getSession(request);
+  const sessionId = authSession.get('sessionId');
+
+  if (sessionId) {
+    await db.session.deleteMany({ where: { id: sessionId } });
+  }
+
+  const headers = new Headers({
+    'Set-Cookie': await destroySession(authSession),
+  });
+
+  if (redirectFallback) {
+    throw redirectBack(request, { fallback: redirectFallback, headers });
+  }
+
+  return headers;
+}
+
+// Auth helpers
+
 export async function getUser(request: Request) {
-  const sessionData = await authenticator.isAuthenticated(request);
-  return sessionData ? getUserById(sessionData.userId) : null;
+  let user: User | null = null;
+  let headers: Headers | null = null;
+
+  // Authenticate
+  const authSession = await getSession(request);
+  const sessionId = authSession.get('sessionId');
+
+  if (sessionId) {
+    const session = await db.session.findFirst({
+      where: { id: sessionId },
+    });
+
+    // Existing server session and not expired?
+    if (session && new Date() < session.expirationDate) {
+      user = await db.user.findFirst({ where: { id: session.userId } });
+    }
+
+    if (!user) {
+      headers = await logout(request);
+    }
+  }
+
+  return {
+    user,
+    headers,
+  };
+}
+
+async function getOptionalUser(request: Request) {
+  const authSession = await getSession(request);
+  const sessionId = authSession.get('sessionId');
+
+  if (!sessionId) return null;
+
+  const session = await db.session.findUnique({
+    select: { user: true },
+    where: { id: sessionId, expirationDate: { gt: new Date() } },
+  });
+
+  return session?.user || null;
+}
+
+export async function requireAnonymous(request: Request) {
+  const user = await getOptionalUser(request);
+  if (user) {
+    throw await redirectWithToast('/', {
+      type: 'info',
+      text: 'Du bist schon eingeloggt!',
+    });
+  }
 }
 
 export async function requireAdmin(request: Request) {
-  const user = await getUser(request);
+  const user = await getOptionalUser(request);
   if (!user?.role.includes('ADMIN')) {
     throw redirect('/login');
   }
