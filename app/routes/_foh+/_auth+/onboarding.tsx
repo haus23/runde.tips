@@ -2,11 +2,8 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json, redirect, useActionData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
 import UI from '#components/ui';
-import {
-  authenticator,
-  getSession,
-  isKnownEmail,
-} from '#utils/auth/auth.server.ts';
+import { authenticator, isKnownEmail } from '#utils/auth/auth.server.ts';
+import { getSession } from '#utils/auth/auth.session.server.ts';
 import { redirectWithToast } from '#utils/toast/toast.server.ts';
 
 export const handle = {
@@ -35,7 +32,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  return { errors: { code: '' } };
+  const reult = await authenticator.authenticate('TOTP', request, {
+    successRedirect: '/',
+  });
 }
 
 export default function OnboardingRoute() {
@@ -45,8 +44,6 @@ export default function OnboardingRoute() {
     e.preventDefault();
     submit(e.currentTarget);
   }
-
-  const actionData = useActionData<typeof action>();
 
   return (
     <UI.Card className="mx-2 sm:mt-8">
@@ -59,7 +56,6 @@ export default function OnboardingRoute() {
           className="flex flex-col items-center gap-y-4"
           method="post"
           onSubmit={onSubmit}
-          validationErrors={actionData?.errors}
         >
           <UI.TextField
             name="code"

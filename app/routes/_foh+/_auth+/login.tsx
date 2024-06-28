@@ -9,11 +9,10 @@ import { Form } from 'react-aria-components';
 import UI from '#components/ui';
 import {
   authenticator,
-  commitSession,
-  getSession,
   isKnownEmail,
   sendTOTP,
 } from '#utils/auth/auth.server.ts';
+import { commitSession, getSession } from '#utils/auth/auth.session.server.ts';
 import { redirectWithToast } from '#utils/toast/toast.server.ts';
 
 export const handle = {

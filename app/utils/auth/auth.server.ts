@@ -1,6 +1,6 @@
-import { generateTOTP } from '@epic-web/totp';
+import { generateTOTP, verifyTOTP } from '@epic-web/totp';
 import type { User } from '@prisma/client';
-import { createCookieSessionStorage, redirect } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
 
 import { db } from '#utils/db.server.ts';
@@ -10,29 +10,11 @@ import {
 } from '#utils/email.server.ts';
 import { invariant } from '#utils/misc.ts';
 
-type AuthSessionData = {
-  sessionId: number;
-};
-
-const authSessionStorage = createCookieSessionStorage<
-  AuthSessionData,
-  { email: string }
->({
-  cookie: {
-    name: '__auth',
-    sameSite: 'lax',
-    path: '/',
-    httpOnly: true,
-    secrets: [process.env.SESSION_SECRET],
-    secure: process.env.NODE_ENV === 'production',
-  },
-});
-
-export const { commitSession, destroySession, getSession } = {
-  ...authSessionStorage,
-  getSession: (request: Request) =>
-    authSessionStorage.getSession(request.headers.get('Cookie')),
-};
+import {
+  type AuthSessionData,
+  authSessionStorage,
+} from './auth.session.server';
+import { TOTPStrategy } from './totp-strategy.server';
 
 export const authenticator = new Authenticator<AuthSessionData>(
   authSessionStorage,
@@ -43,14 +25,54 @@ export async function isKnownEmail(email: string) {
   return user !== null;
 }
 
+async function getUserByEmail(email: string) {
+  const user = await db.user.findUnique({ where: { email } });
+  invariant(user !== null, `Unknown user email: ${email}`);
+  return { ...user, email };
+}
+
+authenticator.use(
+  new TOTPStrategy(async ({ email, code }) => {
+    // Verify code
+    const verificationData = await db.verification.findUnique({
+      where: { email },
+      select: {
+        secret: true,
+        algorithm: true,
+        period: true,
+        digits: true,
+        charSet: true,
+      },
+    });
+    invariant(verificationData);
+
+    const isValid = verifyTOTP({ otp: code, ...verificationData });
+    invariant(isValid !== null);
+
+    // Create Session
+    const user = await getUserByEmail(email);
+
+    const SESSION_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30;
+    const expirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME);
+
+    const sessionData = await db.session.create({
+      select: { id: true },
+      data: {
+        userId: user.id,
+        expirationDate,
+      },
+    });
+
+    return { sessionId: sessionData.id };
+  }),
+);
+
 async function sendTOTPEmail({
   email,
   code,
   magicLink,
 }: { email: string; code: string; magicLink: string }) {
-  const user = await db.user.findUnique({ where: { email } });
-  invariant(user !== null, `Unknown user email: ${email}`);
-
+  const user = await getUserByEmail(email);
   try {
     await sendTotpWithPostmark({ name: user.name, email, code, magicLink });
   } catch {
@@ -59,9 +81,6 @@ async function sendTOTPEmail({
 }
 
 export async function sendTOTP(request: Request, email: string) {
-  const user = await db.user.findUnique({ where: { email } });
-  invariant(user !== null, `Unknown user email: ${email}`);
-
   // Generate TOTP and save data
   const { otp, secret, period, charSet, digits, algorithm } = generateTOTP({
     period: 300,
@@ -82,13 +101,6 @@ export async function sendTOTP(request: Request, email: string) {
 }
 
 // TODO: refactor from here
-
-export async function getUserByEmail(email: string) {
-  invariant(email.length, 'Empty email argument');
-  const user = await db.user.findUnique({ where: { email } });
-  invariant(user !== null, `Unknown user email: ${email}`);
-  return { ...user, email };
-}
 
 async function getUserById(id: number) {
   const user = await db.user.findUnique({ where: { id } });
