@@ -13,7 +13,7 @@ import UI from '#components/ui';
 import { UserMenu } from '#components/user-menu';
 import { useChampionship } from '#utils/app/foh/use-championship';
 import { usePageTitle } from '#utils/app/use-page-title';
-import { useIsAuthenticated } from '#utils/auth/user';
+import { useIsAuthenticated } from '#utils/auth/auth.ts';
 
 import { ChampionshipSelect } from './championship-select';
 

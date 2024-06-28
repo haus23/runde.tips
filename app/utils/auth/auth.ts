@@ -19,8 +19,6 @@ export function useUser() {
   return data.user;
 }
 
-// TODO: Watch out for other BroadcastChannel usages in Remix
-// - remix-themes
 export function useAuthBroadcast() {
   const channelRef = useRef<BroadcastChannel>();
   const authenticated = useIsAuthenticated();
