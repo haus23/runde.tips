@@ -1,6 +1,4 @@
 import { generateTOTP, verifyTOTP } from '@epic-web/totp';
-import type { User } from '@prisma/client';
-import { redirect } from '@remix-run/node';
 import { Authenticator } from 'remix-auth';
 
 import { db } from '#utils/db.server.ts';
@@ -10,10 +8,7 @@ import {
 } from '#utils/email.server.ts';
 import { invariant } from '#utils/misc.ts';
 
-import {
-  type AuthSessionData,
-  authSessionStorage,
-} from './auth.session.server';
+import { type AuthSessionData, authSessionStorage } from './session.server';
 import { TOTPStrategy } from './totp-strategy.server';
 
 export const authenticator = new Authenticator<AuthSessionData>(
@@ -63,7 +58,7 @@ authenticator.use(
       },
     });
 
-    return { sessionId: sessionData.id };
+    return { sessionId: sessionData.id, expires: expirationDate };
   }),
 );
 
@@ -98,24 +93,4 @@ export async function sendTOTP(request: Request, email: string) {
   const magicLink = url.toString();
 
   sendTOTPEmail({ email, code: otp, magicLink });
-}
-
-// TODO: refactor from here
-
-async function getUserById(id: number) {
-  const user = await db.user.findUnique({ where: { id } });
-  invariant(user !== null, `Unknown user id: ${id}`);
-  return user;
-}
-
-export async function getUser(request: Request): Promise<User | null> {
-  const sessionData = await authenticator.isAuthenticated(request);
-  return null; // sessionData ? getUserById(sessionData.userId) : null;
-}
-
-export async function requireAdmin(request: Request) {
-  const user = await getUser(request);
-  if (!user?.role.includes('ADMIN')) {
-    throw redirect('/login');
-  }
 }

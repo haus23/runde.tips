@@ -1,8 +1,5 @@
 import { type AuthenticateOptions, Strategy } from 'remix-auth';
-import type {
-  AuthSessionData,
-  authSessionStorage,
-} from './auth.session.server';
+import type { AuthSessionData, authSessionStorage } from './session.server';
 
 import { redirect } from '@remix-run/node';
 import { invariant } from '#utils/misc.ts';
@@ -48,6 +45,8 @@ export class TOTPStrategy extends Strategy<AuthSessionData, TOTPVerifyParams> {
     if (!options.successRedirect) return authData;
 
     session.set('sessionId', authData.sessionId);
+    session.set('expires', authData.expires);
+
     throw redirect(options.successRedirect, {
       headers: { 'Set-Cookie': await sessionStorage.commitSession(session) },
     });

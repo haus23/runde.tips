@@ -3,7 +3,7 @@ import { json, redirect, useActionData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
 import UI from '#components/ui';
 import { authenticator, isKnownEmail } from '#utils/auth/auth.server.ts';
-import { getSession } from '#utils/auth/auth.session.server.ts';
+import { getSession } from '#utils/auth/session.server.js';
 import { redirectWithToast } from '#utils/toast/toast.server.ts';
 
 export const handle = {

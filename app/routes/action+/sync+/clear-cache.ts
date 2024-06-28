@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs } from '@remix-run/node';
-import { requireAdmin } from '#utils/auth/auth.server';
+import { requireAdmin } from '#utils/auth/utils.server.js';
 import { jsonWithToast } from '#utils/toast/toast.server';
 
 export async function loader() {

@@ -12,7 +12,7 @@ import {
   isKnownEmail,
   sendTOTP,
 } from '#utils/auth/auth.server.ts';
-import { commitSession, getSession } from '#utils/auth/auth.session.server.ts';
+import { commitSession, getSession } from '#utils/auth/session.server.js';
 import { redirectWithToast } from '#utils/toast/toast.server.ts';
 
 export const handle = {

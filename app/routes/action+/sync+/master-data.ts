@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs } from '@remix-run/node';
 import { namedAction } from 'remix-utils/named-action';
-import { requireAdmin } from '#utils/auth/auth.server';
+import { requireAdmin } from '#utils/auth/utils.server.js';
 import { syncLeagues } from '#utils/sync/leagues';
 import { syncPlayers } from '#utils/sync/players';
 import { syncRulesets } from '#utils/sync/rulesets';

@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { eventStream } from 'remix-utils/sse/server';
-import { requireAdmin } from '#utils/auth/auth.server';
+import { requireAdmin } from '#utils/auth/utils.server.js';
 import {
   type TaskProgressEvent,
   taskProgressEventBus,
