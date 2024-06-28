@@ -1,5 +1,6 @@
 import { generateTOTP, verifyTOTP } from '@epic-web/totp';
-import { Authenticator } from 'remix-auth';
+import { json, redirect } from '@remix-run/node';
+import { redirectBack } from 'remix-utils/redirect-back';
 
 import { db } from '#utils/db.server.ts';
 import {
@@ -7,24 +8,10 @@ import {
   sendTotpWithResend,
 } from '#utils/email.server.ts';
 import { invariant } from '#utils/misc.ts';
-
-import { json, redirect } from '@remix-run/node';
-import { redirectBack } from 'remix-utils/redirect-back';
 import { redirectWithToast } from '#utils/toast/toast.server.js';
-import {
-  type AuthSessionData,
-  authSessionStorage,
-  commitSession,
-  destroySession,
-  getSession,
-} from './session.server';
-import { TOTPStrategy } from './totp-strategy.server';
+import { commitSession, destroySession, getSession } from './session.server';
 
-export const authenticator = new Authenticator<AuthSessionData>(
-  authSessionStorage,
-);
-
-export async function isKnownEmail(email: string) {
+async function isKnownEmail(email: string) {
   const user = await db.user.findUnique({ where: { email } });
   return user !== null;
 }
@@ -34,42 +21,6 @@ async function getUserByEmail(email: string) {
   invariant(user !== null, `Unknown user email: ${email}`);
   return { ...user, email };
 }
-
-authenticator.use(
-  new TOTPStrategy(async ({ email, code }) => {
-    // Verify code
-    const verificationData = await db.verification.findUnique({
-      where: { email },
-      select: {
-        secret: true,
-        algorithm: true,
-        period: true,
-        digits: true,
-        charSet: true,
-      },
-    });
-    invariant(verificationData);
-
-    const isValid = verifyTOTP({ otp: code, ...verificationData });
-    invariant(isValid !== null);
-
-    // Create Session
-    const user = await getUserByEmail(email);
-
-    const SESSION_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30;
-    const expirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME);
-
-    const sessionData = await db.session.create({
-      select: { id: true },
-      data: {
-        userId: user.id,
-        expirationDate,
-      },
-    });
-
-    return { sessionId: sessionData.id, expires: expirationDate };
-  }),
-);
 
 async function sendTOTPEmail({
   email,
