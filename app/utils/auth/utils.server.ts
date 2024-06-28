@@ -2,6 +2,7 @@ import type { User } from '@prisma/client';
 import { redirect } from '@remix-run/node';
 import { redirectBack } from 'remix-utils/redirect-back';
 import { db } from '#utils/db.server.js';
+import { redirectWithToast } from '#utils/toast/toast.server.js';
 import { destroySession, getSession } from './session.server';
 
 /**
@@ -73,6 +74,16 @@ async function getOptionalUser(request: Request) {
   });
 
   return session?.user || null;
+}
+
+export async function requireAnonymous(request: Request) {
+  const user = await getOptionalUser(request);
+  if (user) {
+    throw await redirectWithToast('/', {
+      type: 'info',
+      text: 'Du bist schon eingeloggt!',
+    });
+  }
 }
 
 export async function requireAdmin(request: Request) {

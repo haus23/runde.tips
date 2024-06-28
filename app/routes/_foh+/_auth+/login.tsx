@@ -7,28 +7,16 @@ import {
 import { useActionData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
 import UI from '#components/ui';
-import {
-  authenticator,
-  isKnownEmail,
-  sendTOTP,
-} from '#utils/auth/auth.server.ts';
-import { commitSession, getSession } from '#utils/auth/session.server.js';
-import { redirectWithToast } from '#utils/toast/toast.server.ts';
+import { isKnownEmail, sendTOTP } from '#utils/auth/auth.server.ts';
+import { commitSession, getSession } from '#utils/auth/session.server.ts';
+import { requireAnonymous } from '#utils/auth/utils.server.ts';
 
 export const handle = {
   pageTitle: 'Log In',
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const authSession = await authenticator.isAuthenticated(request);
-
-  if (authSession) {
-    return redirectWithToast('/', {
-      type: 'info',
-      text: 'Du bist schon eingeloggt!',
-    });
-  }
-
+  await requireAnonymous(request);
   return json(null);
 }
 

@@ -4,21 +4,14 @@ import { Form } from 'react-aria-components';
 import UI from '#components/ui';
 import { authenticator, isKnownEmail } from '#utils/auth/auth.server.ts';
 import { getSession } from '#utils/auth/session.server.js';
-import { redirectWithToast } from '#utils/toast/toast.server.ts';
+import { requireAnonymous } from '#utils/auth/utils.server.ts';
 
 export const handle = {
   pageTitle: 'Boarding',
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const authSessionData = await authenticator.isAuthenticated(request);
-
-  if (authSessionData) {
-    return redirectWithToast('/', {
-      type: 'info',
-      text: 'Du bist schon eingeloggt!',
-    });
-  }
+  await requireAnonymous(request);
 
   const session = await getSession(request);
   const email = session.get('email');
