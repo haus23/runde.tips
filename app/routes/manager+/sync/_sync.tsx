@@ -17,7 +17,7 @@ import {
   TableHeader,
 } from 'react-aria-components';
 import UI from '#components/ui';
-import { requireAdmin } from '#utils/auth/utils.server.js';
+import { requireAdmin } from '#utils/auth/auth.server.ts';
 import { db } from '#utils/db.server';
 import { getFirestoreChampionships } from '#utils/firestore/championship';
 import { useTask } from '#utils/task';

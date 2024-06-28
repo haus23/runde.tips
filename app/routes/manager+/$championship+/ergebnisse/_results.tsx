@@ -9,7 +9,7 @@ import { z } from 'zod';
 import { setMatchResults } from '#api/use-cases/set-match-results';
 import UI from '#components/ui';
 import { useChampionship } from '#utils/app/manager/use-championship';
-import { requireAdmin } from '#utils/auth/utils.server.js';
+import { requireAdmin } from '#utils/auth/auth.server.ts';
 import { db } from '#utils/db.server';
 import { toast } from '#utils/toast/toast.client.js';
 import { jsonWithToast } from '#utils/toast/toast.server.js';

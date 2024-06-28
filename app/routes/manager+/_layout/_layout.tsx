@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { Outlet, json, useLoaderData } from '@remix-run/react';
 import { ChampionshipProvider } from '#utils/app/championship.context.js';
-import { requireAdmin } from '#utils/auth/utils.server.js';
+import { requireAdmin } from '#utils/auth/auth.server.ts';
 import { db } from '#utils/db.server';
 import { ManagerHeader } from './manager-header';
 import { ManagerNav } from './manager-nav';

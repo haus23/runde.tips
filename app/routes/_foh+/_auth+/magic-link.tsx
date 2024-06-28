@@ -1,6 +1,9 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
-import { ensureSignup, login } from '#utils/auth/auth.server.ts';
-import { requireAnonymous } from '#utils/auth/utils.server.ts';
+import {
+  ensureSignup,
+  login,
+  requireAnonymous,
+} from '#utils/auth/auth.server.ts';
 import { redirectWithToast } from '#utils/toast/toast.server.js';
 
 export async function loader({ request }: LoaderFunctionArgs) {

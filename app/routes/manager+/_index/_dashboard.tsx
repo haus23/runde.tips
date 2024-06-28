@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Icon } from '#components/ui/icon/icon.js';
 import { Link } from '#components/ui/link/link.js';
 import type { IconName } from '#components/ui/types.js';
-import { requireAdmin } from '#utils/auth/utils.server.js';
+import { requireAdmin } from '#utils/auth/auth.server.ts';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await requireAdmin(request);

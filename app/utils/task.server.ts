@@ -1,5 +1,5 @@
 import { type ActionFunctionArgs, json } from '@remix-run/node';
-import { requireAdmin } from './auth/utils.server';
+import { requireAdmin } from './auth/auth.server';
 import { invariant } from './misc';
 
 export function createTaskAction<T>(
