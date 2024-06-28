@@ -1,22 +1,15 @@
-import { type LoaderFunctionArgs, redirect } from '@remix-run/node';
-import { isKnownEmail } from '#utils/auth/auth.server.ts';
-import { getSession } from '#utils/auth/session.server.ts';
+import type { LoaderFunctionArgs } from '@remix-run/node';
+import { ensureSignup, login } from '#utils/auth/auth.server.ts';
 import { requireAnonymous } from '#utils/auth/utils.server.ts';
-import { redirectWithToast } from '#utils/toast/toast.server.ts';
+import { redirectWithToast } from '#utils/toast/toast.server.js';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await requireAnonymous(request);
+  await ensureSignup(request);
+  const error = await login(request);
 
-  const session = await getSession(request);
-  const email = session.get('email');
-
-  if (!email) throw redirect('/login');
-
-  const validEmail = await isKnownEmail(email);
-  if (!validEmail) throw Error('Netter Versuch!');
-
-  return redirectWithToast('/', {
+  return await redirectWithToast('/login', {
     type: 'error',
-    text: 'Noch nicht implementiert',
+    text: error.errors.code,
   });
 }

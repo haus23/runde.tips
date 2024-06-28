@@ -1,9 +1,9 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
-import { json, redirect, useActionData, useSubmit } from '@remix-run/react';
+import { useActionData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
+
 import UI from '#components/ui';
-import { authenticator, isKnownEmail } from '#utils/auth/auth.server.ts';
-import { getSession } from '#utils/auth/session.server.js';
+import { ensureSignup, login } from '#utils/auth/auth.server.ts';
 import { requireAnonymous } from '#utils/auth/utils.server.ts';
 
 export const handle = {
@@ -12,25 +12,16 @@ export const handle = {
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await requireAnonymous(request);
-
-  const session = await getSession(request);
-  const email = session.get('email');
-
-  if (!email) throw redirect('/login');
-
-  const validEmail = await isKnownEmail(email);
-  if (!validEmail) throw Error('Netter Versuch!');
-
-  return json(null);
+  return await ensureSignup(request);
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const reult = await authenticator.authenticate('TOTP', request, {
-    successRedirect: '/',
-  });
+  return login(request);
 }
 
 export default function OnboardingRoute() {
+  const actionData = useActionData<typeof action>();
+
   const submit = useSubmit();
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -49,6 +40,7 @@ export default function OnboardingRoute() {
           className="flex flex-col items-center gap-y-4"
           method="post"
           onSubmit={onSubmit}
+          validationErrors={actionData?.errors}
         >
           <UI.TextField
             name="code"

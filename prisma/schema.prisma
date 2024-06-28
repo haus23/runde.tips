@@ -176,5 +176,5 @@ model Verification {
   period    Int
   charSet   String
 
-  expiresAt DateTime?
+  expiresAt DateTime
 }

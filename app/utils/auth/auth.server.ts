@@ -8,8 +8,9 @@ import {
 } from '#utils/email.server.ts';
 import { invariant } from '#utils/misc.ts';
 
-import { redirect } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { redirectBack } from 'remix-utils/redirect-back';
+import { redirectWithToast } from '#utils/toast/toast.server.js';
 import {
   type AuthSessionData,
   authSessionStorage,
@@ -131,6 +132,115 @@ export async function signup(request: Request) {
     headers: {
       'Set-Cookie': await commitSession(session),
     },
+  });
+}
+
+/**
+ * Ensures ongoing signup action (email in session)
+ *
+ * @param request Request object
+ */
+export async function ensureSignup(request: Request) {
+  const session = await getSession(request);
+  const email = session.get('email');
+
+  if (!email)
+    throw await redirectWithToast('/login', {
+      type: 'error',
+      text: 'Kein Login gestartet.',
+    });
+
+  const validEmail = await isKnownEmail(email);
+  if (!validEmail) throw Error('Netter Versuch!');
+
+  return json(null);
+}
+
+/**
+ * Performs user login
+ *
+ * Expects valid email in session and totp code in request.
+ * Returns error for invalid data. Redirects to home otherwise.
+ *
+ * @param request Request object
+ */
+export async function login(request: Request) {
+  const session = await getSession(request);
+  const email = session.get('email');
+
+  if (!email || !(await isKnownEmail(email))) {
+    throw new Error('Netter Versuch! Keine gültige Email-Adresse!');
+  }
+
+  // Get code from form data or magic link
+  let code: string | undefined = undefined;
+  if (request.method === 'POST') {
+    const formData = await request.formData();
+    code = String(formData.get('code'));
+  } else if (request.method === 'GET') {
+    const url = new URL(request.url);
+    if (url.pathname !== '/magic-link') {
+      throw new Error('Netter Versuch!');
+    }
+    if (url.searchParams.has('code')) {
+      code = decodeURIComponent(url.searchParams.get('code') ?? '');
+    }
+  }
+  if (typeof code === 'undefined' || code === '') {
+    throw new Error('Netter Versuch! Kein gültiger Login Code!');
+  }
+
+  // Verify code
+  const verificationData = await db.verification.findUnique({
+    where: { email },
+    select: {
+      secret: true,
+      algorithm: true,
+      period: true,
+      digits: true,
+      charSet: true,
+      expiresAt: true,
+    },
+  });
+
+  if (!verificationData) {
+    throw new Error(
+      'Netter Versuch! Keine Anmeldung für diese Email-Adresse vorhanden!',
+    );
+  }
+
+  if (new Date() > verificationData.expiresAt) {
+    return {
+      errors: { code: 'Abgelaufener Code.' },
+    };
+  }
+
+  const isValid = verifyTOTP({ otp: code, ...verificationData });
+  if (isValid === null) {
+    return {
+      errors: { code: 'Ungültiger Code.' },
+    };
+  }
+
+  // Create Server Session
+  const user = await getUserByEmail(email);
+
+  const SESSION_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30;
+  const expirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME);
+
+  const sessionData = await db.session.create({
+    select: { id: true },
+    data: {
+      userId: user.id,
+      expirationDate,
+    },
+  });
+
+  session.set('sessionId', sessionData.id);
+  session.set('expires', expirationDate);
+
+  throw redirect('/', {
+    headers: { 'Set-Cookie': await commitSession(session) },
   });
 }
 
