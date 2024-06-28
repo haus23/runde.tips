@@ -8,7 +8,15 @@ import {
 } from '#utils/email.server.ts';
 import { invariant } from '#utils/misc.ts';
 
-import { type AuthSessionData, authSessionStorage } from './session.server';
+import { redirect } from '@remix-run/node';
+import { redirectBack } from 'remix-utils/redirect-back';
+import {
+  type AuthSessionData,
+  authSessionStorage,
+  commitSession,
+  destroySession,
+  getSession,
+} from './session.server';
 import { TOTPStrategy } from './totp-strategy.server';
 
 export const authenticator = new Authenticator<AuthSessionData>(
@@ -93,4 +101,64 @@ export async function sendTOTP(request: Request, email: string) {
   const magicLink = url.toString();
 
   sendTOTPEmail({ email, code: otp, magicLink });
+}
+
+/**
+ * Prepares user onboarding. Expects email in request form data.
+ *
+ * If no valid email address is in the form data, it returns an error.
+ * Otherwise it redirects to the onboarding page.
+ *
+ * @param request Request object
+ */
+export async function signup(request: Request) {
+  const formData = await request.formData();
+  const email = String(formData.get('email'));
+
+  const validEmail = await isKnownEmail(email);
+  if (!validEmail) {
+    return {
+      errors: { email: 'Unbekannte Email-Adresse. Wende dich an Micha.' },
+    };
+  }
+
+  sendTOTP(request, email);
+
+  const session = await getSession(request);
+  session.flash('email', email);
+
+  throw redirect('/onboarding', {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
+}
+
+/**
+ * Logs user out. If no redirectFallback is set, it returns the destroy session cookie
+ * header. With redirectFallback it redirects to the referer or the fallback route
+ * and destroys the session cookie itself.
+ *
+ * @param request Request object
+ * @param redirectFallback Fallback URL if no referer in request
+ * @returns destroy session cookie header
+ */
+
+export async function logout(request: Request, redirectFallback?: string) {
+  const authSession = await getSession(request);
+  const sessionId = authSession.get('sessionId');
+
+  if (sessionId) {
+    await db.session.deleteMany({ where: { id: sessionId } });
+  }
+
+  const headers = new Headers({
+    'Set-Cookie': await destroySession(authSession),
+  });
+
+  if (redirectFallback) {
+    throw redirectBack(request, { fallback: redirectFallback, headers });
+  }
+
+  return headers;
 }

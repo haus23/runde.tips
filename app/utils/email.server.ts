@@ -1,4 +1,4 @@
-import { renderSendTotpEmail } from './auth/send-totp.email';
+import { renderSendTotpEmail } from './emails/send-totp.email';
 
 type EmailProps = {
   from: string;

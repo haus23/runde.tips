@@ -2,13 +2,11 @@ import {
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
   json,
-  redirect,
 } from '@remix-run/node';
 import { useActionData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
 import UI from '#components/ui';
-import { isKnownEmail, sendTOTP } from '#utils/auth/auth.server.ts';
-import { commitSession, getSession } from '#utils/auth/session.server.ts';
+import { signup } from '#utils/auth/auth.server.ts';
 import { requireAnonymous } from '#utils/auth/utils.server.ts';
 
 export const handle = {
@@ -21,26 +19,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
-  const email = String(formData.get('email'));
-
-  const validEmail = await isKnownEmail(email);
-  if (!validEmail) {
-    return {
-      errors: { email: 'Unbekannte Email-Adresse. Wende dich an Micha.' },
-    };
-  }
-
-  sendTOTP(request, email);
-
-  const session = await getSession(request);
-  session.flash('email', email);
-
-  throw redirect('/onboarding', {
-    headers: {
-      'Set-Cookie': await commitSession(session),
-    },
-  });
+  return await signup(request);
 }
 
 export default function LogInRoute() {

@@ -1,37 +1,9 @@
 import type { User } from '@prisma/client';
 import { redirect } from '@remix-run/node';
-import { redirectBack } from 'remix-utils/redirect-back';
-import { db } from '#utils/db.server.js';
-import { redirectWithToast } from '#utils/toast/toast.server.js';
-import { destroySession, getSession } from './session.server';
-
-/**
- * Logs user out. If no redirectFallback is set, it returns the destroy session cookie
- * header. With redirectFallback it redirects to the referer or the fallback route
- * and destroys the session cookie itself.
- *
- * @param request Request object
- * @param redirectFallback Fallback URL if no referer in request
- * @returns destroy session cookie header
- */
-export async function logout(request: Request, redirectFallback?: string) {
-  const authSession = await getSession(request);
-  const sessionId = authSession.get('sessionId');
-
-  if (sessionId) {
-    await db.session.deleteMany({ where: { id: sessionId } });
-  }
-
-  const headers = new Headers({
-    'Set-Cookie': await destroySession(authSession),
-  });
-
-  if (redirectFallback) {
-    throw redirectBack(request, { fallback: redirectFallback, headers });
-  }
-
-  return headers;
-}
+import { db } from '#utils/db.server.ts';
+import { redirectWithToast } from '#utils/toast/toast.server.ts';
+import { logout } from './auth.server';
+import { getSession } from './session.server';
 
 export async function getUser(request: Request) {
   let user: User | null = null;
