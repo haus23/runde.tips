@@ -1,5 +1,3 @@
-import { renderSendTotpEmail } from './emails/send-totp.email';
-
 type EmailProps = {
   from: string;
   to: string;
@@ -68,43 +66,4 @@ export async function sendMailWithResend(props: EmailProps) {
   if (!response.ok) {
     throw new Error('Probleme beim Email-Versand');
   }
-}
-
-type SendTotpEmailProps = {
-  name: string;
-  email: string;
-  code: string;
-  magicLink: string;
-};
-
-export async function sendTotpWithPostmark({
-  name,
-  email,
-  code,
-  magicLink,
-}: SendTotpEmailProps) {
-  const mailProps = {
-    from: 'Tipprunde <hallo@runde.tips>',
-    to: `${name} <${email}>`,
-    subject: 'Tipprunde Login Code',
-    category: 'totp',
-    ...(await renderSendTotpEmail({ name, code, magicLink })),
-  };
-  await sendMailWithPostmark(mailProps);
-}
-
-export async function sendTotpWithResend({
-  name,
-  email,
-  code,
-  magicLink,
-}: SendTotpEmailProps) {
-  const mailProps = {
-    from: 'Tipprunde <hallo@runde.tips>',
-    to: `${name} <${email}>`,
-    subject: 'Tipprunde Login Code',
-    category: 'totp',
-    ...(await renderSendTotpEmail({ name, code, magicLink })),
-  };
-  await sendMailWithResend(mailProps);
 }

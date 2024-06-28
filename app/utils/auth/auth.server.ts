@@ -5,11 +5,12 @@ import { redirectBack } from 'remix-utils/redirect-back';
 import type { User } from '@prisma/client';
 import { db } from '#utils/db.server.ts';
 import {
-  sendTotpWithPostmark,
-  sendTotpWithResend,
+  sendMailWithPostmark,
+  sendMailWithResend,
 } from '#utils/email.server.ts';
+import { renderSendTotpEmail } from '#utils/emails/send-totp.email.tsx';
 import { invariant } from '#utils/misc.ts';
-import { redirectWithToast } from '#utils/toast/toast.server.js';
+import { redirectWithToast } from '#utils/toast/toast.server.ts';
 import { commitSession, destroySession, getSession } from './session.server';
 
 async function isKnownEmail(email: string) {
@@ -29,10 +30,19 @@ async function sendTOTPEmail({
   magicLink,
 }: { email: string; code: string; magicLink: string }) {
   const user = await getUserByEmail(email);
+
+  const mailProps = {
+    from: 'Tipprunde <hallo@runde.tips>',
+    to: `${name} <${email}>`,
+    subject: 'Tipprunde Login Code',
+    category: 'totp',
+    ...(await renderSendTotpEmail({ name: user.name, code, magicLink })),
+  };
+
   try {
-    await sendTotpWithPostmark({ name: user.name, email, code, magicLink });
+    await sendMailWithPostmark(mailProps);
   } catch {
-    await sendTotpWithResend({ name: user.name, email, code, magicLink });
+    await sendMailWithResend(mailProps);
   }
 }
 

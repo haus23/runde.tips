@@ -101,7 +101,7 @@ const topLink = {
   color: '#868E8B',
 };
 
-type SendTotpEmailProps = {
+export type SendTotpEmailProps = {
   name: string;
   code: string;
   magicLink: string;
