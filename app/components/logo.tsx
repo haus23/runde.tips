@@ -8,7 +8,7 @@ export function Logo() {
       >
         <use href="/img/logo.svg#logo" />
       </svg>
-      <span className="text-xl font-medium -translate-y-0.5">runde.tips</span>
+      <span className="-translate-y-0.5 font-medium text-xl">runde.tips</span>
     </div>
   );
 }

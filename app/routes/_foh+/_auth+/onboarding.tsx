@@ -1,64 +1,36 @@
-import {
-  type ActionFunctionArgs,
-  type LoaderFunctionArgs,
-  json,
-  redirect,
-} from '@remix-run/node';
-import { useLoaderData, useSubmit } from '@remix-run/react';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import { useActionData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
+
 import UI from '#components/ui';
 import {
-  authenticator,
-  commitSession,
-  getSession,
-} from '#utils/auth/auth.server';
-import { emitter } from '#utils/emitter.server';
+  ensureSignup,
+  login,
+  requireAnonymous,
+} from '#utils/auth/auth.server.ts';
 
 export const handle = {
   pageTitle: 'Boarding',
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await authenticator.isAuthenticated(request);
-
-  if (user) {
-    emitter.emit('toast', { type: 'success', text: 'Du bist eingeloggt.' });
-    throw redirect('/');
-  }
-
-  const session = await getSession(request);
-  const authEmail = session.get('auth:email');
-  const authError = session.get(authenticator.sessionErrorKey);
-
-  if (!authEmail) return redirect('/login');
-
-  const errors = authError ? { code: authError?.message } : undefined;
-  return json(
-    { errors },
-    {
-      headers: {
-        'set-cookie': await commitSession(session),
-      },
-    },
-  );
+  await requireAnonymous(request);
+  return await ensureSignup(request);
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  await authenticator.authenticate('TOTP', request, {
-    successRedirect: '/onboarding',
-    failureRedirect: '/onboarding',
-  });
+  return login(request);
 }
 
 export default function OnboardingRoute() {
+  const actionData = useActionData<typeof action>();
+
   const submit = useSubmit();
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     submit(e.currentTarget);
   }
-
-  const loaderData = useLoaderData<typeof loader>();
 
   return (
     <UI.Card className="mx-2 sm:mt-8">
@@ -71,10 +43,11 @@ export default function OnboardingRoute() {
           className="flex flex-col items-center gap-y-4"
           method="post"
           onSubmit={onSubmit}
-          validationErrors={loaderData.errors}
+          validationErrors={actionData?.errors}
         >
           <UI.TextField
             name="code"
+            className="flex flex-col items-center"
             inputMode="numeric"
             autoComplete="one-time-code"
             aria-label="Code"
@@ -83,7 +56,7 @@ export default function OnboardingRoute() {
             pattern="\d{6}"
           >
             <UI.Input className="w-40 text-center text-4xl" />
-            <UI.FieldError className="mt-2 text-center">
+            <UI.FieldError className="mt-2">
               {({ validationErrors, validationDetails }) =>
                 validationDetails.valueMissing
                   ? 'Ohne Code geht es nicht weiter.'
