@@ -30,7 +30,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 COPY --from=deps /app/package.json /app/package.json
 ADD . .
-RUN pnpx prisma generate
+RUN pnpm prisma generate
 RUN pnpm build
 
 # final production image
@@ -44,8 +44,6 @@ COPY --from=build /app/prisma /app/prisma
 COPY --from=build /app/package.json /app/package.json
 
 VOLUME [ "/app/data" ]
-
-RUN pnpx prisma db push
 
 EXPOSE 3000
 CMD ["pnpm", "start"]
