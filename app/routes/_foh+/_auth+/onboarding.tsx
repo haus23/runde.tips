@@ -3,11 +3,7 @@ import { useActionData, useSubmit } from '@remix-run/react';
 import { Form } from 'react-aria-components';
 
 import UI from '#components/ui';
-import {
-  ensureSignup,
-  login,
-  requireAnonymous,
-} from '#utils/auth/auth.server.ts';
+import { ensureSignup, login, requireAnonymous } from '#utils/auth/auth.server';
 
 export const handle = {
   pageTitle: 'Boarding',

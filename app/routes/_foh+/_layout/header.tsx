@@ -7,13 +7,14 @@ import {
   Modal,
   ModalOverlay,
 } from 'react-aria-components';
+
 import { Logo } from '#components/logo';
 import { ThemeMenu } from '#components/theme-menu';
 import UI from '#components/ui';
 import { UserMenu } from '#components/user-menu';
 import { useChampionship } from '#utils/app/foh/use-championship';
 import { usePageTitle } from '#utils/app/use-page-title';
-import { useIsAuthenticated } from '#utils/auth/auth.ts';
+import { useIsAuthenticated } from '#utils/auth/auth';
 
 import { ChampionshipSelect } from './championship-select';
 

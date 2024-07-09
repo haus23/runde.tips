@@ -1,5 +1,5 @@
 import { db } from '#utils/db.server';
-import { invariant } from '#utils/misc.js';
+import { invariant } from '#utils/misc';
 import { calculateChampionship } from '../rules/championship';
 import { calculateMatch, matchRuleSchema } from '../rules/match';
 import { tipRuleSchema } from '../rules/tip';

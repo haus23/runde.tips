@@ -1,7 +1,16 @@
 # Code Style
 
-Das Projekt geht all-in mit [Biome](https://biomejs.dev/) zur Formatierung
-und Code-Quality Kontroller vom Code - unterstützt vom Editoconfig-Projekt.
+Das Projekt geht all-in mit [Biome](https://biomejs.dev/) als Formatter und Linter -
+unterstützt vom Editoconfig-Projekt.
+
+## Entscheidungen
+
+- Single Quotes
+- Indent with two spaces
+- Imports without extensions
+
+Letzteres bekomme ich noch nicht konfiguriert für die Auto-Imports mit
+absolutem Pfad und Nutzung des Path-Aliases / `package.json` - Imports.
 
 ## VS Code Extensions
 

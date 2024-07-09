@@ -6,7 +6,7 @@ import {
   MenuTrigger,
   OverlayArrow,
 } from 'react-aria-components';
-import { useUser } from '#utils/auth/auth.ts';
+import { useUser } from '#utils/auth/auth';
 import UI from './ui';
 import { Popover } from './ui/popover/popover';
 

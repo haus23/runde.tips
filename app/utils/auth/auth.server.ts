@@ -1,16 +1,14 @@
 import { generateTOTP, verifyTOTP } from '@epic-web/totp';
+import type { User } from '@prisma/client';
 import { json, redirect } from '@remix-run/node';
 import { redirectBack } from 'remix-utils/redirect-back';
 
-import type { User } from '@prisma/client';
-import { db } from '#utils/db.server.ts';
-import {
-  sendMailWithPostmark,
-  sendMailWithResend,
-} from '#utils/email.server.ts';
-import { renderSendTotpEmail } from '#utils/emails/send-totp.email.tsx';
-import { invariant } from '#utils/misc.ts';
-import { redirectWithToast } from '#utils/toast/toast.server.ts';
+import { db } from '#utils/db.server';
+import { sendMailWithPostmark, sendMailWithResend } from '#utils/email.server';
+import { renderSendTotpEmail } from '#utils/emails/send-totp.email';
+import { invariant } from '#utils/misc';
+import { redirectWithToast } from '#utils/toast/toast.server';
+
 import { commitSession, destroySession, getSession } from './session.server';
 
 async function isKnownEmail(email: string) {
