@@ -9,10 +9,11 @@ import {
   composeRenderProps,
 } from 'react-aria-components';
 import { type VariantProps, tv } from 'tailwind-variants';
-import { FieldError, Label } from '.';
 import { Button } from '../button/button';
 import { Icon } from '../icon/icon';
 import { Popover } from '../popover/popover';
+import { FieldError } from './field-error';
+import { Label } from './label';
 
 const selectStyles = tv({
   base: 'group flex',

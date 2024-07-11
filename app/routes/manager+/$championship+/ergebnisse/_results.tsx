@@ -6,13 +6,14 @@ import {
 import { useFetcher, useLoaderData } from '@remix-run/react';
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
+
 import { setMatchResults } from '#api/use-cases/set-match-results';
 import UI from '#components/ui';
 import { useChampionship } from '#utils/app/manager/use-championship';
-import { requireAdmin } from '#utils/auth/auth.server.ts';
+import { requireAdmin } from '#utils/auth/auth.server';
 import { db } from '#utils/db.server';
-import { toast } from '#utils/toast/toast.client.js';
-import { jsonWithToast } from '#utils/toast/toast.server.js';
+import { toast } from '#utils/toast/toast.client';
+import { jsonWithToast } from '#utils/toast/toast.server';
 
 const schema = z.array(
   z.object({ matchId: z.number(), result: z.string().regex(/^\d+:\d+$/) }),

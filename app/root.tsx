@@ -13,9 +13,9 @@ import { type ReactNode, useEffect } from 'react';
 
 import { GeneralErrorBoundary } from '#components/error-boundary';
 import UI from '#components/ui';
-import { getUser } from '#utils/auth/auth.server.ts';
-import { useAuthBroadcast } from '#utils/auth/auth.ts';
-import { combineHeaders } from '#utils/misc.ts';
+import { useAuthBroadcast } from '#utils/auth/auth';
+import { getUser } from '#utils/auth/auth.server';
+import { combineHeaders } from '#utils/misc';
 import { ClientHintsFallback } from '#utils/theme/client-hints-fallback';
 import { getHints } from '#utils/theme/client-hints.server';
 import { useTheme } from '#utils/theme/theme';
@@ -46,7 +46,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export function Layout({ children }: { children: ReactNode }) {
   const { revalidate } = useRevalidator();
-  const { theme, mode, needsFallback } = useTheme();
+  const { effectiveColorScheme, mode, needsFallback } = useTheme();
 
   useEffect(() => {
     if (mode === 'client') {
@@ -63,7 +63,7 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="de"
-      className={`${theme.colorScheme} bg-app text-app antialiased`}
+      className={`${effectiveColorScheme} bg-app text-app antialiased`}
     >
       <head>
         <meta charSet="utf-8" />

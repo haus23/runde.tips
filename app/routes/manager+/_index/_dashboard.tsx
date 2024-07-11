@@ -1,9 +1,10 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import clsx from 'clsx';
-import { Icon } from '#components/ui/icon/icon.js';
-import { Link } from '#components/ui/link/link.js';
-import type { IconName } from '#components/ui/types.js';
-import { requireAdmin } from '#utils/auth/auth.server.ts';
+
+import { Icon } from '#components/ui/icon/icon';
+import { Link } from '#components/ui/link/link';
+import type { IconName } from '#components/ui/types';
+import { requireAdmin } from '#utils/auth/auth.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await requireAdmin(request);

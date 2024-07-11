@@ -9,13 +9,14 @@ import {
 
 import { twMerge } from 'tailwind-merge';
 import { includes } from '#utils/misc';
-import { type ColorScheme, useTheme } from '#utils/theme/theme';
+import { useTheme } from '#utils/theme/theme';
+import type { Theme } from '#utils/theme/types';
 import UI from './ui';
 import { Popover } from './ui/popover/popover';
 import type { IconName } from './ui/types';
 
 const colorSchemes: {
-  name: ColorScheme | 'system';
+  name: Theme['colorScheme'];
   label: string;
   icon: IconName;
 }[] = [
@@ -25,7 +26,7 @@ const colorSchemes: {
 ];
 
 export function ThemeMenu() {
-  const { theme, mode, setTheme } = useTheme();
+  const { effectiveColorScheme, theme, mode, setTheme } = useTheme();
 
   const selectedColorScheme = new Set([
     mode === 'session' ? theme.colorScheme : 'system',
@@ -41,10 +42,6 @@ export function ThemeMenu() {
       !selectedColorScheme.has(key) && setTheme({ ...theme, colorScheme: key });
     }
   }
-
-  const showArrow = true;
-  const check = 'right';
-
   return (
     <MenuTrigger>
       <UI.Button
@@ -59,14 +56,14 @@ export function ThemeMenu() {
             name="moon"
             className={twMerge(
               'absolute inset-0 origin-[50%_100px] rotate-90 transform transition-transform duration-300',
-              theme.colorScheme === 'dark' && 'rotate-0',
+              effectiveColorScheme === 'dark' && 'rotate-0',
             )}
           />
           <UI.Icon
             name="sun"
             className={twMerge(
               '-rotate-90 absolute inset-0 origin-[50%_100px] transform transition-transform duration-300',
-              theme.colorScheme === 'light' && 'rotate-0',
+              effectiveColorScheme === 'light' && 'rotate-0',
             )}
           />
         </div>
