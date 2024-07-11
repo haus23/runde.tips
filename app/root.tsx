@@ -46,7 +46,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export function Layout({ children }: { children: ReactNode }) {
   const { revalidate } = useRevalidator();
-  const { theme, mode, needsFallback } = useTheme();
+  const { effectiveColorScheme, mode, needsFallback } = useTheme();
 
   useEffect(() => {
     if (mode === 'client') {
@@ -63,7 +63,7 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="de"
-      className={`${theme.colorScheme} bg-app text-app antialiased`}
+      className={`${effectiveColorScheme} bg-app text-app antialiased`}
     >
       <head>
         <meta charSet="utf-8" />
