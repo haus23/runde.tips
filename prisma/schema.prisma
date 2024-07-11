@@ -152,6 +152,7 @@ model Tip {
 
 model Session {
   id             String   @id @default(cuid())
+  expires        Boolean
   expirationDate DateTime
 
   createdAt DateTime @default(now())

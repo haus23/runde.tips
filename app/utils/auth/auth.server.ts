@@ -75,6 +75,7 @@ export async function sendTOTP(request: Request, email: string) {
 export async function signup(request: Request) {
   const formData = await request.formData();
   const email = String(formData.get('email'));
+  const rememberMe = formData.get('rememberMe') === 'rememberMe';
 
   const validEmail = await isKnownEmail(email);
   if (!validEmail) {
@@ -94,6 +95,7 @@ export async function signup(request: Request) {
 
   const session = await getSession(request);
   session.flash('email', email);
+  session.flash('rememberMe', rememberMe);
 
   throw redirect('/onboarding', {
     headers: {
@@ -134,6 +136,7 @@ export async function ensureSignup(request: Request) {
 export async function login(request: Request) {
   const session = await getSession(request);
   const email = session.get('email');
+  const rememberMe = session.get('rememberMe') ?? false;
 
   if (!email || !(await isKnownEmail(email))) {
     throw new Error('Netter Versuch! Keine gültige Email-Adresse!');
@@ -192,13 +195,14 @@ export async function login(request: Request) {
   // Create Server Session
   const user = await getUserByEmail(email);
 
-  const SESSION_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30;
-  const expirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME);
+  const SESSION_EXPIRATION_TIME = 60 * 60 * 24 * 30;
+  const expirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME * 1000);
 
   const sessionData = await db.session.create({
     select: { id: true },
     data: {
       userId: user.id,
+      expires: !rememberMe,
       expirationDate,
     },
   });
@@ -207,7 +211,13 @@ export async function login(request: Request) {
   session.set('expires', expirationDate);
 
   throw redirect('/', {
-    headers: { 'Set-Cookie': await commitSession(session) },
+    headers: {
+      'Set-Cookie': await commitSession(session, {
+        ...(rememberMe && {
+          maxAge: SESSION_EXPIRATION_TIME,
+        }),
+      }),
+    },
   });
 }
 

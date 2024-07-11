@@ -53,6 +53,13 @@ export default function LogInRoute() {
             </UI.Description>
             <UI.FieldError />
           </UI.TextField>
+          <UI.Checkbox
+            name="rememberMe"
+            value="rememberMe"
+            className="flex items-center gap-x-4"
+          >
+            <span>Angemeldet bleiben</span>
+          </UI.Checkbox>
           <UI.Button
             variant="solid"
             color="accent"

@@ -7,7 +7,7 @@ export type AuthSessionData = {
 
 export const authSessionStorage = createCookieSessionStorage<
   AuthSessionData,
-  { email: string; errors: Record<string, string> }
+  { email: string; errors: Record<string, string>; rememberMe: boolean }
 >({
   cookie: {
     name: '__auth',
@@ -16,32 +16,6 @@ export const authSessionStorage = createCookieSessionStorage<
     httpOnly: true,
     secrets: [process.env.SESSION_SECRET],
     secure: process.env.NODE_ENV === 'production',
-  },
-});
-
-const originalCommitSession = authSessionStorage.commitSession;
-
-Object.defineProperty(authSessionStorage, 'commitSession', {
-  value: async function commitSession(
-    ...args: Parameters<typeof originalCommitSession>
-  ) {
-    const [session, options] = args;
-    if (options?.expires) {
-      session.set('expires', options.expires);
-    }
-    if (options?.maxAge) {
-      session.set('expires', new Date(Date.now() + options.maxAge * 1000));
-    }
-    const sessionExpiresDate = session.get('expires');
-    const expires = sessionExpiresDate
-      ? new Date(sessionExpiresDate)
-      : undefined;
-    const setCookieHeader = await originalCommitSession(session, {
-      ...options,
-      expires,
-    });
-    console.log(expires);
-    return setCookieHeader;
   },
 });
 
