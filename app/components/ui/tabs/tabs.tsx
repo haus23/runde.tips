@@ -10,7 +10,6 @@ import {
   type TabPanelsProps,
   type TabProps,
 } from '@headlessui/react';
-import { composeRenderProps } from 'react-aria-components';
 import { twMerge } from 'tailwind-merge';
 import { tv } from 'tailwind-variants';
 import { composeTailwindRenderProps } from '../utils';
