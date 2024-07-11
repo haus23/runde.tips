@@ -4,9 +4,10 @@ import { type ActionFunctionArgs, json } from '@remix-run/node';
 import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
 import type { FormEvent } from 'react';
 import { Form } from 'react-aria-components';
+
 import UI from '#components/ui';
-import { apiCommandBus } from '#utils/api/command-bus.server.js';
-import { createChampionshipSchema as schema } from '#utils/api/commands.js';
+import { commandBus } from '#utils/cqrs/command-bus.server';
+import { createChampionshipSchema as schema } from '#utils/cqrs/commands';
 import { db } from '#utils/db.server';
 import { redirectWithToast } from '#utils/toast/toast.server';
 
@@ -39,7 +40,7 @@ export async function action({ request }: ActionFunctionArgs) {
     );
   }
 
-  apiCommandBus.emit({
+  commandBus.emit({
     name: 'CREATE_CHAMPIONSHIP',
     payload: submission.value,
   });

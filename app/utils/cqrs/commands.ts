@@ -12,4 +12,4 @@ export type CreateChampionshipCommand = {
   payload: z.infer<typeof createChampionshipSchema>;
 };
 
-export type APICommand = CreateChampionshipCommand;
+export type Command = CreateChampionshipCommand;
