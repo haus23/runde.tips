@@ -103,8 +103,8 @@ importers:
         specifier: ~2.9.2
         version: 2.9.2(@remix-run/react@2.9.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.2))(@remix-run/serve@2.9.2(typescript@5.5.2))(@types/node@20.14.2)(typescript@5.5.2)(vite@5.3.3(@types/node@20.14.2))
       '@sly-cli/sly':
-        specifier: ~1.10.0
-        version: 1.10.0(typescript@5.5.2)
+        specifier: ~1.13.0
+        version: 1.13.0(typescript@5.5.2)
       '@types/node':
         specifier: ~20.14.2
         version: 20.14.2
@@ -2246,8 +2246,8 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
-  '@sly-cli/sly@1.10.0':
-    resolution: {integrity: sha512-keX8aUj4tpDGrfup/QvLttH61ARd0wxU7m9YEwGkpHohvnyIG8lXltbzpZdE9AGmQJLFYs0s++rFRmqpSKoqfQ==}
+  '@sly-cli/sly@1.13.0':
+    resolution: {integrity: sha512-h1CWj26bTnWtZRwsLWDmFEA/3slpTnons1l73cAlkLeDoq6e/l8fGY9J4V22en9noG4vWsNjB38Ej9VR+fZCyw==}
     hasBin: true
 
   '@swc/helpers@0.5.11':
@@ -8495,7 +8495,7 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
-  '@sly-cli/sly@1.10.0(typescript@5.5.2)':
+  '@sly-cli/sly@1.13.0(typescript@5.5.2)':
     dependencies:
       '@epic-web/cachified': 5.2.0
       chalk: 5.3.0
