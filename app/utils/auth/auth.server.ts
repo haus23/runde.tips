@@ -9,7 +9,12 @@ import { renderSendTotpEmail } from '#utils/emails/send-totp.email';
 import { invariant } from '#utils/misc';
 import { redirectWithToast } from '#utils/toast/toast.server';
 
-import { commitSession, destroySession, getSession } from './session.server';
+import {
+  SESSION_EXPIRATION_TIME,
+  commitSession,
+  destroySession,
+  getSession,
+} from './session.server';
 
 async function isKnownEmail(email: string) {
   const user = await db.user.findUnique({ where: { email } });
@@ -195,7 +200,6 @@ export async function login(request: Request) {
   // Create Server Session
   const user = await getUserByEmail(email);
 
-  const SESSION_EXPIRATION_TIME = 60 * 60 * 24 * 30;
   const expirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME * 1000);
 
   const sessionData = await db.session.create({
@@ -208,7 +212,6 @@ export async function login(request: Request) {
   });
 
   session.set('sessionId', sessionData.id);
-  session.set('expires', expirationDate);
 
   throw redirect('/', {
     headers: {
