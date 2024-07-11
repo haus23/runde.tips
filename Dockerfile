@@ -42,6 +42,7 @@ COPY --from=build /app/build /app/build
 COPY --from=build /app/prisma /app/prisma
 COPY --from=build /app/package.json /app/package.json
 
+RUN pnpm prisma generate
 VOLUME [ "/app/data" ]
 
 EXPOSE 3000
