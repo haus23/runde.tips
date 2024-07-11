@@ -2,7 +2,7 @@ type EmailProps = {
   from: string;
   to: string;
   subject: string;
-  html: string;
+  html?: string;
   text: string;
   category: string;
 };
@@ -36,9 +36,6 @@ export async function sendMailWithPostmark({
   });
 
   if (!response.ok) {
-    console.log(response);
-    const txt = await response.text();
-    console.log(txt);
     throw new Error('Probleme beim Email-Versand');
   }
 }

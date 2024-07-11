@@ -31,7 +31,7 @@ async function sendTOTPEmail({
 
   const mailProps = {
     from: 'Tipprunde <hallo@runde.tips>',
-    to: `${name} <${email}>`,
+    to: `${user.name} <${email}>`,
     subject: 'Tipprunde Login Code',
     category: 'totp',
     ...(await renderSendTotpEmail({ name: user.name, code, magicLink })),
@@ -78,6 +78,13 @@ export async function signup(request: Request) {
 
   const validEmail = await isKnownEmail(email);
   if (!validEmail) {
+    sendMailWithResend({
+      from: 'security@runde.tips',
+      to: 'Micha <micha@haus23.net>',
+      category: 'security',
+      subject: 'Signup error with invalid email',
+      text: `Invalid email address: ${email}`,
+    });
     return {
       errors: { email: 'Unbekannte Email-Adresse. Wende dich an Micha.' },
     };
