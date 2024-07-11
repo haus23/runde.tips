@@ -1,6 +1,31 @@
 # @tipprunde/www
 
 
+## v0.6.0
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.5.5...v0.6.0)
+
+### 🚀 Enhancements
+
+- Add remember-me option in login form ([d715a94](https://github.com/haus23/runde.tips/commit/d715a94))
+- Implement rolling cookie for remembered sessions. ([1b8def6](https://github.com/haus23/runde.tips/commit/1b8def6))
+- Add migration for the rolling session feature. Finally resolves #120 ([#120](https://github.com/haus23/runde.tips/issues/120))
+
+### 🩹 Fixes
+
+- Upgrade prisma due to bug. ([f515cce](https://github.com/haus23/runde.tips/commit/f515cce))
+- Track invalid logins. First solution: email notification. Resolves #34 ([#34](https://github.com/haus23/runde.tips/issues/34))
+- Remove remaining traces of (un-) revealed server.js ([79f62f6](https://github.com/haus23/runde.tips/commit/79f62f6))
+- Regenerate prisma client in production image ([8b8b666](https://github.com/haus23/runde.tips/commit/8b8b666))
+
+### 🏡 Chore
+
+- **dx:** Update biome ([0c7f626](https://github.com/haus23/runde.tips/commit/0c7f626))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.5.5
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.5.4...v0.5.5)
