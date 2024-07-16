@@ -12,6 +12,7 @@ export type IconName =
   | "search"
   | "scale"
   | "pilcrow"
+  | "pencil"
   | "moon"
   | "menu"
   | "log-out"
@@ -46,6 +47,7 @@ export const iconNames = [
   "search",
   "scale",
   "pilcrow",
+  "pencil",
   "moon",
   "menu",
   "log-out",
