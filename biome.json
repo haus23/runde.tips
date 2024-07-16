@@ -5,8 +5,7 @@
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space",
-    "ignore": ["app/components/ui/icon/icons/*.ts"]
+    "indentStyle": "space"
   },
   "linter": {
     "enabled": true,
