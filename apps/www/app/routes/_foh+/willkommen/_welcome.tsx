@@ -7,7 +7,7 @@ export const meta: MetaFunction = () => {
 
 export default function WelcomeRoute() {
   return (
-    <Card className="mx-2 py-2 sm:mt-8">
+    <Card className="mx-2 py-2 md:mt-8">
       <CardHeader className="px-8 text-2xl">Marie 23 Tipprunde</CardHeader>
       <Divider className="my-2" />
       <CardBody className="flex flex-col gap-y-4 px-8 text-lg">

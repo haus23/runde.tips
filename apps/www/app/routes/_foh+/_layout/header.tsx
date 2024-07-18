@@ -15,7 +15,7 @@ export function Header() {
           <Link href="/">Tabelle</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/spieler">Spieler</Link>
+          <Link href="/spieler/nix">Spieler</Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end" />

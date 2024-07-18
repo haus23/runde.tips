@@ -11,8 +11,9 @@
     "@nextui-org/link": "~2.0.33",
     "@nextui-org/navbar": "~2.0.34",
     "@nextui-org/system": "~2.2.3",
-    "@nextui-org/theme": "~2.2.7",
-    "framer-motion": "~11.3.6",
+    "@nextui-org/theme": "~2.2.8",
+    "framer-motion": "~11.3.7",
+    "tailwind-merge": "~2.4.0",
     "tailwindcss": "catalog:"
   }
 }

@@ -4,7 +4,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteError,
 } from '@remix-run/react';
+
+import { GeneralErrorBoundary } from '#components/error-boundary';
 
 import './styles.css';
 
@@ -29,4 +32,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return <Outlet />;
+}
+
+export function ErrorBoundary() {
+  return <GeneralErrorBoundary />;
 }

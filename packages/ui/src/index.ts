@@ -1,5 +1,6 @@
 // Theme
 export { tv } from '@nextui-org/theme';
+export { twMerge } from 'tailwind-merge';
 
 // Components
 export { Card, CardBody, CardHeader } from '@nextui-org/card';

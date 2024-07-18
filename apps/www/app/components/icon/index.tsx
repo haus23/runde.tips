@@ -1,4 +1,4 @@
-import { tv } from 'ui';
+import { twMerge } from 'ui';
 import type { IconName } from './icons/names.d.ts';
 import iconsHref from './icons/sprite.svg';
 
@@ -7,10 +7,6 @@ export { iconsHref };
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
 }
-
-const iconStyles = tv({
-  base: 'inline size-5 self-center',
-});
 
 export function Icon({ name, className, children, ...props }: IconProps) {
   if (children) {
@@ -26,7 +22,7 @@ export function Icon({ name, className, children, ...props }: IconProps) {
       {...props}
       role="img"
       aria-label={`${name} icon`}
-      className={iconStyles({ className })}
+      className={twMerge('inline size-5 self-center', className)}
     >
       <use href={`${iconsHref}#${name}`} />
     </svg>
