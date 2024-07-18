@@ -13,7 +13,10 @@
   },
   "linter": {
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "nursery": {
+        "useSortedClasses": "error"
+      }
     }
   },
   "vcs": {
