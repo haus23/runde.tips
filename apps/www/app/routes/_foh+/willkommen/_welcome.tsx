@@ -1,9 +1,15 @@
-import type { MetaFunction } from '@remix-run/node';
+import { type MetaFunction, json } from '@remix-run/node';
 import { Card, CardBody, CardHeader, Divider } from 'ui';
+import { requireNoChampionships } from '#utils/app/championship.server';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Willkommen - runde.tips' }];
 };
+
+export async function loader() {
+  await requireNoChampionships();
+  return json(null);
+}
 
 export default function WelcomeRoute() {
   return (

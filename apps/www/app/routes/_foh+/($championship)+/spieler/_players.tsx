@@ -7,7 +7,7 @@ import {
 import { requireChampionship } from '#utils/app/championship.server';
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'Tabelle - runde.tips' }];
+  return [{ title: 'Spieler - runde.tips' }];
 };
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -16,5 +16,5 @@ export async function loader({ params }: LoaderFunctionArgs) {
 }
 
 export default function RankingRoute() {
-  return <h2>Tabelle</h2>;
+  return <h2>Spieler</h2>;
 }
