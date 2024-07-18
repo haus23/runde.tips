@@ -26,7 +26,7 @@ export default function ManagerLayout() {
         </div>
         <div className="flex flex-1 flex-col md:pl-52">
           <ManagerHeader />
-          <div className="p-2 pb-4 md:px-4">
+          <div className="mt-2 pb-10 sm:px-6 lg:px-8">
             <Outlet />
           </div>
         </div>

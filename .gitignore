@@ -10,6 +10,9 @@ build/
 # Sensible data
 .env
 
+# Icons
+app/components/ui/icon/icons/
+
 # Dev DB
 prisma/dev.db
 prisma/dev.db-journal

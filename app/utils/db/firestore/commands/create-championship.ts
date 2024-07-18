@@ -1,4 +1,4 @@
-import type { CreateChampionshipCommand } from '#utils/api/commands';
+import type { CreateChampionshipCommand } from '#utils/cqrs/commands';
 import { db } from '#utils/db.server.js';
 import { invariant } from '#utils/misc.js';
 import type { Championship } from '../model/championship';
