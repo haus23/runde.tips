@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     // React
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    // Vite as Bundler
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true
   }
 }
