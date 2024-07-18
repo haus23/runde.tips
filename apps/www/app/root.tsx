@@ -10,7 +10,7 @@ import './styles.css';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className="dark">
+    <html lang="de" className="dark bg-background text-foreground antialiased">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,7 +18,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-background text-foreground">
+      <body>
         {children}
         <ScrollRestoration />
         <Scripts />
