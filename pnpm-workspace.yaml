@@ -1,2 +1,6 @@
 packages:
   - apps/*
+  - packages/*
+
+catalog:
+  tailwindcss: ~3.4.6

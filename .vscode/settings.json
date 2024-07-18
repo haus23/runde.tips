@@ -7,7 +7,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "biome.json": ".editorconfig",
-    "package.json": "package-lock.json, pnpm-lock.yaml, pnpm-workspace.yaml, .postcssrc.json, tsconfig.json, tailwind.config.ts, vite.config.ts",
+    "package.json": "package-lock.json, pnpm-lock.yaml, pnpm-workspace.yaml, .npmrc, .postcssrc.json, tsconfig.json, tailwind.config.ts, vite.config.ts",
     "README.md": "CHANGELOG.md, LICENSE"
   }
 }

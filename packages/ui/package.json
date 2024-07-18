@@ -1,0 +1,13 @@
+{
+  "name": "ui",
+  "type": "module",
+  "exports": {
+    "./tailwind.config.ts": "./tailwind.config.ts"
+  },
+  "dependencies": {
+    "@nextui-org/system": "~2.2.3",
+    "@nextui-org/theme": "~2.2.7",
+    "framer-motion": "~11.3.6",
+    "tailwindcss": "catalog:"
+  }
+}
