@@ -2,7 +2,10 @@
   "name": "www",
   "type": "module",
   "scripts": {
-    "dev": "vite"
+    "dev": "remix vite:dev",
+    "build": "remix vite:build",
+    "start": "remix-serve ./build/server/index.js",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@remix-run/node": "~2.10.3",

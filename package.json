@@ -3,7 +3,11 @@
   "license": "MIT",
   "version": "0.0.2",
   "scripts": {
-    "check": "biome check --write"
+    "dev": "pnpm --filter www run dev",
+    "build": "pnpm --filter www run build",
+    "start": "pnpm --filter www run start",
+    "check": "biome check --write",
+    "typecheck": "pnpm --filter www run typecheck"
   },
   "engines": {
     "node": "20"
