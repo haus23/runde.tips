@@ -21,7 +21,7 @@ const columns: DataColumn<User>[] = [
   {
     id: 'email',
     label: 'Email',
-    isRowHeader: true,
+    isRowHeader: false,
   },
 ];
 

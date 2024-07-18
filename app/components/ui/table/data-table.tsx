@@ -9,8 +9,21 @@ import {
   TableHeader,
   type TableProps,
 } from 'react-aria-components';
-import { Button } from '../button/button';
-import { Icon } from '../icon/icon';
+import { tv } from 'tailwind-variants';
+import { focusRingStyles } from '../base-styles';
+
+const rowStyles = tv({
+  base: 'rounded-md py-2',
+  extend: focusRingStyles,
+  variants: {
+    isSelected: {
+      true: 'bg-content-active',
+    },
+    isHovered: {
+      true: 'bg-content-hover',
+    },
+  },
+});
 
 export type DataColumn<T extends object> = {
   id: keyof T;
@@ -31,28 +44,33 @@ export function DataTable<T extends object>({
   ...props
 }: DataTableProps<T>) {
   return (
-    <Table {...props} className="w-full">
-      <TableHeader>
+    <Table
+      {...props}
+      className="w-full border-spacing-y-2"
+      selectionMode="single"
+    >
+      <TableHeader className="bg-accent text-xs uppercase">
         <Collection items={columns}>
           {(column) => (
-            <Column className="text-left" isRowHeader={column.isRowHeader}>
+            <Column
+              className="p-2 text-left md:px-6"
+              isRowHeader={column.isRowHeader}
+            >
               {column.label}
             </Column>
           )}
         </Collection>
-        <Column className="sr-only">Bearbeiten</Column>
       </TableHeader>
-      <TableBody items={rows}>
+      <TableBody items={rows} className="divide-y divide-default">
         {(item) => (
-          <Row columns={columns}>
+          <Row columns={columns} className={rowStyles}>
             <Collection items={columns}>
-              {(column) => <Cell>{item[column.id] as ReactNode}</Cell>}
+              {(column) => (
+                <Cell className={'p-2 md:px-6'}>
+                  {item[column.id] as ReactNode}
+                </Cell>
+              )}
             </Collection>
-            <Cell className="w-5">
-              <Button variant="toolbar" onPress={() => onEdit(item)}>
-                <Icon className="h-4 w-4 text-app-subtle" name="pencil" />
-              </Button>
-            </Cell>
           </Row>
         )}
       </TableBody>

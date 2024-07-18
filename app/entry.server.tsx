@@ -5,7 +5,6 @@ import { createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
 import { renderToPipeableStream } from 'react-dom/server';
-import { rollingCookie } from 'remix-utils/rolling-cookie';
 
 import '#utils/env.server';
 import { ensureRollingAuthCookie } from '#utils/auth/session.server.js';

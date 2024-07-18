@@ -19,11 +19,13 @@
     "scope": "typescriptreact",
     "prefix": "loaderfn",
     "body": [
-      "export async function loader({ request }: LoaderFunctionArgs) {",
+			"import { type LoaderFunctionArgs, json } from \"@remix-run/node\"",
+			"",
+			"export async function loader({ request }: LoaderFunctionArgs) {",
       "  $1",
-      "  return null;",
-      "}"
-    ],
+			"  return json({})",
+			"}",
+		],
     "description": "Creates a loader function in a remix route module."
   }
 }
