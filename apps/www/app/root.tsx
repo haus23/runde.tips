@@ -4,14 +4,17 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useRouteError,
+  useNavigate,
 } from '@remix-run/react';
 
+import { UIProvider } from 'ui';
 import { GeneralErrorBoundary } from '#components/error-boundary';
 
 import './styles.css';
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate();
+
   return (
     <html lang="de" className="dark bg-background text-foreground antialiased">
       <head>
@@ -22,9 +25,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <UIProvider navigate={navigate}>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </UIProvider>
       </body>
     </html>
   );

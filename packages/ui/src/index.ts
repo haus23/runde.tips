@@ -1,3 +1,6 @@
+// Core
+export { NextUIProvider as UIProvider } from '@nextui-org/system';
+
 // Theme
 export { tv } from '@nextui-org/theme';
 export { twMerge } from 'tailwind-merge';
