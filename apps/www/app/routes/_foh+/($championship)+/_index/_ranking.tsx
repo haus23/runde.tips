@@ -1,5 +1,13 @@
-import { type LoaderFunctionArgs, json } from '@remix-run/node';
+import {
+  type LoaderFunctionArgs,
+  type MetaFunction,
+  json,
+} from '@remix-run/node';
 // import { requireChampionship } from '#utils/app/championship.server';
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Tabelle - runde.tips' }];
+};
 
 export async function loader({ params }: LoaderFunctionArgs) {
   // await requireChampionship(params);
