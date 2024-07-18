@@ -6,6 +6,7 @@
     "dev": "pnpm --filter www run dev",
     "build": "pnpm --filter www run build",
     "start": "pnpm --filter www run start",
+    "icons": "pnpm --filter www run icons",
     "check": "biome check --write",
     "typecheck": "pnpm --filter www run typecheck"
   },
