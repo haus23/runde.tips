@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.2...v0.0.3)
+
+### 🚀 Enhancements
+
+- Start building routes with remix-flat-routes. ([d9eb861](https://github.com/haus23/runde.tips/commit/d9eb861))
+- Add icons system ([312f836](https://github.com/haus23/runde.tips/commit/312f836))
+
+### 🏡 Chore
+
+- Refine dev workflow. ([7da81d4](https://github.com/haus23/runde.tips/commit/7da81d4))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.2
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.1...v0.0.2)
