@@ -5,6 +5,10 @@
     ".": "./src/index.ts",
     "./tailwind.config.ts": "./tailwind.config.ts"
   },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
   "dependencies": {
     "@nextui-org/card": "~2.0.32",
     "@nextui-org/divider": "~2.0.29",
@@ -13,7 +17,12 @@
     "@nextui-org/system": "~2.2.3",
     "@nextui-org/theme": "~2.2.8",
     "framer-motion": "~11.3.7",
+    "@remix-run/react": "catalog:",
     "tailwind-merge": "~2.4.0",
     "tailwindcss": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:types",
+    "@types/react-dom": "catalog:types"
   }
 }

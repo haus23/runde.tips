@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    // Base
+    "target": "ES2023",
+    "skipLibCheck": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    // Strictness
+    "strict": true,
+
+    // React
+    "jsx": "react-jsx",
+
+    // Vite as Bundler
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true
+  }
+}

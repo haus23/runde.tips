@@ -6,9 +6,25 @@ settings:
 
 catalogs:
   default:
+    '@remix-run/react':
+      specifier: ~2.10.3
+      version: 2.10.3
+    react:
+      specifier: ~18.3.1
+      version: 18.3.1
+    react-dom:
+      specifier: ~18.3.1
+      version: 18.3.1
     tailwindcss:
       specifier: ~3.4.6
       version: 3.4.6
+  types:
+    '@types/react':
+      specifier: ~18.3.3
+      version: 18.3.3
+    '@types/react-dom':
+      specifier: ~18.3.0
+      version: 18.3.0
 
 importers:
 
@@ -24,7 +40,7 @@ importers:
         specifier: ~2.10.3
         version: 2.10.3(typescript@5.5.3)
       '@remix-run/react':
-        specifier: ~2.10.3
+        specifier: 'catalog:'
         version: 2.10.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)
       '@remix-run/serve':
         specifier: ~2.10.3
@@ -33,10 +49,10 @@ importers:
         specifier: ~5.1.13
         version: 5.1.13
       react:
-        specifier: ~18.3.1
+        specifier: 'catalog:'
         version: 18.3.1
       react-dom:
-        specifier: ~18.3.1
+        specifier: 'catalog:'
         version: 18.3.1(react@18.3.1)
       remix-flat-routes:
         specifier: 0.6.5
@@ -55,10 +71,10 @@ importers:
         specifier: ~1.13.0
         version: 1.13.0(typescript@5.5.3)
       '@types/react':
-        specifier: ~18.3.3
+        specifier: catalog:types
         version: 18.3.3
       '@types/react-dom':
-        specifier: ~18.3.0
+        specifier: catalog:types
         version: 18.3.0
       postcss:
         specifier: ~8.4.39
@@ -96,15 +112,31 @@ importers:
       '@nextui-org/theme':
         specifier: ~2.2.8
         version: 2.2.8(tailwindcss@3.4.6)
+      '@remix-run/react':
+        specifier: 'catalog:'
+        version: 2.10.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)
       framer-motion:
         specifier: ~11.3.7
         version: 11.3.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react:
+        specifier: 'catalog:'
+        version: 18.3.1
+      react-dom:
+        specifier: 'catalog:'
+        version: 18.3.1(react@18.3.1)
       tailwind-merge:
         specifier: ~2.4.0
         version: 2.4.0
       tailwindcss:
         specifier: 'catalog:'
         version: 3.4.6
+    devDependencies:
+      '@types/react':
+        specifier: catalog:types
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: catalog:types
+        version: 18.3.0
 
 packages:
 

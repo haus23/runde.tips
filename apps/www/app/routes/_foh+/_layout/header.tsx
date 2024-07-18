@@ -1,4 +1,4 @@
-import { Link, Navbar, NavbarBrand, NavbarContent, NavbarItem } from 'ui';
+import { NavLink, Navbar, NavbarBrand, NavbarContent, NavbarItem } from 'ui';
 import { Logo } from '#components/logo';
 
 export function Header() {
@@ -9,13 +9,13 @@ export function Header() {
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarItem>
-          <Link href="/willkommen">Willkommen</Link>
+          <NavLink href="/willkommen">Willkommen</NavLink>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/">Tabelle</Link>
+          <NavLink href="/">Tabelle</NavLink>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/spieler/nix">Spieler</Link>
+          <NavLink href="/spieler/nix">Spieler</NavLink>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end" />
