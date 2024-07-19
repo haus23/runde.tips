@@ -13,11 +13,11 @@ Das effektive ColorScheme wird wie folgt bestimmt (Präzedenz steigend):
   - Im Root-Loader werden die Hints gelesen (falls unterstützt)
   - Browser ohne Unterstützung von Client Hints erzeugen ein Fallback-Cookie
   - Überwache das bevorzugte ColorScheme des Browsers
+3. Session:
+  - Beim Theme-Wechsel ein Session-Cookie erzeugen
+
 
 ## ThemeColor
 
-Es ist einiges vorbereitet, aber noch nicht zu Ende entwickelt. Zur Zeit wird
-auch nur eine Farbe genutzt: `grass`. In den Dateien im `app/utils/theme` Ordner
-steckt schon der Code um alternativ auch `violet` zu nutzen. Es fehlt die
-Color-Switch Komponente, die Farben aus der Palette in der `styles.css` und
-schließlich das Setzen der CSS-Klasse zur Auswahl der Palette.
+Durch den Einsatz von NextUI bedarf es lediglich der Entwicklung neuer
+Themes und deren Auswahl im erweiterten Theme-Menu.

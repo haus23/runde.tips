@@ -1,3 +1,4 @@
+import type { Key } from 'react';
 import {
   Button,
   Dropdown,
@@ -6,6 +7,7 @@ import {
   DropdownTrigger,
   twMerge,
 } from 'ui';
+import { includes } from '#utils/misc';
 import { useTheme } from '#utils/theme';
 import type { Theme } from '#utils/theme/types';
 import { Icon } from './icon';
@@ -22,11 +24,22 @@ const colorSchemes: {
 ];
 
 export function ThemeMenu() {
-  const { mode, effectiveColorScheme } = useTheme();
+  const { mode, effectiveColorScheme, setTheme, theme } = useTheme();
 
   const selectedColorScheme = new Set([
     mode === 'session' ? 'unknown' : 'system',
   ]);
+
+  function onThemeSelect(key: Key) {
+    if (
+      includes(
+        colorSchemes.map((cs) => cs.name),
+        key,
+      )
+    ) {
+      !selectedColorScheme.has(key) && setTheme({ ...theme, colorScheme: key });
+    }
+  }
 
   return (
     <Dropdown>
@@ -61,6 +74,7 @@ export function ThemeMenu() {
       <DropdownMenu
         selectionMode="single"
         selectedKeys={selectedColorScheme}
+        onAction={onThemeSelect}
         aria-label="Farbschema wählen"
         items={colorSchemes}
       >
