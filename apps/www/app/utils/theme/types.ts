@@ -12,3 +12,5 @@ export const themeSchema = object({
 
 export type Theme = InferInput<typeof themeSchema>;
 export type ThemeMode = 'session' | 'client';
+
+export const cookieName = 'CH-prefers-color-scheme';

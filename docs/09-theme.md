@@ -11,6 +11,7 @@ Das effektive ColorScheme wird wie folgt bestimmt (Präzedenz steigend):
 2. Client Hints:
   - Der Server Entry fordert per Response-Header Client-Hints an
   - Im Root-Loader werden die Hints gelesen (falls unterstützt)
+  - Browser ohne Unterstützung von Client Hints erzeugen ein Fallback-Cookie
 
 ## ThemeColor
 

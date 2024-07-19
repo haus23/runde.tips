@@ -11,7 +11,7 @@ import {
 
 import { UIProvider } from 'ui';
 import { GeneralErrorBoundary } from '#components/error-boundary';
-import { useTheme } from '#utils/theme';
+import { ClientHintsFallback, useTheme } from '#utils/theme';
 import { getTheme } from '#utils/theme/theme.server';
 
 import './styles.css';
@@ -26,7 +26,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
-  const { effectiveColorScheme } = useTheme();
+  const { effectiveColorScheme, needsFallback } = useTheme();
 
   return (
     <html
@@ -37,6 +37,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Marie 23 Cottbus Tipprunde" />
+        {needsFallback && <ClientHintsFallback />}
         <Meta />
         <Links />
       </head>

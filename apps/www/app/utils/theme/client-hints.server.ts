@@ -1,5 +1,5 @@
 import { safeParse } from 'valibot';
-import { colorSchemeSchema } from './types';
+import { colorSchemeSchema, cookieName } from './types';
 
 export function getHints(request: Request) {
   const colorSchemeHeaderValue = request.headers.get(
@@ -9,9 +9,31 @@ export function getHints(request: Request) {
     colorSchemeSchema,
     colorSchemeHeaderValue,
   );
+  let colorScheme = colorSchemeHeader.success ? colorSchemeHeader.output : null;
+
+  // Cookie Fallback
+  if (!colorScheme) {
+    const colorSchemeCookieValue = getCookieValue(request);
+    const colorSchemeCookie = safeParse(
+      colorSchemeSchema,
+      colorSchemeCookieValue,
+    );
+    colorScheme = colorSchemeCookie.success ? colorSchemeCookie.output : null;
+  }
 
   return {
-    colorScheme: colorSchemeHeader.success ? colorSchemeHeader.output : null,
+    colorScheme,
     fallback: !colorSchemeHeader.success,
   };
+}
+
+function getCookieValue(request: Request) {
+  const cookieString = request.headers.get('Cookie') ?? '';
+  const value = cookieString
+    .split(';')
+    .map((c: string) => c.trim())
+    .find((c: string) => c.startsWith(`${cookieName}=`))
+    ?.split('=')[1];
+
+  return value ?? null;
 }
