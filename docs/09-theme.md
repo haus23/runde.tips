@@ -10,6 +10,7 @@ Das effektive ColorScheme wird wie folgt bestimmt (Präzedenz steigend):
 1. Default: light
 2. Client Hints:
   - Der Server Entry fordert per Response-Header Client-Hints an
+  - Im Root-Loader werden die Hints gelesen (falls unterstützt)
 
 ## ThemeColor
 

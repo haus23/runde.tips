@@ -1,17 +1,28 @@
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  json,
   useNavigate,
 } from '@remix-run/react';
 
 import { UIProvider } from 'ui';
 import { GeneralErrorBoundary } from '#components/error-boundary';
+import { useTheme } from '#utils/theme';
+import { getTheme } from '#utils/theme/theme.server';
 
 import './styles.css';
-import { useTheme } from '#utils/theme';
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  return json({
+    requestInfo: {
+      theme: await getTheme(request),
+    },
+  });
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();

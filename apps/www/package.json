@@ -17,7 +17,8 @@
     "react-dom": "catalog:",
     "remix-flat-routes": "0.6.5",
     "tailwindcss": "catalog:",
-    "ui": "workspace:"
+    "ui": "workspace:",
+    "valibot": "0.36.0"
   },
   "devDependencies": {
     "@remix-run/dev": "~2.10.3",
