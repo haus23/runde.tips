@@ -10,8 +10,10 @@
     "react-dom": "catalog:"
   },
   "dependencies": {
+    "@nextui-org/button": "~2.0.35",
     "@nextui-org/card": "~2.0.32",
     "@nextui-org/divider": "~2.0.29",
+    "@nextui-org/dropdown": "~2.1.27",
     "@nextui-org/link": "~2.0.33",
     "@nextui-org/navbar": "~2.0.34",
     "@nextui-org/system": "~2.2.3",

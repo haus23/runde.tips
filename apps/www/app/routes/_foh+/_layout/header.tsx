@@ -13,6 +13,7 @@ import {
 } from 'ui';
 import { Icon } from '#components/icon';
 import { Logo } from '#components/logo';
+import { ThemeMenu } from '#components/theme-menu';
 import { useChampionship } from '#utils/app/use-championship';
 
 export function Header() {
@@ -66,7 +67,9 @@ export function Header() {
           </NavbarItem>
         )}
       </NavbarContent>
-      <NavbarContent justify="end" />
+      <NavbarContent justify="end">
+        <ThemeMenu />
+      </NavbarContent>
       <NavbarMenu>
         {championships.length > 0 ? (
           <>
