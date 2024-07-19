@@ -11,12 +11,17 @@ import { UIProvider } from 'ui';
 import { GeneralErrorBoundary } from '#components/error-boundary';
 
 import './styles.css';
+import { useTheme } from '#utils/theme';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
+  const { effectiveColorScheme } = useTheme();
 
   return (
-    <html lang="de" className="dark bg-background text-foreground antialiased">
+    <html
+      lang="de"
+      className={`${effectiveColorScheme} bg-background text-foreground antialiased`}
+    >
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
