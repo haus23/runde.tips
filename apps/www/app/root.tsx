@@ -7,11 +7,13 @@ import {
   ScrollRestoration,
   json,
   useNavigate,
+  useRevalidator,
 } from '@remix-run/react';
+import { useEffect } from 'react';
 
 import { UIProvider } from 'ui';
 import { GeneralErrorBoundary } from '#components/error-boundary';
-import { ClientHintsFallback, useTheme } from '#utils/theme';
+import { ClientHintsFallback, cookieName, useTheme } from '#utils/theme';
 import { getTheme } from '#utils/theme/theme.server';
 
 import './styles.css';
@@ -26,7 +28,29 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
-  const { effectiveColorScheme, needsFallback } = useTheme();
+  const { revalidate } = useRevalidator();
+
+  const { effectiveColorScheme, mode, needsFallback } = useTheme();
+
+  useEffect(() => {
+    if (mode === 'client') {
+      const handleChange = (ev: MediaQueryListEvent) => {
+        if (needsFallback) {
+          const colorScheme = window.matchMedia('(prefers-color-scheme: light)')
+            .matches
+            ? 'light'
+            : 'dark';
+          document.cookie = `${cookieName}=${colorScheme}; Max-Age=31536000; path=/; SameSite=Lax`;
+        }
+
+        revalidate();
+      };
+
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery?.removeEventListener('change', handleChange);
+    }
+  }, [revalidate, mode, needsFallback]);
 
   return (
     <html
