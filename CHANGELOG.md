@@ -1,6 +1,35 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.4...v0.0.5)
+
+### 🚀 Enhancements
+
+- Implement default theme. ([607ac18](https://github.com/haus23/runde.tips/commit/607ac18))
+- Request client hints. ([66eaf65](https://github.com/haus23/runde.tips/commit/66eaf65))
+- Evaluate client hints ([6ebe344](https://github.com/haus23/runde.tips/commit/6ebe344))
+- Implement cookie fallback ([fb8bc5c](https://github.com/haus23/runde.tips/commit/fb8bc5c))
+- Watch prefered color scheme in client. ([97b6f0e](https://github.com/haus23/runde.tips/commit/97b6f0e))
+- Add theme menu ([358b935](https://github.com/haus23/runde.tips/commit/358b935))
+- Validate and type env vars. ([17a4e4b](https://github.com/haus23/runde.tips/commit/17a4e4b))
+- Create theme cookie ([0938976](https://github.com/haus23/runde.tips/commit/0938976))
+- Derive theme class ([7e580be](https://github.com/haus23/runde.tips/commit/7e580be))
+- Read theme cookie and set theme. ([5ea4710](https://github.com/haus23/runde.tips/commit/5ea4710))
+
+### 💅 Refactors
+
+- Clean up entry file. ([62613b9](https://github.com/haus23/runde.tips/commit/62613b9))
+
+### 🏡 Chore
+
+- Reveal server entry. ([8a501fb](https://github.com/haus23/runde.tips/commit/8a501fb))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.4
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.3...v0.0.4)
