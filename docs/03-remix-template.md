@@ -10,3 +10,4 @@ Anpassungen an den Entry-Files:
 
 - `entry.server.ts`:
   - Clean Up (Linting and isBot-Usage)
+  - Validating environment vars
