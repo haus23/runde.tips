@@ -8,6 +8,8 @@ zwingend in der Tailwind-Config `darkMode: 'class'` notwendig.
 Das effektive ColorScheme wird wie folgt bestimmt (Präzedenz steigend):
 
 1. Default: light
+2. Client Hints:
+  - Der Server Entry fordert per Response-Header Client-Hints an
 
 ## ThemeColor
 
