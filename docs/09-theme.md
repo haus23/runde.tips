@@ -15,7 +15,7 @@ Das effektive ColorScheme wird wie folgt bestimmt (Präzedenz steigend):
   - Überwache das bevorzugte ColorScheme des Browsers
 3. Session:
   - Beim Theme-Wechsel ein Session-Cookie erzeugen
-
+  - Session auslesen und das komplette Theme final setzen
 
 ## ThemeColor
 

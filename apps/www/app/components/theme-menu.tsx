@@ -27,7 +27,7 @@ export function ThemeMenu() {
   const { mode, effectiveColorScheme, setTheme, theme } = useTheme();
 
   const selectedColorScheme = new Set([
-    mode === 'session' ? 'unknown' : 'system',
+    mode === 'session' ? theme.colorScheme : 'system',
   ]);
 
   function onThemeSelect(key: Key) {
