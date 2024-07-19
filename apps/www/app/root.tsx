@@ -30,7 +30,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
   const { revalidate } = useRevalidator();
 
-  const { effectiveColorScheme, mode, needsFallback } = useTheme();
+  const { effectiveColorScheme, mode, needsFallback, theme } = useTheme();
+  const themeClass =
+    theme.themeColor === 'default'
+      ? effectiveColorScheme
+      : `${theme.themeColor}-${effectiveColorScheme}`;
 
   useEffect(() => {
     if (mode === 'client') {
@@ -55,7 +59,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="de"
-      className={`${effectiveColorScheme} bg-background text-foreground antialiased`}
+      className={`${themeClass} bg-background text-foreground antialiased`}
     >
       <head>
         <meta charSet="utf-8" />
