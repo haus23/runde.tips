@@ -13,6 +13,9 @@ export {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
 } from '@nextui-org/navbar';
 
 // Custom Components

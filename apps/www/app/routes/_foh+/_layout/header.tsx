@@ -1,3 +1,5 @@
+import { useNavigation } from '@remix-run/react';
+import { useEffect, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -5,7 +7,11 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
 } from 'ui';
+import { Icon } from '#components/icon';
 import { Logo } from '#components/logo';
 import { useChampionship } from '#utils/app/use-championship';
 
@@ -17,13 +23,30 @@ export function Header() {
       ? ''
       : `/${currentChampionship?.slug}`;
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { state } = useNavigation();
+
+  useEffect(() => {
+    if (state === 'loading') setIsMenuOpen(false);
+  }, [state]);
+
   return (
-    <Navbar>
-      <NavbarBrand>
-        <Link href="/">
-          <Logo />
-        </Link>
-      </NavbarBrand>
+    <Navbar
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      disableAnimation={true}
+    >
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label="Menü öffnen bzw. schließen"
+          className="sm:hidden"
+        />
+        <NavbarBrand>
+          <Link href="/">
+            <Logo />
+          </Link>
+        </NavbarBrand>
+      </NavbarContent>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         {championships.length > 0 ? (
           <>
@@ -44,6 +67,43 @@ export function Header() {
         )}
       </NavbarContent>
       <NavbarContent justify="end" />
+      <NavbarMenu>
+        {championships.length > 0 ? (
+          <>
+            <NavbarMenuItem>
+              <NavLink
+                className="w-full"
+                size="lg"
+                href={`${championshipSegment || '/'}`}
+              >
+                <Icon name="list-ordered">Tabelle</Icon>
+              </NavLink>
+            </NavbarMenuItem>
+            <NavbarMenuItem>
+              <NavLink
+                className="w-full"
+                size="lg"
+                href={`${championshipSegment}/spieler`}
+              >
+                <Icon name="users">Spieler</Icon>
+              </NavLink>
+            </NavbarMenuItem>
+            <NavbarMenuItem>
+              <NavLink
+                className="w-full"
+                size="lg"
+                href={`${championshipSegment}/spiele`}
+              >
+                <Icon name="dices">Spiele</Icon>
+              </NavLink>
+            </NavbarMenuItem>
+          </>
+        ) : (
+          <NavbarItem>
+            <NavLink href="/willkommen">Willkommen</NavLink>
+          </NavbarItem>
+        )}
+      </NavbarMenu>
     </Navbar>
   );
 }
