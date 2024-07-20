@@ -17,8 +17,8 @@ const envSchema = object({
   // AUTH_ENCRYPTION_SECRET: string(),
 
   // Email SaaS Tokens
-  // POSTMARK_TOKEN: string(),
-  // RESEND_TOKEN: string(),
+  POSTMARK_TOKEN: string(),
+  RESEND_TOKEN: string(),
 
   // MIGRATION: Firebase
   // FIREBASE_PROJECT_ID: string(),

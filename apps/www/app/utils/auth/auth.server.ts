@@ -1,11 +1,25 @@
 import { redirect } from '@remix-run/node';
 import * as v from 'valibot';
 
+import { sendMailWithResend } from '#utils/email.server';
+
 const emailSchema = v.pipe(
   v.string(),
   v.nonEmpty('Bitte Email-Adresse angeben.'),
   v.email('Ungültige Email-Adresse.'),
 );
+
+/**
+ * Validates an email address. Only well known addresses are accepted.
+ *
+ * @param email Address to validate
+ * @returns true if email is well known
+ */
+async function isKnownEmail(email: string) {
+  // const user = await db.user.findUnique({ where: { email } });
+  // return user !== null;
+  return email === 'micha@haus23.net';
+}
 
 /**
  * Prepares user onboarding. Expects email in request form data.
@@ -28,13 +42,6 @@ export async function signup(request: Request) {
     };
   }
 
-  if (email !== 'micha@haus23.net') {
-    return {
-      errors: { email: 'Unbekannte Email-Adresse. Wende dich an Micha.' },
-    };
-  }
-
-  /*
   const validEmail = await isKnownEmail(email);
   if (!validEmail) {
     sendMailWithResend({
@@ -48,7 +55,7 @@ export async function signup(request: Request) {
       errors: { email: 'Unbekannte Email-Adresse. Wende dich an Micha.' },
     };
   }
-
+  /*
   sendTOTP(request, email);
 
   const session = await getSession(request);
