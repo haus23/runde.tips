@@ -8,6 +8,7 @@ export { twMerge } from 'tailwind-merge';
 // Components
 export { Button } from '@nextui-org/button';
 export { Card, CardBody, CardHeader } from '@nextui-org/card';
+export { Checkbox } from '@nextui-org/checkbox';
 export { Divider } from '@nextui-org/divider';
 export {
   Dropdown,
@@ -27,3 +28,4 @@ export {
 
 // Custom Components
 export { Link, NavLink } from './components/link';
+export { Input } from './components/input';

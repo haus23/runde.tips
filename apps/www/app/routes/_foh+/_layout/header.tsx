@@ -1,6 +1,7 @@
 import { useNavigation } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import {
+  Divider,
   Link,
   NavLink,
   Navbar,
@@ -69,6 +70,10 @@ export function Header() {
       </NavbarContent>
       <NavbarContent justify="end">
         <ThemeMenu />
+        <Divider orientation="vertical" className="w-0.5 scale-75" />
+        <NavbarItem>
+          <NavLink href="/login">Log In</NavLink>
+        </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
         {championships.length > 0 ? (
