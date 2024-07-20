@@ -1,7 +1,9 @@
 import { redirect } from '@remix-run/node';
 import * as v from 'valibot';
 
-import { sendMailWithResend } from '#utils/email.server';
+import { sendMailWithPostmark, sendMailWithResend } from '#utils/email.server';
+import { renderSendTotpEmail } from '#utils/emails/send-totp.email';
+import { invariant } from '#utils/misc';
 
 const emailSchema = v.pipe(
   v.string(),
@@ -19,6 +21,44 @@ async function isKnownEmail(email: string) {
   // const user = await db.user.findUnique({ where: { email } });
   // return user !== null;
   return email === 'micha@haus23.net';
+}
+
+/**
+ * Loads user by email address
+ * @param email
+ * @returns User
+ */
+async function getUserByEmail(email: string) {
+  const user = { name: 'Micha' }; //  await db.user.findUnique({ where: { email } });
+  invariant(user !== null, `Unknown user email: ${email}`);
+  return { ...user, email };
+}
+
+/**
+ * Send generated one-time-password to user
+ *
+ * @param options
+ */
+async function sendTOTPEmail({
+  email,
+  code,
+  magicLink,
+}: { email: string; code: string; magicLink: string }) {
+  const user = await getUserByEmail(email);
+
+  const mailProps = {
+    from: 'Tipprunde <hallo@runde.tips>',
+    to: `${user.name} <${email}>`,
+    subject: 'Tipprunde Login Code',
+    category: 'totp',
+    ...(await renderSendTotpEmail({ name: user.name, code, magicLink })),
+  };
+
+  try {
+    await sendMailWithPostmark(mailProps);
+  } catch {
+    await sendMailWithResend(mailProps);
+  }
 }
 
 /**
@@ -55,6 +95,13 @@ export async function signup(request: Request) {
       errors: { email: 'Unbekannte Email-Adresse. Wende dich an Micha.' },
     };
   }
+
+  sendTOTPEmail({
+    email,
+    code: '135762',
+    magicLink: 'http://localhost:5173/magic-link',
+  });
+
   /*
   sendTOTP(request, email);
 
