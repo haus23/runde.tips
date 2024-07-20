@@ -42,7 +42,7 @@ export function ThemeMenu() {
   }
 
   return (
-    <Dropdown>
+    <Dropdown showArrow>
       <DropdownTrigger>
         <Button
           className={twMerge(
