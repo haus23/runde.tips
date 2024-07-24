@@ -22,10 +22,10 @@ const envSchema = object({
   POSTMARK_TOKEN: string(),
   RESEND_TOKEN: string(),
 
-  // MIGRATION: Firebase
-  // FIREBASE_PROJECT_ID: string(),
-  // FIREBASE_CLIENT_EMAIL: string(),
-  // FIREBASE_PRIVATE_KEY: string(),
+  // Firebase Credentials
+  FIREBASE_PROJECT_ID: string(),
+  FIREBASE_CLIENT_EMAIL: string(),
+  FIREBASE_PRIVATE_KEY: string(),
 });
 
 declare global {
