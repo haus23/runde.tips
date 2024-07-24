@@ -3,3 +3,6 @@ build/
 
 # Icons
 app/components/icon/icons/
+
+# Prisma Dev DB
+dev.db

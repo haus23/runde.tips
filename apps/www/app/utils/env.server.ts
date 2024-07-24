@@ -10,7 +10,9 @@ import {
 const envSchema = object({
   // Basics
   NODE_ENV: optional(picklist(['development', 'production'])),
-  // DATABASE_URL: string(),
+
+  // Prisma Connection
+  DATABASE_URL: string(),
 
   // Secrets
   SESSION_SECRET: string(),
