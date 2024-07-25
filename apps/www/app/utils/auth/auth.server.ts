@@ -1,4 +1,4 @@
-import { generateTOTP } from '@epic-web/totp';
+import { generateTOTP, verifyTOTP } from '@epic-web/totp';
 import { redirect } from '@remix-run/node';
 import * as v from 'valibot';
 
@@ -7,7 +7,11 @@ import { queryBus } from '#utils/cqrs/query-bus';
 import { sendMailWithPostmark, sendMailWithResend } from '#utils/email.server';
 import { renderSendTotpEmail } from '#utils/emails/send-totp.email';
 import { invariant } from '#utils/misc';
-import { commitSession, getSession } from './session.server';
+import {
+  SESSION_EXPIRATION_TIME,
+  commitSession,
+  getSession,
+} from './session.server';
 
 const emailSchema = v.pipe(
   v.string(),
@@ -138,6 +142,87 @@ export async function signup(request: Request) {
   throw redirect('/onboarding', {
     headers: {
       'Set-Cookie': await commitSession(session),
+    },
+  });
+}
+
+/**
+ * Performs user login
+ *
+ * Expects valid email in session and totp code in request.
+ * Returns error for invalid data. Redirects to home otherwise.
+ *
+ * @param request Request object
+ */
+export async function login(request: Request) {
+  const session = await getSession(request);
+  const email = session.get('email');
+  const rememberMe = session.get('rememberMe') ?? false;
+
+  if (!email || !(await isKnownEmail(email))) {
+    throw new Error('Netter Versuch! Keine gültige Email-Adresse!');
+  }
+
+  // Get code from form data or magic link
+  let code: string | undefined = undefined;
+  if (request.method === 'POST') {
+    const formData = await request.formData();
+    code = String(formData.get('code'));
+  } else if (request.method === 'GET') {
+    const url = new URL(request.url);
+    if (url.pathname !== '/magic-link') {
+      throw new Error('Netter Versuch!');
+    }
+    if (url.searchParams.has('code')) {
+      code = decodeURIComponent(url.searchParams.get('code') ?? '');
+    }
+  }
+  if (typeof code === 'undefined' || code === '') {
+    throw new Error('Netter Versuch! Kein gültiger Login Code!');
+  }
+
+  // Verify code
+  const verificationData = await queryBus.getVerification(email);
+
+  if (!verificationData) {
+    throw new Error(
+      'Netter Versuch! Keine Anmeldung für diese Email-Adresse vorhanden!',
+    );
+  }
+
+  if (new Date() > verificationData.expirationDate) {
+    return {
+      errors: { code: 'Abgelaufener Code.' },
+    };
+  }
+
+  const isValid = verifyTOTP({ otp: code, ...verificationData });
+  if (isValid === null) {
+    return {
+      errors: { code: 'Ungültiger Code.' },
+    };
+  }
+
+  // Create Server Session
+  const user = await getUserByEmail(email);
+
+  const expirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME * 1000);
+
+  const sessionData = await commandBus.createSession({
+    userId: user.id,
+    expires: !rememberMe,
+    expirationDate,
+  });
+
+  session.set('sessionId', sessionData.id);
+
+  throw redirect('/', {
+    headers: {
+      'Set-Cookie': await commitSession(session, {
+        ...(rememberMe && {
+          maxAge: SESSION_EXPIRATION_TIME,
+        }),
+      }),
     },
   });
 }

@@ -1,5 +1,10 @@
 import type { Prisma } from '@prisma/client';
 
 export interface CommandHandler {
-  upsertVerification(args: Prisma.VerificationCreateInput): Promise<void>;
+  upsertVerification(
+    verification: Prisma.VerificationCreateInput,
+  ): Promise<void>;
+  createSession(
+    sessionData: Prisma.SessionCreateArgs['data'],
+  ): Promise<{ id: string }>;
 }

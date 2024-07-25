@@ -1,5 +1,12 @@
+import type { ActionFunctionArgs } from '@remix-run/node';
 import { Form } from '@remix-run/react';
+
 import { Button, Card, CardBody, CardHeader, Divider, Input } from 'ui';
+import { login } from '#utils/auth/auth.server';
+
+export async function action({ request }: ActionFunctionArgs) {
+  return await login(request);
+}
 
 export default function LoginRoute() {
   return (
