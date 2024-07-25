@@ -1,6 +1,29 @@
 # Changelog
 
 
+## v0.0.7
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.6...v0.0.7)
+
+### 🚀 Enhancements
+
+- Implement sending TOTP with simple command-bus ([8b0a4f3](https://github.com/haus23/runde.tips/commit/8b0a4f3))
+- Prepare onboarding. ([a5c7f24](https://github.com/haus23/runde.tips/commit/a5c7f24))
+- Add login flow via totp form ([e99dba9](https://github.com/haus23/runde.tips/commit/e99dba9))
+- Load auth data in root loader. ([941e5d2](https://github.com/haus23/runde.tips/commit/941e5d2))
+- Provide client hook to load auth data. ([4600ac0](https://github.com/haus23/runde.tips/commit/4600ac0))
+- Implement logout and refactor header. ([6540ad6](https://github.com/haus23/runde.tips/commit/6540ad6))
+- Add login flow via magic-link ([c64bdab](https://github.com/haus23/runde.tips/commit/c64bdab))
+
+### 🏡 Chore
+
+- Update pnpm ([b602fea](https://github.com/haus23/runde.tips/commit/b602fea))
+- Patch update. ([7e00405](https://github.com/haus23/runde.tips/commit/7e00405))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.6
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.5...v0.0.6)
