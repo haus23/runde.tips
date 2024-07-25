@@ -16,7 +16,7 @@ const envSchema = object({
 
   // Secrets
   SESSION_SECRET: string(),
-  // AUTH_ENCRYPTION_SECRET: string(),
+  AUTH_SESSION_SECRET: string(),
 
   // Email SaaS Tokens
   POSTMARK_TOKEN: string(),

@@ -7,6 +7,7 @@ import { queryBus } from '#utils/cqrs/query-bus';
 import { sendMailWithPostmark, sendMailWithResend } from '#utils/email.server';
 import { renderSendTotpEmail } from '#utils/emails/send-totp.email';
 import { invariant } from '#utils/misc';
+import { commitSession, getSession } from './session.server';
 
 const emailSchema = v.pipe(
   v.string(),
@@ -117,7 +118,7 @@ export async function signup(request: Request) {
   const validEmail = await isKnownEmail(email);
   if (!validEmail) {
     sendMailWithResend({
-      from: 'security@runde.tips',
+      from: 'Tipprunde <security@runde.tips>',
       to: 'Micha <micha@haus23.net>',
       category: 'security',
       subject: 'Signup error with invalid email',
@@ -129,16 +130,14 @@ export async function signup(request: Request) {
   }
 
   sendTOTP(request, email);
-  /*
 
   const session = await getSession(request);
   session.flash('email', email);
   session.flash('rememberMe', rememberMe);
 
-  */
   throw redirect('/onboarding', {
-    // headers: {
-    //   'Set-Cookie': await commitSession(session),
-    // },
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
   });
 }
