@@ -16,9 +16,11 @@ import { Icon } from '#components/icon';
 import { Logo } from '#components/logo';
 import { ThemeMenu } from '#components/theme-menu';
 import { useChampionship } from '#utils/app/use-championship';
+import { useIsAuthenticated } from '#utils/auth';
 
 export function Header() {
   const { championships, currentChampionship } = useChampionship();
+  const isAuthenticated = useIsAuthenticated();
 
   const championshipSegment =
     currentChampionship?.id === championships[0]?.id
@@ -72,7 +74,11 @@ export function Header() {
         <ThemeMenu />
         <Divider orientation="vertical" className="w-0.5 scale-75" />
         <NavbarItem>
-          <NavLink href="/login">Log In</NavLink>
+          {isAuthenticated ? (
+            <NavLink href="/logout">Log Out</NavLink>
+          ) : (
+            <NavLink href="/login">Log In</NavLink>
+          )}
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
