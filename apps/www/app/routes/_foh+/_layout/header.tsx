@@ -1,4 +1,4 @@
-import { useNavigation } from '@remix-run/react';
+import { Form, useNavigation } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import {
   Divider,
@@ -39,6 +39,7 @@ export function Header() {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       disableAnimation={true}
+      classNames={{ wrapper: 'px-4' }}
     >
       <NavbarContent>
         <NavbarMenuToggle
@@ -72,10 +73,20 @@ export function Header() {
       </NavbarContent>
       <NavbarContent justify="end">
         <ThemeMenu />
-        <Divider orientation="vertical" className="w-0.5 scale-75" />
-        <NavbarItem>
+        <Divider
+          orientation="vertical"
+          className="hidden w-0.5 scale-75 sm:block"
+        />
+        <NavbarItem className="hidden sm:list-item">
           {isAuthenticated ? (
-            <NavLink href="/logout">Log Out</NavLink>
+            <Form action="/logout" method="post" className="flex">
+              <button
+                type="submit"
+                className="tap-highlight-transparent relative inline-flex cursor-default items-center text-foreground text-medium no-underline outline-none transition-opacity hover:opacity-80 active:opacity-disabled data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2"
+              >
+                Log Out
+              </button>
+            </Form>
           ) : (
             <NavLink href="/login">Log In</NavLink>
           )}
@@ -113,10 +124,29 @@ export function Header() {
             </NavbarMenuItem>
           </>
         ) : (
-          <NavbarItem>
-            <NavLink href="/willkommen">Willkommen</NavLink>
-          </NavbarItem>
+          <NavbarMenuItem>
+            <NavLink href="/willkommen">
+              <Icon name="house">Willkommen</Icon>
+            </NavLink>
+          </NavbarMenuItem>
         )}
+        <Divider />
+        <NavbarMenuItem>
+          {isAuthenticated ? (
+            <Form action="/logout" method="post" className="flex">
+              <button
+                type="submit"
+                className="tap-highlight-transparent relative inline-flex cursor-default items-center text-foreground text-medium no-underline outline-none transition-opacity hover:opacity-80 active:opacity-disabled data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2"
+              >
+                <Icon name="log-out">Log Out</Icon>
+              </button>
+            </Form>
+          ) : (
+            <NavLink href="/login">
+              <Icon name="log-in">Log In</Icon>
+            </NavLink>
+          )}
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
