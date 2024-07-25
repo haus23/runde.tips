@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v0.0.6
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.5...v0.0.6)
+
+### 🚀 Enhancements
+
+- Add login and onboarding forms ([7180b48](https://github.com/haus23/runde.tips/commit/7180b48))
+- Implement sending emails. ([bc89b2e](https://github.com/haus23/runde.tips/commit/bc89b2e))
+- Send html emails ([d06a255](https://github.com/haus23/runde.tips/commit/d06a255))
+- Install and configure prisma. Add auth models. ([2d83634](https://github.com/haus23/runde.tips/commit/2d83634))
+- Add seed script. ([9d7e3aa](https://github.com/haus23/runde.tips/commit/9d7e3aa))
+- Expose prisma client as singleton. ([e2000e6](https://github.com/haus23/runde.tips/commit/e2000e6))
+- Implement simple query bus. ([985f0c2](https://github.com/haus23/runde.tips/commit/985f0c2))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.5
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.4...v0.0.5)
