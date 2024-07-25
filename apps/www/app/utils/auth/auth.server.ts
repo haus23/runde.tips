@@ -1,6 +1,8 @@
+import { generateTOTP } from '@epic-web/totp';
 import { redirect } from '@remix-run/node';
 import * as v from 'valibot';
 
+import { commandBus } from '#utils/cqrs/foh-command-bus';
 import { queryBus } from '#utils/cqrs/query-bus';
 import { sendMailWithPostmark, sendMailWithResend } from '#utils/email.server';
 import { renderSendTotpEmail } from '#utils/emails/send-totp.email';
@@ -62,6 +64,36 @@ async function sendTOTPEmail({
 }
 
 /**
+ * Generates TOTP and send it to the given email
+ *
+ * @param request Request object
+ * @param email
+ */
+export async function sendTOTP(request: Request, email: string) {
+  // Generate TOTP and save data
+  const { otp, secret, period, charSet, digits, algorithm } = generateTOTP({
+    period: 300,
+  });
+  const expirationDate = new Date(Date.now() + period * 1000);
+  await commandBus.upsertVerification({
+    email,
+    secret,
+    period,
+    algorithm,
+    digits,
+    charSet,
+    expirationDate,
+  });
+
+  // Generate Magic Link
+  const url = new URL('/magic-link', new URL(request.url).origin);
+  url.searchParams.set('code', otp);
+  const magicLink = url.toString();
+
+  sendTOTPEmail({ email, code: otp, magicLink });
+}
+
+/**
  * Prepares user onboarding. Expects email in request form data.
  *
  * If no valid email address is in the form data, it returns an error.
@@ -96,14 +128,8 @@ export async function signup(request: Request) {
     };
   }
 
-  sendTOTPEmail({
-    email,
-    code: '135762',
-    magicLink: 'http://localhost:5173/magic-link',
-  });
-
-  /*
   sendTOTP(request, email);
+  /*
 
   const session = await getSession(request);
   session.flash('email', email);
