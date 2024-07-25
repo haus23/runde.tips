@@ -1,6 +1,7 @@
 import { redirect } from '@remix-run/node';
 import * as v from 'valibot';
 
+import { queryBus } from '#utils/cqrs/query-bus';
 import { sendMailWithPostmark, sendMailWithResend } from '#utils/email.server';
 import { renderSendTotpEmail } from '#utils/emails/send-totp.email';
 import { invariant } from '#utils/misc';
@@ -18,9 +19,8 @@ const emailSchema = v.pipe(
  * @returns true if email is well known
  */
 async function isKnownEmail(email: string) {
-  // const user = await db.user.findUnique({ where: { email } });
-  // return user !== null;
-  return email === 'micha@haus23.net';
+  const user = await queryBus.getUserByEmail(email);
+  return user !== null;
 }
 
 /**
@@ -29,7 +29,7 @@ async function isKnownEmail(email: string) {
  * @returns User
  */
 async function getUserByEmail(email: string) {
-  const user = { name: 'Micha' }; //  await db.user.findUnique({ where: { email } });
+  const user = await queryBus.getUserByEmail(email);
   invariant(user !== null, `Unknown user email: ${email}`);
   return { ...user, email };
 }
