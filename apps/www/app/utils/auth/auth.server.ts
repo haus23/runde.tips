@@ -1,5 +1,7 @@
 import { generateTOTP, verifyTOTP } from '@epic-web/totp';
+import type { User } from '@prisma/client';
 import { redirect } from '@remix-run/node';
+import { redirectBack } from 'remix-utils/redirect-back';
 import * as v from 'valibot';
 
 import { commandBus } from '#utils/cqrs/foh-command-bus';
@@ -10,6 +12,7 @@ import { invariant } from '#utils/misc';
 import {
   SESSION_EXPIRATION_TIME,
   commitSession,
+  destroySession,
   getSession,
 } from './session.server';
 
@@ -225,4 +228,62 @@ export async function login(request: Request) {
       }),
     },
   });
+}
+
+/**
+ * Logs user out. If no redirectFallback is set, it returns the destroy session cookie
+ * header. With redirectFallback it redirects to the referer or the fallback route
+ * and destroys the session cookie itself.
+ *
+ * @param request Request object
+ * @param redirectFallback Fallback URL if no referer in request
+ * @returns destroy session cookie header
+ */
+
+export async function logout(request: Request, redirectFallback?: string) {
+  const authSession = await getSession(request);
+  const sessionId = authSession.get('sessionId');
+
+  if (sessionId) {
+    await commandBus.deleteSession(sessionId);
+  }
+
+  const headers = new Headers({
+    'Set-Cookie': await destroySession(authSession),
+  });
+
+  if (redirectFallback) {
+    throw redirectBack(request, { fallback: redirectFallback, headers });
+  }
+
+  return headers;
+}
+
+// Auth helpers
+
+export async function getUser(request: Request) {
+  let user: User | null = null;
+  let headers: Headers | null = null;
+
+  // Authenticate
+  const authSession = await getSession(request);
+  const sessionId = authSession.get('sessionId');
+
+  if (sessionId) {
+    const session = await queryBus.getSessionById(sessionId);
+
+    // Existing server session and not expired?
+    if (session && new Date() < session.expirationDate) {
+      user = await queryBus.getUserById(session.userId);
+    }
+
+    if (!user) {
+      headers = await logout(request);
+    }
+  }
+
+  return {
+    user,
+    headers,
+  };
 }

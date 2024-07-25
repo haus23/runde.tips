@@ -15,4 +15,7 @@ export const commandHandler = {
       data: sessionData,
     });
   },
+  async deleteSession(id) {
+    await db.session.delete({ where: { id } });
+  },
 } satisfies CommandHandler;

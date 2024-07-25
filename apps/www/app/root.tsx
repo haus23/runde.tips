@@ -13,17 +13,26 @@ import { useEffect } from 'react';
 
 import { UIProvider } from 'ui';
 import { GeneralErrorBoundary } from '#components/error-boundary';
+import { getUser } from '#utils/auth/auth.server';
 import { ClientHintsFallback, cookieName, useTheme } from '#utils/theme';
 import { getTheme } from '#utils/theme/theme.server';
 
 import './styles.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  return json({
-    requestInfo: {
-      theme: await getTheme(request),
+  const { user, headers: authHeaders } = await getUser(request);
+
+  return json(
+    {
+      user,
+      requestInfo: {
+        theme: await getTheme(request),
+      },
     },
-  });
+    {
+      headers: authHeaders || undefined,
+    },
+  );
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {

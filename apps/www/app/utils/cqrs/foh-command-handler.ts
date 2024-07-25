@@ -7,4 +7,5 @@ export interface CommandHandler {
   createSession(
     sessionData: Prisma.SessionCreateArgs['data'],
   ): Promise<{ id: string }>;
+  deleteSession(id: string): Promise<void>;
 }
