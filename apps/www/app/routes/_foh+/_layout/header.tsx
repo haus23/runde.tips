@@ -2,6 +2,7 @@ import { Form, useNavigation } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import {
   Divider,
+  Icon,
   Link,
   NavLink,
   Navbar,
@@ -12,7 +13,6 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from 'ui';
-import { Icon } from '#components/icon';
 import { Logo } from '#components/logo';
 import { ThemeMenu } from '#components/theme-menu';
 import { useChampionship } from '#utils/app/use-championship';

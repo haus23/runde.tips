@@ -27,5 +27,8 @@ export {
 } from '@nextui-org/navbar';
 
 // Custom Components
-export { Link, NavLink } from './components/link';
+export { Icon, iconsHref } from './components/icon';
+export type { IconName } from './components/icon';
 export { Input } from './components/input';
+export { Link, NavLink } from './components/link';
+export { toast, Toaster } from './components/toast';

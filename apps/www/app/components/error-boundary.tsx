@@ -6,8 +6,7 @@ import {
   useRouteError,
 } from '@remix-run/react';
 
-import { Link } from 'ui';
-import { Icon } from './icon';
+import { Icon, Link } from 'ui';
 
 type StatusHandler = (info: {
   error: ErrorResponse;

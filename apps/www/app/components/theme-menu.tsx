@@ -5,13 +5,13 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Icon,
+  type IconName,
   twMerge,
 } from 'ui';
 import { includes } from '#utils/misc';
 import { useTheme } from '#utils/theme';
 import type { Theme } from '#utils/theme/types';
-import { Icon } from './icon';
-import type { IconName } from './icon/icons/names';
 
 const colorSchemes: {
   name: Theme['colorScheme'];

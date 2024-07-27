@@ -2,7 +2,7 @@ import { twMerge } from 'ui';
 import type { IconName } from './icons/names.d.ts';
 import iconsHref from './icons/sprite.svg';
 
-export { iconsHref };
+export { iconsHref, type IconName };
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;

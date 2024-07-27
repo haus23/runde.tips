@@ -7,11 +7,11 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   plugins: [
     iconsSpritesheet({
-      inputDir: 'resources/icons',
-      outputDir: 'app/components/icon/icons',
+      inputDir: '../../packages/ui/icons',
+      outputDir: '../../packages/ui/src/components/icons',
       fileName: 'sprite.svg',
       withTypes: true,
-      typesOutputFile: 'app/components/icon/icons/names.d.ts',
+      typesOutputFile: '../../packages/ui/src/components/icons/names.d.ts',
       iconNameTransformer: (name) => name[0]?.toLowerCase() + name.slice(1),
     }),
     remix({

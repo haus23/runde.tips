@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/react": "catalog:types",
-    "@types/react-dom": "catalog:types"
+    "@types/react-dom": "catalog:types",
+    "vite": "~5.3.5"
   }
 }
