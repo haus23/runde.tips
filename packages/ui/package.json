@@ -20,6 +20,8 @@
     "@nextui-org/navbar": "~2.0.36",
     "@nextui-org/system": "~2.2.5",
     "@nextui-org/theme": "~2.2.9",
+    "@react-aria/toast": "3.0.0-beta.14",
+    "@react-stately/toast": "3.0.0-beta.5",
     "@remix-run/react": "catalog:",
     "framer-motion": "~11.3.17",
     "tailwind-merge": "~2.4.0",

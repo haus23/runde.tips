@@ -11,7 +11,7 @@ import {
 } from '@remix-run/react';
 import { useEffect } from 'react';
 
-import { UIProvider } from 'ui';
+import { Toaster, UIProvider } from 'ui';
 import { GeneralErrorBoundary } from '#components/error-boundary';
 import { getUser } from '#utils/auth/auth.server';
 import { ClientHintsFallback, cookieName, useTheme } from '#utils/theme';
@@ -90,7 +90,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+      <Toaster />
+    </>
+  );
 }
 
 export function ErrorBoundary() {
