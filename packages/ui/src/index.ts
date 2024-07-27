@@ -31,4 +31,4 @@ export { Icon, iconsHref } from './components/icon';
 export type { IconName } from './components/icon';
 export { Input } from './components/input';
 export { Link, NavLink } from './components/link';
-export { toast, Toaster } from './components/toast';
+export { toast, Toaster, type Toast } from './components/toast';

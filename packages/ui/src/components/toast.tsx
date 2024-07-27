@@ -29,22 +29,18 @@ const typeColors = {
   error: 'bg-danger-50',
 } satisfies Record<ToastTypes, string>;
 
-type ToastData = {
+export type Toast = {
   type: ToastTypes;
   title: string;
   description?: string;
 };
 
-const toastQueue = new ToastQueue<ToastData>({
+const toastQueue = new ToastQueue<Toast>({
   maxVisibleToasts: 5,
 });
 
-export function toast(
-  type: ToastData['type'],
-  title: string,
-  description?: string,
-) {
-  toastQueue.add({ type, title, description }, { timeout: 5000 });
+export function toast(toast: Toast) {
+  toastQueue.add(toast, { timeout: 5000 });
 }
 
 /*
@@ -55,7 +51,7 @@ interface ToastProps<T> extends AriaToastProps<T> {
   state: ToastState<T>;
 }
 
-function Toast<T extends ToastData>({ state, ...props }: ToastProps<T>) {
+function RoastedToast<T extends Toast>({ state, ...props }: ToastProps<T>) {
   const ref = useRef(null);
   const { toastProps, contentProps, titleProps, descriptionProps } = useToast(
     props,
@@ -102,7 +98,7 @@ interface ToastRegionProps<T> extends AriaToastRegionProps {
   state: ToastState<T>;
 }
 
-function ToastRegion<T extends ToastData>({
+function ToastRegion<T extends Toast>({
   state,
   ...props
 }: ToastRegionProps<T>) {
@@ -116,7 +112,7 @@ function ToastRegion<T extends ToastData>({
       className="fixed top-16 right-4 flex flex-col gap-y-2"
     >
       {state.visibleToasts.map((toast) => (
-        <Toast key={toast.key} toast={toast} state={state} />
+        <RoastedToast key={toast.key} toast={toast} state={state} />
       ))}
     </div>
   );

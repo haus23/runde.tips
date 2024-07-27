@@ -11,26 +11,31 @@ import {
 } from '@remix-run/react';
 import { useEffect } from 'react';
 
-import { Toaster, UIProvider } from 'ui';
+import { UIProvider } from 'ui';
 import { GeneralErrorBoundary } from '#components/error-boundary';
 import { getUser } from '#utils/auth/auth.server';
+import { combineHeaders } from '#utils/misc';
 import { ClientHintsFallback, cookieName, useTheme } from '#utils/theme';
 import { getTheme } from '#utils/theme/theme.server';
+import { getToast } from '#utils/toast/toast.server';
+import { Toaster } from '#utils/toast/toaster';
 
 import './styles.css';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { user, headers: authHeaders } = await getUser(request);
+  const { toast, headers: toastHeaders } = await getToast(request);
 
   return json(
     {
       user,
       requestInfo: {
         theme: await getTheme(request),
+        toast,
       },
     },
     {
-      headers: authHeaders || undefined,
+      headers: combineHeaders(authHeaders, toastHeaders),
     },
   );
 }

@@ -1,5 +1,5 @@
 import { type MetaFunction, json } from '@remix-run/node';
-import { Button, Card, CardBody, CardHeader, Divider, toast } from 'ui';
+import { Card, CardBody, CardHeader, Divider } from 'ui';
 import { requireNoChampionships } from '#utils/app/championship.server';
 
 export const meta: MetaFunction = () => {
@@ -26,36 +26,6 @@ export default function WelcomeRoute() {
           wird. Bis dahin empfehle ich ein kühles Blondes am Lieblingstresen
           deiner Stadt.
         </p>
-        <div className="mt-4 flex justify-around">
-          <Button
-            onPress={() =>
-              toast(
-                'info',
-                'This is an info toast with a verly long text',
-                'Bis dahin empfehle ich ein kühles Blondes am Lieblingstresen deiner Stadt.',
-              )
-            }
-          >
-            Info Toast
-          </Button>
-          <Button onPress={() => toast('info', 'This is an info toast')}>
-            Info Toast
-          </Button>
-          <Button
-            onPress={() =>
-              toast(
-                'success',
-                'This is a success toast',
-                'Bis dahin empfehle ich ein kühles Blondes am Lieblingstresen deiner Stadt.',
-              )
-            }
-          >
-            Success Toast
-          </Button>
-          <Button onPress={() => toast('error', 'This is an error toast')}>
-            Error Toast
-          </Button>
-        </div>
       </CardBody>
     </Card>
   );
