@@ -12,3 +12,5 @@ catalogs:
   types:
     "@types/react": ~18.3.3
     "@types/react-dom": ~18.3.0
+  dev-tools:
+    vite: ~5.3.5
