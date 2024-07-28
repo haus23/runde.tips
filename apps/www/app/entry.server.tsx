@@ -5,18 +5,21 @@ import { createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import { isbot } from 'isbot';
 import { renderToPipeableStream } from 'react-dom/server';
+import { ensureRollingAuthCookie } from '#utils/auth/session.server';
 import { ensureEnvironment } from '#utils/env.server';
 
 const ABORT_DELAY = 5_000;
 
 ensureEnvironment();
 
-export default function handleRequest(
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
+  await ensureRollingAuthCookie(request, responseHeaders);
+
   return isbot(request.headers.get('user-agent'))
     ? handleBotRequest(
         request,

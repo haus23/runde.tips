@@ -15,6 +15,9 @@ export const commandHandler = {
       data: sessionData,
     });
   },
+  async updateSession(id, sessionData) {
+    await db.session.update({ where: { id }, data: sessionData });
+  },
   async deleteSession(id) {
     await db.session.delete({ where: { id } });
   },
