@@ -1,5 +1,9 @@
-import type { ActionFunctionArgs, MetaFunction } from '@remix-run/node';
-import { Form, useActionData } from '@remix-run/react';
+import type {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from '@remix-run/node';
+import { Form, json, useActionData } from '@remix-run/react';
 import {
   Button,
   Card,
@@ -9,11 +13,16 @@ import {
   Divider,
   Input,
 } from 'ui';
-import { signup } from '#utils/auth/auth.server';
+import { requireAnonymous, signup } from '#utils/auth/auth.server';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Anmeldung - runde.tips' }];
 };
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  await requireAnonymous(request);
+  return json(null);
+}
 
 export async function action({ request }: ActionFunctionArgs) {
   return await signup(request);

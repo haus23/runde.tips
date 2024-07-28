@@ -1,8 +1,21 @@
-import type { ActionFunctionArgs } from '@remix-run/node';
+import type {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from '@remix-run/node';
 import { Form } from '@remix-run/react';
 
 import { Button, Card, CardBody, CardHeader, Divider, Input } from 'ui';
-import { login } from '#utils/auth/auth.server';
+import { ensureSignup, login, requireAnonymous } from '#utils/auth/auth.server';
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Code Eingabe - runde.tips' }];
+};
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  await requireAnonymous(request);
+  return await ensureSignup(request);
+}
 
 export async function action({ request }: ActionFunctionArgs) {
   return await login(request);

@@ -1,6 +1,6 @@
 import { generateTOTP, verifyTOTP } from '@epic-web/totp';
 import type { User } from '@prisma/client';
-import { redirect } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { redirectBack } from 'remix-utils/redirect-back';
 import * as v from 'valibot';
 
@@ -9,6 +9,8 @@ import { queryBus } from '#utils/cqrs/query-bus';
 import { sendMailWithPostmark, sendMailWithResend } from '#utils/email.server';
 import { renderSendTotpEmail } from '#utils/emails/send-totp.email';
 import { invariant } from '#utils/misc';
+import { redirectWithToast } from '#utils/toast/toast.server';
+
 import {
   SESSION_EXPIRATION_TIME,
   commitSession,
@@ -150,6 +152,27 @@ export async function signup(request: Request) {
 }
 
 /**
+ * Ensures ongoing signup action (email in session)
+ *
+ * @param request Request object
+ */
+export async function ensureSignup(request: Request) {
+  const session = await getSession(request);
+  const email = session.get('email');
+
+  if (!email)
+    throw await redirectWithToast('/login', {
+      type: 'error',
+      title: 'Kein Login gestartet.',
+    });
+
+  const validEmail = await isKnownEmail(email);
+  if (!validEmail) throw Error('Netter Versuch!');
+
+  return json(null);
+}
+
+/**
  * Performs user login
  *
  * Expects valid email in session and totp code in request.
@@ -286,4 +309,14 @@ export async function getUser(request: Request) {
     user,
     headers,
   };
+}
+
+export async function requireAnonymous(request: Request) {
+  const { user } = await getUser(request);
+  if (user) {
+    throw await redirectWithToast('/', {
+      type: 'info',
+      title: 'Du bist schon eingeloggt!',
+    });
+  }
 }
