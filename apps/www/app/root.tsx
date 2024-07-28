@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 
 import { UIProvider } from 'ui';
 import { GeneralErrorBoundary } from '#components/error-boundary';
+import { useAuthBroadcast } from '#utils/auth';
 import { getUser } from '#utils/auth/auth.server';
 import { combineHeaders } from '#utils/misc';
 import { ClientHintsFallback, cookieName, useTheme } from '#utils/theme';
@@ -95,6 +96,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  useAuthBroadcast();
   return (
     <>
       <Outlet />
