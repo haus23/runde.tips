@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v0.0.8
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.7...v0.0.8)
+
+### 🚀 Enhancements
+
+- Add simple toast implementation. ([711c2c9](https://github.com/haus23/runde.tips/commit/711c2c9))
+- Implement response toasts. ([664d788](https://github.com/haus23/runde.tips/commit/664d788))
+- Add guards to the auth routes. ([da5c25b](https://github.com/haus23/runde.tips/commit/da5c25b))
+- Sync auth state over tabs. ([2a72ad8](https://github.com/haus23/runde.tips/commit/2a72ad8))
+- Keep auth state with rolling cookie if rememberMe was activated. ([431bade](https://github.com/haus23/runde.tips/commit/431bade))
+
+### 💅 Refactors
+
+- Move icon component to ui package. ([c888238](https://github.com/haus23/runde.tips/commit/c888238))
+
+### 🏡 Chore
+
+- Move vite to dev-tools catalog. ([84484ad](https://github.com/haus23/runde.tips/commit/84484ad))
+
+### ❤️ Contributors
+
+- Micha Buchholz <micha@haus23.net>
+
 ## v0.0.7
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.6...v0.0.7)

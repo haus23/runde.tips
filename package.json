@@ -1,7 +1,7 @@
 {
   "name": "runde.tips",
   "license": "MIT",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "dev": "pnpm --filter www run dev",
     "build": "pnpm --filter www run build",
