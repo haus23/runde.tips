@@ -1,11 +1,11 @@
-import { safeParse } from 'valibot';
+import * as v from 'valibot';
 import { colorSchemeSchema, cookieName } from './types';
 
 export function getHints(request: Request) {
   const colorSchemeHeaderValue = request.headers.get(
     'Sec-CH-Prefers-Color-Scheme',
   );
-  const colorSchemeHeader = safeParse(
+  const colorSchemeHeader = v.safeParse(
     colorSchemeSchema,
     colorSchemeHeaderValue,
   );
@@ -14,7 +14,7 @@ export function getHints(request: Request) {
   // Cookie Fallback
   if (!colorScheme) {
     const colorSchemeCookieValue = getCookieValue(request);
-    const colorSchemeCookie = safeParse(
+    const colorSchemeCookie = v.safeParse(
       colorSchemeSchema,
       colorSchemeCookieValue,
     );

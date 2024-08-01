@@ -1,41 +1,34 @@
-import {
-  type InferInput,
-  object,
-  optional,
-  picklist,
-  safeParse,
-  string,
-} from 'valibot';
+import * as v from 'valibot';
 
-const envSchema = object({
+const envSchema = v.object({
   // Basics
-  NODE_ENV: optional(picklist(['development', 'production'])),
+  NODE_ENV: v.optional(v.picklist(['development', 'production'])),
 
   // Prisma Connection
-  DATABASE_URL: string(),
+  DATABASE_URL: v.string(),
 
   // Secrets
-  SESSION_SECRET: string(),
-  AUTH_SESSION_SECRET: string(),
+  SESSION_SECRET: v.string(),
+  AUTH_SESSION_SECRET: v.string(),
 
   // Email SaaS Tokens
-  POSTMARK_TOKEN: string(),
-  RESEND_TOKEN: string(),
+  POSTMARK_TOKEN: v.string(),
+  RESEND_TOKEN: v.string(),
 
   // Firebase Credentials
-  FIREBASE_PROJECT_ID: string(),
-  FIREBASE_CLIENT_EMAIL: string(),
-  FIREBASE_PRIVATE_KEY: string(),
+  FIREBASE_PROJECT_ID: v.string(),
+  FIREBASE_CLIENT_EMAIL: v.string(),
+  FIREBASE_PRIVATE_KEY: v.string(),
 });
 
 declare global {
   namespace NodeJS {
-    interface ProcessEnv extends InferInput<typeof envSchema> {}
+    interface ProcessEnv extends v.InferInput<typeof envSchema> {}
   }
 }
 
 export function ensureEnvironment() {
-  const result = safeParse(envSchema, process.env);
+  const result = v.safeParse(envSchema, process.env);
 
   if (!result.success) {
     console.error(

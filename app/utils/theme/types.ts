@@ -1,16 +1,16 @@
-import { type InferInput, object, picklist } from 'valibot';
+import * as v from 'valibot';
 
 const colorSchemeNames = ['light', 'dark'] as const;
 
-export const colorSchemeSchema = picklist(colorSchemeNames);
-export const themeColorSchema = picklist(['default']);
+export const colorSchemeSchema = v.picklist(colorSchemeNames);
+export const themeColorSchema = v.picklist(['default']);
 
-export const themeSchema = object({
-  colorScheme: picklist([...colorSchemeNames, 'system']),
+export const themeSchema = v.object({
+  colorScheme: v.picklist([...colorSchemeNames, 'system']),
   themeColor: themeColorSchema,
 });
 
-export type Theme = InferInput<typeof themeSchema>;
+export type Theme = v.InferInput<typeof themeSchema>;
 export type ThemeMode = 'session' | 'client';
 
 export const cookieName = 'CH-prefers-color-scheme';

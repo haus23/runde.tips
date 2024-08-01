@@ -3,7 +3,7 @@ import {
   createCookieSessionStorage,
   json,
 } from '@remix-run/node';
-import { safeParse } from 'valibot';
+import * as v from 'valibot';
 
 import { getHints } from './client-hints.server';
 import { type Theme, themeSchema } from './types';
@@ -34,7 +34,7 @@ export function createThemeAction() {
   return async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
 
-    const themeResult = safeParse(themeSchema, Object.fromEntries(formData));
+    const themeResult = v.safeParse(themeSchema, Object.fromEntries(formData));
 
     const session = await themeSessionStorage.getSession(
       request.headers.get('Cookie'),

@@ -1,6 +1,6 @@
 import { useFetcher, useRouteLoaderData } from '@remix-run/react';
 import { useCallback } from 'react';
-import { safeParse } from 'valibot';
+import * as v from 'valibot';
 
 import type { loader } from '#root';
 import { type Theme, type ThemeMode, colorSchemeSchema } from './types';
@@ -15,7 +15,7 @@ export function useTheme() {
   const data = useRouteLoaderData<typeof loader>('root');
 
   // True only if cookie and colorScheme is light or dark
-  const hasPersistedColorScheme = safeParse(
+  const hasPersistedColorScheme = v.safeParse(
     colorSchemeSchema,
     data?.requestInfo.theme.session?.colorScheme,
   ).success;
