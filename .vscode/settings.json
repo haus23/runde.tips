@@ -12,5 +12,6 @@
   },
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
-  }
+  },
+  "tailwindCSS.classAttributes": ["class", "className", "classNames"]
 }

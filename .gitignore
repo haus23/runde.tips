@@ -3,3 +3,10 @@ node_modules/
 
 # Sensible data
 .env
+
+# Remix build
+build/
+app/components/ui/icons/
+
+# Prisma Dev DB
+dev.db
