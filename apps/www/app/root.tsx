@@ -84,7 +84,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="relative isolate min-h-svh w-full">
         <UIProvider navigate={navigate}>
           {children}
           <ScrollRestoration />
