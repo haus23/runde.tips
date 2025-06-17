@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    // Strictness
+    "strict": true,
+
+    // Typings
+    "types": ["vite/client"],
+
+    // EcmaScript Version
+    "target": "ES2024",
+
+    // React
+    "jsx": "react-jsx",
+
+    // Bundler
+    "module": "Preserve",
+    "skipLibCheck": true,
+
+    // DX
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  }
+}
