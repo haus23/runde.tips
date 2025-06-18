@@ -6,5 +6,13 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  plugins: [tsConfigPaths(), tanstackStart({ target: "netlify" })],
+  plugins: [
+    tsConfigPaths(),
+    tanstackStart({
+      target: "netlify",
+      tsr: {
+        generatedRouteTree: "generated/routeTree.gen.ts",
+      },
+    }),
+  ],
 });
