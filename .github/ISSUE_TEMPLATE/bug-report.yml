@@ -1,0 +1,40 @@
+name: Bug Report
+description: Melde einen Fehler oder ein unerwartetes Verhalten
+title: "[Bug] "
+labels: ["bug"]
+assignees: ["haus23"]
+
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Was ist passiert?
+      description: Beschreibe, was du beobachtet hast – inklusive Fehlermeldungen, Screenshots oder Konsolenausgaben.
+      placeholder: "Beim Klicken auf 'Speichern' passiert nichts..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Was hast du erwartet?
+      description: Was sollte eigentlich passieren?
+      placeholder: "Das Formular sollte die Daten speichern und ein 'Erfolgreich'-Hinweis erscheinen."
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Schritte zur Reproduktion
+      description: Wie lässt sich der Bug reproduzieren?
+      placeholder: |
+        1. Gehe auf Seite X
+        2. Fülle Feld Y aus
+        3. Klicke auf Z
+        4. Siehe Fehler
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / Plattform
+      description: In welchem Browser oder Gerät tritt das Problem auf?
+      placeholder: "z. B. Chrome 125, Firefox 126, Safari auf iOS 17"

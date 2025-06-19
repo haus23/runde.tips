@@ -1,0 +1,28 @@
+name: Feature Task
+description: Für alle Unteraufgaben eines Features
+title: "[Task] "
+labels: ["idea"]
+assignees: ["haus23"]
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Beschreibung
+      description: Was genau soll erledigt werden?
+      placeholder: "Kurze Zusammenfassung der Aufgabe..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Akzeptanzkriterien
+      description: Wann gilt diese Aufgabe als erledigt?
+      placeholder: "- [ ] Das Formular speichert Daten korrekt\n- [ ] Validierung schlägt bei falschem Input fehl"
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Technische Notizen
+      description: (Optional) Gedanken zur Umsetzung, API, Komponenten etc.
