@@ -5,5 +5,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  return <h1>runde.tips</h1>;
+  return (
+    <div className="mx-4 h-12 flex items-center">
+      <h1 className="text-2xl font-medium">runde.tips</h1>
+    </div>
+  );
 }

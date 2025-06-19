@@ -1,9 +1,13 @@
 catalogs:
   build:
-    vite: ^6.3.5
-    vite-tsconfig-paths: ^5.1.4
-    vite-plugin-devtools-json: ^0.2.0
+    "vite": ^6.3.5
+    "vite-tsconfig-paths": ^5.1.4
+    "vite-plugin-devtools-json": ^0.2.0
+  styling:
+    "tailwindcss": ^4.1.10
+    "@tailwindcss/vite": ^4.1.10
 
 onlyBuiltDependencies:
-  - '@parcel/watcher'
+  - "@parcel/watcher"
+  - "@tailwindcss/oxide"
   - esbuild
