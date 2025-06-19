@@ -1,3 +1,9 @@
+catalogs:
+  build:
+    vite: ^6.3.5
+    vite-tsconfig-paths: ^5.1.4
+    vite-plugin-devtools-json: ^0.2.0
+
 onlyBuiltDependencies:
-  - '@parcel/watcher'
+  - "@parcel/watcher"
   - esbuild
