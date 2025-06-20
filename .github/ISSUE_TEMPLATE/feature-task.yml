@@ -1,7 +1,7 @@
 name: Feature Task
 description: Für alle Unteraufgaben eines Features
 title: "[Task] "
-labels: ["idea"]
+labels: ["task"]
 assignees: ["haus23"]
 
 body:
