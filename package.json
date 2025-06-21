@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "react-router dev"
+    "dev": "react-router dev",
+    "build": "react-router build"
   },
   "dependencies": {
     "@react-router/node": "catalog:framework",
