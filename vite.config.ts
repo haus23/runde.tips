@@ -2,7 +2,8 @@ import { defineConfig } from "vite";
 
 import { reactRouter } from "@react-router/dev/vite";
 import netlifyPlugin from "@netlify/vite-plugin-react-router";
+import devtoolsJson from "vite-plugin-devtools-json";
 
 export default defineConfig({
-  plugins: [reactRouter(), netlifyPlugin()],
+  plugins: [devtoolsJson(), reactRouter(), netlifyPlugin()],
 });

@@ -19,6 +19,7 @@
     "@types/react": "catalog:typing",
     "@types/react-dom": "catalog:typing",
     "typescript": "catalog:typing",
-    "vite": "catalog:bundler"
+    "vite": "catalog:bundler",
+    "vite-plugin-devtools-json": "catalog:bundler"
   }
 }

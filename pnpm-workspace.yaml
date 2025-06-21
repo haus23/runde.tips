@@ -6,6 +6,7 @@ catalogs:
   bundler:
     vite: ^6.3.5
     '@netlify/vite-plugin-react-router': ^1.0.1
+    vite-plugin-devtools-json: ^0.2.0
   typing:
     typescript: ~5.8.3
     '@types/react': ^19.1.8
