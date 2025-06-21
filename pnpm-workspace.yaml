@@ -1,0 +1,14 @@
+catalogs:
+  framework:
+    react-router: ^7.6.2
+    "@react-router/dev": ^7.6.2
+    "@react-router/node": ^7.6.2
+  bundler:
+    vite: ^6.3.5
+  typing:
+    typescript: ~5.8.3
+    "@types/react": ^19.1.8
+    "@types/react-dom": ^19.1.6
+
+onlyBuiltDependencies:
+  - esbuild

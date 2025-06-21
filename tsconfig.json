@@ -1,0 +1,21 @@
+{
+  "include": ["**/*", ".react-router/types/**/*"],
+  "compilerOptions": {
+    // Strictness
+    "strict": true,
+
+    // Source
+    "target": "ES2024",
+    "verbatimModuleSyntax": true,
+
+    // React
+    "jsx": "react-jsx",
+
+    // React Router
+    "rootDirs": [".", "./.react-router/types"],
+
+    // Bundler
+    "module": "Preserve",
+    "noEmit": true
+  }
+}

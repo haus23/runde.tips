@@ -1,5 +1,22 @@
 {
   "name": "runde.tips",
   "version": "0.0.0",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "react-router dev"
+  },
+  "dependencies": {
+    "@react-router/node": "catalog:framework",
+    "isbot": "^5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "catalog:framework"
+  },
+  "devDependencies": {
+    "@react-router/dev": "catalog:framework",
+    "@types/react": "catalog:typing",
+    "@types/react-dom": "catalog:typing",
+    "typescript": "catalog:typing",
+    "vite": "catalog:bundler"
+  }
 }
