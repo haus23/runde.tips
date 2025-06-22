@@ -2,6 +2,7 @@
   "name": "runde.tips",
   "version": "0.0.1",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "react-router dev",
     "build": "react-router build"
@@ -16,8 +17,10 @@
   "devDependencies": {
     "@netlify/vite-plugin-react-router": "catalog:bundler",
     "@react-router/dev": "catalog:framework",
+    "@tailwindcss/vite": "catalog:styling",
     "@types/react": "catalog:typing",
     "@types/react-dom": "catalog:typing",
+    "tailwindcss": "catalog:styling",
     "typescript": "catalog:typing",
     "vite": "catalog:bundler",
     "vite-plugin-devtools-json": "catalog:bundler"

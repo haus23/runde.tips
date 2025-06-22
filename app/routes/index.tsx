@@ -3,5 +3,9 @@ export function meta() {
 }
 
 export default function Home() {
-  return <h1>runde.tips</h1>;
+  return (
+    <div>
+      <h1 className="px-4 py-2 text-2xl font-medium">runde.tips</h1>
+    </div>
+  );
 }

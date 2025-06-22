@@ -16,6 +16,7 @@
 
     // Bundler
     "module": "Preserve",
-    "noEmit": true
+    "noEmit": true,
+    "types": ["vite/client"]
   }
 }
