@@ -1,4 +1,4 @@
-export default function Home() {
+export default function RankingRoute() {
   return (
     <div>
       <title>runde.tips</title>
