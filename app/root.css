@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@import "./themes/mauve-violet.css";
+
+@theme {
+    --color-*: initial;
+
+    --background-color-app: var(--app-bg);
+    --background-color-sidebar: var(--accent-2);
+    --text-color-app: var(--app-text);
+    --text-color-muted: var(--gray-11);
+}
+
+:root {
+    color-scheme: light dark;
+}
