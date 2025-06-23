@@ -17,6 +17,11 @@
     // Bundler
     "module": "Preserve",
     "noEmit": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+
+    // DX
+    "paths": {
+      "~/*": ["./app/*"]
+    }
   }
 }

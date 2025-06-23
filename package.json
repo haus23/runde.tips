@@ -10,6 +10,7 @@
   "dependencies": {
     "@react-router/node": "catalog:framework",
     "isbot": "^5",
+    "lucide-react": "^0.522.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "catalog:framework"
@@ -23,6 +24,7 @@
     "tailwindcss": "catalog:styling",
     "typescript": "catalog:typing",
     "vite": "catalog:bundler",
-    "vite-plugin-devtools-json": "catalog:bundler"
+    "vite-plugin-devtools-json": "catalog:bundler",
+    "vite-tsconfig-paths": "catalog:bundler"
   }
 }
