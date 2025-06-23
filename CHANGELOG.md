@@ -1,6 +1,21 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.2...v0.0.3)
+
+### 🚀 Enhancements
+
+- Initial take on color system. ([51cff8e](https://github.com/haus23/runde.tips/commit/51cff8e))
+- Add logo component. ([6011cfb](https://github.com/haus23/runde.tips/commit/6011cfb))
+- Initial component wrapper, a link. ([3fc7317](https://github.com/haus23/runde.tips/commit/3fc7317))
+- Initial take on the nav layout concept. ([a62a947](https://github.com/haus23/runde.tips/commit/a62a947))
+
+### 🏡 Chore
+
+- **dx:** Add path alias. ([7c765ff](https://github.com/haus23/runde.tips/commit/7c765ff))
+
 ## v0.0.2
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.1...v0.0.2)
