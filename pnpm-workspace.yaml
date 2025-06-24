@@ -21,6 +21,7 @@ catalogs:
 
 onlyBuiltDependencies:
   - "@prisma/engines"
+  - "@prisma/client"
   - "@tailwindcss/oxide"
   - esbuild
   - prisma
