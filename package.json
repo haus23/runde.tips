@@ -16,6 +16,7 @@
     "react-router": "catalog:framework"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.0.5",
     "@netlify/vite-plugin-react-router": "catalog:bundler",
     "@react-router/dev": "catalog:framework",
     "@tailwindcss/vite": "catalog:styling",
