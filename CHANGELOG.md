@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v0.1.0-pre.0
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.4...v0.1.0-pre.0)
+
+### 🚀 Enhancements
+
+- Add login route. Resolves #1 ([#1](https://github.com/haus23/runde.tips/issues/1))
+- Implement initial take on route guards. See #2. ([#2](https://github.com/haus23/runde.tips/issues/2))
+- Add guards to the routes. See #2 ([#2](https://github.com/haus23/runde.tips/issues/2))
+
+### 💅 Refactors
+
+- Do not hardcode required role. ([3d2e8eb](https://github.com/haus23/runde.tips/commit/3d2e8eb))
+
+### 🏡 Chore
+
+- **dx:** Enforce separated type imports. ([5116104](https://github.com/haus23/runde.tips/commit/5116104))
+- Install and configure prisma. ([52c5f71](https://github.com/haus23/runde.tips/commit/52c5f71))
+- **dx:** Move generated prisma client into app folder. ([5411a53](https://github.com/haus23/runde.tips/commit/5411a53))
+- Add prisma client to build scripts ([cd436ab](https://github.com/haus23/runde.tips/commit/cd436ab))
+
 ## v0.0.4
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.3...v0.0.4)
