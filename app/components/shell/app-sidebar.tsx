@@ -11,12 +11,19 @@ export function AppSidebar() {
     : FohNavigation;
 
   return (
-    <div className="">
-      <Link to="/">
-        <Logo className="size-10" />
-        <span>runde.tips</span>
-      </Link>
-      <Navigation />
+    <div className="group">
+      <div className="relative h-svh w-[var(--sidebar-width)]" />
+      <div className="fixed inset-y-0 h-svh w-[var(--sidebar-width)] border-r">
+        <div className="flex h-full w-full flex-col">
+          <div className="p-2">
+            <Link to="/" variant="sidenav">
+              <Logo className="size-10" />
+              <span className="font-medium text-xl">runde.tips</span>
+            </Link>
+          </div>
+          <Navigation />
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,10 +1,29 @@
+import { twMerge } from 'tailwind-merge';
 import { AppSidebar } from './app-sidebar';
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+const SIDEBAR_WIDTH = '12rem';
+
+export interface AppShellProps extends React.ComponentProps<'div'> {}
+
+export function AppShell({
+  children,
+  className,
+  style,
+  ...props
+}: AppShellProps) {
   return (
-    <div className="isolate flex min-h-svh w-full">
+    <div
+      className={twMerge('isolate flex min-h-svh w-full', className)}
+      style={
+        {
+          '--sidebar-width': SIDEBAR_WIDTH,
+          ...style,
+        } as React.CSSProperties
+      }
+      {...props}
+    >
       <AppSidebar />
-      <main>{children}</main>
+      <main className="p-2 pt-3">{children}</main>
     </div>
   );
 }
