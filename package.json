@@ -25,6 +25,7 @@
     "@tailwindcss/vite": "catalog:styling",
     "@types/react": "catalog:typing",
     "@types/react-dom": "catalog:typing",
+    "prisma": "catalog:orm",
     "tailwindcss": "catalog:styling",
     "typescript": "catalog:typing",
     "vite": "catalog:bundler",

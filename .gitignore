@@ -10,3 +10,9 @@ build/
 
 # Editor / IDE settings
 .zed/
+
+# Sensible data
+.env
+
+# Generated code
+/generated/prisma

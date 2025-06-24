@@ -15,7 +15,11 @@ catalogs:
   styling:
     tailwindcss: ^4.1.10
     '@tailwindcss/vite': ^4.1.10
+  orm:
+    prisma: ^6.10.1
 
 onlyBuiltDependencies:
+  - '@prisma/engines'
   - '@tailwindcss/oxide'
   - esbuild
+  - prisma
