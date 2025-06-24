@@ -15,4 +15,4 @@ build/
 .env
 
 # Generated code
-/generated/prisma
+/app/prisma
