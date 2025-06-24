@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.0.3...v0.0.4)
+
+### 🚀 Enhancements
+
+- Add minimal styling to the link wrappers. ([71a784d](https://github.com/haus23/runde.tips/commit/71a784d))
+- Add initial sidebar styling. ([6aa6794](https://github.com/haus23/runde.tips/commit/6aa6794))
+
+### 💅 Refactors
+
+- Drop all(!) color styling for now. ([99b74fa](https://github.com/haus23/runde.tips/commit/99b74fa))
+
+### 🏡 Chore
+
+- **dx:** Add and configure biome. ([d979dd6](https://github.com/haus23/runde.tips/commit/d979dd6))
+- **dx:** Add check script and run the script. ([b55406a](https://github.com/haus23/runde.tips/commit/b55406a))
+- **dx:** Use sorted tailwind classes. ([d8e31be](https://github.com/haus23/runde.tips/commit/d8e31be))
+- **dx:** Add class variance authority tooling. ([3d2ddb6](https://github.com/haus23/runde.tips/commit/3d2ddb6))
+- **dx:** Lint sorted classes. ([7458170](https://github.com/haus23/runde.tips/commit/7458170))
+
 ## v0.0.3
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.2...v0.0.3)
