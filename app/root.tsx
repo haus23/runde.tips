@@ -1,9 +1,9 @@
-import type * as React from "react";
-import { Outlet, Scripts, ScrollRestoration } from "react-router";
+import type * as React from 'react';
+import { Outlet, Scripts, ScrollRestoration } from 'react-router';
 
-import { AppShell } from "~/components/shell/app-shell";
+import { AppShell } from '~/components/shell/app-shell';
 
-import stylesHref from "./root.css?url";
+import stylesHref from './root.css?url';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

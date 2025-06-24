@@ -1,5 +1,5 @@
-import { TableIcon, UsersIcon, DicesIcon, SettingsIcon } from "lucide-react";
-import { NavLink } from "~/components/ui/link";
+import { DicesIcon, SettingsIcon, TableIcon, UsersIcon } from 'lucide-react';
+import { NavLink } from '~/components/ui/link';
 
 export function FohNavigation() {
   return (

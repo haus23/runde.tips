@@ -1,4 +1,4 @@
-import { AppSidebar } from "./app-sidebar";
+import { AppSidebar } from './app-sidebar';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (

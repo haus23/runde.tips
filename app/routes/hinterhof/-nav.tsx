@@ -1,5 +1,5 @@
-import { HomeIcon, LogOutIcon } from "lucide-react";
-import { NavLink } from "~/components/ui/link";
+import { HomeIcon, LogOutIcon } from 'lucide-react';
+import { NavLink } from '~/components/ui/link';
 
 export function HinterhofNavigation() {
   return (

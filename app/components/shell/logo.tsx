@@ -1,6 +1,6 @@
-import LogoImage from "~/assets/logo.svg?no-inline";
+import LogoImage from '~/assets/logo.svg?no-inline';
 
-export interface LogoProps extends React.ComponentProps<"div"> {}
+export interface LogoProps extends React.ComponentProps<'div'> {}
 
 export function Logo({ className, ...props }: LogoProps) {
   return (
