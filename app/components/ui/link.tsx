@@ -3,15 +3,38 @@ import type {
   NavLinkProps as _NavLinkProps,
 } from 'react-router';
 import { Link as _Link, NavLink as _NavLink } from 'react-router';
+import { compose, cva, type VariantProps } from '~/utils/cva';
 
-interface LinkProps extends _LinkProps {}
+const link = cva({
+  base: [],
+  variants: {
+    variant: {
+      default: [''],
+      sidenav: ['flex items-center gap-1.5'],
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+});
 
-export function Link({ ...props }: LinkProps) {
-  return <_Link {...props} />;
+const navLink = compose(
+  link,
+  cva({
+    variants: {
+      variant: { sidenav: ['aria-[current=page]:underline'] },
+    },
+  }),
+);
+
+interface LinkProps extends _LinkProps, VariantProps<typeof link> {}
+
+export function Link({ className, variant, ...props }: LinkProps) {
+  return <_Link className={link({ className, variant })} {...props} />;
 }
 
-interface NavLinkProps extends _NavLinkProps {}
+interface NavLinkProps extends _NavLinkProps, VariantProps<typeof navLink> {}
 
-export function NavLink({ ...props }: NavLinkProps) {
-  return <_NavLink {...props} />;
+export function NavLink({ className, variant, ...props }: NavLinkProps) {
+  return <_NavLink className={navLink({ className, variant })} {...props} />;
 }
