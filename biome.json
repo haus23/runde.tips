@@ -17,6 +17,14 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "style": {
+        "useImportType": {
+          "level": "on",
+          "options": {
+            "style": "separatedType"
+          }
+        }
+      },
       "nursery": {
         "useSortedClasses": {
           "level": "info",

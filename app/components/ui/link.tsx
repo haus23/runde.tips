@@ -3,7 +3,8 @@ import type {
   NavLinkProps as _NavLinkProps,
 } from 'react-router';
 import { Link as _Link, NavLink as _NavLink } from 'react-router';
-import { compose, cva, type VariantProps } from '~/utils/cva';
+import type { VariantProps } from '~/utils/cva';
+import { compose, cva } from '~/utils/cva';
 
 const link = cva({
   base: [],
