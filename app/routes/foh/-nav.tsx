@@ -1,6 +1,6 @@
 import {
   DicesIcon,
-  LogOutIcon,
+  LogInIcon,
   SettingsIcon,
   TableIcon,
   UsersIcon,
@@ -29,9 +29,9 @@ export function FohNavigation() {
           <SettingsIcon className="size-5" />
           <span>Manager</span>
         </NavLink>
-        <NavLink to="/logout" variant="sidenav">
-          <LogOutIcon className="size-5" />
-          <span>Log Out</span>
+        <NavLink to="/login" variant="sidenav">
+          <LogInIcon className="size-5" />
+          <span>Log In</span>
         </NavLink>
       </div>
     </div>
