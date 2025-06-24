@@ -1,5 +1,5 @@
 import { redirect } from 'react-router';
-import type { Role, User } from '~/prisma';
+import type { User } from '~/prisma';
 
 /**
  * Loads user from db - may be identified by the cookie session
@@ -26,9 +26,9 @@ export async function requireAnonymous(request: Request) {
  *
  * @param request Request object
  */
-export async function requireRole(request: Request, role: Role) {
+export async function requireManager(request: Request) {
   const user = await getOptionalUser(request);
-  if (!user || user.role === role) {
+  if (!user || user.role === 'ADMIN') {
     throw redirect('/login');
   }
 }
