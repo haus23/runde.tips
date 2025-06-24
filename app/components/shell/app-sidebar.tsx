@@ -1,7 +1,8 @@
-import { Link, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { Logo } from "./logo";
 import { HinterhofNavigation } from "~/routes/hinterhof/-nav";
 import { FohNavigation } from "~/routes/foh/-nav";
+import { Link } from "../ui/link";
 
 export function AppSidebar() {
   const { pathname } = useLocation();
@@ -10,15 +11,12 @@ export function AppSidebar() {
     : FohNavigation;
 
   return (
-    <div>
-      <div className="fixed flex flex-col left-3 py-1 top-3 h-[calc(100vh-1.5rem)] rounded-xl w-16 bg-sidebar">
-        <div className="grow flex flex-col gap-y-4 items-center">
-          <Link to="/">
-            <Logo className="size-10 text-app" />
-          </Link>
-          <Navigation />
-        </div>
-      </div>
+    <div className="">
+      <Link to="/">
+        <Logo className="size-10" />
+        <span>runde.tips</span>
+      </Link>
+      <Navigation />
     </div>
   );
 }
