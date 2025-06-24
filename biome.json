@@ -21,7 +21,9 @@
         "useSortedClasses": {
           "level": "info",
           "fix": "safe",
-          "options": {}
+          "options": {
+            "functions": ["cva", "cx", "twMerge"]
+          }
         }
       }
     }
