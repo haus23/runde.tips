@@ -1,6 +1,7 @@
 import { redirect } from 'react-router';
 import type { User } from '~/prisma';
 import { getUserByEmail } from './db/user';
+import { commitAuthSession, getAuthSession } from './sessions.server';
 import { createLoginCode } from './totp.server';
 
 /*
@@ -27,7 +28,14 @@ export async function prepareOnboarding(request: Request) {
   const code = await createLoginCode(email);
   console.log(code);
 
-  throw redirect('/verify');
+  const session = await getAuthSession(request);
+  session.flash('email', email);
+
+  throw redirect('/verify', {
+    headers: {
+      'Set-Cookie': await commitAuthSession(session),
+    },
+  });
 }
 
 /*

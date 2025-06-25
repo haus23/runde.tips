@@ -12,6 +12,9 @@ const envSchema = v.object({
 
   // TOTP Settings (Period in seconds the code is valid)
   TOTP_PERIOD: v.pipe(v.string(), v.transform(Number)),
+
+  // Secrets
+  AUTH_SESSION_SECRET: v.string(),
 });
 
 export const env = v.parse(envSchema, process.env);
