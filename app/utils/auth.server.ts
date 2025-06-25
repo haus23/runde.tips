@@ -26,6 +26,8 @@ export async function prepareOnboarding(request: Request) {
 
   const code = await createLoginCode(email);
   console.log(code);
+
+  throw redirect('/verify');
 }
 
 /*
