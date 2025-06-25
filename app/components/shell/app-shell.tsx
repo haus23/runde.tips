@@ -23,7 +23,7 @@ export function AppShell({
       {...props}
     >
       <AppSidebar />
-      <main className="p-2 pt-3">{children}</main>
+      <main className="p-4 pt-3">{children}</main>
     </div>
   );
 }
