@@ -18,13 +18,15 @@
     "react-aria-components": "^1.10.1",
     "react-dom": "^19.1.0",
     "react-router": "catalog:framework",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "valibot": "^1.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.5",
     "@netlify/vite-plugin-react-router": "catalog:bundler",
     "@react-router/dev": "catalog:framework",
     "@tailwindcss/vite": "catalog:styling",
+    "@types/node": "catalog:typing",
     "@types/react": "catalog:typing",
     "@types/react-dom": "catalog:typing",
     "prisma": "catalog:orm",

@@ -1,27 +1,28 @@
 catalogs:
   framework:
     react-router: ^7.6.2
-    "@react-router/dev": ^7.6.2
-    "@react-router/node": ^7.6.2
+    '@react-router/dev': ^7.6.2
+    '@react-router/node': ^7.6.2
   bundler:
     vite: ^6.3.5
-    "@netlify/vite-plugin-react-router": ^1.0.1
+    '@netlify/vite-plugin-react-router': ^1.0.1
     vite-plugin-devtools-json: ^0.2.0
     vite-tsconfig-paths: ^5.1.4
   typing:
     typescript: ~5.8.3
-    "@types/react": ^19.1.8
-    "@types/react-dom": ^19.1.6
+    '@types/react': ^19.1.8
+    '@types/react-dom': ^19.1.6
+    '@types/node': ^24.0.4
   styling:
     tailwindcss: ^4.1.10
-    "@tailwindcss/vite": ^4.1.10
+    '@tailwindcss/vite': ^4.1.10
   orm:
-    "@prisma/client": ^6.10.1
+    '@prisma/client': ^6.10.1
     prisma: ^6.10.1
 
 onlyBuiltDependencies:
-  - "@prisma/engines"
-  - "@prisma/client"
-  - "@tailwindcss/oxide"
+  - '@prisma/engines'
+  - '@prisma/client'
+  - '@tailwindcss/oxide'
   - esbuild
   - prisma
