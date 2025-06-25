@@ -1,6 +1,7 @@
 import { redirect } from 'react-router';
 import type { User } from '~/prisma';
 import { getUserByEmail } from './db/user';
+import { createLoginCode } from './totp.server';
 
 /*
  * The main auth flow functions
@@ -23,7 +24,8 @@ export async function prepareOnboarding(request: Request) {
     };
   }
 
-  console.log(user);
+  const code = await createLoginCode(email);
+  console.log(code);
 }
 
 /*

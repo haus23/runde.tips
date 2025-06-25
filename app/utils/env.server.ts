@@ -9,6 +9,9 @@ const envSchema = v.object({
 
   // Root Email
   ROOT_EMAIL: v.pipe(v.string(), v.email()),
+
+  // TOTP Settings (Period in seconds the code is valid)
+  TOTP_PERIOD: v.pipe(v.string(), v.transform(Number)),
 });
 
 export const env = v.parse(envSchema, process.env);

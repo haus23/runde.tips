@@ -9,6 +9,7 @@
     "check": "biome check --write ."
   },
   "dependencies": {
+    "@epic-web/totp": "^4.0.1",
     "@prisma/client": "catalog:orm",
     "@react-router/node": "catalog:framework",
     "cva": "1.0.0-beta.4",
