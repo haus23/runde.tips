@@ -23,7 +23,9 @@ export function AppShell({
       {...props}
     >
       <AppSidebar />
-      <main className="p-4 pt-3">{children}</main>
+      <main className="relative flex min-h-svh w-full grow flex-col">
+        <div className="p-4 pt-3">{children}</div>
+      </main>
     </div>
   );
 }
