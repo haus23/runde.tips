@@ -38,6 +38,26 @@ export async function prepareOnboarding(request: Request) {
   });
 }
 
+/**
+ * Ensures that there is an ongoing onboarding session.
+ *
+ * Prevents the route from being called directly without email verification
+ *
+ * @param request Request object
+ */
+export async function ensureOnboardingSession(request: Request) {
+  const session = await getAuthSession(request);
+  const email = session.get('email');
+
+  if (!email) {
+    throw redirect('/login');
+  }
+
+  // Ensure again valid email in session
+  const user = await getUserByEmail(email);
+  if (!user) throw Error('Netter Versuch!');
+}
+
 /*
  * The auth state functions
  *

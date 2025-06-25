@@ -1,3 +1,11 @@
+import { ensureOnboardingSession, requireAnonymous } from '~/utils/auth.server';
+import type { Route } from './+types/verify';
+
+export async function loader({ request }: Route.LoaderArgs) {
+  await requireAnonymous(request);
+  await ensureOnboardingSession(request);
+}
+
 export default function LoginRoute() {
   return (
     <div>
