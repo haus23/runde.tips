@@ -1,6 +1,33 @@
 # Changelog
 
 
+## v0.1.0-pre.1
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0-pre.0...v0.1.0-pre.1)
+
+### 🚀 Enhancements
+
+- Add minimal input wrapper. Resolves #16 ([#16](https://github.com/haus23/runde.tips/issues/16))
+- Add minimal text-field wrapper. Resolves #17 ([#17](https://github.com/haus23/runde.tips/issues/17))
+- Add simple form wrapper. Resolves #20 ([#20](https://github.com/haus23/runde.tips/issues/20))
+- Add minimal button wrapper. Resolves #18 ([#18](https://github.com/haus23/runde.tips/issues/18))
+- Validate env vars. Resolves #22 ([#22](https://github.com/haus23/runde.tips/issues/22))
+- Add initial user email validation. ([760bf3f](https://github.com/haus23/runde.tips/commit/760bf3f))
+- Add first take on the login form. Validates email. Resolves #24 ([#24](https://github.com/haus23/runde.tips/issues/24))
+
+### 🩹 Fixes
+
+- Increase padding. ([657f483](https://github.com/haus23/runde.tips/commit/657f483))
+- Make main full size. ([0b2b2fd](https://github.com/haus23/runde.tips/commit/0b2b2fd))
+
+### 💅 Refactors
+
+- Add some form styling. Could keep client code smaller. ([d3531a5](https://github.com/haus23/runde.tips/commit/d3531a5))
+
+### 🏡 Chore
+
+- Install React Aria Components (RAC). See #13 ([#13](https://github.com/haus23/runde.tips/issues/13))
+
 ## v0.1.0-pre.0
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.0.4...v0.1.0-pre.0)
