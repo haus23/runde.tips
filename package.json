@@ -15,6 +15,7 @@
     "isbot": "^5",
     "lucide-react": "^0.522.0",
     "react": "^19.1.0",
+    "react-aria-components": "^1.10.1",
     "react-dom": "^19.1.0",
     "react-router": "catalog:framework",
     "tailwind-merge": "^3.3.1"
