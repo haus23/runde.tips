@@ -1,5 +1,5 @@
+import type { User } from '@prisma/client';
 import { redirect } from 'react-router';
-import type { User } from '~/prisma';
 import { getUserByEmail } from './db/user';
 import { commitAuthSession, getAuthSession } from './sessions.server';
 import { createLoginCode } from './totp.server';

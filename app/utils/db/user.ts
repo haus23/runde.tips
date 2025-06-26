@@ -1,4 +1,4 @@
-import type { User } from '~/prisma';
+import type { Prisma } from '@prisma/client';
 import { env } from '../env.server';
 
 const rootUser = {
@@ -7,7 +7,7 @@ const rootUser = {
   slug: 'root',
   name: 'Root',
   role: 'ADMIN',
-} satisfies Omit<User, 'createdAt' | 'updatedAt'>;
+} satisfies Prisma.UserUncheckedCreateInput;
 
 /**
  * Gets a user bei its unique email
