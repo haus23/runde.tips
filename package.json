@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "react-router dev",
     "dev:staging": "react-router dev -m staging",
-    "build": "react-router build",
+    "build": "prisma generate && react-router build",
     "check": "biome check --write .",
     "prisma": "prisma",
     "prisma:staging": "dotenv -e .env.staging -- prisma",
