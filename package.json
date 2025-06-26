@@ -11,7 +11,7 @@
     "prisma": "prisma",
     "prisma:staging": "dotenv -e .env.staging -- prisma",
     "prisma:prod": "dotenv -e .env.production -- prisma",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate --no-engine"
   },
   "dependencies": {
     "@epic-web/totp": "^4.0.1",
