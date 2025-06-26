@@ -1,6 +1,7 @@
 import type { User } from '@prisma/client';
 import { redirect } from 'react-router';
 import { getUserByEmail } from './db/user';
+import { sendCodeMail } from './emails.server';
 import { commitAuthSession, getAuthSession } from './sessions.server';
 import { createLoginCode } from './totp.server';
 
@@ -26,7 +27,7 @@ export async function prepareOnboarding(request: Request) {
   }
 
   const code = await createLoginCode(email);
-  console.log(code);
+  await sendCodeMail(request, { userName: user.name, code, email });
 
   const session = await getAuthSession(request);
   session.flash('email', email);
