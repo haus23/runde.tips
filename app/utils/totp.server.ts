@@ -1,5 +1,5 @@
 import { generateTOTP } from '@epic-web/totp';
-
+import { createOrUpdateVerification } from './db/verification';
 import { env } from './env.server';
 
 /**
@@ -8,9 +8,17 @@ import { env } from './env.server';
  * @param email User email the code will be associated with
  * @returns Code
  */
-export async function createLoginCode(_email: string) {
-  const { otp } = await generateTOTP({
+export async function createLoginCode(email: string) {
+  const { otp, period, ...otpProps } = await generateTOTP({
     period: env.TOTP_PERIOD,
+  });
+
+  const expiresAt = new Date(Date.now() + period * 1000);
+  await createOrUpdateVerification({
+    email,
+    expiresAt,
+    period,
+    ...otpProps,
   });
 
   return otp;
