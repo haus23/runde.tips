@@ -78,9 +78,6 @@ importers:
       lucide-react:
         specifier: ^0.522.0
         version: 0.522.0(react@19.1.0)
-      prisma-client:
-        specifier: link:generated/prisma
-        version: link:generated/prisma
       react:
         specifier: ^19.1.0
         version: 19.1.0
