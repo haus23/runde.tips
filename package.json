@@ -10,7 +10,8 @@
     "check": "biome check --write .",
     "prisma": "prisma",
     "prisma:staging": "dotenv -e .env.staging -- prisma",
-    "prisma:prod": "dotenv -e .env.production -- prisma"
+    "prisma:prod": "dotenv -e .env.production -- prisma",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@epic-web/totp": "^4.0.1",
