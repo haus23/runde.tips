@@ -5,8 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
+    "dev:staging": "react-router dev -m staging",
     "build": "react-router build",
-    "check": "biome check --write ."
+    "check": "biome check --write .",
+    "prisma": "prisma",
+    "prisma:staging": "dotenv -e .env.staging -- prisma",
+    "prisma:prod": "dotenv -e .env.production -- prisma"
   },
   "dependencies": {
     "@epic-web/totp": "^4.0.1",
@@ -30,6 +34,7 @@
     "@types/node": "catalog:typing",
     "@types/react": "catalog:typing",
     "@types/react-dom": "catalog:typing",
+    "dotenv-cli": "^8.0.0",
     "prisma": "catalog:orm",
     "tailwindcss": "catalog:styling",
     "typescript": "catalog:typing",
