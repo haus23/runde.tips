@@ -1,4 +1,4 @@
-import type { Prisma } from '@prisma/client';
+import type { users } from '~/db/schema';
 import { env } from '../env.server';
 
 const rootUser = {
@@ -7,7 +7,7 @@ const rootUser = {
   slug: 'root',
   name: 'Root',
   role: 'ADMIN',
-} satisfies Prisma.UserUncheckedCreateInput;
+} satisfies typeof users.$inferInsert;
 
 /**
  * Gets a user bei its unique email

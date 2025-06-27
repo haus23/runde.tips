@@ -5,6 +5,9 @@ node_modules/
 .react-router/
 build/
 
+# Dev Runtime Data
+.pglite
+
 # Netlify
 .netlify/
 

@@ -29,6 +29,12 @@ catalogs:
       specifier: ^7.6.2
       version: 7.6.2
   orm:
+    '@electric-sql/pglite':
+      specifier: ^0.3.4
+      version: 0.3.4
+    '@electric-sql/pglite-socket':
+      specifier: ^0.0.9
+      version: 0.0.9
     '@prisma/client':
       specifier: ^6.10.1
       version: 6.10.1
@@ -83,7 +89,7 @@ importers:
         version: 1.0.0-beta.4(typescript@5.8.3)
       drizzle-orm:
         specifier: catalog:orm
-        version: 0.44.2(@prisma/client@6.10.1(prisma@6.10.1(typescript@5.8.3))(typescript@5.8.3))(postgres@3.4.7)(prisma@6.10.1(typescript@5.8.3))
+        version: 0.44.2(@electric-sql/pglite@0.3.4)(@prisma/client@6.10.1(prisma@6.10.1(typescript@5.8.3))(typescript@5.8.3))(postgres@3.4.7)(prisma@6.10.1(typescript@5.8.3))
       isbot:
         specifier: ^5
         version: 5.1.28
@@ -115,6 +121,12 @@ importers:
       '@biomejs/biome':
         specifier: 2.0.5
         version: 2.0.5
+      '@electric-sql/pglite':
+        specifier: catalog:orm
+        version: 0.3.4
+      '@electric-sql/pglite-socket':
+        specifier: catalog:orm
+        version: 0.0.9(@electric-sql/pglite@0.3.4)
       '@netlify/vite-plugin-react-router':
         specifier: catalog:bundler
         version: 1.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.4)(jiti@2.4.2)(lightningcss@1.30.1))
@@ -350,6 +362,15 @@ packages:
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
+
+  '@electric-sql/pglite-socket@0.0.9':
+    resolution: {integrity: sha512-vB/FlCxkua6qzBIHMmZZY/uY8yZy89PlLiJ8YpbFr4+hxDCpe8wHL1uIP+Y2MWX87jQN5LcYqje6yNZ/8ZK3IA==}
+    hasBin: true
+    peerDependencies:
+      '@electric-sql/pglite': 0.3.4
+
+  '@electric-sql/pglite@0.3.4':
+    resolution: {integrity: sha512-h5hoL2GuxcWN8Q3+jtesIRem14iIvAZVEsTeUF6eO9RiUb6ar73QVIEW9t+Ud58iXAcAE2dFMtWqw3W2Oo4LDw==}
 
   '@epic-web/totp@4.0.1':
     resolution: {integrity: sha512-n4LJ9lJ5GjIEzba72RPaATqtWLrxm8cP7yRKbQvf/D8NHFSMF77hwXKwssFnsB7o9gEQLE4cYQpzqjlmsNMEVg==}
@@ -2672,6 +2693,12 @@ snapshots:
 
   '@drizzle-team/brocli@0.10.2': {}
 
+  '@electric-sql/pglite-socket@0.0.9(@electric-sql/pglite@0.3.4)':
+    dependencies:
+      '@electric-sql/pglite': 0.3.4
+
+  '@electric-sql/pglite@0.3.4': {}
+
   '@epic-web/totp@4.0.1':
     dependencies:
       base32-decode: 1.0.0
@@ -4337,8 +4364,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.44.2(@prisma/client@6.10.1(prisma@6.10.1(typescript@5.8.3))(typescript@5.8.3))(postgres@3.4.7)(prisma@6.10.1(typescript@5.8.3)):
+  drizzle-orm@0.44.2(@electric-sql/pglite@0.3.4)(@prisma/client@6.10.1(prisma@6.10.1(typescript@5.8.3))(typescript@5.8.3))(postgres@3.4.7)(prisma@6.10.1(typescript@5.8.3)):
     optionalDependencies:
+      '@electric-sql/pglite': 0.3.4
       '@prisma/client': 6.10.1(prisma@6.10.1(typescript@5.8.3))(typescript@5.8.3)
       postgres: 3.4.7
       prisma: 6.10.1(typescript@5.8.3)

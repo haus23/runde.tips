@@ -4,19 +4,16 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "start": "pglite-server --db=./.pglite --run 'react-router dev'",
+    "db": "pglite-server --db=./.pglite",
     "dev": "react-router dev",
     "dev:staging": "react-router dev -m staging",
     "build": "prisma generate && react-router build",
     "check": "biome check --write .",
-    "typecheck": "tsc",
-    "prisma": "prisma",
-    "prisma:staging": "dotenv -e .env.staging -- prisma",
-    "prisma:prod": "dotenv -e .env.production -- prisma",
-    "postinstall": "prisma generate --no-engine"
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@epic-web/totp": "^4.0.1",
-    "@prisma/client": "catalog:orm",
     "@react-router/node": "catalog:framework",
     "cva": "1.0.0-beta.4",
     "drizzle-orm": "catalog:orm",
@@ -32,6 +29,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.5",
+    "@electric-sql/pglite-socket": "catalog:orm",
     "@netlify/vite-plugin-react-router": "catalog:bundler",
     "@react-router/dev": "catalog:framework",
     "@tailwindcss/vite": "catalog:styling",
@@ -40,7 +38,6 @@
     "@types/react-dom": "catalog:typing",
     "dotenv-cli": "^8.0.0",
     "drizzle-kit": "catalog:orm",
-    "prisma": "catalog:orm",
     "tailwindcss": "catalog:styling",
     "typescript": "catalog:typing",
     "vite": "catalog:bundler",

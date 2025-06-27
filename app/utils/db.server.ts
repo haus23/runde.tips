@@ -1,3 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import { env } from './env.server';
 
-export const db = new PrismaClient();
+export const db = drizzle(env.DATABASE_URL, { casing: 'snake_case' });
