@@ -17,7 +17,7 @@ catalogs:
     tailwindcss: ^4.1.11
     "@tailwindcss/vite": ^4.1.11
   orm:
-    drizzle-kit: ^0.31.3
+    drizzle-kit: ^0.31.4
     drizzle-orm: ^0.44.2
     postgres: ^3.4.7
     "@electric-sql/pglite-socket": ^0.0.9
