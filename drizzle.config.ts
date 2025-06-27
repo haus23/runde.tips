@@ -13,6 +13,6 @@ export default {
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  schema: './database/schema.ts',
+  schema: './app/db/schema.ts',
   casing: 'snake_case',
 } satisfies Config;
