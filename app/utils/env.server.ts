@@ -7,6 +7,9 @@ const envSchema = v.object({
     'development',
   ),
 
+  // Database Connection
+  DATABASE_URL: v.string(),
+
   // Root Email
   ROOT_EMAIL: v.pipe(v.string(), v.email()),
 
