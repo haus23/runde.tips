@@ -1,6 +1,53 @@
 # Changelog
 
 
+## v0.1.0-pre.2
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0-pre.1...v0.1.0-pre.2)
+
+### 🚀 Enhancements
+
+- Create TOTP code. Resolves #25 ([#25](https://github.com/haus23/runde.tips/issues/25))
+- Add verify code route. Resolves #4 ([#4](https://github.com/haus23/runde.tips/issues/4))
+- Redirect to verify-route after validating email. Resolves #27 ([#27](https://github.com/haus23/runde.tips/issues/27))
+- Create auth session. Resolves #3 ([#3](https://github.com/haus23/runde.tips/issues/3))
+- Guard the verify route. See #2 ([#2](https://github.com/haus23/runde.tips/issues/2))
+- Add verifications table ([0c8165c](https://github.com/haus23/runde.tips/commit/0c8165c))
+- Create prisma client. No need for singleton up to now. ([db82823](https://github.com/haus23/runde.tips/commit/db82823))
+- Store TOTP metadata in database to make verifying possible. ([25debe0](https://github.com/haus23/runde.tips/commit/25debe0))
+- Implement sending TOTP code email. Resolves #26 ([#26](https://github.com/haus23/runde.tips/issues/26))
+- Update env vars. ([b56b461](https://github.com/haus23/runde.tips/commit/b56b461))
+
+### 🩹 Fixes
+
+- Use correct package with import. ([00040b6](https://github.com/haus23/runde.tips/commit/00040b6))
+- Prepare environments. Resolves #23 ([#23](https://github.com/haus23/runde.tips/issues/23))
+- Generate prisma client via postinstall-script. ([f89e94a](https://github.com/haus23/runde.tips/commit/f89e94a))
+- Add binary targets for Netlify ([6f19f40](https://github.com/haus23/runde.tips/commit/6f19f40))
+- Try workaround. ([65d82ba](https://github.com/haus23/runde.tips/commit/65d82ba))
+- Run prisma generate with no-engine flag. ([8eccb46](https://github.com/haus23/runde.tips/commit/8eccb46))
+- Rerun the client generation in front of build. ([eeb1a05](https://github.com/haus23/runde.tips/commit/eeb1a05))
+- Enable type checking. Resolves #36 ([#36](https://github.com/haus23/runde.tips/issues/36))
+- Add missing attempts column. ([02689ee](https://github.com/haus23/runde.tips/commit/02689ee))
+- Switch to prisma. Update local dev tooling. Resolves #35 ([#35](https://github.com/haus23/runde.tips/issues/35))
+- Remove prisma from build script. ([4fbf494](https://github.com/haus23/runde.tips/commit/4fbf494))
+- Remove last trace of prisma. ([ef643a0](https://github.com/haus23/runde.tips/commit/ef643a0))
+
+### 💅 Refactors
+
+- Move generated code to folder outside of app. ([1198425](https://github.com/haus23/runde.tips/commit/1198425))
+- Send totp emails during development via resend. ([d519770](https://github.com/haus23/runde.tips/commit/d519770))
+- Move schema into app folder. ([15d59d6](https://github.com/haus23/runde.tips/commit/15d59d6))
+
+### 🏡 Chore
+
+- Update tailwindcss ([3ab19d9](https://github.com/haus23/runde.tips/commit/3ab19d9))
+- Revert the workaround in last commit. ([7b15fad](https://github.com/haus23/runde.tips/commit/7b15fad))
+- Install postgres lib, drizzle orm and kit. ([b2c9a76](https://github.com/haus23/runde.tips/commit/b2c9a76))
+- Configure drizzle. ([008e3bd](https://github.com/haus23/runde.tips/commit/008e3bd))
+- Add tables for users and verifications. ([1500d6d](https://github.com/haus23/runde.tips/commit/1500d6d))
+- **dx:** Prepare staging environment with dev db. ([8cb4a93](https://github.com/haus23/runde.tips/commit/8cb4a93))
+
 ## v0.1.0-pre.1
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0-pre.0...v0.1.0-pre.1)
