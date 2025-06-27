@@ -10,7 +10,9 @@
     "dev:staging": "react-router dev -m staging",
     "build": "prisma generate && react-router build",
     "check": "biome check --write .",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "drizzle-kit": "drizzle-kit",
+    "drizzle-kit:staging": "dotenv -e .env.staging -- drizzle-kit"
   },
   "dependencies": {
     "@epic-web/totp": "^4.0.1",
