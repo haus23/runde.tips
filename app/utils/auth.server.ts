@@ -1,9 +1,11 @@
-import type { User } from '@prisma/client';
 import { redirect } from 'react-router';
+import type { users } from '~/db/schema';
 import { getUserByEmail } from './db/user';
 import { sendCodeMail } from './emails.server';
 import { commitAuthSession, getAuthSession } from './sessions.server';
 import { createLoginCode } from './totp.server';
+
+type User = typeof users.$inferSelect;
 
 /*
  * The main auth flow functions
