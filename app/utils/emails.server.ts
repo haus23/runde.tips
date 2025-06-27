@@ -24,14 +24,26 @@ export async function sendCodeMail(
     magic_link: `${getDomainUrl(request)}/verify?code=${code}`,
   };
 
-  await sendTemplateMailWithPostmark({
-    from: `Tipprunde <${env.WELCOME_EMAIL}>`,
-    to: `${userName} <${email}>`,
-    category: 'totp',
-    templateAlias: 'send-totp',
-    templateModel,
-  });
+  if (env.NODE_ENV === 'production') {
+    await sendTemplateMailWithPostmark({
+      from: `Tipprunde <${env.WELCOME_EMAIL}>`,
+      to: `${userName} <${email}>`,
+      category: 'totp',
+      templateAlias: 'send-totp',
+      templateModel,
+    });
+  } else {
+    await sendMail({
+      from: `Tipprunde <${env.WELCOME_EMAIL}>`,
+      to: `${userName} <${email}>`,
+      category: 'totp',
+      subject: 'Tipprunde Login Code',
+      text: `Hallo ${userName}! Dein Code lautet: ${code}. Oder Login per Link: ${templateModel.magic_link}`,
+    });
+  }
 }
+
+// Email Send Helpers
 
 type PostmarkTemplateEmailProps = {
   from: string;
@@ -71,6 +83,84 @@ async function sendTemplateMailWithPostmark({
 
   if (!response.ok) {
     console.log(response);
+    throw new Error('Probleme beim Email-Versand');
+  }
+}
+
+type EmailProps = {
+  from: string;
+  to: string;
+  subject: string;
+  html?: string;
+  text: string;
+  category: string;
+};
+
+type Provider = 'Postmark' | 'Resend';
+
+async function sendMail(props: EmailProps, provider: Provider = 'Resend') {
+  switch (provider) {
+    case 'Postmark':
+      return await sendMailWithPostmark(props);
+    default:
+      return await sendMailWithResend(props);
+  }
+}
+
+async function sendMailWithPostmark({
+  from,
+  to,
+  subject,
+  html,
+  text,
+  category,
+}: EmailProps) {
+  const httpBody = {
+    From: from,
+    To: to,
+    Subject: subject,
+    HtmlBody: html,
+    TextBody: text,
+    Tag: category,
+    MessageStream: 'outbound',
+  };
+
+  const response = await fetch('https://api.postmarkapp.com/email', {
+    method: 'POST',
+    body: JSON.stringify(httpBody),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Postmark-Server-Token': `${env.POSTMARK_TOKEN}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Probleme beim Email-Versand');
+  }
+}
+
+async function sendMailWithResend(props: EmailProps) {
+  const { from, to, subject, html, text } = props;
+  const httpBody = {
+    from,
+    to,
+    subject,
+    html,
+    text,
+    tags: [{ name: 'category', value: props.category }],
+  };
+
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    body: JSON.stringify(httpBody),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${env.RESEND_TOKEN}`,
+    },
+  });
+
+  if (!response.ok) {
     throw new Error('Probleme beim Email-Versand');
   }
 }

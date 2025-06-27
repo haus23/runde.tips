@@ -24,6 +24,7 @@ const envSchema = v.object({
 
   // Email SaaS Tokens
   POSTMARK_TOKEN: v.string(),
+  RESEND_TOKEN: v.string(),
 });
 
 export const env = v.parse(envSchema, process.env);
