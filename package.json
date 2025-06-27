@@ -8,6 +8,7 @@
     "dev:staging": "react-router dev -m staging",
     "build": "prisma generate && react-router build",
     "check": "biome check --write .",
+    "typecheck": "tsc",
     "prisma": "prisma",
     "prisma:staging": "dotenv -e .env.staging -- prisma",
     "prisma:prod": "dotenv -e .env.production -- prisma",

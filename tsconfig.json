@@ -17,6 +17,7 @@
     // Bundler
     "module": "Preserve",
     "noEmit": true,
+    "skipLibCheck": true,
     "types": ["vite/client"],
 
     // DX
