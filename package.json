@@ -8,7 +8,7 @@
     "db": "pglite-server --db=./.pglite",
     "dev": "react-router dev",
     "dev:staging": "react-router dev -m staging",
-    "build": "prisma generate && react-router build",
+    "build": "react-router build",
     "check": "biome check --write .",
     "typecheck": "tsc",
     "drizzle-kit": "drizzle-kit",
