@@ -12,7 +12,7 @@ catalogs:
     typescript: ~5.8.3
     "@types/react": ^19.1.8
     "@types/react-dom": ^19.1.6
-    "@types/node": ^24.0.4
+    "@types/node": ^24.0.5
   styling:
     tailwindcss: ^4.1.11
     "@tailwindcss/vite": ^4.1.11
