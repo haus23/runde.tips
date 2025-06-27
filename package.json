@@ -20,7 +20,7 @@
     "cva": "1.0.0-beta.4",
     "drizzle-orm": "catalog:orm",
     "isbot": "^5",
-    "lucide-react": "^0.522.0",
+    "lucide-react": "^0.525.0",
     "postgres": "catalog:orm",
     "react": "^19.1.0",
     "react-aria-components": "^1.10.1",
