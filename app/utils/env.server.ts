@@ -1,11 +1,10 @@
 import * as v from 'valibot';
 
+console.log(process.env.NODE_ENV);
+
 const envSchema = v.object({
   // Node
-  NODE_ENV: v.optional(
-    v.picklist(['development', 'production']),
-    'development',
-  ),
+  NODE_ENV: v.optional(v.picklist(['development', 'production']), 'production'),
 
   // Database Connection
   DATABASE_URL: v.string(),
