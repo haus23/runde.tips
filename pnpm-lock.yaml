@@ -29,15 +29,9 @@ catalogs:
       specifier: ^7.6.2
       version: 7.6.2
   orm:
-    '@electric-sql/pglite':
-      specifier: ^0.3.4
-      version: 0.3.4
     '@electric-sql/pglite-socket':
       specifier: ^0.0.9
       version: 0.0.9
-    '@prisma/client':
-      specifier: ^6.10.1
-      version: 6.10.1
     drizzle-kit:
       specifier: ^0.31.3
       version: 0.31.3
@@ -47,9 +41,6 @@ catalogs:
     postgres:
       specifier: ^3.4.7
       version: 3.4.7
-    prisma:
-      specifier: ^6.10.1
-      version: 6.10.1
   styling:
     '@tailwindcss/vite':
       specifier: ^4.1.11
@@ -78,9 +69,6 @@ importers:
       '@epic-web/totp':
         specifier: ^4.0.1
         version: 4.0.1
-      '@prisma/client':
-        specifier: catalog:orm
-        version: 6.10.1(prisma@6.10.1(typescript@5.8.3))(typescript@5.8.3)
       '@react-router/node':
         specifier: catalog:framework
         version: 7.6.2(react-router@7.6.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)
@@ -121,9 +109,6 @@ importers:
       '@biomejs/biome':
         specifier: 2.0.5
         version: 2.0.5
-      '@electric-sql/pglite':
-        specifier: catalog:orm
-        version: 0.3.4
       '@electric-sql/pglite-socket':
         specifier: catalog:orm
         version: 0.0.9(@electric-sql/pglite@0.3.4)
@@ -151,9 +136,6 @@ importers:
       drizzle-kit:
         specifier: catalog:orm
         version: 0.31.3
-      prisma:
-        specifier: catalog:orm
-        version: 6.10.1(typescript@5.8.3)
       tailwindcss:
         specifier: catalog:styling
         version: 4.1.11
@@ -2977,14 +2959,18 @@ snapshots:
     optionalDependencies:
       prisma: 6.10.1(typescript@5.8.3)
       typescript: 5.8.3
+    optional: true
 
   '@prisma/config@6.10.1':
     dependencies:
       jiti: 2.4.2
+    optional: true
 
-  '@prisma/debug@6.10.1': {}
+  '@prisma/debug@6.10.1':
+    optional: true
 
-  '@prisma/engines-version@6.10.1-1.9b628578b3b7cae625e8c927178f15a170e74a9c': {}
+  '@prisma/engines-version@6.10.1-1.9b628578b3b7cae625e8c927178f15a170e74a9c':
+    optional: true
 
   '@prisma/engines@6.10.1':
     dependencies:
@@ -2992,16 +2978,19 @@ snapshots:
       '@prisma/engines-version': 6.10.1-1.9b628578b3b7cae625e8c927178f15a170e74a9c
       '@prisma/fetch-engine': 6.10.1
       '@prisma/get-platform': 6.10.1
+    optional: true
 
   '@prisma/fetch-engine@6.10.1':
     dependencies:
       '@prisma/debug': 6.10.1
       '@prisma/engines-version': 6.10.1-1.9b628578b3b7cae625e8c927178f15a170e74a9c
       '@prisma/get-platform': 6.10.1
+    optional: true
 
   '@prisma/get-platform@6.10.1':
     dependencies:
       '@prisma/debug': 6.10.1
+    optional: true
 
   '@react-aria/autocomplete@3.0.0-beta.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
@@ -4683,6 +4672,7 @@ snapshots:
       '@prisma/engines': 6.10.1
     optionalDependencies:
       typescript: 5.8.3
+    optional: true
 
   proc-log@3.0.0: {}
 
