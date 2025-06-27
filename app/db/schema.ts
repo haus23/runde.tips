@@ -32,6 +32,7 @@ export const verifications = pgTable('verification', {
   digits: integer().notNull(),
   period: integer().notNull(),
   charSet: text().notNull(),
+  attempts: integer().notNull().default(0),
   expiresAt: timestamp().notNull(),
   ...timestamps,
 });
