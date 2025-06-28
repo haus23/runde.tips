@@ -1,6 +1,8 @@
 import { cva } from 'cva';
 import type { OTPInputProps as _OTPInputProps } from 'input-otp';
 import { OTPInput as _OTPInput, REGEXP_ONLY_DIGITS } from 'input-otp';
+import { useRef } from 'react';
+import { InputContext, useContextProps } from 'react-aria-components';
 
 const otpInput = cva({
   base: 'group flex items-center',
@@ -14,11 +16,22 @@ interface OTPInputProps extends Omit<_OTPInputProps, 'children' | 'maxLength'> {
   length: number;
 }
 
+// Basic wrapper of OtpInput. Not very generic but works in my context
+
 export function OtpInput({ className, length, ...props }: OTPInputProps) {
+  const ref = useRef<HTMLInputElement>(null);
+  const [mergedProps, mergedRef] = useContextProps(props, ref, InputContext);
+
+  // biome-ignore lint/correctness/noUnusedVariables: implementation just works this way
+  const { onChange, value, ...otpInputProps } = mergedProps;
+
   return (
     <_OTPInput
+      ref={mergedRef}
       containerClassName={otpInput({ className })}
+      {...otpInputProps}
       pattern={REGEXP_ONLY_DIGITS}
+      maxLength={length}
       render={({ slots }) => (
         <div className="flex">
           {slots.map((slot, ix) => (
@@ -35,8 +48,6 @@ export function OtpInput({ className, length, ...props }: OTPInputProps) {
           ))}
         </div>
       )}
-      maxLength={length}
-      {...props}
     />
   );
 }
