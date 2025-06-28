@@ -17,6 +17,7 @@ interface OtpFieldProps extends _TextFieldProps {
   description?: string;
   label?: string;
   length: number;
+  onComplete?: () => unknown;
 }
 
 export function OtpField({
@@ -24,6 +25,7 @@ export function OtpField({
   description,
   label,
   length,
+  onComplete,
   ...props
 }: OtpFieldProps) {
   return (
@@ -53,7 +55,7 @@ export function OtpField({
           </div>
         )}
       </FieldError>
-      <OtpInput length={length} />
+      <OtpInput length={length} onComplete={onComplete} />
     </_TextField>
   );
 }
