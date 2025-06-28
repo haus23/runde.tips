@@ -7,3 +7,17 @@
 :root {
     color-scheme: light dark;
 }
+
+/* Animations */
+@theme {
+    --animate-caret: 1s caret step-end infinite;
+    @keyframes caret {
+        from,
+        to {
+            border-color: transparent;
+        }
+        50% {
+            border-color: inherit;
+        }
+    }
+}
