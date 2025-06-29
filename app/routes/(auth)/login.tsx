@@ -21,30 +21,29 @@ export default function LoginRoute({ actionData }: Route.ComponentProps) {
     <div>
       <title>Anmeldung - runde.tips</title>
       <h1 className="font-medium text-2xl">Anmeldung</h1>
-      <div className="mt-8 flex flex-col">
-        <Form
-          method="post"
-          onSubmit={(e) => {
-            e.preventDefault();
-            submit(e.currentTarget);
-          }}
-          validationErrors={actionData?.errors}
-        >
-          <TextField
-            label="Email"
-            name="email"
-            autoComplete="email"
-            type="email"
-            isRequired
-            description="Deine Adresse aus der Tipprunde"
-          />
-          <div>
-            <Button type="submit" variant="primary">
-              Code anfordern
-            </Button>
-          </div>
-        </Form>
-      </div>
+      <Form
+        method="post"
+        onSubmit={(e) => {
+          e.preventDefault();
+          submit(e.currentTarget);
+        }}
+        validationErrors={actionData?.errors}
+        className="mt-8"
+      >
+        <TextField
+          label="Email"
+          name="email"
+          autoComplete="email"
+          type="email"
+          isRequired
+          description="Deine Adresse aus der Tipprunde"
+        />
+        <div>
+          <Button type="submit" variant="primary">
+            Code anfordern
+          </Button>
+        </div>
+      </Form>
     </div>
   );
 }

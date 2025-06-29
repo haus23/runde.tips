@@ -3,7 +3,7 @@ import type { users } from '~/db/schema';
 import { getUserByEmail } from './db/user';
 import { sendCodeMail } from './emails.server';
 import { commitAuthSession, getAuthSession } from './sessions.server';
-import { createLoginCode } from './totp.server';
+import { createLoginCode, verifyLoginCode } from './totp.server';
 
 type User = typeof users.$inferSelect;
 
@@ -59,6 +59,35 @@ export async function ensureOnboardingSession(request: Request) {
   // Ensure again valid email in session
   const user = await getUserByEmail(email);
   if (!user) throw Error('Netter Versuch!');
+
+  return { session, email, user };
+}
+
+/**
+ * Performs user login
+ *
+ * Expects valid email in session and totp code in request.
+ * Returns error for invalid data. Logs the user in and redirects to home otherwise.
+ *
+ * @param request Request object
+ * @returns Login errors or redirects
+ */
+export async function verifyOnboardingCode(request: Request) {
+  const { session, email, user } = await ensureOnboardingSession(request);
+
+  const formData = await request.formData();
+  const code = String(formData.get('code'));
+
+  if (!code) {
+    return {
+      errors: { code: 'Du musst Deinen Code eingeben, um fortzufahren.' },
+    };
+  }
+
+  const verifyResult = await verifyLoginCode(email, code);
+  if (!verifyResult.success) {
+    return { errors: { code: verifyResult.error } };
+  }
 }
 
 /*

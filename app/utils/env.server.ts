@@ -15,8 +15,9 @@ const envSchema = v.object({
   // Sender Emails
   WELCOME_EMAIL: v.pipe(v.string(), v.email()),
 
-  // TOTP Settings (Period in seconds the code is valid)
+  // TOTP Settings (Period in seconds the code is valid and and max attempts to enter the code)
   TOTP_PERIOD: v.pipe(v.string(), v.transform(Number)),
+  TOTP_ATTEMPTS: v.pipe(v.string(), v.transform(Number)),
 
   // Secrets
   AUTH_SESSION_SECRET: v.string(),
