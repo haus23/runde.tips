@@ -1,4 +1,5 @@
 import {
+  boolean,
   integer,
   pgEnum,
   pgTable,
@@ -21,6 +22,14 @@ export const users = pgTable('user', {
   slug: text().unique().notNull(),
   email: text().unique(),
   role: roleEnum().notNull().default('USER'),
+  ...timestamps,
+});
+
+export const sessions = pgTable('session', {
+  id: uuid().primaryKey().defaultRandom(),
+  userId: integer().notNull(),
+  expires: boolean().notNull(),
+  expiresAt: timestamp().notNull(),
   ...timestamps,
 });
 
