@@ -1,9 +1,13 @@
+import type { ToastOptions } from 'react-aria-components';
 import type { Session } from 'react-router';
 import { createCookie, createCookieSessionStorage } from 'react-router';
 import { env } from './env.server';
+import type { ToastData } from './toast';
 
 type AppSessionData = Record<string, never>;
-type AppSessionFlashData = Record<string, never>;
+type AppSessionFlashData = {
+  toast: { data: ToastData; options: ToastOptions };
+};
 
 const appSessionStorage = createCookieSessionStorage<
   AppSessionData,

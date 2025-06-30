@@ -5,8 +5,8 @@ const toastTypes = ['success', 'info', 'warning', 'error'] as const;
 type ToastType = (typeof toastTypes)[number];
 
 export type ToastData = {
-  type: ToastType;
   message: string;
+  type: ToastType;
 };
 
 const toastQueue = new ToastQueue<ToastData>();
