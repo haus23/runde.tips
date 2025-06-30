@@ -1,7 +1,5 @@
 import * as v from 'valibot';
 
-console.log(process.env.NODE_ENV);
-
 const envSchema = v.object({
   // Node
   NODE_ENV: v.optional(v.picklist(['development', 'production']), 'production'),
@@ -18,6 +16,9 @@ const envSchema = v.object({
   // TOTP Settings (Period in seconds the code is valid and and max attempts to enter the code)
   TOTP_PERIOD: v.pipe(v.string(), v.transform(Number)),
   TOTP_ATTEMPTS: v.pipe(v.string(), v.transform(Number)),
+
+  // Auth Session Duration (the db session) in seconds
+  SESSION_DURATION: v.pipe(v.string(), v.transform(Number)),
 
   // Secrets
   AUTH_SESSION_SECRET: v.string(),

@@ -1,7 +1,9 @@
 import { redirect } from 'react-router';
 import type { users } from '~/db/schema';
+import { createSession } from './db/session';
 import { getUserByEmail } from './db/user';
 import { sendCodeMail } from './emails.server';
+import { env } from './env.server';
 import { combineHeaders } from './misc';
 import {
   commitAuthSession,
@@ -143,10 +145,14 @@ export async function verifyOnboardingCode(request: Request) {
         ),
       });
     }
-
-    // TODO: login and clear auth session
     return { errors: { code: verifyResult.error } };
   }
+
+  // Create the app session
+  const expirationDate = new Date(Date.now() + env.SESSION_DURATION * 1000);
+  await createSession(user.id, expirationDate);
+
+  // TODO: login and clear auth session
 }
 
 /*
