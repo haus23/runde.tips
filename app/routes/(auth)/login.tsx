@@ -2,11 +2,16 @@ import { useSubmit } from 'react-router';
 import { Button } from '~/components/ui/button';
 import { Form } from '~/components/ui/form/form';
 import { TextField } from '~/components/ui/form/text-field';
-import { prepareOnboarding, requireAnonymous } from '~/utils/auth.server';
+import {
+  prepareOnboarding,
+  requireAnonymous,
+  restoreLastAuthSession,
+} from '~/utils/auth.server';
 import type { Route } from './+types/login';
 
 export async function loader({ request }: Route.LoaderArgs) {
   await requireAnonymous(request);
+  return await restoreLastAuthSession(request);
 }
 
 export async function action({ request }: Route.ActionArgs) {
@@ -14,7 +19,10 @@ export async function action({ request }: Route.ActionArgs) {
   return await prepareOnboarding(request);
 }
 
-export default function LoginRoute({ actionData }: Route.ComponentProps) {
+export default function LoginRoute({
+  loaderData,
+  actionData,
+}: Route.ComponentProps) {
   const submit = useSubmit();
 
   return (
@@ -31,6 +39,7 @@ export default function LoginRoute({ actionData }: Route.ComponentProps) {
         className="mt-8"
       >
         <TextField
+          defaultValue={loaderData.email || ''}
           label="Email"
           name="email"
           autoComplete="email"

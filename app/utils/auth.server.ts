@@ -12,6 +12,7 @@ type User = typeof users.$inferSelect;
 /*
  * The main auth flow functions
  *
+ * - restoreLastAuthSession(): loads last used email from auth session
  * - prepareOnboarding(): validates onboarding email and sends TOTP and magic link via email
  * - ensureOnboarding(): ensures ongoing boarding
  * - verifyOnboardingCode(): validates TOTP and logs user in
@@ -19,6 +20,28 @@ type User = typeof users.$inferSelect;
  * - prolongRememberMeSession(): prolongs an eventually ongoing rememberMe-Session
  */
 
+/**
+ * Loads last used email from auth session
+ *
+ * @param request Request object
+ * @returns Object with email in session - if any
+ */
+export async function restoreLastAuthSession(request: Request) {
+  const session = await getAuthSession(request);
+  const email = session.get('email');
+
+  return { email };
+}
+
+/**
+ * Prepares users onboarding. Expects email in request form data.
+ *
+ * If no valid email address is in the form data, it returns an error.
+ * Otherwise, it creates an onboarding code and redirects to the onboarding page
+ * to let the user enter the mailed code.
+ *
+ * @param request Request object
+ */
 export async function prepareOnboarding(request: Request) {
   const formData = await request.formData();
   const email = String(formData.get('email'));
