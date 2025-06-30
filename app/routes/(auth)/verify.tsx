@@ -28,9 +28,9 @@ export default function VerifyRoute({ actionData }: Route.ComponentProps) {
       <h1 className="font-medium text-2xl">Kontrolle</h1>
       <Form
         method="post"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          submit(e.currentTarget);
+          await submit(e.currentTarget);
         }}
         validationErrors={actionData?.errors}
         className="mt-8"

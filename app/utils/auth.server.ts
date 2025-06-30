@@ -3,7 +3,11 @@ import type { users } from '~/db/schema';
 import { getUserByEmail } from './db/user';
 import { sendCodeMail } from './emails.server';
 import { combineHeaders } from './misc';
-import { commitAuthSession, getAuthSession } from './sessions.server';
+import {
+  commitAuthSession,
+  destroyAuthSession,
+  getAuthSession,
+} from './sessions.server';
 import { createServerToast } from './toast.server';
 import { createLoginCode, verifyLoginCode } from './totp.server';
 
@@ -85,8 +89,13 @@ export async function ensureOnboardingSession(request: Request) {
   const session = await getAuthSession(request);
   const email = session.get('email');
 
+  // TODO: toast with wrong browser message
   if (!email) {
-    throw redirect('/login');
+    const toast = await createServerToast(request, {
+      type: 'error',
+      message: 'Kein aktueller Anmeldeversuch. Bitte erst Code anfordern.',
+    });
+    throw redirect('/login', { headers: toast });
   }
 
   // Ensure again valid email in session
@@ -119,6 +128,23 @@ export async function verifyOnboardingCode(request: Request) {
 
   const verifyResult = await verifyLoginCode(email, code);
   if (!verifyResult.success) {
+    if (!verifyResult.retry) {
+      const toast = await createServerToast(request, {
+        message: verifyResult.error,
+        type: 'error',
+      });
+
+      throw redirect('/login', {
+        headers: combineHeaders(
+          verifyResult.severe && {
+            'Set-Cookie': await destroyAuthSession(session),
+          },
+          toast,
+        ),
+      });
+    }
+
+    // TODO: login and clear auth session
     return { errors: { code: verifyResult.error } };
   }
 }

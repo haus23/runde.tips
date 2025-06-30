@@ -31,9 +31,9 @@ export default function LoginRoute({
       <h1 className="font-medium text-2xl">Anmeldung</h1>
       <Form
         method="post"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          submit(e.currentTarget);
+          await submit(e.currentTarget);
         }}
         validationErrors={actionData?.errors}
         className="mt-8"

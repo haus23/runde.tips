@@ -39,7 +39,8 @@ export async function verifyLoginCode(
   email: string,
   code: string,
 ): Promise<
-  { success: true } | { success: false; retry: boolean; error: string }
+  | { success: true }
+  | { success: false; retry: boolean; error: string; severe?: true }
 > {
   const verificationData = await getVerificationByEmail(email);
   if (!verificationData) {
@@ -47,6 +48,7 @@ export async function verifyLoginCode(
       success: false,
       retry: false,
       error: 'Kein Code für diese Email-Adresse vorhanden!',
+      severe: true,
     };
   }
 
