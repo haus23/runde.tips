@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
-@theme {
-    --color-*: initial;
-}
-
 :root {
     color-scheme: light dark;
+}
+
+@theme {
+    --color-*: initial;
+    --background-color-root: light-dark(#fff, #1c1b22);
 }
 
 /* Animations */
