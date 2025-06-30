@@ -1,6 +1,43 @@
 # Changelog
 
 
+## v0.1.0-pre.3
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0-pre.2...v0.1.0-pre.3)
+
+### 🚀 Enhancements
+
+- Add initial wrapper for otp-input. ([b590cd7](https://github.com/haus23/runde.tips/commit/b590cd7))
+- Pass through onComplete event. ([d235443](https://github.com/haus23/runde.tips/commit/d235443))
+- Validate submitted TOTP code. Resolves #38 ([#38](https://github.com/haus23/runde.tips/issues/38))
+- Create an app session. Persisted for one year after every change. ([124769c](https://github.com/haus23/runde.tips/commit/124769c))
+- Implement toaster and toasts. Resolves #30 and closes #42 as well. ([#30](https://github.com/haus23/runde.tips/issues/30), [#42](https://github.com/haus23/runde.tips/issues/42))
+- Implement server toasts. Resolves #31 ([#31](https://github.com/haus23/runde.tips/issues/31))
+- Redirect to verify with server toast. ([9e03143](https://github.com/haus23/runde.tips/commit/9e03143))
+- Restore last auth data - if any. ([20f42b6](https://github.com/haus23/runde.tips/commit/20f42b6))
+- Redirect on errors. Resolve #44 ([#44](https://github.com/haus23/runde.tips/issues/44))
+- Add session table. ([85c9620](https://github.com/haus23/runde.tips/commit/85c9620))
+- Create app session in db. Resolves #40 ([#40](https://github.com/haus23/runde.tips/issues/40))
+- Logs the user in and redirects to home. Resolves #39 and resolves ([#39](https://github.com/haus23/runde.tips/issues/39))
+
+### 🩹 Fixes
+
+- Switch default env. Resolves #37 ([#37](https://github.com/haus23/runde.tips/issues/37))
+- Use direct connection for migrations. ([6cd811b](https://github.com/haus23/runde.tips/commit/6cd811b))
+
+### 💅 Refactors
+
+- Include schema in drizzle instance to enable queries. ([b3482a6](https://github.com/haus23/runde.tips/commit/b3482a6))
+- Finally my first color. Same as browser default for dark mode: rgba(0,0,0,0) ([d05118f](https://github.com/haus23/runde.tips/commit/d05118f))
+
+### 🏡 Chore
+
+- Update react router. ([9b11bd9](https://github.com/haus23/runde.tips/commit/9b11bd9))
+- **dx:** Update biome. ([efadb01](https://github.com/haus23/runde.tips/commit/efadb01))
+- Update icons ([96daf74](https://github.com/haus23/runde.tips/commit/96daf74))
+- Update drizzle-kit. ([eedb07a](https://github.com/haus23/runde.tips/commit/eedb07a))
+- Update node typings. ([d6c1089](https://github.com/haus23/runde.tips/commit/d6c1089))
+
 ## v0.1.0-pre.2
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0-pre.1...v0.1.0-pre.2)
