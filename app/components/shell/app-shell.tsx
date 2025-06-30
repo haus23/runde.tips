@@ -1,5 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 import { AppSidebar } from './app-sidebar';
+import { Toaster } from './toaster';
 
 const SIDEBAR_WIDTH = '12rem';
 
@@ -26,6 +27,7 @@ export function AppShell({
       <main className="relative flex min-h-svh w-full grow flex-col">
         <div className="p-4 pt-3">{children}</div>
       </main>
+      <Toaster />
     </div>
   );
 }
