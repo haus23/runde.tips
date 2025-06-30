@@ -150,9 +150,23 @@ export async function verifyOnboardingCode(request: Request) {
 
   // Create the app session
   const expirationDate = new Date(Date.now() + env.SESSION_DURATION * 1000);
-  await createSession(user.id, expirationDate);
 
-  // TODO: login and clear auth session
+  // Log the user in
+  const { id: sessionId } = await createSession(user.id, expirationDate);
+  session.set('sessionId', sessionId);
+
+  const toast = await createServerToast(request, {
+    type: 'success',
+    message: `Hallo ${user.name}! Du bist drin.`,
+  });
+  throw redirect('/', {
+    headers: combineHeaders(
+      {
+        'Set-Cookie': await commitAuthSession(session),
+      },
+      toast,
+    ),
+  });
 }
 
 /*
