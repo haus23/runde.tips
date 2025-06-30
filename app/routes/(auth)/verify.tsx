@@ -38,7 +38,7 @@ export default function VerifyRoute({ actionData }: Route.ComponentProps) {
         <OtpField
           name="code"
           label="Code"
-          description="Der Anmelde-Code aus der letzten Code-Email"
+          description="Der Anmelde-Code aus der (letzten) Code-Email"
           length={6}
         />
         <div>

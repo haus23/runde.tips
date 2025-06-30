@@ -2,7 +2,9 @@ import { redirect } from 'react-router';
 import type { users } from '~/db/schema';
 import { getUserByEmail } from './db/user';
 import { sendCodeMail } from './emails.server';
+import { combineHeaders } from './misc';
 import { commitAuthSession, getAuthSession } from './sessions.server';
+import { createServerToast } from './toast.server';
 import { createLoginCode, verifyLoginCode } from './totp.server';
 
 type User = typeof users.$inferSelect;
@@ -34,10 +36,18 @@ export async function prepareOnboarding(request: Request) {
   const session = await getAuthSession(request);
   session.flash('email', email);
 
+  const toast = await createServerToast(request, {
+    message:
+      'Eine Email mit einem Login-Code wurde an deine Email-Adresse gesendet.',
+  });
+
   throw redirect('/verify', {
-    headers: {
-      'Set-Cookie': await commitAuthSession(session),
-    },
+    headers: combineHeaders(
+      {
+        'Set-Cookie': await commitAuthSession(session),
+      },
+      toast,
+    ),
   });
 }
 
