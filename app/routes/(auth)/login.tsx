@@ -1,7 +1,7 @@
 import { useSubmit } from 'react-router';
 import { Button } from '~/components/ui/button';
 import { Form } from '~/components/ui/form/form';
-import { TextField } from '~/components/ui/form/text-field';
+import { useAppForm } from '~/hooks/app-form';
 import {
   prepareOnboarding,
   requireAnonymous,
@@ -25,6 +25,14 @@ export default function LoginRoute({
 }: Route.ComponentProps) {
   const submit = useSubmit();
 
+  const form = useAppForm({
+    defaultValues: { email: loaderData.email || '' },
+    onSubmit: async ({ value }) => {
+      console.log(value);
+      // await submit(value, { method: 'post' });
+    },
+  });
+
   return (
     <div>
       <title>Anmeldung - runde.tips</title>
@@ -33,20 +41,22 @@ export default function LoginRoute({
         method="post"
         onSubmit={async (e) => {
           e.preventDefault();
-          await submit(e.currentTarget);
+          await form.handleSubmit();
         }}
         validationErrors={actionData?.errors}
         className="mt-8"
       >
-        <TextField
-          defaultValue={loaderData.email || ''}
-          label="Email"
-          name="email"
-          autoComplete="email"
-          type="email"
-          isRequired
-          description="Deine Adresse aus der Tipprunde"
-        />
+        <form.AppField name="email">
+          {(field) => (
+            <field.TextField
+              isRequired
+              type="email"
+              label="Email"
+              description="Deine Adresse aus der Tipprunde"
+              autoComplete="email"
+            />
+          )}
+        </form.AppField>
         <div>
           <Button type="submit" variant="primary">
             Code anfordern
