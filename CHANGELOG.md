@@ -1,6 +1,37 @@
 # Changelog
 
 
+## v0.1.0-pre.5
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0-pre.4...v0.1.0-pre.5)
+
+### 🚀 Enhancements
+
+- Use authenticated user to render navs. Resolves #11 ([#11](https://github.com/haus23/runde.tips/issues/11))
+- Install tanstack form lib and start using composed form pattern. Resolves #50 ([#50](https://github.com/haus23/runde.tips/issues/50))
+- Make text-field a composed tanstack form field. Resolves #51 ([#51](https://github.com/haus23/runde.tips/issues/51))
+- Using the form field. RAC validation works. Resolves #52 ([#52](https://github.com/haus23/runde.tips/issues/52))
+- Add server validation. Works. Resolves #54 ([#54](https://github.com/haus23/runde.tips/issues/54))
+- Integrate tanstack errors. Resolves #53 ([#53](https://github.com/haus23/runde.tips/issues/53))
+- Implement a later requirement. TextField must be controlled in some cases. ([d1c6efe](https://github.com/haus23/runde.tips/commit/d1c6efe))
+- Add minimal styling for disabled buttons. ([ef1eb0e](https://github.com/haus23/runde.tips/commit/ef1eb0e))
+- Add subscription button. As predicted: resolves #47 ([#47](https://github.com/haus23/runde.tips/issues/47))
+
+### 🩹 Fixes
+
+- Set autocomplete mode. ([d1a8c9a](https://github.com/haus23/runde.tips/commit/d1a8c9a))
+- Add custom focus styling. Resolves #41 ([#41](https://github.com/haus23/runde.tips/issues/41))
+
+### 💅 Refactors
+
+- Delegate to change event handler. Works now as controlled input. ([e1df364](https://github.com/haus23/runde.tips/commit/e1df364))
+- Move hook files to hooks folder. ([29ea5a9](https://github.com/haus23/runde.tips/commit/29ea5a9))
+
+### 🏡 Chore
+
+- Update deps. ([185964e](https://github.com/haus23/runde.tips/commit/185964e))
+- Upgrade vite. ([dab0a3f](https://github.com/haus23/runde.tips/commit/dab0a3f))
+
 ## v0.1.0-pre.4
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0-pre.3...v0.1.0-pre.4)
