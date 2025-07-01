@@ -21,18 +21,23 @@ interface TextFieldProps
   > {
   description?: string;
   label?: string;
+  controlled?: boolean;
 }
 
 export function TextField({
   className,
   description,
   label,
+  controlled = false,
   ...props
 }: TextFieldProps) {
   const field = useFieldContext<string>();
   return (
     <_TextField
       name={field.name}
+      {...(controlled
+        ? { value: field.state.value }
+        : { defaultValue: field.state.value })}
       defaultValue={field.state.value}
       onChange={field.handleChange}
       onBlur={field.handleBlur}
