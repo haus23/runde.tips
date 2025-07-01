@@ -17,6 +17,7 @@
   "dependencies": {
     "@epic-web/totp": "^4.0.1",
     "@react-router/node": "catalog:framework",
+    "@tanstack/react-form": "^1.12.4",
     "cva": "1.0.0-beta.4",
     "drizzle-orm": "catalog:orm",
     "input-otp": "^1.4.2",
