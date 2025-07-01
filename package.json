@@ -20,7 +20,7 @@
     "cva": "1.0.0-beta.4",
     "drizzle-orm": "catalog:orm",
     "input-otp": "^1.4.2",
-    "isbot": "^5",
+    "isbot": "^5.1.28",
     "lucide-react": "^0.525.0",
     "postgres": "catalog:orm",
     "react": "^19.1.0",
