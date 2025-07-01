@@ -2,9 +2,10 @@ import type { ButtonProps as _ButtonProps } from 'react-aria-components';
 import { Button as _Button } from 'react-aria-components';
 import type { VariantProps } from '~/utils/cva';
 import { cva } from '~/utils/cva';
+import { focusVisibleClassName } from './_common';
 
 const button = cva({
-  base: '',
+  base: [focusVisibleClassName],
   variants: {
     variant: {
       unset: null,

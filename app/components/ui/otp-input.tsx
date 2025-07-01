@@ -3,9 +3,14 @@ import type { OTPInputProps as _OTPInputProps } from 'input-otp';
 import { OTPInput as _OTPInput, REGEXP_ONLY_DIGITS } from 'input-otp';
 import { useRef } from 'react';
 import { InputContext, useContextProps } from 'react-aria-components';
+import { outlineClassNameOn } from './_common';
 
-const otpInput = cva({
-  base: 'group flex items-center',
+const containerClassName = cva({
+  base: [
+    'group flex w-40 justify-center',
+    'border',
+    outlineClassNameOn('has-[:focus]'),
+  ],
 });
 
 const slotClassName = cva({
@@ -28,8 +33,9 @@ export function OtpInput({ className, length, ...props }: OTPInputProps) {
   return (
     <_OTPInput
       ref={mergedRef}
-      containerClassName={otpInput({ className })}
+      containerClassName={containerClassName({ className })}
       {...otpInputProps}
+      tabIndex={0}
       autoComplete="one-time-code"
       pattern={REGEXP_ONLY_DIGITS}
       maxLength={length}

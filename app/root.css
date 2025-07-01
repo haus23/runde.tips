@@ -7,6 +7,7 @@
 @theme {
     --color-*: initial;
     --background-color-root: light-dark(#fff, #1c1b22);
+    --outline-color-focus: light-dark(#005fcc, #99c8ff);
 }
 
 /* Animations */

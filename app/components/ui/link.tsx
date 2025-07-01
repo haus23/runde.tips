@@ -5,9 +5,10 @@ import type {
 import { Link as _Link, NavLink as _NavLink } from 'react-router';
 import type { VariantProps } from '~/utils/cva';
 import { compose, cva } from '~/utils/cva';
+import { focusVisibleClassName } from './_common';
 
 const link = cva({
-  base: [],
+  base: [focusVisibleClassName],
   variants: {
     variant: {
       default: [''],
