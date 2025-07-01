@@ -30,6 +30,7 @@ export function OtpInput({ className, length, ...props }: OTPInputProps) {
       ref={mergedRef}
       containerClassName={otpInput({ className })}
       {...otpInputProps}
+      autoComplete="one-time-code"
       pattern={REGEXP_ONLY_DIGITS}
       maxLength={length}
       render={({ slots }) => (
