@@ -236,8 +236,15 @@ export async function getUser(request: Request) {
  * @param request Request object
  * @returns User or null
  */
-async function getOptionalUser(_request: Request): Promise<User | null> {
-  return null;
+async function getOptionalUser(request: Request): Promise<User | null> {
+  const authSession = await getAuthSession(request);
+  const sessionId = authSession.get('sessionId');
+
+  if (!sessionId) return null;
+
+  const session = await getSession(sessionId);
+
+  return session?.user || null;
 }
 
 /**
@@ -257,7 +264,7 @@ export async function requireAnonymous(request: Request) {
  */
 export async function requireManager(request: Request) {
   const user = await getOptionalUser(request);
-  if (!user || user.role === 'ADMIN') {
+  if (!user || user.role !== 'ADMIN') {
     throw redirect('/login');
   }
 }
