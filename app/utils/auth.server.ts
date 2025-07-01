@@ -1,6 +1,6 @@
 import { redirect } from 'react-router';
 import type { users } from '~/db/schema';
-import { createSession } from './db/session';
+import { createSession, deleteSession, getSession } from './db/session';
 import { getUserByEmail } from './db/user';
 import { sendCodeMail } from './emails.server';
 import { env } from './env.server';
@@ -176,6 +176,58 @@ export async function verifyOnboardingCode(request: Request) {
  * - requireAnonymous(): loader/action guard
  * - requireManager(): loader/action guard
  */
+
+/**
+ * Validates app session and returns logged-in user or null.
+ * In case of an invalid session, all session data will be deleted.
+ *
+ * This function is the main authentication point, it is only called from the root loader.
+ *
+ * @param request Request Object
+ * @returns User or null
+ */
+export async function getUser(request: Request) {
+  const authSession = await getAuthSession(request);
+  const sessionId = authSession.get('sessionId');
+
+  // No client session? Exit early
+  if (!sessionId) {
+    return {
+      user: null,
+      headers: null,
+    };
+  }
+
+  const session = await getSession(sessionId);
+
+  // No server session? Log the user out from the client and exit
+  if (!session) {
+    return {
+      user: null,
+      headers: {
+        'Set-Cookie': await destroyAuthSession(authSession),
+      },
+    };
+  }
+
+  // No user or expired server session? Destroy server session and log user out from the client
+  // This covers the rare case that the user account is already deleted, but there is still a browser session
+  const user = session.user;
+  if (!user || new Date() > session.expiresAt) {
+    await deleteSession(sessionId);
+    return {
+      user: null,
+      headers: {
+        'Set-Cookie': await destroyAuthSession(authSession),
+      },
+    };
+  }
+
+  return {
+    user,
+    headers: null,
+  };
+}
 
 /**
  * Loads user from db - may be identified by the cookie session

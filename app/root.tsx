@@ -3,13 +3,18 @@ import { data, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { AppShell } from '~/components/shell/app-shell';
 import type { Route } from './+types/root';
 import stylesHref from './root.css?url';
+import { getUser } from './utils/auth.server';
 import { combineHeaders } from './utils/misc';
 import { getServerToast } from './utils/toast.server';
 
 export async function loader({ request }: Route.LoaderArgs) {
+  const { user, headers: authHeaders } = await getUser(request);
   const { toast, headers: toastHeaders } = await getServerToast(request);
 
-  return data({ toast }, { headers: combineHeaders(toastHeaders) });
+  return data(
+    { user, toast },
+    { headers: combineHeaders(authHeaders, toastHeaders) },
+  );
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
