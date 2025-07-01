@@ -1,5 +1,4 @@
 import { useSubmit } from 'react-router';
-import { Button } from '~/components/ui/button';
 import { Form } from '~/components/ui/form/form';
 import { useAppForm } from '~/hooks/app-form';
 import { useFormErrors } from '~/hooks/form-errors';
@@ -68,9 +67,9 @@ export default function LoginRoute({
           )}
         </form.AppField>
         <div>
-          <Button type="submit" variant="primary">
-            Code anfordern
-          </Button>
+          <form.AppForm>
+            <form.Button variant="primary">Code anfordern</form.Button>
+          </form.AppForm>
         </div>
       </Form>
     </div>
