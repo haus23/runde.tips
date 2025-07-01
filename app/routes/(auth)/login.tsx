@@ -47,15 +47,7 @@ export default function LoginRoute({
         validationErrors={errors}
         className="mt-8"
       >
-        <form.AppField
-          name="email"
-          validators={{
-            onChange: ({ value }) =>
-              !value.startsWith('admin')
-                ? 'Admin muss am Anfang stehen'
-                : undefined,
-          }}
-        >
+        <form.AppField name="email">
           {(field) => (
             <field.TextField
               isRequired
