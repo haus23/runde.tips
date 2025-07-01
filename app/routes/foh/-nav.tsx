@@ -1,10 +1,13 @@
 import {
   DicesIcon,
   LogInIcon,
+  LogOutIcon,
   SettingsIcon,
   TableIcon,
   UsersIcon,
 } from 'lucide-react';
+import { Button } from '~/components/ui/button';
+import { Form } from '~/components/ui/form/form';
 import { NavLink } from '~/components/ui/link';
 
 export function FohNavigation() {
@@ -33,6 +36,12 @@ export function FohNavigation() {
           <LogInIcon className="size-5" />
           <span>Log In</span>
         </NavLink>
+        <Form action="/logout" method="post">
+          <Button type="submit" variant="sidenav">
+            <LogOutIcon className="size-5" />
+            <span>Log Out</span>
+          </Button>
+        </Form>
       </div>
     </div>
   );
