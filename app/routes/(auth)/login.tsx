@@ -2,6 +2,7 @@ import { useSubmit } from 'react-router';
 import { Button } from '~/components/ui/button';
 import { Form } from '~/components/ui/form/form';
 import { useAppForm } from '~/hooks/app-form';
+import { useFormErrors } from '~/hooks/form-errors';
 import {
   prepareOnboarding,
   requireAnonymous,
@@ -32,6 +33,8 @@ export default function LoginRoute({
     },
   });
 
+  const errors = useFormErrors(form, actionData?.errors);
+
   return (
     <div>
       <title>Anmeldung - runde.tips</title>
@@ -42,10 +45,18 @@ export default function LoginRoute({
           e.preventDefault();
           await form.handleSubmit();
         }}
-        validationErrors={actionData?.errors}
+        validationErrors={errors}
         className="mt-8"
       >
-        <form.AppField name="email">
+        <form.AppField
+          name="email"
+          validators={{
+            onChange: ({ value }) =>
+              !value.startsWith('admin')
+                ? 'Admin muss am Anfang stehen'
+                : undefined,
+          }}
+        >
           {(field) => (
             <field.TextField
               isRequired
