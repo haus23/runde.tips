@@ -28,8 +28,7 @@ export default function LoginRoute({
   const form = useAppForm({
     defaultValues: { email: loaderData.email || '' },
     onSubmit: async ({ value }) => {
-      console.log(value);
-      // await submit(value, { method: 'post' });
+      await submit(value, { method: 'post' });
     },
   });
 
