@@ -6,6 +6,7 @@ import {
   Label,
   Text,
 } from 'react-aria-components';
+import { useFieldContext } from '~/hooks/form.context';
 import { cva } from '~/utils/cva';
 import { Input } from '../input';
 
@@ -13,7 +14,11 @@ const textField = cva({
   base: ['flex flex-col gap-2'],
 });
 
-interface TextFieldProps extends _TextFieldProps {
+interface TextFieldProps
+  extends Omit<
+    _TextFieldProps,
+    'name' | 'defaultValue' | 'value' | 'onChange' | 'onBlur'
+  > {
   description?: string;
   label?: string;
 }
@@ -24,8 +29,16 @@ export function TextField({
   label,
   ...props
 }: TextFieldProps) {
+  const field = useFieldContext<string>();
   return (
-    <_TextField className={textField({ className })} {...props}>
+    <_TextField
+      name={field.name}
+      defaultValue={field.state.value}
+      onChange={field.handleChange}
+      onBlur={field.handleBlur}
+      className={textField({ className })}
+      {...props}
+    >
       {!!label && <Label className="font-semibold text-sm">{label}</Label>}
       {!!description && (
         <Text className="pl-4 text-sm" slot="description">
