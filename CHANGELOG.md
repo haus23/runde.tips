@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.0-pre.4
+
+[compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0-pre.3...v0.1.0-pre.4)
+
+### 🚀 Enhancements
+
+- Load authenticated user or null. Fixes #48 as well. ([#48](https://github.com/haus23/runde.tips/issues/48))
+- Respect authenticated user in the guards. Resolves #21 ([#21](https://github.com/haus23/runde.tips/issues/21))
+- Add players route to better test logout. ([1384fa7](https://github.com/haus23/runde.tips/commit/1384fa7))
+- Add logout route. See #10 ([#10](https://github.com/haus23/runde.tips/issues/10))
+- Add sidenav variant ([99266d7](https://github.com/haus23/runde.tips/commit/99266d7))
+- Add logout actions. Resolves #10 ([#10](https://github.com/haus23/runde.tips/issues/10))
+
+### 💅 Refactors
+
+- Split schema tables and relations into separate files. ([0a2ec86](https://github.com/haus23/runde.tips/commit/0a2ec86))
+
 ## v0.1.0-pre.3
 
 [compare changes](https://github.com/haus23/runde.tips/compare/v0.1.0-pre.2...v0.1.0-pre.3)
