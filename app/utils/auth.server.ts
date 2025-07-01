@@ -169,6 +169,34 @@ export async function verifyOnboardingCode(request: Request) {
   });
 }
 
+/**
+ * Performs user logout and redirects to referer or home if no referer is available.
+ *
+ * @param request Request object
+ */
+export async function logout(request: Request) {
+  const session = await getAuthSession(request);
+  const sessionId = session.get('sessionId');
+
+  if (sessionId) {
+    await deleteSession(sessionId);
+  }
+
+  const headers = new Headers({
+    'Set-Cookie': await destroyAuthSession(session),
+  });
+
+  const redirectUrl = request.headers.get('Referer') || '/';
+  const toast = await createServerToast(request, {
+    type: 'info',
+    message: 'Du bist abgemeldet. Bis bald mal wieder.',
+  });
+
+  throw redirect(redirectUrl, {
+    headers: combineHeaders(headers, toast),
+  });
+}
+
 /*
  * The auth state functions
  *
