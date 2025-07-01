@@ -10,6 +10,7 @@ const button = cva({
       unset: null,
       primary: [],
       secondary: [],
+      sidenav: ['flex items-center gap-1.5'],
     },
   },
   compoundVariants: [
