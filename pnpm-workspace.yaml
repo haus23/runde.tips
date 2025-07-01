@@ -4,7 +4,7 @@ catalogs:
     '@react-router/dev': ^7.6.3
     '@react-router/node': ^7.6.3
   bundler:
-    vite: ^6.3.5
+    vite: ^7.0.0
     '@netlify/vite-plugin-react-router': ^1.0.1
     vite-plugin-devtools-json: ^0.2.1
     vite-tsconfig-paths: ^5.1.4
