@@ -38,7 +38,6 @@ export function TextField({
       {...(controlled
         ? { value: field.state.value }
         : { defaultValue: field.state.value })}
-      defaultValue={field.state.value}
       onChange={field.handleChange}
       onBlur={field.handleBlur}
       className={textField({ className })}

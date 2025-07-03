@@ -1,7 +1,6 @@
 import { useSubmit } from 'react-router';
-import { Button } from '~/components/ui/button';
 import { Form } from '~/components/ui/form/form';
-import { OtpField } from '~/components/ui/form/otp-field';
+import { useAppForm } from '~/hooks/app-form';
 import {
   ensureOnboardingSession,
   requireAnonymous,
@@ -22,6 +21,13 @@ export async function action({ request }: Route.ActionArgs) {
 export default function VerifyRoute({ actionData }: Route.ComponentProps) {
   const submit = useSubmit();
 
+  const form = useAppForm({
+    defaultValues: { code: '' },
+    onSubmit: async ({ value }) => {
+      await submit(value, { method: 'post' });
+    },
+  });
+
   return (
     <div>
       <title>Kontrolle - runde.tips</title>
@@ -35,16 +41,20 @@ export default function VerifyRoute({ actionData }: Route.ComponentProps) {
         validationErrors={actionData?.errors}
         className="mt-8"
       >
-        <OtpField
-          name="code"
-          label="Code"
-          description="Der Anmelde-Code aus der (letzten) Code-Email"
-          length={6}
-        />
+        <form.AppField name="code">
+          {(field) => (
+            <field.OtpField
+              label="Code"
+              description="Der Anmelde-Code aus der (letzten) Code-Email"
+              length={6}
+            />
+          )}
+        </form.AppField>
+
         <div>
-          <Button type="submit" variant="primary">
-            Code prüfen
-          </Button>
+          <form.AppForm>
+            <form.Button variant="primary">Code prüfen</form.Button>
+          </form.AppForm>
         </div>
       </Form>
     </div>

@@ -6,6 +6,7 @@ import {
   Label,
   Text,
 } from 'react-aria-components';
+import { useFieldContext } from '~/hooks/form-context';
 import { cva } from '~/utils/cva';
 import { OtpInput } from '../otp-input';
 
@@ -13,7 +14,11 @@ const otpField = cva({
   base: ['flex flex-col gap-2'],
 });
 
-interface OtpFieldProps extends _TextFieldProps {
+interface OtpFieldProps
+  extends Omit<
+    _TextFieldProps,
+    'name' | 'defaultValue' | 'value' | 'onChange' | 'onBlur'
+  > {
   description?: string;
   label?: string;
   length: number;
@@ -28,8 +33,14 @@ export function OtpField({
   onComplete,
   ...props
 }: OtpFieldProps) {
+  const field = useFieldContext<string>();
+
   return (
     <_TextField
+      name={field.name}
+      value={field.state.value}
+      onChange={field.handleChange}
+      onBlur={field.handleBlur}
       className={otpField({ className })}
       isRequired
       minLength={length}
