@@ -25,6 +25,7 @@ export default function VerifyRoute({ actionData }: Route.ComponentProps) {
     defaultValues: { code: '' },
     onSubmit: async ({ value }) => {
       await submit(value, { method: 'post' });
+      form.resetField('code');
     },
   });
 
@@ -36,7 +37,7 @@ export default function VerifyRoute({ actionData }: Route.ComponentProps) {
         method="post"
         onSubmit={async (e) => {
           e.preventDefault();
-          await submit(e.currentTarget);
+          await form.handleSubmit();
         }}
         validationErrors={actionData?.errors}
         className="mt-8"
